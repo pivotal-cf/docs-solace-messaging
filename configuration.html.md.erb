@@ -1,0 +1,52 @@
+---
+title: Configuring Solace Messaging for Pivotal Cloud Foundry
+owner: Partners
+---
+
+The Solace Messaging for Pivotal Cloud Foundry tile has its configurable items in the `Message Router Config` form.
+
+## Message Router Config
+
+The Message Router Config form of the Solace Messaging for Pivotal Cloud Foundry tile needs
+some configuration for the service to operate.
+
+<%= image_tag('VMR_Config_Form.png') %> 
+
+The Tile requires external Solace Virtual Message Routers (VMR) in order to operate.  URIs for each Message Routers
+to be enrolled by the Tile must be provided in the `Message Routers Config` Form.
+
+The Message Routers are assumed to be up and running with their admin user setup with password basic authentication.
+
+### Dedicated Message Routers and Shared Message Routers
+
+The `List of dedicated Message Routers (comma delimited)` field accepts a comma separated list of Message Routers
+URIs that are to be enrolled.  The URI must contains these fields :
+
+* Scheme (Must be http://)
+* Username
+* Password
+* Host
+* SEMP Port
+
+The URI format is : `http://<username>:<password>@<host>:<semp-port>`
+
+The Dedicated Message Routers list contains Message Routers to be enrolled for the `dedicated_vmr` plan
+
+<%= image_tag('List_Dedicated_VMR_Config.png') %>
+
+The Shared Message Routers list contains Message Routers to be enrolled in the `shared_vmr` plan
+
+<%= image_tag('List_Shared_VMR_Config.png') %>
+
+### Starting Port
+
+The following ports and ranges are used by the Solace Virtual Message Routers :
+
+* Destination port 22 to access the Message Routers's shell
+* Destination port 443 to access the Message Routers's secure configuration SEMP interface
+* Destination port 8080 to access the Message Routers's configuration SEMP interface
+* Destination port <startingPort> to <startingPort>+35 to access the messaging services
+
+Where startingPort is defined by the `Starting Port` property in the Config Form
+
+<%= image_tag('Starting_Port_VMR_Config.png') %>

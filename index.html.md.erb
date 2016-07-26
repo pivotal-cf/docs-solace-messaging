@@ -1,0 +1,62 @@
+---
+title: Solace Messaging for Pivotal Cloud Foundry
+owner: Partners
+---
+
+Solace Messaging is a multi-protocol message broker that enables the efficient movement of data between all kinds of
+ applications, devices and people across clouds, datacenters and the Internet of Things.
+ Solace simplifies and improves the scalability of IT systems by meeting diverse data movement needs with a unified
+ platform that supports all kinds of message exchange patterns, deployment environments, and qualities of service, along
+ with open APIs and protocols like JMS, MQTT and REST. Solace Messaging even enables the distribution of data over long
+ distance WAN links and streaming between web apps, mobile devices and IoT devices like sensors and smart vehicles.
+
+## Product snapshot
+
+Current Solace Messaging for Pivotal Cloud Foundry Details :
+
+* **Version**: 0.1.0
+* **Release Date**: August 1, 2016
+* **Software component version**: 0.1.0
+* **Compatible Ops Manager Version(s)**: 1.6.x, 1.7.x
+* **Compatible Elastic Runtime Version(s)**: 1.6.x, 1.7.x
+* **vSphere support?** Yes
+* **AWS support?** No
+* **OpenStack support?** No
+
+## Features
+
+Each service instance provides :
+* Guaranteed Messaging
+* Pub/Sub Messaging
+* Persistent Message Queues
+* Request / Reply
+* Maximum guaranteed message size of 10MB
+* Up to 10k topic subscriptions per queue
+* Up to 1000 incoming connections
+* Up to 1000 concurrent transacted sessions
+* Up to 1M in-flight concurrent messages
+ 
+Consult the [Solace Developer's Portal](dev.solacesystems.com) for more information.
+
+## Beta Limitations
+
+These features are not currently available in the Beta version of Solace Messaging for Pivotal Cloud Foundry:
+
+* High Availability
+* TLS Connections
+* Client Certificates based authentication
+* LDAP and Radius based authentication
+* Upgrades will clear out all Service Instances and Application Bindings
+
+## Security
+
+The following ports and ranges are used by the Solace Virtual Message Routers :
+
+* Destination port 22 to access the Message Router's shell
+* Destination port 443 to access the Message Router's secure configuration SEMP interface
+* Destination port 8080 to access the Message Router's configuration SEMP interface
+* By default, Ports 7000 to 7035 to access the Messaging services (Starting port can be changed from the Tile's configurable options)
+
+## Further Reading
+
+* [Solace Developer Portal](http://dev.solacesystems.com/)
