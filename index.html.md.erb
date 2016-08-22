@@ -1,62 +1,67 @@
 ---
-title: Solace Messaging for Pivotal Cloud Foundry
+title: Solace Messaging for Pivotal Cloud Foundry (BETA)
 owner: Partners
 ---
 
-Solace Messaging is a multi-protocol message broker that enables the efficient movement of data between all kinds of
- applications, devices and people across clouds, datacenters and the Internet of Things.
- Solace simplifies and improves the scalability of IT systems by meeting diverse data movement needs with a unified
- platform that supports all kinds of message exchange patterns, deployment environments, and qualities of service, along
- with open APIs and protocols like JMS, MQTT and REST. Solace Messaging even enables the distribution of data over long
- distance WAN links and streaming between web apps, mobile devices and IoT devices like sensors and smart vehicles.
+This documentation describes Solace Messaging for Pivotal Cloud Foundry (PCF). Solace Messaging for PCF is a multi-protocol message broker. The Solace Messaging for PCF tile registers a service broker on PCF and exposes its service plans on the Marketplace. Developers can provision Message VPNs on a Solace Virtual Message Router (VMR) by creating instances of the service plans using Apps Manager or the cf Command Line Interface (CLI).
 
-## Product snapshot
+## <a id='overview'></a>Overview
 
-Current Solace Messaging for Pivotal Cloud Foundry Details :
+Solace Messaging for PCF enables developers to link their applications to a Solace VMR through a Message VPN. To learn more about these components, see the [Core Concepts](http://dev.solacesystems.com/docs/core-concepts/#message-router-concepts) topic in the Solace documentation.
 
-* **Version**: 0.1.0
-* **Release Date**: August 1, 2016
-* **Software component version**: 0.1.0
+Solace Messaging for PCF includes the following features:
+
+* Support for a range of message exchange patterns, deployment environments, and qualities of service, including open APIs and protocols like JMS, MQTT and REST 
+* Support for distributing data over long-distance WAN links and streaming between web applications, mobile devices and IoT devices like sensors and smart vehicles
+* Guaranteed messaging
+* Pub/sub and request/reply messaging
+* Persistent message queues
+* Maximum guaranteed message size of 10MB
+* Up to 10KB topic subscriptions per queue
+* Up to 1000 incoming connections
+* Up to 1000 concurrent transacted sessions
+* Up to 1MB in-flight concurrent messages
+
+For examples of how PCF developers can configure their applications to use the Solace Messaging service, see the sample applications [GitHub repository](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java).
+
+## <a id='snapshot'></a>Product Snapshot
+
+Current Solace Messaging for Pivotal Cloud Foundry Details:
+
+* **Version**: 0.1.30
+* **Release Date**: August 26, 2016
+* **Software component version**: Solace Messaging for PCF 0.1.30
 * **Compatible Ops Manager Version(s)**: 1.6.x, 1.7.x
 * **Compatible Elastic Runtime Version(s)**: 1.6.x, 1.7.x
 * **vSphere support?** Yes
 * **AWS support?** No
 * **OpenStack support?** No
 
-## Features
+## <a id='prereqs'></a>Prerequisites
 
-Each service instance provides :
-* Guaranteed Messaging
-* Pub/Sub Messaging
-* Persistent Message Queues
-* Request / Reply
-* Maximum guaranteed message size of 10MB
-* Up to 10k topic subscriptions per queue
-* Up to 1000 incoming connections
-* Up to 1000 concurrent transacted sessions
-* Up to 1M in-flight concurrent messages
- 
-Consult the [Solace Developer's Portal](dev.solacesystems.com) for more information.
+Solace Messaging for PCF has the following prerequisites:
 
-## Beta Limitations
+* You must install the MySQL for PCF tile. When configuring the tile, set the maximum storage in the **Service Plan** section to 100 MB. See the MySQL for PCF [documentation](../p-mysql/) for more information on how to install and configure the tile.
+* You must set up external Solace VMRs. See the [Get Started](http://dev.solacesystems.com/get-started/) guide in the Solace documentation for more information. The environment where you deploy your Solace VMRs must allow inbound connections on the following ports:
+    * Port 22 to access the VMR shell
+    * Port 8080 to access the VMR's Solace Elements Management Protocol (SEMP) configuration interface
+    * Ports 7000 to 7035 to access the VMR's messaging services (you can modify this range when [configuring](installing.html) the tile)
+* If your deployment filters outbound traffic, you must allow outbound traffic from your deployment to the Solace VMRs. 
 
-These features are not currently available in the Beta version of Solace Messaging for Pivotal Cloud Foundry:
+## <a id='limitations'></a> Beta Limitations
 
-* High Availability
-* TLS Connections
-* Client Certificates based authentication
-* LDAP and Radius based authentication
-* Upgrades will clear out all Service Instances and Application Bindings
+The beta version of Solace Messaging for PCF currently does not include the following features:
 
-## Security
+* High availability
+* TLS connections
+* Client certificate-based authentication
+* LDAP and RADIUS-based authentication
 
-The following ports and ranges are used by the Solace Virtual Message Routers :
+<p class="note"><strong>Note</strong>: Upgrading the tile will delete all  service instances and application bindings related to Solace Messaging for PCF.</p>
 
-* Destination port 22 to access the Message Router's shell
-* Destination port 443 to access the Message Router's secure configuration SEMP interface
-* Destination port 8080 to access the Message Router's configuration SEMP interface
-* By default, Ports 7000 to 7035 to access the Messaging services (Starting port can be changed from the Tile's configurable options)
+## <a id='feedback'></a>Feedback
 
-## Further Reading
+Please provide any bugs, feature requests, or questions to the [Pivotal Cloud Foundry Feedback](mailto:pivotal-cf-feedback@pivotal.io) list.
 
-* [Solace Developer Portal](http://dev.solacesystems.com/)
+
+

@@ -1,0 +1,44 @@
+---
+title: Managing the Message VPN
+owner: Partners
+---
+
+This topic describes how to manage the Message VPN on a Solace Virtual Message Router (VMR). After Solace Messaging for Pivotal Cloud Foundry (PCF) is installed, developers can provision Message VPNs on a VMR by creating instances of the service plans using Apps Manager or the cf Command Line Interface (CLI). Each service instance represents one Message VPN. 
+
+Developers can manage the Message VPN associated with a service instance by connecting to the VMR with the SolAdmin administration tool.
+
+## <a id='retrieve'></a>Retrieve Information 
+
+To retrieve the information required to connect to the VMR, perform the following steps:
+
+1. Log in to your deployment and choose the org and space where your Solace Messaging service instance and bound application exists.
+	<pre class="terminal">
+	$ cf login
+	API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+
+	Email> user<span>@</span>example.com
+	Password>
+	</pre>
+1. View the `VCAP_SERVICES` environment variable by retrieving the environment variables associated with your bound application:
+	<pre class="terminal">
+	cf env YOUR-APP
+	</pre>
+1. Locate your Solace Messaging service instance in `VCAP_SERVICES` and record the following fields:
+	* `managementUsername`: The service instance's management username.
+	* `managementPassword`: The service instance's management password.
+	* `management HttpUris`: The VMR's IP address and management port, in the format `http://IP-ADDRESS:MANAGEMENT-PORT/SEMP/V2`.
+	<br><br>
+	For more information about the `VCAP_SERVICES` fields, see the [Understanding Credentials](credentials.html) topic.
+
+## <a id='connect'></a> Connect to the Solace VMR
+
+1. Download and install the SolAdmin administration tool from the [Solace Developers Portal Download Page](http://dev.solacesystems.com/downloads/).
+1. Start SolAdmin.
+1. Click **Manage** to open the **Manage Appliance** window.
+	<%= image_tag('soladmin_manage.png') %>
+1. Under **Management IP Address**, enter the IP address of the VMR recorded above.
+1. Under **User Name** and **Password**, enter the management username and password recorded above.
+1. Click **Ok**. The VMR should now appear in the **Managed Appliances** list.
+	<%= image_tag('soladmin_router_list.png') %>
+1. To use SolAdmin to manage your Message VPN, see the [SolAdmin User Guide](https://sftp.solacesystems.com/Portal_Docs/#page/SolAdmin_User_Guide/About_This_Document.html#).
+
