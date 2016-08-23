@@ -1,0 +1,65 @@
+---
+title: Installing and Configuring Solace Messaging for Pivotal Cloud Foundry
+owner: Partners
+---
+
+This topic describes how to install and configure Solace Messaging for Pivotal Cloud Foundry (PCF). Before installing Solace Messaging for PCF, you must complete the [prerequisites](index.html#prereqs).
+
+##<a id='resource-reqs'></a> Review Resource Requirements
+
+Review the default resource and IP requirements for installing the Solace Messaging for PCF tile.
+
+<table border="1" class="nice">
+	<tr>
+		<th>Product</th>
+		<th>Resource</th>
+		<th>Instances</th>
+		<th>CPU</th>
+		<th>Ram</th>
+		<th>Ephemeral</th>
+		<th>Persistent</th>
+		<th>Static IP</th>
+		<th>Dynamic IP</th>
+	</tr>
+    <tr>
+        <td>Solace Messaging for PCF</td>
+        <td>Solace Service Broker</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1024</td>
+        <td>1024</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+    </tr>
+</table>
+
+##<a id='install'></a> Install Solace Messaging for PCF 
+
+To install Solace Messaging for PCF, perform the following steps:
+
+1. Download the product file from Pivotal Network.
+1. Upload the product file on the Ops Manager Installation Dashboard.
+1. Click **Add** next to the uploaded Solace Messaging tile in the Ops Manager **Available Products** view to add it to your staging area.
+1. Click the **Solace Messaging** tile.
+1. Follow the steps in the section below to configure the tile.
+
+##<a id='configure'></a> Configure Solace Messaging for PCF
+
+To configure Solace Messaging for PCF, perform the following steps:
+
+1. From the **Settings** tab of the Solace Messaging tile, click **Message Routing Config**.
+	<%= image_tag('VMR_Config_Form.png') %> 
+1. Under **List of dedicated Message Routers (comma delimited)**, enter a comma-delimited list of URIs for your dedicated Solace Virtual Message Routers (VMRs). These VMRs will support the `dedicated_vmr` service plan of the Solace Messaging service available to developers in the Marketplace. 
+	<%= image_tag('List_Dedicated_VMR_Config.png') %>
+	The URIs must follow the format `http://YOUR-ADMIN-USERNAME:YOUR-PASSWORD@HOST:SEMP-PORT`.
+	<p class="note"><strong>Note</strong>: Ensure the VMRs are running and have their administrator user set up with basic password authentication.</p>
+1. Under **List of shared Message Routers (comma delimited)**, enter a comma-delimited list of URIs for your shared Solace VMRs. These VMRs will support the `shared_vmr` service plan of the Solace Messaging service available to developers in the Marketplace. 
+	<%= image_tag('List_Shared_VMR_Config.png') %>
+	The URIs must follow the format `http://YOUR-ADMIN-USERNAME:YOUR-PASSWORD@HOST:SEMP-PORT`.
+	<p class="note"><strong>Note</strong>: Ensure the VMRs are running and have their administrator user set up with basic password authentication.</p>
+1. Under **Starting Port**, enter a port where the messaging services on the VMRs will start listening from. For example, `7000`.
+	<%= image_tag('Starting_Port_VMR_Config.png') %>
+1. Click **Save**.
+1. Click **Apply Changes** to deploy the tile.
+1. After the tile has deployed, see the [Creating and Binding Solace Messaging Service Instances](service-instances.html) topic for information about how to create instances of the Solace Messaging service and bind them to applications.
