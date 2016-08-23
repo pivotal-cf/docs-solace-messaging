@@ -7,7 +7,6 @@ This documentation describes Solace Messaging for Pivotal Cloud Foundry (PCF). S
 
 ## <a id='overview'></a>Overview
 
-<%= image_tag('Deployment-overview.png') %>
 
 Solace Messaging for PCF enables developers to link their applications to a Solace VMR through a Message VPN. To learn more about these components, see the [Core Concepts](http://dev.solacesystems.com/docs/core-concepts/#message-router-concepts) topic in the Solace documentation.
 
@@ -25,6 +24,12 @@ Solace Messaging for PCF includes the following features:
 * Up to 1MB in-flight concurrent messages
 
 For examples of how PCF developers can configure their applications to use the Solace Messaging service, see the sample applications [GitHub repository](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java).
+
+## <a id='architecture'></a>Architecture
+
+The following diagram provides an overview of the product architecture of Solace Messaging for PCF.
+
+<%= image_tag('Deployment-overview.png') %>
 
 ## <a id='snapshot'></a>Product Snapshot
 
@@ -58,7 +63,7 @@ The beta version of Solace Messaging for PCF currently does not include the foll
 * TLS connections
 * Client certificate-based authentication
 * LDAP and RADIUS-based authentication
-* Service Broker data will not persists through tile upgrades
+* Service Broker data will not persist through tile upgrades
 
 <p class="note"><strong>Note</strong>: Upgrading the tile will delete all service instances and application bindings related to Solace Messaging for PCF.</p>
 
