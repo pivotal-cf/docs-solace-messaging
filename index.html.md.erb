@@ -7,6 +7,8 @@ This documentation describes Solace Messaging for Pivotal Cloud Foundry (PCF). S
 
 ## <a id='overview'></a>Overview
 
+<%= image_tag('Deployment-overview.png') %>
+
 Solace Messaging for PCF enables developers to link their applications to a Solace VMR through a Message VPN. To learn more about these components, see the [Core Concepts](http://dev.solacesystems.com/docs/core-concepts/#message-router-concepts) topic in the Solace documentation.
 
 Solace Messaging for PCF includes the following features:
@@ -34,7 +36,7 @@ Current Solace Messaging for Pivotal Cloud Foundry Details:
 * **Compatible Ops Manager Version(s)**: 1.6.x, 1.7.x
 * **Compatible Elastic Runtime Version(s)**: 1.6.x, 1.7.x
 * **vSphere support?** Yes
-* **AWS support?** No
+* **AWS support?** Yes
 * **OpenStack support?** No
 
 ## <a id='prereqs'></a>Prerequisites
@@ -56,8 +58,9 @@ The beta version of Solace Messaging for PCF currently does not include the foll
 * TLS connections
 * Client certificate-based authentication
 * LDAP and RADIUS-based authentication
+* Service Broker data will not persists through tile upgrades
 
-<p class="note"><strong>Note</strong>: Upgrading the tile will delete all  service instances and application bindings related to Solace Messaging for PCF.</p>
+<p class="note"><strong>Note</strong>: Upgrading the tile will delete all service instances and application bindings related to Solace Messaging for PCF.</p>
 
 ## <a id='feedback'></a>Feedback
 
