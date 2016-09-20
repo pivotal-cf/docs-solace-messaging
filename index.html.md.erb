@@ -35,11 +35,11 @@ The following diagram provides an overview of the product architecture of Solace
 
 Current Solace Messaging for Pivotal Cloud Foundry Details:
 
-* **Version**: 0.1.30
-* **Release Date**: August 26, 2016
-* **Software component version**: Solace Messaging for PCF 0.1.30
-* **Compatible Ops Manager Version(s)**: 1.6.x, 1.7.x
-* **Compatible Elastic Runtime Version(s)**: 1.6.x, 1.7.x
+* **Version**: 0.2.0
+* **Release Date**: October 13, 2016
+* **Software component version**: Solace Messaging for PCF 0.2.0
+* **Compatible Ops Manager Version(s)**: 1.6.x, 1.7.x, 1.8.x
+* **Compatible Elastic Runtime Version(s)**: 1.6.x, 1.7.x, 1.8.x
 * **vSphere support?** Yes
 * **AWS support?** Yes
 * **OpenStack support?** No
@@ -49,11 +49,6 @@ Current Solace Messaging for Pivotal Cloud Foundry Details:
 Solace Messaging for PCF has the following prerequisites:
 
 * You must install the MySQL for PCF tile. When configuring the tile, set the maximum storage in the **Service Plan** section to 100 MB. See the MySQL for PCF [documentation](../p-mysql/) for more information on how to install and configure the tile.
-* You must set up external Solace VMRs. See the [Get Started](http://dev.solacesystems.com/get-started/) guide in the Solace documentation for more information. The environment where you deploy your Solace VMRs must allow inbound connections on the following ports:
-    * Port 22 to access the VMR shell
-    * Port 8080 to access the VMR's Solace Elements Management Protocol (SEMP) configuration interface
-    * Ports 7000 to 7035 to access the VMR's messaging services (you can modify this range when [configuring](installing.html) the tile)
-* If your deployment filters outbound traffic, you must allow outbound traffic from your deployment to the Solace VMRs. 
 
 ## <a id='limitations'></a> Beta Limitations
 
@@ -64,8 +59,6 @@ The beta version of Solace Messaging for PCF currently does not include the foll
 * Client certificate-based authentication
 * LDAP and RADIUS-based authentication
 * Service Broker data will not persist through tile upgrades
-
-<p class="note"><strong>Note</strong>: Upgrading the tile will delete all service instances and application bindings related to Solace Messaging for PCF.</p>
 
 ## <a id='feedback'></a>Feedback
 
