@@ -21,18 +21,46 @@ Review the default resource and IP requirements for installing the Solace Messag
 		<th>Static IP</th>
 		<th>Dynamic IP</th>
 	</tr>
-    <tr>
-        <td>Solace Messaging for PCF</td>
-        <td>Solace Service Broker</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1024</td>
-        <td>1024</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1</td>
-    </tr>
+  <tr>
+    <td>Solace Messaging for PCF</td>
+    <td>Solace Service Broker</td>
+    <td>1</td>
+    <td>1</td>
+    <td>1024</td>
+    <td>1024</td>
+    <td>0</td>
+    <td>0</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Solace Messaging for PCF</td>
+    <td>Medium-VMR</td>
+    <td>1</td>
+    <td>2</td>
+    <td>4096</td>
+    <td>10240</td>
+    <td>20480</td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>Solace Messaging for PCF</td>
+    <td>Large-VMR</td>
+    <td>1</td>
+    <td>4</td>
+    <td>12288</td>
+    <td>10240</td>
+    <td>40960</td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
 </table>
+
+#### Notes:
+* The number of `Solace VMR (Medium)` Node can be increased if required.
+* The number of `Solace VMR (Large)` Node can be increased if required.
+* The maximum number of service instances that can concurrently exist for the `shared` service plan is defined by the number of Medium_VMR instances times 5.
+* The maximum number of service instances that can concurrently exist for the `large` service plan is defined by the number of Large-VMR instances.
 
 ##<a id='install'></a> Install Solace Messaging for PCF 
 
@@ -50,16 +78,16 @@ To configure Solace Messaging for PCF, perform the following steps:
 
 1. From the **Settings** tab of the Solace Messaging tile, click **Message Routing Config**.
 	<%= image_tag('VMR_Config_Form.png') %> 
-1. Under **List of dedicated Message Routers (comma delimited)**, enter a comma-delimited list of URIs for your dedicated Solace Virtual Message Routers (VMRs). These VMRs will support the `dedicated_vmr` service plan of the Solace Messaging service available to developers in the Marketplace. 
-	<%= image_tag('List_Dedicated_VMR_Config.png') %>
-	The URIs must follow the format `http://YOUR-ADMIN-USERNAME:YOUR-PASSWORD@HOST:SEMP-PORT`.
-	<p class="note"><strong>Note</strong>: Ensure the VMRs are running and have their administrator user set up with basic password authentication.</p>
-1. Under **List of shared Message Routers (comma delimited)**, enter a comma-delimited list of URIs for your shared Solace VMRs. These VMRs will support the `shared_vmr` service plan of the Solace Messaging service available to developers in the Marketplace. 
-	<%= image_tag('List_Shared_VMR_Config.png') %>
-	The URIs must follow the format `http://YOUR-ADMIN-USERNAME:YOUR-PASSWORD@HOST:SEMP-PORT`.
-	<p class="note"><strong>Note</strong>: Ensure the VMRs are running and have their administrator user set up with basic password authentication.</p>
+1. Under **Admin user password**, pick a password for the Virtual Message Routers admin user.
+	<%= image_tag('admin_password_VMR_Config.png') %>
+1. Under **Support user password**, pick a password for the Virtual Message Routers support user.
+	<%= image_tag('support_password_VMR_Config.png') %>
 1. Under **Starting Port**, enter a port where the messaging services on the VMRs will start listening from. For example, `7000`.
 	<%= image_tag('Starting_Port_VMR_Config.png') %>
+1. Click **Save**.
+1. Open the **Resource Config** page.
+1. Configure the `Medium-VMR` job and the `Large-VMR` job.  They define the VMs allocated for the `Shared` and `Large` service plans respectively.  Default values for the vm type are recommended.  The number of instances, and persistent disk size can be increased as required.
+  <%= image_tag('Resource_Config.png') %>
 1. Click **Save**.
 1. Click **Apply Changes** to deploy the tile.
 1. After the tile has deployed, see the [Creating and Binding Solace Messaging Service Instances](service-instances.html) topic for information about how to create instances of the Solace Messaging service and bind them to applications.
