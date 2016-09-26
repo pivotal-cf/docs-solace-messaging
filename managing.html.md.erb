@@ -32,6 +32,8 @@ To retrieve the information required to connect to the VMR, perform the followin
 
 ## <a id='connect'></a> Connect to the Solace VMR
 
+If you have direct connectivity to the network where Solace Messaging was installed, follow this procedure:
+
 1. Download and install the SolAdmin administration tool from the [Solace Developers Portal Download Page](http://dev.solacesystems.com/downloads/).
 1. Start SolAdmin.
 1. Click **Manage** to open the **Manage Appliance** window.
@@ -42,3 +44,16 @@ To retrieve the information required to connect to the VMR, perform the followin
 	<%= image_tag('soladmin_router_list.png') %>
 1. To use SolAdmin to manage your Message VPN, see the [SolAdmin User Guide](https://sftp.solacesystems.com/Portal_Docs/#page/SolAdmin_User_Guide/About_This_Document.html#).
 
+If you do not have direct connectivity to the network Solace Messaging was installed, follow this procedure:
+
+1. Download and install the SolAdmin administration tool from the [Solace Developers Portal Download Page](http://dev.solacesystems.com/downloads/).
+1. From a shell, create an SSH Session to a box with connectivity to the PCF's internal network and set a tunnel to the VMR SEMP Port : **ssh -L <local-port>:<IP-ADDRESS>:<MANAGEMENT-PORT> <user>@<box>**, where **local-port** is a port you choose that is free(IE. 8080), and **IP-ADDRESS** and **MANAGEMENT-PORT** are values recorded above in the Retrieve Information section.
+1. Once the SSH session establishes, start SolAdmin.
+1. Click **Manage** to open the **Manage Appliance** window.
+	<%= image_tag('soladmin_manage.png') %>
+1. Under **Management IP Address**, enter `127.0.0.1`
+1. Under **Management Port**, enter the **local-port** chosen above when the ssh tunnel was created.
+1. Under **User Name** and **Password**, enter the management username and password recorded above.
+1. Click **Ok**. The VMR should now appear in the **Managed Appliances** list.
+	<%= image_tag('soladmin_router_list.png') %>
+1. To use SolAdmin to manage your Message VPN, see the [SolAdmin User Guide](https://sftp.solacesystems.com/Portal_Docs/#page/SolAdmin_User_Guide/About_This_Document.html#).
