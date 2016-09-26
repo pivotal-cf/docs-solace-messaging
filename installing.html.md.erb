@@ -56,11 +56,7 @@ Review the default resource and IP requirements for installing the Solace Messag
   </tr>
 </table>
 
-#### Notes:
-* The number of `Solace VMR (Medium)` Node can be increased if required.
-* The number of `Solace VMR (Large)` Node can be increased if required.
-* The maximum number of service instances that can concurrently exist for the `shared` service plan is defined by the number of Medium_VMR instances times 5.
-* The maximum number of service instances that can concurrently exist for the `large` service plan is defined by the number of Large-VMR instances.
+<p class="note"><strong>Note</strong>: You can modify the resource usage while configuring the Solace Messaging for PCF tile. For more information, see the <a href="#configure">Configure Solace Messaging for PCF</a> tile below.</p> 
 
 ##<a id='install'></a> Install Solace Messaging for PCF 
 
@@ -85,9 +81,11 @@ To configure Solace Messaging for PCF, perform the following steps:
 1. Under **Starting Port**, enter a port where the messaging services on the VMRs will start listening from. For example, `7000`.
 	<%= image_tag('Starting_Port_VMR_Config.png') %>
 1. Click **Save**.
-1. Open the **Resource Config** page.
-1. Configure the `Medium-VMR` job and the `Large-VMR` job.  They define the VMs allocated for the `Shared` and `Large` service plans respectively.  Default values for the vm type are recommended.  The number of instances, and persistent disk size can be increased as required.
+1. Click **Resource Config**.
+1. If necessary, use the drop-down menus to increase the number of instances of the `Large-VMR` job and the `Medium-VMR` job, or increase the persistent disk available to each job. The `Large-VMR` job defines the VMs allocated for the `Large` service plan, and the `Medium-VMR` job defines the VMs allocated for the `Shared` service plan. Pivotal recommends keeping the default values for **VM Type**. 
+<p class="note"><strong>Note</strong>: The  maximum number of service instances that can concurrently exist for the <code>Shared</code> service plan is the number of <code>Medium-VMR</code> instances times 5. The maximum number of service instances that can concurrently exist for the <code>Large</code> service plan is the number of <code>Large-VMR</code> instances.</p>
   <%= image_tag('Resource_Config.png') %>
+  
 1. Click **Save**.
 1. Click **Apply Changes** to deploy the tile.
 1. After the tile has deployed, see the [Creating and Binding Solace Messaging Service Instances](service-instances.html) topic for information about how to create instances of the Solace Messaging service and bind them to applications.
