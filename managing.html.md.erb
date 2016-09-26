@@ -44,7 +44,7 @@ If you have direct connectivity to the network where Solace Messaging was instal
 	<%= image_tag('soladmin_router_list.png') %>
 1. To use SolAdmin to manage your Message VPN, see the [SolAdmin User Guide](https://sftp.solacesystems.com/Portal_Docs/#page/SolAdmin_User_Guide/About_This_Document.html#).
 
-If you do not have direct connectivity to the network Solace Messaging was installed, follow this procedure:
+If you do not have direct connectivity to the network on which Solace Messaging was installed, follow this procedure:
 
 1. Download and install the SolAdmin administration tool from the [Solace Developers Portal Download Page](http://dev.solacesystems.com/downloads/).
 1. From a shell, create an SSH Session to a box with connectivity to the PCF's internal network and set a tunnel to the VMR SEMP Port : **ssh -L <local-port>:<IP-ADDRESS>:<MANAGEMENT-PORT> <user>@<box>**, where **local-port** is a port you choose that is free(IE. 8080), and **IP-ADDRESS** and **MANAGEMENT-PORT** are values recorded above in the Retrieve Information section.
