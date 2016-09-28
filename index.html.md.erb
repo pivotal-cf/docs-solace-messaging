@@ -8,7 +8,7 @@ This documentation describes Solace Messaging for Pivotal Cloud Foundry (PCF). S
 ## <a id='overview'></a>Overview
 
 
-Solace Messaging for PCF enables developers to link their applications to a Solace VMR through a Message VPN. To learn more about these components, see the [Core Concepts](http://dev.solacesystems.com/docs/core-concepts/#message-router-concepts) topic in the Solace documentation.
+Solace Messaging for PCF enables developers to link their applications to a Solace VMR through a Message VPN. To learn more about these components, see the [Core Concepts](http://docs.solacesystems.com/Features/Core-Concepts.htm#message-router-concepts) topic in the Solace documentation.
 
 Solace Messaging for PCF includes the following features:
 
@@ -52,13 +52,14 @@ Solace Messaging for PCF has the following prerequisites:
 
 ## <a id='limitations'></a> Beta Limitations
 
-The beta version of Solace Messaging for PCF currently does not include the following features:
+The beta version of Solace Messaging for PCF currently has the following limitations:
 
-* High availability
-* TLS connections
-* Client certificate-based authentication
-* LDAP and RADIUS-based authentication
+* No support for Solace Message Router High availability
+* No support for TLS connections
+* No support for Client certificate-based authentication
+* No support for LDAP and RADIUS-based authentication
 * No routes are set up which would allow access to the Virtual Message Router from external networks.
+* All Persistent Messages are lost during a tile upgrade
 
 ## <a id='feedback'></a>Feedback
 
