@@ -78,9 +78,9 @@ To configure Solace Messaging for PCF, perform the following steps:
 1. Click **Save**.
 1. Click **Message Routing Config**.
 	<%= image_tag('VMR_Config_Form.png') %> 
-1. Under **Admin user password**, pick a password for the Virtual Message Routers admin user.
+1. Under **Admin user password**, pick a password for the Virtual Message Routers `admin` user.
 	<%= image_tag('admin_password_VMR_Config.png') %>
-1. Under **Support user password**, pick a password for the Virtual Message Routers support user.
+1. Under **Support user password**, pick a password for the Virtual Message Routers `support` user.
 	<%= image_tag('support_password_VMR_Config.png') %>
 1. Under **Starting Port**, enter a port where the messaging services on the VMRs will start listening from. For example, `7000`.
 	<%= image_tag('Starting_Port_VMR_Config.png') %>
@@ -92,7 +92,7 @@ To configure Solace Messaging for PCF, perform the following steps:
 
 1. Click **Save**.
 1. Click **Resource Config**.
-1. If necessary, use the drop-down menus to increase the number of instances of the `Large-VMR` job and the `Medium-VMR` job, or increase the persistent disk available to each job. The `Large-VMR` job defines the VMs allocated for the `Large` service plan, and the `Medium-VMR` job defines the VMs allocated for the `Shared` service plan. Pivotal recommends keeping the default values for **VM Type**. 
+1. If necessary, use the drop-down menus to increase the number of instances of the `Large-VMR` job and the `Medium-VMR` job, or increase the persistent disk available to each job. The `Large-VMR` job defines the VMs allocated for the `large` service plan, and the `Medium-VMR` job defines the VMs allocated for the `shared` service plan. Pivotal recommends keeping the default values for **VM Type**.
 <p class="note"><strong>Note</strong>: The  maximum number of service instances that can concurrently exist for the <code>Shared</code> service plan is the number of <code>Medium-VMR</code> instances times 5. The maximum number of service instances that can concurrently exist for the <code>Large</code> service plan is the number of <code>Large-VMR</code> instances.</p>
   <%= image_tag('Resource_Config.png') %>
 
