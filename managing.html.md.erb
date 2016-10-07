@@ -54,7 +54,7 @@ If you have direct connectivity to the network where you installed Solace Messag
 If you do not have direct connectivity to the network where you installed Solace Messaging, perform the following steps to connect to the Solace VMR:
 
 1. Download and install the SolAdmin administration tool from the [Solace Developers Portal Download Page](http://dev.solacesystems.com/downloads/).
-1. Open an ssh session to a host with connectivity to PCF's internal network and set a tunnel to the VMR SEMP port: 
+1. Open an ssh session to a host with connectivity to PCF's internal network and create a tunnel to the VMR SEMP port:
     <pre class="terminal">
     $ ssh -L LOCAL-PORT:IP-ADDRESS:MANAGEMENT-PORT USER@HOST
     </pre>
