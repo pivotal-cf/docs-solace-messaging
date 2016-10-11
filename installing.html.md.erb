@@ -93,7 +93,7 @@ To configure Solace Messaging for PCF, perform the following steps:
 1. Click **Save**.
 1. Click **Resource Config**.
 1. If necessary, use the drop-down menus to increase the number of instances of the `Large-VMR` job and the `Medium-VMR` job, or increase the persistent disk available to each job. The `Large-VMR` job defines the VMs allocated for the `large` service plan, and the `Medium-VMR` job defines the VMs allocated for the `shared` service plan. Pivotal recommends keeping the default values for **VM Type**.
-<p class="note"><strong>Note</strong>: The  maximum number of service instances that can concurrently exist for the <code>Shared</code> service plan is the number of <code>Medium-VMR</code> instances times 5. The maximum number of service instances that can concurrently exist for the <code>Large</code> service plan is the number of <code>Large-VMR</code> instances.</p>
+<p class="note"><strong>Note</strong>: The  maximum number of service instances that can concurrently exist for the <code>shared</code> service plan is the number of <code>Medium-VMR</code> instances times 5. The maximum number of service instances that can concurrently exist for the <code>large</code> service plan is the number of <code>Large-VMR</code> instances.</p>
   <%= image_tag('Resource_Config.png') %>
 
 1. Click **Save**.
