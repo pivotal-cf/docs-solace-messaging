@@ -31,6 +31,13 @@ To retrieve the information required to connect to the VMR, perform the followin
 
 ## <a id='connect'></a> Connect to the Solace VMR
 
+The procedure for connecting to the Solace VMR varies depending on whether you have direct connectivity to the network where you installed Solace Messaging.
+This was the network that was picked in the `Tile Installation and Configuration` section.
+
+###<a id='direct-connectivity'></a> Connect with Direct Connectivity
+
+If you have direct connectivity to the network where you installed Solace Messaging, perform the following steps to connect to the Solace VMR:
+
 1. Download and install the SolAdmin administration tool from the [Solace Developers Portal Download Page](http://dev.solacesystems.com/downloads/).
 1. Start SolAdmin.
 1. Click **Manage** to open the **Manage Appliance** window.
@@ -38,5 +45,31 @@ To retrieve the information required to connect to the VMR, perform the followin
 1. Under **Management IP Address**, enter the IP address of the VMR recorded above.
 1. Under **User Name** and **Password**, enter the management username and password recorded above.
 1. Click **Ok**. The VMR should now appear in the **Managed Appliances** list.
-  <%= image_tag('soladmin_router_list.png') %>
-1. To use SolAdmin to manage your Message VPN, see the [SolAdmin User Guide](https://sftp.solacesystems.com/Portal_Docs/#page/SolAdmin_User_Guide/About_This_Document.html#).
+	<%= image_tag('soladmin_router_list.png') %>
+1. To learn how to use SolAdmin to manage your Message VPN, see the included context specific tool help within the SolAdmin tool itself.
+
+###<a id='no-direct-connectivity'></a> Connect without Direct Connectivity
+
+If you do not have direct connectivity to the network where you installed Solace Messaging, perform the following steps to connect to the Solace VMR:
+
+1. Download and install the SolAdmin administration tool from the [Solace Developers Portal Download Page](http://dev.solacesystems.com/downloads/).
+1. Open an ssh session to a host with connectivity to PCF's internal network and create a tunnel to the VMR SEMP port:
+    <pre class="terminal">
+    $ ssh -L LOCAL-PORT:IP-ADDRESS:MANAGEMENT-PORT USER@HOST
+    </pre>
+    Replace the placeholders with the following values:
+    * `LOCAL-PORT`: A free port on your local machine
+    * `IP-ADDRESS` and `MANAGEMENT-PORT`: The VMR's IP address and management port, recorded above in the [Retrieve Information](#retrieve) section
+    * `USER`: The username you use to log in to the host
+    * `HOST`: The IP address or FQDN of the host
+1. Once you have established the SSH session, start SolAdmin.
+1. Click **Manage** to open the **Manage Appliance** window.
+	<%= image_tag('soladmin_manage_tunnel.png') %>
+1. Under **Management IP Address**, enter `127.0.0.1`
+1. Under **Management Port**, enter the local port chosen above when the SSH tunnel was created.
+1. Under **User Name** and **Password**, enter the management username and password recorded above.
+1. Click **Ok**. The VMR should now appear in the **Managed Appliances** list.
+	<%= image_tag('soladmin_router_list.png') %>
+1. To learn how to use SolAdmin to manage your Message VPN, see the included context specific tool help within the SolAdmin tool itself.
+
+<p class="note"><strong>Note</strong>: The requirement to forward ports is a current limitation of the Solace Messaging tile in Open Beta. This will be improved in a future release to simplify this procedure.</p> 

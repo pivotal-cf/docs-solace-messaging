@@ -10,17 +10,17 @@ This topic describes how to install and configure Solace Messaging for Pivotal C
 Review the default resource and IP requirements for installing the Solace Messaging for PCF tile.
 
 <table border="1" class="nice">
-  <tr>
-    <th>Product</th>
-    <th>Resource</th>
-    <th>Instances</th>
-    <th>CPU</th>
-    <th>Ram</th>
-    <th>Ephemeral</th>
-    <th>Persistent</th>
-    <th>Static IP</th>
-    <th>Dynamic IP</th>
-  </tr>
+	<tr>
+		<th>Product</th>
+		<th>Resource</th>
+		<th>Instances</th>
+		<th>CPU</th>
+		<th>Ram (MB)</th>
+		<th>Ephemeral (MB)</th>
+		<th>Persistent (MB)</th>
+		<th>Static IP</th>
+		<th>Dynamic IP</th>
+	</tr>
   <tr>
     <td>Solace Messaging for PCF</td>
     <td>Solace Service Broker</td>
@@ -32,7 +32,31 @@ Review the default resource and IP requirements for installing the Solace Messag
     <td>0</td>
     <td>1</td>
   </tr>
+  <tr>
+    <td>Solace Messaging for PCF</td>
+    <td>Medium-VMR</td>
+    <td>1</td>
+    <td>2</td>
+    <td>4096</td>
+    <td>10240</td>
+    <td>20480</td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>Solace Messaging for PCF</td>
+    <td>Large-VMR</td>
+    <td>1</td>
+    <td>4</td>
+    <td>12288</td>
+    <td>10240</td>
+    <td>40960</td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
 </table>
+
+<p class="note"><strong>Note</strong>: You can modify the resource usage while configuring the Solace Messaging for PCF tile. For more information, see the <a href="#configure">Configure Solace Messaging for PCF</a> tile below.</p> 
 
 ##<a id='install'></a> Install Solace Messaging for PCF 
 
@@ -48,18 +72,33 @@ To install Solace Messaging for PCF, perform the following steps:
 
 To configure Solace Messaging for PCF, perform the following steps:
 
-1. From the **Settings** tab of the Solace Messaging tile, click **Message Routing Config**.
-  <%= image_tag('VMR_Config_Form.png') %> 
-1. Under **List of dedicated Message Routers (comma delimited)**, enter a comma-delimited list of URIs for your dedicated Solace Virtual Message Routers (VMRs). These VMRs will support the `dedicated_vmr` service plan of the Solace Messaging service available to developers in the Marketplace. 
-  <%= image_tag('List_Dedicated_VMR_Config.png') %>
-  The URIs must follow this format:  `http://YOUR-ADMIN-USERNAME:YOUR-PASSWORD@HOST:SEMP-PORT`.
-  <p class="note"><strong>Note</strong>: Ensure the VMRs are running and have their administrator user set up with basic password authentication.</p>
-1. Under **List of shared Message Routers (comma delimited)**, enter a comma-delimited list of URIs for your shared Solace VMRs. These VMRs will support the `shared_vmr` service plan of the Solace Messaging service available to developers in the Marketplace. 
-  <%= image_tag('List_Shared_VMR_Config.png') %>
-  The URIs must follow the format `http://YOUR-ADMIN-USERNAME:YOUR-PASSWORD@HOST:SEMP-PORT`.
-  <p class="note"><strong>Note</strong>: Ensure the VMRs are running and have their administrator user set up with basic password authentication.</p>
-1. Under **Starting Port**, enter a port from which the messaging services on the VMRs will start listening. For example, `7000`.
-  <%= image_tag('Starting_Port_VMR_Config.png') %>
+1. From the **Settings** tab of the Solace Messaging tile, click **Assign AZs and Networks**.
+  <%= image_tag('Network_Config_Form.png') %>
+1. Under **Network** choose the network where Solace Messaging should run.
 1. Click **Save**.
+1. Click **Message Routing Config**.
+	<%= image_tag('VMR_Config_Form.png') %> 
+1. Under **Admin user password**, pick a password for the Virtual Message Routers `admin` user.
+	<%= image_tag('admin_password_VMR_Config.png') %>
+1. Under **Support user password**, pick a password for the Virtual Message Routers `support` user.
+	<%= image_tag('support_password_VMR_Config.png') %>
+1. Under **Starting Port**, enter a port where the messaging services on the VMRs will start listening from. For example, `7000`.
+	<%= image_tag('Starting_Port_VMR_Config.png') %>
+1. Click **Save**.
+1. Click **Service Access**.
+  <%= image_tag('ServiceAccess_Config_Form.png') %>
+1. Enable the **Enable global access to plans of service solace_messaging** option.
+<p class="note"><strong>Note</strong>: If you'd rather control access to Solace Messaging's service plans on a case by case basis, then it is okay to leave this option unchecked.</p>
+
+1. Click **Save**.
+1. Click **Resource Config**.
+1. If necessary, use the drop-down menus to increase the number of instances of the `Large-VMR` job and the `Medium-VMR` job, or increase the persistent disk available to each job. The `Large-VMR` job defines the VMs allocated for the `large` service plan, and the `Medium-VMR` job defines the VMs allocated for the `shared` service plan. Pivotal recommends keeping the default values for **VM Type**.
+<p class="note"><strong>Note</strong>: The  maximum number of service instances that can concurrently exist for the <code>shared</code> service plan is the number of <code>Medium-VMR</code> instances times 5. The maximum number of service instances that can concurrently exist for the <code>large</code> service plan is the number of <code>Large-VMR</code> instances.</p>
+  <%= image_tag('Resource_Config.png') %>
+
+1. Click **Save**.
+1. Click **Installation Dashboard** at the top left corner of the screen to leave the tile configuration and go back to dashboard.
+  <% image_tag('Installation_Dashboard_Link.png') %>
+
 1. Click **Apply Changes** to deploy the tile.
-1. After deploying the tile, see the [Creating and Binding Solace Messaging Service Instances](service-instances.html) topic for information about creating instances of the Solace Messaging service and binding them to applications.
+1. After the tile has deployed, see the [Creating and Binding Solace Messaging Service Instances](service-instances.html) topic for information about how to create instances of the Solace Messaging service and bind them to applications.
