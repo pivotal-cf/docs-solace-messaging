@@ -11,6 +11,8 @@ Each service instance represents a Message VPN on a Solace Virtual Message Route
 
 Creating a service instance also gives the developer permissions to manage the Message VPN through the SolAdmin administration tool. For more information, see the [Managing the Message VPN](managing.html) topic.
 
+The following tutorials will show you how to create a Solace Messaging service called *solace-messaging-instance* and bind this service instance to an application named *sample-cloud-app*.
+
 ##<a id='cf-cli'></a> Create and Bind a Service Instance with the cf CLI
 
 To create and bind an instance of the Solace Messaging service with the cf CLI, perform the following steps:
@@ -42,21 +44,21 @@ To create and bind an instance of the Solace Messaging service with the cf CLI, 
 1. Create an instance of the Solace Messaging service. Select either the `shared` or `large` service plan. The `shared` plan provides a VMR that is shared by four other service instances, while the `large` provides a VMR that is used only by your service instance. Pivotal recommends using a shared plan for development and testing, and a large plan for production. The following example uses the 'shared` service plan.
 
 	<pre class="terminal">
-	$ cf create-service solace-messaging shared YOUR-SERVICE-INSTANCE
-	Creating service instance YOUR-SERVICE-INSTANCE in org example / space development as user@example.com...
+	$ cf create-service solace-messaging shared solace-messaging-instance
+	Creating service instance solace-messaging-instance in org example / space development as user@example.com...
 	OK
 	</pre>
 
 1. Bind the instance to an application.
   <pre class="terminal">
-  $ cf bind-service YOUR-APP YOUR-SERVICE-INSTANCE
-  Binding service YOUR-SERVICE-INSTANCE to app YOUR-APP in org example / space development as user@example.com...
+  $ cf bind-service sample-cloud-app solace-messaging-instance
+  Binding service solace-messaging-instance to app YOUR-APP in org example / space development as user@example.com...
   OK
-  TIP: Use 'cf restage YOUR-APP' to ensure your env variable changes take effect
+  TIP: Use 'cf restage sample-cloud-app' to ensure your env variable changes take effect
   </pre>
 1. Restage the application for the binding to take effect.
   <pre class="terminal">
-  $ cf restage YOUR-APP
+  $ cf restage sample-cloud-app
   </pre>
 
 ##<a id='apps-man'></a> Create and Bind a Service Instance in Apps Manager
@@ -67,10 +69,9 @@ To create and bind an instance of the Solace Messaging service in Apps Manager, 
 1. Click **Marketplace** in the left navigation.
 1. Click **Solace Messaging**.
 1. Select either the `shared` or the `large` service plan. The `shared` plan provides a VMR that is shared by four other service instances, while the `large` provides a VMR that is used only by your service instance. Pivotal recommends using a shared plan for development and testing, and a large plan for production. 
-1. Enter an **Instance Name** and select a space under **Add to Space**. To bind the service instance to an application, select an application under **Bind to App**.
+1. Enter an **Instance Name** and select a space under **Add to Space**. To bind the service instance to an application, select an application under **Bind to App**. Then click **Add**. 
   <%= image_tag('config-instance.png') %> 
-1. Click **Add**.
-  You can also bind an application to a service instance by navigating to the application page, clicking **Services**, then clicking **Bind a Service**. 
+1. You can also bind an application to a service instance by navigating to the application page, clicking **Services**, then clicking **Bind a Service**.
   <%= image_tag('app-page.png') %>
 1. Select a service instance to bind to the application and click **Bind**.
   <%= image_tag('add-binding.png') %>
