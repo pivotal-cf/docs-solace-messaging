@@ -39,7 +39,7 @@ To create and bind an instance of the Solace Messaging service with the cf CLI, 
 	service          plans                           description
 	solace-messaging shared, large                   Solace Messaging service
 	</pre>
-1. Create an instance of the Solace Messaging service. Select either the `shared` or `large` service plan. The `shared` plan provides a VMR that is shared by four other service instances, while the `large` provides a VMR that is used only by your service instance. Pivotal recommends using a shared plan for development and testing, and a large plan for production. The following example uses the 'shared` service plan.
+1. Create an instance of the Solace Messaging service. Select either the `shared` or `large` service plan. The `shared` plan provides a VMR that is shared by four other service instances, while the `large` provides a VMR that is used only by your service instance. Pivotal recommends using a shared plan for development and testing, and a large plan for production. The following example uses the `shared` service plan.
 
 	<pre class="terminal">
 	$ cf create-service solace-messaging shared YOUR-SERVICE-INSTANCE
