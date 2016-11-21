@@ -3,31 +3,74 @@ title: Solace Messaging for Pivotal Cloud Foundry (BETA)
 owner: Partners
 ---
 
-This documentation describes Solace Messaging for Pivotal Cloud Foundry (PCF). Solace Messaging for PCF is a multi-protocol message broker. The Solace Messaging for PCF tile registers a service broker on PCF and exposes its service plans on the Marketplace. Developers can provision Message VPNs on a Solace Virtual Message Router (VMR) by creating instances of the service plans using Apps Manager or the Cloud Foundry Command Line Interface (cf CLI).
+Solace Messaging for PCF enables developers to take advantage of the leading multi-cloud, multi-protocol messaging solution which makes application development easy and makes production applications scalable, robust, high performance and easy to manage.  Solace Messaging supports all kinds of messaging APIs, QoS and data streaming as part of one platform across all clouds in a high performance, WAN optimized, easy to manage solution. It’s easily deployed in your public and private cloud environments and forms the perfect backbone for single or multi-cloud messaging support of your cloud native micro-services, IoT, big data capture and next generation digital applications.
 
-## <a id='overview'></a>Overview
+Solace Messaging for PCF provides plans for both shared message router instances for cost-effective development as well as a variety of plans for dedicated message routers of varying performance and scale for robust test and production deployments.
 
-Solace Messaging for PCF enables developers to link their applications to a Solace VMR through a Message VPN. To learn more about these components, see the [Core Concepts](http://docs.solace.com/Features/Core-Concepts.htm#message-router-concepts) topic in the Solace documentation.
+One of the key strengths of Solace Messaging is its [support for many different open transports and protocols](http://dev.solace.com/tech/#multi-service) making Solace message routers ideal data distribution platforms to connect to any application.
 
-Solace Messaging for PCF includes the following features:
+<%= image_tag('solace-overview.png') %>
 
-* Solace Messaging is now a Managed Service : The Tile deploys the Virtual Message Routers onto PCF's IaaS.
-* Support for a range of message exchange patterns, deployment environments, and qualities of service, including open APIs and protocols like JMS, MQTT and REST 
-* Support for distributing data over long-distance WAN links and streaming between web applications, mobile devices, and IoT devices like sensors and smart vehicles
-* Guaranteed messaging
-* Pub/sub and request/reply messaging
-* Persistent message queues
-* Maximum guaranteed message size of 10MB
-* Up to 10K topic subscriptions per queue
-* Up to 1000 incoming connections
-* Up to 1000 concurrent transacted sessions
-* Up to 1M in-flight concurrent messages
 
-For examples of how PCF developers can configure their applications to use the Solace Messaging service, see the sample application [GitHub repository](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java).
+## <a id='getting-started'></a>Getting Started
+
+In addition to the documentation here, there is also a wealth of information on the [Solace Developer Portal](http://dev.solace.com).
+
+### <a id='cloud-operators'></a>Cloud Operators
+
+For cloud operators, the following section shows you how to install and configure Solace Messaging for PCF in your environments.
+
+* [Tile Installation and Configuration](installing.html)
+
+### <a id='developers'></a>Developers
+
+For developers there are a few resources to help you easily get started with Solace Messaging for PCF. Within this documentation, check out the following sections:
+
+* [Service Instances and Bindings](service-instances.html)
+* [Solace Messaging Credentials](credentials.html)
+* [Managing the Message VPN](managing.html)
+
+There is also simple sample code which shows you how to easily connect to a Solace Messaging Service Instance:
+
+* [Getting Started Examples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java).
+
+## <a id='marketplace-plans'>PCF Marketplace Plans
+
+Solace Messaging currently offers the following plans to meet the needs of applications. More plans will be introduced as the Solace Messaging for PCF tile evolves towards GA.
+
+<table border="1" class="nice">
+	<tr>
+		<th>Service Plan</th>
+		<th>Description</th>
+	</tr>
+  <tr>
+    <td>Shared</td>
+    <td>Solace Service Broker</td>
+    <td>A single Message VPN in a shared Solace Message Router useful for light traffic and development</td>
+  </tr>
+  <tr>
+    <td>Large</td>
+    <td>A single message VPN on a dedicated Solace Message Router</td>
+  </tr>
+</table>
+
+## <a id='solace-messaging-features'>Solace Messaging Features
+
+In addition to easy and natural APIs for your applications, Solace Messaging supports the following key features:
+
+* [Easy integration with 3rd party products](http://dev.solace.com/integration-guides/) such as big data, ESBs, JEE, DataPower and more.
+* [Comprehensive authentication, authorization and encryption](http://dev.solace.com/tech/#security) features to ensure that your infrastructure and information are protected at all times.
+* [The most robust data movement infrastructure available today](http://dev.solace.com/tech/#robustness), offering fault tolerance and disaster recovery.
+* [Integrated federation and distribution](http://dev.solace.com/tech/#federation) for connectivity between Solace message routers.
+* [High performance](http://dev.solace.com/tech/#high-performance) messaging middleware which can cost-effectively meet the needs of any application.
+* [Fast, Efficient WAN Distribution](http://dev.solace.com/tech/#wan-distribution).
+* [Simplified operations](http://dev.solace.com/tech/#management-monitoring) with multiple management administration interfaces.
+* [Virtualize application groups on a single Solace message router](http://dev.solace.com/tech/#virtualization) with complete message isolation through Solace Message VPNs.
+
 
 ## <a id='architecture'></a>Architecture
 
-The following diagram provides an overview of the product architecture of Solace Messaging for PCF.
+Solace Messaging is a Managed Service. The Tile deploys the Virtual Message Routers onto PCF’s IaaS. The Solace Messaging tile registers a service broker with PCF and exposes its service plans in the PCF Marketplace. The following diagram provides an overview of the product architecture of Solace Messaging for PCF.
 
 <%= image_tag('Deployment-overview.png') %>
 
@@ -38,23 +81,20 @@ Current Solace Messaging for Pivotal Cloud Foundry Details:
 * **Version**: 0.2.0
 * **Release Date**: October 13, 2016
 * **Software component version**: Solace Messaging for PCF 0.2.0
+* **Solace Virtual Message Router version**: 7.2pcf2.1 which is similar in functionality to VMR 7.2.1
 * **Compatible Ops Manager Version(s)**: 1.6.x, 1.7.x, 1.8.x
 * **Compatible Elastic Runtime Version(s)**: 1.6.x, 1.7.x, 1.8.x
 * **vSphere support?** Yes
 * **AWS support?** Yes
 * **OpenStack support?** No
 
-## <a id='prereqs'></a>Prerequisites
+Note: The Solace Virtual Message Router provided in this tile is limited to a 90-day evaluation period. Users wishing to purchase an Enterprise tile for PCF should [contact Solace here](https://solace.com/company/contact-us).
 
-Solace Messaging for PCF has the following prerequisites:
-
-* You must install the MySQL for PCF tile. When configuring the tile, set the maximum storage in the **Service Plan** section to 100 MB. See the MySQL for PCF [documentation](../p-mysql/index.html) for more information on how to install and configure the tile.
 
 ## <a id='limitations'></a> Beta Limitations
 
 The beta version of Solace Messaging for PCF currently has the following limitations:
 
-* The VMR is limited to a 90 days evaluation period.
 * No support for Solace Message Router High availability
 * No support for TLS connections
 * No support for Client certificate-based authentication
