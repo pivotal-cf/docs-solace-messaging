@@ -116,7 +116,7 @@ To configure Solace Messaging for PCF, perform the following steps:
 
 <p class="note"><strong>Note 2</strong>: Communication between the Solace Messaging Service Broker and VMRs is also encrypted if a TLS certificate is configured. The Service Broker uses the Container Certificate Trust Store Framework to validate the server certificate returned by VMRs. So if the framework is not operational when the tile is deployed the Service Broker will be unable to validate server certificates sent by the VMRs and the tile will fail to deploy. In development environments it may be acceptable to not require server certificate validation in which case the **Disable RSA Server Certificate validation on the Service Broker (For development only)** checkbox can be selected. This checbox should never be selected in production deployments, instead the framework should be made operational. See [Configuring Ops Manager Director for VMware vSphre](https://docs.pivotal.io/pivotalcf/1-8/customizing/vsphere-config.html#security-config) for an example of how to configure the Container Certificate Trust Store Framework</p>
 
-1. Click **Save**.
+1. (Optional) Click **Save**.
 
 1. Click **Service Access**
 
