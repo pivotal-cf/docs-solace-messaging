@@ -34,23 +34,34 @@ Review the resource and IP requirements for installing the Solace Messaging for 
   </tr>
   <tr>
     <td>Solace Messaging for PCF</td>
-    <td>Medium-VMR</td>
+    <td>Large-VMR</td>
     <td>1<a href="#tableNote">*</a></td>
-    <td>2</td>
-    <td>4096</td>
+    <td>4</td>
+    <td>12288</td>
     <td>10240</td>
-    <td>20480<a href="#tableNote">*</a></td>
+    <td>204800<a href="#tableNote">*</a></td>
     <td>1</td>
     <td>0</td>
   </tr>
   <tr>
     <td>Solace Messaging for PCF</td>
-    <td>Large-VMR</td>
+    <td>Medium-VMR</td>
+    <td>1<a href="#tableNote">*</a></td>
+    <td>2</td>
+    <td>4096</td>
+    <td>10240</td>
+    <td>51200<a href="#tableNote">*</a></td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>Solace Messaging for PCF</td>
+    <td>Community-VMR</td>
     <td>1<a href="#tableNote">*</a></td>
     <td>4</td>
-    <td>12288</td>
+    <td>4096</td>
+    <td>10240</td>
     <td>10240<a href="#tableNote">*</a></td>
-    <td>40960</td>
     <td>1</td>
     <td>0</td>
   </tr>
@@ -60,9 +71,10 @@ Review the resource and IP requirements for installing the Solace Messaging for 
 
 ## <a id='prereqs'></a>Prerequisites
 
-Solace Messaging for PCF has the following prerequisites:
+The Solace Messaging for PCF Service Broker requires the following:
 
-* You must install the MySQL for PCF tile. When configuring the tile, set the maximum storage in the **Service Plan** section to 100 MB. See the MySQL for PCF [documentation](../p-mysql/index.html) for more information on how to install and configure the tile.
+* Java buildpack 3.7.1 or higher.
+* The MySQL for PCF tile. When configuring the tile, set the maximum storage in the **Service Plan** section to 100 MB. See the MySQL for PCF [documentation](../p-mysql/index.html) for more information on how to install and configure the tile.
 
 ##<a id='install'></a> Install Solace Messaging for PCF 
 
@@ -103,8 +115,8 @@ To configure Solace Messaging for PCF, perform the following steps:
 
 1. Click **Save**.
 1. Click **Resource Config**.
-1. If necessary, use the drop-down menus to increase the number of instances of the `Large-VMR` job and the `Medium-VMR` job. This controls the number of VMR instances of each type that are statically created when the tile is deployed. VMRs are then dynamically bound to/unbound from applications on demand post-deployment. `Large-VMR` job instances are used by service instances created from the `large` service plan while `Medium-VMR` job instances are used by service instances created from the `shared` service plan. This number can be increased after the tile is deployed without impacting already bound applications however reducing the number of instances post-deployment can result in application failure and total message loss. The size of the persistent disk used by VMR instances can also be changed both before and after deployment. Unlike increasing the number of job instances post-deployment, increasing the size of the persistent disks post-deployment will impact the service of already bound applications however messages will not be lost. Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable VMRs, and/or undefined behaviors. Solace recommends keeping the default values for **VM Type**.
-<p class="note"><strong>Note</strong>: The  maximum number of service instances that can concurrently exist for the <code>shared</code> service plan is five times the number of <code>Medium-VMR</code> instances. The maximum number of service instances that can concurrently exist for the <code>large</code> service plan is the number of <code>Large-VMR</code> instances.</p>
+1. If necessary, use the drop-down menus to increase the number of instances of the `Large-VMR`, `Medium-VMR` and `Community-VMR` jobs. This controls the number of VMR instances of each type that are statically created when the tile is deployed. VMRs are then dynamically bound to/unbound from applications on demand post-deployment. `Large-VMR` job instances are used by service instances created from the `large` service plan. `Medium-VMR` job instances are used by service instances created from the `shared` service plan. And 'Community-VMR' job instances are used by service instances created from the `shared` service plan. The number of job instances can be increased after the tile is deployed without impacting already bound applications however reducing the number of instances post-deployment can result in application failure and total message loss. The size of the persistent disk used by VMR instances can also be changed both before and after deployment. Unlike increasing the number of job instances post-deployment, increasing the size of the persistent disks post-deployment will impact the service of already bound applications however messages will not be lost. Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable VMRs, and/or undefined behaviors. Solace recommends keeping the default values for **VM Type**.
+<p class="note"><strong>Note</strong>: The maximum number of service instances that can concurrently exist for the <code>shared</code> service plan is equal to five times the number of <code>Medium-VMR</code> instances. The maximum number of service instances that can concurrently exist for the <code>large</code> and <code>community</code> service plans is equal to the number of <code>Large-VMR</code> and <code>Community-VMR</code> instances respectively.</p>
     <%= image_tag('Resource_Config.png') %>
 
 1. Click **Save**.
