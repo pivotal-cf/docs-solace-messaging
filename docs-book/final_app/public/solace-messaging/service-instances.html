@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Always force latest IE rendering engine or request Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400italic,400,600' rel='stylesheet' type='text/css'>
+  <!-- Use title if it's in the page YAML frontmatter -->
+  <title>
+      Creating and Binding Solace Messaging Service Instances |
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/stylesheets/all.css" rel="stylesheet" media="screen, print" />
+  <link href="/stylesheets/print.css" rel="stylesheet" media="print" />
+  <link href='/images/favicon.ico' rel='shortcut icon'>
+
+  <script src="/javascripts/all.js"></script>
+  <script>
+//Global Google Search
+(function() {
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + '';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+})();
+</script>
+
+<script type="text/javascript">
+  if (window.location.host === 'hello') {
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '']);
+    _gaq.push(['_setDomainName', '']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  }
+</script>
+
+<script type="text/javascript">
+  var blackList = ['acceptance'];
+
+  blackList.forEach(function(blackListedEnv) {
+    if (document.URL.indexOf(blackListedEnv) > -1 && blackListedEnv != "") {
+      $('head').append('<meta name="hashtag" content="PivotalMoment">');
+    }
+  });
+</script>
+
+<!-- CrazyEgg Tracking Script -->
+<script type="text/javascript">
+  setTimeout(function() {
+    var a = document.createElement("script");
+    var b = document.getElementsByTagName("script")[0];
+    a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0020/8294.js?" + Math.floor(new Date().getTime() / 3600000);
+    a.async = true;
+    a.type = "text/javascript";
+    b.parentNode.insertBefore(a, b)
+  }, 1);
+</script>
+
+<script type="text/javascript">
+  (function() {
+    var didInit = false;
+
+    function initMunchkin() {
+      if (didInit === false) {
+        didInit = true;
+        Munchkin.init('625-IUJ-009');
+      }
+    }
+
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+    s.onreadystatechange = function() {
+      if (this.readyState == 'complete' || this.readyState == 'loaded') {
+        initMunchkin();
+      }
+    };
+    s.onload = initMunchkin;
+    document.getElementsByTagName('head')[0].appendChild(s);
+  })();
+</script>
+
+</head>
+
+<body class="solace-messaging solace-messaging_service-instances has-subnav">
+
+<div class="viewport">
+  <div class='wrap'>
+    <script type="text/javascript">
+      document.domain = "";
+    </script>
+
+       
+    <header class="header header-layout">
+      <h1 class="logo">
+        <a href="/">Default Book Title</a>
+      </h1>
+      
+      <div class="header-links js-bar-links">
+        <div class="btn-menu" data-behavior="MenuMobile"></div>
+        
+        <div class="header-item">
+          
+        </div>
+        <!--Default search-->
+<!--If book needs something different, add a book-search partial to the book's layouts folder-->
+<div class="header-item searchbar js-searchbar">
+  <a class="search-icon" data-behavior="Search"></a>
+  <div class="search-input">
+    <div class="search-input-inner" id="docs-search">
+        <gcse:searchbox></gcse:searchbox>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </header>
+
+
+
+    <div class="container">
+
+      <!--googleoff: index-->
+      <div id="sub-nav" class="deepnav-content js-deep-nav js-sidenav nav-container" role="navigation">
+  <a class="sidenav-title" data-behavior="SubMenuMobile">
+    Doc Index
+  </a>
+  <div class="nav-content">
+    <ul class="menu">
+      <li>
+        <span class="topic">
+          <a id='home-nav-link' href="/solace-messaging/index.html">Solace Messaging for PCF Overview</a>
+        </span>
+      </li>
+      <li>
+          <span><a href="/solace-messaging/installing.html">Tile Installation and Configuration</a></span>
+      </li>
+      <li>
+          <span><a href="/solace-messaging/service-instances.html">Service Instances and Bindings</a></span>
+      </li>
+      <li>
+          <span><a href="/solace-messaging/credentials.html">Solace Messaging Credentials</a></span>
+      </li>
+      <li>
+          <span><a href="/solace-messaging/managing.html">Message VPN Management</a></span>
+      </li>
+      <li>
+          <span><a href="/solace-messaging/release-notes.html">Release Notes</a></span>
+      </li>
+
+     </ul>
+    </div>
+</div>
+      <!--googleon: index-->
+
+      <main class="content content-layout" id="js-content" role="main">
+        <a id="top"></a>
+        
+          <h1 class="title-container" >
+    Creating and Binding Solace Messaging Service Instances
+  </h1>
+
+          <div id="js-quick-links" >
+            <div class="quick-links"><ul>
+<li><a href="#cf-cli">Create and Bind a Service Instance with the cf CLI</a></li>
+<li><a href="#apps-man">Create and Bind a Service Instance in Apps Manager</a></li>
+</ul></div>
+          </div>
+        <div class="to-top" id="js-to-top">
+          <a href="#top" title="back to top"></a>
+        </div>
+        <p>This topic describes how developers create and bind instances of the Solace Messaging service.</p>
+
+<p>After deploying the Solace Messaging for Pivotal Cloud Foundry (PCF) tile, the Solace Messaging service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service and bind it to applications that need to exchange messages.</p>
+
+<p>Each service instance represents a Message VPN on a Solace Virtual Message Router (VMR). By binding an application to the instance, developers give the application permission to access this Message VPN through a client username. For more information about how developers can use the credentials provided by the binding, see the <a href="/solace-messaging/managing.html">Understanding Solace Messaging Credentials</a> topic.</p>
+
+<p>Creating a service instance also gives the developer permissions to manage the Message VPN through the SolAdmin administration tool. For more information, see the <a href="/solace-messaging/managing.html">Managing the Message VPN</a> topic.</p>
+
+<p>The following tutorials will show you how to create a Solace Messaging service called <em>solace-messaging-instance</em> and bind this service instance to an application named <em>sample-cloud-app</em>.</p>
+
+<h2><a id='cf-cli'></a> Create and Bind a Service Instance with the cf CLI</h2>
+
+<p>To create and bind an instance of the Solace Messaging service with the cf CLI, perform the following steps:</p>
+
+<ol>
+<li>Set your API endpoint to the Cloud Controller of your deployment.
+<pre class="terminal">
+$ cf api api.YOUR-SYSTEM-DOMAIN
+Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
+OK
+API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+Not logged in. Use &#39;cf login&#39; to log in.
+</pre></li>
+<li>Log in to your deployment and select an org and a space.
+<pre class="terminal">
+$ cf login
+API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+Email&gt; user<span>@</span>example.com
+Password&gt;
+</pre></li>
+<li><p>List the Marketplace services and locate the Solace Messaging service.
+<pre class="terminal">
+$ cf marketplace
+Getting services from marketplace in org example / space development as user<span>@</span>example.com...
+OK</p>
+
+<p>service          plans                           description
+solace-messaging shared, large, community        Solace Messaging for real-time, multi-protocol data distribution
+</pre></p></li>
+<li><p>Create an instance of the Solace Messaging service. Select either the <code>shared</code>, <code>large</code>, or <code>community</code> service plan. See <a href="index.html/#marketplace-plans">PCF Marketplace Plans</a> for how these service plans differ. The following example uses the <code>shared</code> service plan.</p>
+
+<pre class="terminal">
+$ cf create-service solace-messaging shared solace-messaging-instance
+Creating service instance solace-messaging-instance in org example / space development as user@example.com...
+OK
+</pre></li>
+<li><p>Bind the instance to an application.
+<pre class="terminal">
+$ cf bind-service sample-cloud-app solace-messaging-instance
+Binding service solace-messaging-instance to app YOUR-APP in org example / space development as <a href="mailto:user@example.com">user@example.com</a>...
+OK
+TIP: Use &#39;cf restage sample-cloud-app&#39; to ensure your env variable changes take effect
+</pre></p></li>
+<li><p>Restage the application for the binding to take effect.
+<pre class="terminal">
+$ cf restage sample-cloud-app
+</pre></p></li>
+</ol>
+
+<h2><a id='apps-man'></a> Create and Bind a Service Instance in Apps Manager</h2>
+
+<p>To create and bind an instance of the Solace Messaging service in Apps Manager, perform the following steps:</p>
+
+<ol>
+<li>Navigate to <code>apps.YOUR-SYSTEM-DOMAIN</code> in a browser and log in.</li>
+<li>Click <strong>Marketplace</strong> in the left navigation.</li>
+<li>Click <strong>Solace Messaging</strong>.</li>
+<li>Select either the <code>shared</code>, <code>large</code>, or <code>community</code> service plan. See <a href="index.html/#marketplace-plans">PCF Marketplace Plans</a> for how these service plans differ.</li>
+<li>Enter an <strong>Instance Name</strong> and select a space under <strong>Add to Space</strong>. To bind the service instance to an application, select an application under <strong>Bind to App</strong>. Then click <strong>Add</strong>. 
+<img src="images/config-instance.png" /> </li>
+<li>You can also bind an application to a service instance by navigating to the application page, clicking <strong>Services</strong>, then clicking <strong>Bind a Service</strong>.
+<img src="images/app-page.png" /></li>
+<li>Select a service instance to bind to the application and click <strong>Bind</strong>.
+<img src="images/add-binding.png" /></li>
+</ol>
+
+          <gcse:searchresults></gcse:searchresults>
+<a id='repo-link' href='http://github.com/docs-content/tree/staging/service-instances.html.md.erb'>View the source for this page in GitHub</a>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<div id="scrim"></div>
+
+<div class="container">
+  <footer class="site-footer-links">
+    <div class="copyright">
+  <a href='http://pivotal.io/privacy-policy'>Privacy Policy</a> | 
+  <a href='http://pivotal.io/terms-of-use'>Terms of Use</a><br/>
+  <a href='/'>Pivotal Documentation</a>
+  &copy; 2016 <a href='http://pivotal.io'>Pivotal Software</a>, Inc. All Rights Reserved.
+</div>
+<div class="support">
+  Need help? <a href="" target="_blank">Visit Support</a>
+</div>
+
+  </footer>
+</div><!--end of container-->
+
+</body>
+</html>

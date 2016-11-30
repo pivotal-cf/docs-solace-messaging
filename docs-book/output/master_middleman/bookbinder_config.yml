@@ -3,18 +3,18 @@
   ".": 
 :production_host: hello
 :subnav_templates:
-  myservice: myservice_subnav
+  solace-messaging: pivotal_solace_messaging
 :template_variables: 
-:local_repo_dir: "/Users/pivotal/workspace/docs-partners-template"
+:local_repo_dir: "/Users/pivotal/workspace/docs-solace-messaging"
 :workspace: !ruby/object:Pathname
-  path: "/Users/pivotal/workspace/docs-partners-template/docs-book/output/master_middleman/source"
+  path: "/Users/pivotal/workspace/docs-solace-messaging/docs-book/output/master_middleman/source"
 :feedback_enabled: 
 :repo_link_enabled: true
 :repo_links:
-  myservice:
+  solace-messaging:
     repo: docs-content
-    ref: master
+    ref: staging
     at_path: 
 :product_info:
-  myservice: {}
+  solace-messaging: {}
 :elastic_search: false

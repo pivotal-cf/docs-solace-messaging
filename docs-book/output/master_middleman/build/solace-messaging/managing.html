@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Always force latest IE rendering engine or request Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400italic,400,600' rel='stylesheet' type='text/css'>
+  <!-- Use title if it's in the page YAML frontmatter -->
+  <title>
+      Managing the Message VPN |
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/stylesheets/all.css" rel="stylesheet" media="screen, print" />
+  <link href="/stylesheets/print.css" rel="stylesheet" media="print" />
+  <link href='/images/favicon.ico' rel='shortcut icon'>
+
+  <script src="/javascripts/all.js"></script>
+  <script>
+//Global Google Search
+(function() {
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + '';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+})();
+</script>
+
+<script type="text/javascript">
+  if (window.location.host === 'hello') {
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '']);
+    _gaq.push(['_setDomainName', '']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  }
+</script>
+
+<script type="text/javascript">
+  var blackList = ['acceptance'];
+
+  blackList.forEach(function(blackListedEnv) {
+    if (document.URL.indexOf(blackListedEnv) > -1 && blackListedEnv != "") {
+      $('head').append('<meta name="hashtag" content="PivotalMoment">');
+    }
+  });
+</script>
+
+<!-- CrazyEgg Tracking Script -->
+<script type="text/javascript">
+  setTimeout(function() {
+    var a = document.createElement("script");
+    var b = document.getElementsByTagName("script")[0];
+    a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0020/8294.js?" + Math.floor(new Date().getTime() / 3600000);
+    a.async = true;
+    a.type = "text/javascript";
+    b.parentNode.insertBefore(a, b)
+  }, 1);
+</script>
+
+<script type="text/javascript">
+  (function() {
+    var didInit = false;
+
+    function initMunchkin() {
+      if (didInit === false) {
+        didInit = true;
+        Munchkin.init('625-IUJ-009');
+      }
+    }
+
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+    s.onreadystatechange = function() {
+      if (this.readyState == 'complete' || this.readyState == 'loaded') {
+        initMunchkin();
+      }
+    };
+    s.onload = initMunchkin;
+    document.getElementsByTagName('head')[0].appendChild(s);
+  })();
+</script>
+
+</head>
+
+<body class="solace-messaging solace-messaging_managing has-subnav">
+
+<div class="viewport">
+  <div class='wrap'>
+    <script type="text/javascript">
+      document.domain = "";
+    </script>
+
+       
+    <header class="header header-layout">
+      <h1 class="logo">
+        <a href="/">Default Book Title</a>
+      </h1>
+      
+      <div class="header-links js-bar-links">
+        <div class="btn-menu" data-behavior="MenuMobile"></div>
+        
+        <div class="header-item">
+          
+        </div>
+        <!--Default search-->
+<!--If book needs something different, add a book-search partial to the book's layouts folder-->
+<div class="header-item searchbar js-searchbar">
+  <a class="search-icon" data-behavior="Search"></a>
+  <div class="search-input">
+    <div class="search-input-inner" id="docs-search">
+        <gcse:searchbox></gcse:searchbox>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </header>
+
+
+
+    <div class="container">
+
+      <!--googleoff: index-->
+      <div id="sub-nav" class="deepnav-content js-deep-nav js-sidenav nav-container" role="navigation">
+  <a class="sidenav-title" data-behavior="SubMenuMobile">
+    Doc Index
+  </a>
+  <div class="nav-content">
+    <ul class="menu">
+      <li>
+        <span class="topic">
+          <a id='home-nav-link' href="/solace-messaging/index.html">Solace Messaging for PCF Overview</a>
+        </span>
+      </li>
+      <li>
+          <span><a href="/solace-messaging/installing.html">Tile Installation and Configuration</a></span>
+      </li>
+      <li>
+          <span><a href="/solace-messaging/service-instances.html">Service Instances and Bindings</a></span>
+      </li>
+      <li>
+          <span><a href="/solace-messaging/credentials.html">Solace Messaging Credentials</a></span>
+      </li>
+      <li>
+          <span><a href="/solace-messaging/managing.html">Message VPN Management</a></span>
+      </li>
+      <li>
+          <span><a href="/solace-messaging/release-notes.html">Release Notes</a></span>
+      </li>
+
+     </ul>
+    </div>
+</div>
+      <!--googleon: index-->
+
+      <main class="content content-layout" id="js-content" role="main">
+        <a id="top"></a>
+        
+          <h1 class="title-container" >
+    Managing the Message VPN
+  </h1>
+
+          <div id="js-quick-links" >
+            <div class="quick-links"><ul>
+<li><a href="#retrieve">Retrieve Information</a></li>
+<li>
+<a href="#connect">Connect to the Solace VMR</a><ul>
+<li><a href="#direct-connectivity">Connect with Direct Connectivity</a></li>
+<li><a href="#no-direct-connectivity">Connect without Direct Connectivity</a></li>
+</ul>
+</li>
+</ul></div>
+          </div>
+        <div class="to-top" id="js-to-top">
+          <a href="#top" title="back to top"></a>
+        </div>
+        <p>This topic describes how to manage the Message VPN on a Solace Virtual Message Router (VMR). After Solace Messaging for Pivotal Cloud Foundry (PCF) is installed, developers can provision Message VPNs on a VMR by creating instances of the service plans using Apps Manager or the Cloud Foundry Command Line Interface (cf CLI). Each service instance represents one Message VPN. </p>
+
+<p>Developers can manage the Message VPN associated with a service instance by connecting to the VMR with the SolAdmin administration tool.</p>
+
+<h2><a id='retrieve'></a>Retrieve Information</h2>
+
+<p>To retrieve the information required to connect to the VMR, perform the following steps:</p>
+
+<ol>
+<li>Log in to your deployment and choose the org and space where your Solace Messaging service instance and bound application exists.
+<pre class="terminal">
+$ cf login
+API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+Email&gt; user<span>@</span>example.com
+Password&gt;
+</pre></li>
+<li>View the <code>VCAP_SERVICES</code> environment variable by retrieving the environment variables associated with your bound application:
+<pre class="terminal">
+$ cf env YOUR-APP
+</pre></li>
+<li>Locate your Solace Messaging service instance in <code>VCAP_SERVICES</code> and record the following fields:
+
+<ul>
+<li><code>managementUsername</code>: The service instance&rsquo;s management username</li>
+<li><code>managementPassword</code>: The service instance&rsquo;s management password</li>
+<li><code>managementHttpUris</code>: The VMR&rsquo;s IP address and management port, in the format <code>http://IP-ADDRESS:MANAGEMENT-PORT/SEMP/V2</code>
+<br><br>
+For more information about the <code>VCAP_SERVICES</code> fields, see the <a href="/solace-messaging/credentials.html">Understanding Credentials</a> topic.</li>
+</ul></li>
+</ol>
+
+<h2><a id='connect'></a> Connect to the Solace VMR</h2>
+
+<p>The procedure for connecting to the Solace VMR varies depending on whether you have direct connectivity to the network where you installed Solace Messaging.
+This was the network that was picked in the <code>Tile Installation and Configuration</code> section.</p>
+
+<h3><a id='direct-connectivity'></a> Connect with Direct Connectivity</h3>
+
+<p>If you have direct connectivity to the network where you installed Solace Messaging, perform the following steps to connect to the Solace VMR:</p>
+
+<ol>
+<li>Download and install the SolAdmin administration tool from the <a href="http://dev.solace.com/downloads/">Solace Developers Portal Download Page</a>.</li>
+<li>Start SolAdmin.</li>
+<li>Click <strong>Manage</strong> to open the <strong>Manage Appliance</strong> window.
+<img src="images/soladmin_manage.png" /></li>
+<li>Under <strong>Management IP Address</strong>, enter the IP address of the VMR recorded above.</li>
+<li>Under <strong>User Name</strong> and <strong>Password</strong>, enter the management username and password recorded above.</li>
+<li>Click <strong>Ok</strong>. The VMR should now appear in the <strong>Managed Appliances</strong> list.
+<img src="images/soladmin_router_list.png" /></li>
+<li>To learn how to use SolAdmin to manage your Message VPN, see the included context specific tool help within the SolAdmin tool itself.</li>
+</ol>
+
+<h3><a id='no-direct-connectivity'></a> Connect without Direct Connectivity</h3>
+
+<p>If you do not have direct connectivity to the network where you installed Solace Messaging, perform the following steps to connect to the Solace VMR:</p>
+
+<ol>
+<li>Download and install the SolAdmin administration tool from the <a href="http://dev.solace.com/downloads/">Solace Developers Portal Download Page</a>.</li>
+<li>Open an ssh session to a host with connectivity to PCF&rsquo;s internal network and create a tunnel to the VMR SEMP port:
+<pre class="terminal">
+$ ssh -L LOCAL-PORT:IP-ADDRESS:MANAGEMENT-PORT USER@HOST
+</pre>
+Replace the placeholders with the following values:
+
+<ul>
+<li><code>LOCAL-PORT</code>: A free port on your local machine</li>
+<li><code>IP-ADDRESS</code> and <code>MANAGEMENT-PORT</code>: The VMR&rsquo;s IP address and management port, recorded above in the <a href="#retrieve">Retrieve Information</a> section</li>
+<li><code>USER</code>: The username you use to log in to the host</li>
+<li><code>HOST</code>: The IP address or FQDN of the host</li>
+</ul></li>
+<li>Once you have established the SSH session, start SolAdmin.</li>
+<li>Click <strong>Manage</strong> to open the <strong>Manage Appliance</strong> window.
+<img src="images/soladmin_manage_tunnel.png" /></li>
+<li>Under <strong>Management IP Address</strong>, enter <code>127.0.0.1</code>.</li>
+<li>Under <strong>Management Port</strong>, enter the local port chosen above when the SSH tunnel was created.</li>
+<li>Under <strong>User Name</strong> and <strong>Password</strong>, enter the management username and password recorded above.</li>
+<li>Click <strong>Ok</strong>. The VMR should now appear in the <strong>Managed Appliances</strong> list.
+<img src="images/soladmin_router_list.png" /></li>
+<li>To learn how to use SolAdmin to manage your Message VPN, see the included context specific tool help within the SolAdmin tool itself.</li>
+</ol>
+
+<p class="note"><strong>Note</strong>: The requirement to forward ports is a current limitation of the Solace Messaging tile in Open Beta. This will be improved in a future release to simplify this procedure.</p> 
+
+          <gcse:searchresults></gcse:searchresults>
+<a id='repo-link' href='http://github.com/docs-content/tree/staging/managing.html.md.erb'>View the source for this page in GitHub</a>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<div id="scrim"></div>
+
+<div class="container">
+  <footer class="site-footer-links">
+    <div class="copyright">
+  <a href='http://pivotal.io/privacy-policy'>Privacy Policy</a> | 
+  <a href='http://pivotal.io/terms-of-use'>Terms of Use</a><br/>
+  <a href='/'>Pivotal Documentation</a>
+  &copy; 2016 <a href='http://pivotal.io'>Pivotal Software</a>, Inc. All Rights Reserved.
+</div>
+<div class="support">
+  Need help? <a href="" target="_blank">Visit Support</a>
+</div>
+
+  </footer>
+</div><!--end of container-->
+
+</body>
+</html>

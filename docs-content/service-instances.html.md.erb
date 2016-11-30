@@ -41,7 +41,7 @@ To create and bind an instance of the Solace Messaging service with the cf CLI, 
 	service          plans                           description
 	solace-messaging shared, large, community        Solace Messaging for real-time, multi-protocol data distribution
 	</pre>
-1. Create an instance of the Solace Messaging service. Select either the `shared`, `large`, or `community` service plan. See [PCF Marketplace Plans](index.html/#marketplace-plans) for how these service plans differ. The following example uses the `shared` service plan.
+1. Create an instance of the Solace Messaging service. Select either the `shared`, `large`, or `community` service plan. See [PCF Marketplace Plans](index.html#marketplace-plans) for how these service plans differ. The following example uses the `shared` service plan.
 
 	<pre class="terminal">
 	$ cf create-service solace-messaging shared solace-messaging-instance
@@ -68,7 +68,7 @@ To create and bind an instance of the Solace Messaging service in Apps Manager, 
 1. Navigate to `apps.YOUR-SYSTEM-DOMAIN` in a browser and log in.
 1. Click **Marketplace** in the left navigation.
 1. Click **Solace Messaging**.
-1. Select either the `shared`, `large`, or `community` service plan. See [PCF Marketplace Plans](index.html/#marketplace-plans) for how these service plans differ.
+1. Select either the `shared`, `large`, or `community` service plan. See [PCF Marketplace Plans](index.html#marketplace-plans) for how these service plans differ.
 1. Enter an **Instance Name** and select a space under **Add to Space**. To bind the service instance to an application, select an application under **Bind to App**. Then click **Add**. 
   <%= image_tag('config-instance.png') %> 
 1. You can also bind an application to a service instance by navigating to the application page, clicking **Services**, then clicking **Bind a Service**.
