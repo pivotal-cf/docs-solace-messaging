@@ -3,14 +3,13 @@ title: Solace Messaging for Pivotal Cloud Foundry (BETA)
 owner: Partners
 ---
 
-Solace Messaging for PCF enables developers to take advantage of the leading multi-cloud, multi-protocol messaging solution which makes application inter-connectivity easy and makes production applications scalable, robust, high performance and easy to manage.  Solace Messaging supports all kinds of messaging APIs, QoS and data streaming as part of one platform across all clouds in a high performance, WAN optimized, easy to manage solution. It’s easily deployed in your public and private cloud environments and forms the perfect backbone for single or multi-cloud messaging support of your cloud native micro-services, IoT, big data capture and next generation digital applications.
+Solace Messaging for PCF enables developers to take advantage of the leading multi-cloud, multi-protocol messaging solution which makes application inter-connectivity easy and makes production applications scalable, robust, high performance and easy to manage.  Solace Messaging supports all kinds of messaging APIs, QoS and data streaming as part of one platform across all clouds in a high performance, WAN optimized, easy to manage solution. It's easily deployed in your public and private cloud environments and forms the perfect backbone for single or multi-cloud messaging support of your cloud native micro-services, IoT, big data capture and next generation digital applications.
 
 Solace Messaging for PCF provides plans for both shared message router instances for cost-effective development as well as a variety of plans for dedicated message routers of varying performance and scale for robust test and production deployments.
 
-One of the key strengths of Solace Messaging is its [support for many different open transports and protocols](http://dev.solace.com/tech/#multi-service) making Solace message routers ideal data distribution platforms to connect to any application.
+One of the key strengths of Solace Messaging is its [support for many different open transports and protocols](http://dev.solace.com/tech/#multi-service) making Solace message routers ideal data distribution platforms to connect to any application.
 
 <%= image_tag('solace-overview.png') %>
-
 
 ## <a id='getting-started'></a>Getting Started
 
@@ -45,12 +44,15 @@ Solace Messaging currently offers the following plans to meet the needs of appli
 	</tr>
   <tr>
     <td>Shared</td>
-    <td>Solace Service Broker</td>
-    <td>A single Message VPN in a shared Solace Message Router useful for light traffic and development</td>
+    <td>A single Message VPN in a shared Solace Message Router. Useful for light traffic and development. This plan is not feature limited but does have a time limited 90-day evaluation period.</td>
   </tr>
   <tr>
     <td>Large</td>
-    <td>A single message VPN on a dedicated Solace Message Router</td>
+    <td>A single message VPN on a dedicated Solace Message Router. This plan is not feature limited but does have a time limited 90-day evaluation period.</td>
+  </tr>
+  <tr>
+    <td>Community</td>
+    <td>A single message VPN on a dedicated Solace Message Router. The plan is limited by the features available on the Community Edition VMR but there is no time limited evaluation period enforced.</td>
   </tr>
 </table>
 
@@ -58,19 +60,19 @@ Solace Messaging currently offers the following plans to meet the needs of appli
 
 In addition to easy and natural APIs for your applications, Solace Messaging supports the following key features:
 
-* [Easy integration with 3rd party products](http://dev.solace.com/integration-guides/) such as big data, ESBs, JEE, DataPower and more.
-* [Comprehensive authentication, authorization and encryption](http://dev.solace.com/tech/#security) features to ensure that your infrastructure and information are protected at all times.
+* [Easy integration with 3rd party products](http://dev.solace.com/integration-guides/) such as big data, ESBs, JEE, DataPower and more.
+* [Comprehensive authentication, authorization and encryption](http://dev.solace.com/tech/#security) features to ensure that your infrastructure and information are protected at all times.
 * [The most robust data movement infrastructure available today](http://dev.solace.com/tech/#robustness), offering fault tolerance and disaster recovery.
-* [Integrated federation and distribution](http://dev.solace.com/tech/#federation) for connectivity between Solace message routers.
-* [High performance](http://dev.solace.com/tech/#high-performance) messaging middleware which can cost-effectively meet the needs of any application.
+* [Integrated federation and distribution](http://dev.solace.com/tech/#federation) for connectivity between Solace message routers.
+* [High performance](http://dev.solace.com/tech/#high-performance) messaging middleware which can cost-effectively meet the needs of any application.
 * [Fast, Efficient WAN Distribution](http://dev.solace.com/tech/#wan-distribution).
-* [Simplified operations](http://dev.solace.com/tech/#management-monitoring) with multiple management administration interfaces.
-* [Virtualize application groups on a single Solace message router](http://dev.solace.com/tech/#virtualization) with complete message isolation through Solace Message VPNs.
+* [Simplified operations](http://dev.solace.com/tech/#management-monitoring) with multiple management administration interfaces.
+* [Virtualize application groups on a single Solace message router](http://dev.solace.com/tech/#virtualization) with complete message isolation through Solace Message VPNs.
 
 
 ## <a id='architecture'></a>Architecture
 
-Solace Messaging is a Managed Service. The Tile deploys the Virtual Message Routers onto PCF’s IaaS. The Solace Messaging tile registers a service broker with PCF and exposes its service plans in the PCF Marketplace. The following diagram provides an overview of the product architecture of Solace Messaging for PCF.
+Solace Messaging is a Managed Service. The Tile deploys the Virtual Message Routers onto PCF's IaaS. The Solace Messaging tile registers a service broker with PCF and exposes its service plans in the PCF Marketplace. The following diagram provides an overview of the product architecture of Solace Messaging for PCF.
 
 <%= image_tag('Deployment-overview.png') %>
 
@@ -78,33 +80,28 @@ Solace Messaging is a Managed Service. The Tile deploys the Virtual Message Rout
 
 Current Solace Messaging for Pivotal Cloud Foundry Details:
 
-* **Version**: 0.2.0
-* **Release Date**: October 13, 2016
-* **Software component version**: Solace Messaging for PCF 0.2.0
-* **Solace Virtual Message Router version**: 7.2pcf2.1 which is similar in functionality to VMR 7.2.1
-* **Compatible Ops Manager Version(s)**: 1.6.x, 1.7.x, 1.8.x
-* **Compatible Elastic Runtime Version(s)**: 1.6.x, 1.7.x, 1.8.x
+* **Version**: 0.3.0
+* **Release Date**: December 7, 2016
+* **Software component version**: Solace Messaging for PCF 0.3.0
+* **Solace Virtual Message Router version**: 7.2pcf2.6 which is similar in functionality to VMR 7.2.1
+* **Compatible Ops Manager Version(s)**: 1.7.x, 1.8.x
+* **Compatible Elastic Runtime Version(s)**: 1.7.x, 1.8.x
 * **vSphere support?** Yes
 * **AWS support?** Yes
-* **OpenStack support?** No
+* Additional IaaSs are supported. Please [contact Solace](https://solace.com/company/contact-us) for futher information.
 
-Note: The Solace Virtual Message Router provided in this tile is limited to a 90-day evaluation period. Users wishing to purchase an Enterprise tile for PCF should [contact Solace here](https://solace.com/company/contact-us).
+## <a id='limitations'></a> Limitations
 
-
-## <a id='limitations'></a> Beta Limitations
-
-The beta version of Solace Messaging for PCF currently has the following limitations:
+This version of Solace Messaging for PCF currently has the following limitations:
 
 * No support for Solace Message Router High availability
-* No support for TLS connections
 * No support for Client certificate-based authentication
 * No support for LDAP and RADIUS-based authentication
-* No routes are set up which would allow access to the Virtual Message Router from external networks.
+* No routes are set up which would allow access to the Virtual Message Router from external networks
 * All Persistent Messages are lost during a tile upgrade
 
 ## <a id='feedback'></a>Feedback
 
 Provide any bugs, feature requests, or questions to the [Pivotal Cloud Foundry Feedback](mailto:pivotal-cf-feedback@pivotal.io) list.
-
 
 
