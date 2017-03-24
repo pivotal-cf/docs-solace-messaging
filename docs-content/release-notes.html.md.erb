@@ -1,0 +1,51 @@
+---
+title: Release Notes
+owner: Partners
+---
+
+Release Notes for Solace Messaging for Pivotal Cloud Foundry (PCF).
+
+### v0.3.0
+
+**Release Date: December 7, 2016**
+
+Features included in the release:
+
+* Second open beta
+* The tile allows a TLS server certificate to be configured for the deployed VMRs. 
+  This allows encrypted TLS data connections between Virtual Message Routers (VMRs) and applications as well as the Solace service broker.
+* Community service plan is introduced. This plan uses the Community Edition VMR to host PCF service instances. 
+  It is a feature-limited version of the VMR with a perpetual license.
+* Contains VMR release v7.2pcf2.1.6
+* Requires BOSH stemcell v3263 ubuntu-trusty
+* Requires Java buildpack v3.7.1 or later
+
+
+### v0.2.0
+
+**Release Date: October 13, 2016**
+
+Features included in the release:
+
+* First open beta
+* The tile deploys as a Managed Service; it deploys Virtual Message Routers (VMRs) during the tile install.
+* Ability to configure two flavors of VMRs: Large and Medium
+* The service plans names changed. These are the new service plans names:
+  * `shared`: Provides a service instance on a Medium VMR shared with other service instances
+  * `large`: Provides a service instance on a dedicated Large VMR
+* Tile upgrade is improved. Service Plan Configuration is maintained across upgrades. All stored messages are still lost.
+
+### v0.1.30
+
+**Release Date: August 26, 2016**
+
+Features included in this release:
+
+* MVP private beta
+* Uses customer-provided Virtual Message Routers (VMRs)
+* Ability to configures multiple VMRs
+* Provides these two service plans:
+  1. Shared VMR: Provides a service instance on a VMR shared with other service instances
+  1. Dedicated VMR: Provides a service instance on a dedicated VMR
+* Tile is upgradeable within Ops Manager — All service plan configuration and messages are lost during upgrades.
+* Service Broker uses external MySQL service.

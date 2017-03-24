@@ -1,0 +1,20 @@
+---
+:archive_menu:
+  ".": 
+:production_host: hello
+:subnav_templates:
+  solace-messaging: pivotal_solace_messaging
+:template_variables: 
+:local_repo_dir: "/Users/pivotal/workspace/docs-solace-messaging"
+:workspace: !ruby/object:Pathname
+  path: "/Users/pivotal/workspace/docs-solace-messaging/docs-book/output/master_middleman/source"
+:feedback_enabled: 
+:repo_link_enabled: true
+:repo_links:
+  solace-messaging:
+    repo: docs-content
+    ref: staging
+    at_path: 
+:product_info:
+  solace-messaging: {}
+:elastic_search: false

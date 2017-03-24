@@ -1,0 +1,77 @@
+---
+title: Creating and Binding Solace Messaging Service Instances
+owner: Partners
+---
+
+This topic describes how developers create and bind instances of the Solace Messaging service.
+
+After deploying the Solace Messaging for Pivotal Cloud Foundry (PCF) tile, the Solace Messaging service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service and bind it to applications that need to exchange messages.
+
+Each service instance represents a Message VPN on a Solace Virtual Message Router (VMR). By binding an application to the instance, developers give the application permission to access this Message VPN through a client username. For more information about how developers can use the credentials provided by the binding, see the [Understanding Solace Messaging Credentials](credentials.html) topic.
+
+Creating a service instance also gives the developer permissions to manage the Message VPN through the SolAdmin administration tool. For more information, see the [Managing the Message VPN](managing.html) topic.
+
+The following tutorials will show you how to create a Solace Messaging service called *solace-messaging-instance* and bind this service instance to an application named *sample-cloud-app*.
+
+##<a id='cf-cli'></a> Create and Bind a Service Instance with the cf CLI
+
+To create and bind an instance of the Solace Messaging service with the cf CLI, perform the following steps:
+
+1. Set your API endpoint to the Cloud Controller of your deployment.
+  <pre class="terminal">
+  $ cf api api.YOUR-SYSTEM-DOMAIN
+  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
+  OK
+  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+  Not logged in. Use 'cf login' to log in.
+  </pre>
+1. Log in to your deployment and select an org and a space.
+  <pre class="terminal">
+  $ cf login
+  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+  Email> user<span>@</span>example.com
+  Password>
+  </pre>
+1. List the Marketplace services and locate the Solace Messaging service.
+	<pre class="terminal">
+	$ cf marketplace
+	Getting services from marketplace in org example / space development as user<span>@</span>example.com...
+	OK
+
+	service          plans                           description
+	solace-messaging shared, large, community        Solace Messaging for real-time, multi-protocol data distribution
+	</pre>
+1. Create an instance of the Solace Messaging service. Select either the `shared`, `large`, or `community` service plan. See [PCF Marketplace Plans](index.html#marketplace-plans) for how these service plans differ. The following example uses the `shared` service plan.
+
+	<pre class="terminal">
+	$ cf create-service solace-messaging shared solace-messaging-instance
+	Creating service instance solace-messaging-instance in org example / space development as user@example.com...
+	OK
+	</pre>
+
+1. Bind the instance to an application.
+  <pre class="terminal">
+  $ cf bind-service sample-cloud-app solace-messaging-instance
+  Binding service solace-messaging-instance to app YOUR-APP in org example / space development as user@example.com...
+  OK
+  TIP: Use 'cf restage sample-cloud-app' to ensure your env variable changes take effect
+  </pre>
+1. Restage the application for the binding to take effect.
+  <pre class="terminal">
+  $ cf restage sample-cloud-app
+  </pre>
+
+##<a id='apps-man'></a> Create and Bind a Service Instance in Apps Manager
+
+To create and bind an instance of the Solace Messaging service in Apps Manager, perform the following steps:
+
+1. Navigate to `apps.YOUR-SYSTEM-DOMAIN` in a browser and log in.
+1. Click **Marketplace** in the left navigation.
+1. Click **Solace Messaging**.
+1. Select either the `shared`, `large`, or `community` service plan. See [PCF Marketplace Plans](index.html#marketplace-plans) for how these service plans differ.
+1. Enter an **Instance Name** and select a space under **Add to Space**. To bind the service instance to an application, select an application under **Bind to App**. Then click **Add**. 
+  <%= image_tag('config-instance.png') %> 
+1. You can also bind an application to a service instance by navigating to the application page, clicking **Services**, then clicking **Bind a Service**.
+  <%= image_tag('app-page.png') %>
+1. Select a service instance to bind to the application and click **Bind**.
+  <%= image_tag('add-binding.png') %>
