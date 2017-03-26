@@ -12,7 +12,6 @@ Review the resource and IP requirements for installing the Solace Messaging for 
 
 <table border="1" class="nice">
 	<tr>
-		<th>Product</th>
 		<th>Resource</th>
 		<th>Instances</th>
 		<th>CPU</th>
@@ -23,7 +22,6 @@ Review the resource and IP requirements for installing the Solace Messaging for 
 		<th>Dynamic IP</th>
 	</tr>
   <tr>
-    <td>Solace Messaging for PCF</td>
     <td>Solace Service Broker</td>
     <td>1</td>
     <td>1</td>
@@ -34,48 +32,81 @@ Review the resource and IP requirements for installing the Solace Messaging for 
     <td>1</td>
   </tr>
   <tr>
-    <td>Solace Messaging for PCF</td>
+    <td>UpdateServiceBroker</td>
+    <td>1</td>
+    <td>1</td>
+    <td>1024</td>
+    <td>1024</td>
+    <td>0</td>
+    <td>0</td>
+    <td>1</td>
+  </tr>
+  <tr>
     <td>Large-VMR</td>
-    <td>1<a href="#tableNote">*</a></td>
+    <td>1<a href="#tableNote"><sup>1</sup></a></td>
     <td>4</td>
     <td>12288</td>
     <td>10240</td>
-    <td>40960<a href="#tableNote">*</a></td>
+    <td>40960<a href="#tableNote"><sup>1</sup></a></td>
     <td>1</td>
     <td>0</td>
   </tr>
   <tr>
-    <td>Solace Messaging for PCF</td>
-    <td>Medium-VMR</td>
-    <td>1<a href="#tableNote">*</a></td>
+    <td>Shared-VMR</td>
+    <td>1<a href="#tableNote"><sup>1</sup></a></td>
     <td>2</td>
     <td>4096</td>
     <td>10240</td>
-    <td>20480<a href="#tableNote">*</a></td>
+    <td>20480<a href="#tableNote"><sup>1</sup></a></td>
     <td>1</td>
     <td>0</td>
   </tr>
   <tr>
-    <td>Solace Messaging for PCF</td>
     <td>Community-VMR</td>
-    <td>1<a href="#tableNote">*</a></td>
-    <td>4</td>
+    <td>1<a href="#tableNote"><sup>1</sup></a></td>
+    <td>2</td>
     <td>4096</td>
     <td>10240</td>
-    <td>20480<a href="#tableNote">*</a></td>
+    <td>20480<a href="#tableNote"><sup>1</sup></a></td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>Medium-HA-VMR</td>
+    <td>3
+	<a href="#tableNote"><sup>1, </sup></a>
+	<a href="#tableNote2"><sup>2</sup></a></td>
+    <td>2</td>
+    <td>4096</td>
+    <td>10240</td>
+    <td>20480<a href="#tableNote"><sup>1</sup></a></td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>Large-HA-VMR</td>
+    <td>3
+	<a href="#tableNote"><sup>1, </sup></a>
+	<a href="#tableNote2"><sup>2</sup></a></td>
+    <td>4</td>
+    <td>12288</td>
+    <td>10240</td>
+    <td>40960<a href="#tableNote"><sup>1</sup></a></td>
     <td>1</td>
     <td>0</td>
   </tr>
 </table>
 
-<p id="tableNote" class="note"><strong>* Note</strong>: You can modify the number of Instances and Persistent disk size when configuring the Solace Messaging for PCF tile. 
-Solace recommends not changing the other parameters. For more information, see the <a href="#configure">Configure Solace Messaging for PCF</a> tile below.</p> 
+<p id="tableNote" class="note"><strong><sup>1</sup> Note</strong>: You can modify the number of Instances and Persistent disk size when configuring the Solace Messaging for PCF tile for the VMR jobs.
+Solace recommends not changing the other parameters for the VMR jobs or any parameters for the non-VMR jobs such as the <code>UpdateServiceBroker</code> job.  For more information, see the <a href="#configure">Configure Solace Messaging for PCF</a> tile below.</p> 
+
+<p id="tableNote" class="note"><strong><sup>2</sup> Note</strong>: A single high-availability Solace Messaging service instance requires three (3) HA VMR job instances to be used. As such the number of HA VMR job instances specified for the HA VMR instances should be multiple of 3. If it is not the remaining job instances will go unused.</p>
+
 
 ## <a id='prereqs'></a>Prerequisites
 
 The Solace Messaging for PCF Service Broker requires the following:
 
-* BOSH stemcell v3263 ubuntu-trusty.
 * Java buildpack v3.7.1 or higher.
 * The MySQL for PCF tile. When configuring the tile, set the maximum storage in the **Service Plan** section to 100 MB. 
   For information on how to install and configure the tile, see the MySQL for PCF [documentation](http://docs.pivotal.io/p-mysql/index.html).
@@ -107,7 +138,7 @@ To configure Solace Messaging for PCF, perform the following steps:
 
     <%= image_tag('support_password_VMR_Config.png') %>
 1. Under **Starting Port**, enter a port where the messaging services on the VMRs (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`.  
-The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` enviornment variable passed to applications. 
+The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to applications. 
 For an example, see [Example Environment Variable](credentials.html#example).
 
     <%= image_tag('Starting_Port_VMR_Config.png') %>
@@ -138,16 +169,12 @@ This checkbox should never be selected in production deployments, instead the fr
 
 1. (Optional) Click **Save**.
 1. Click **Resource Config**.
-1. Use the drop-down menus to configure the number of instances of the `Large-VMR`, `Medium-VMR`, and `Community-VMR` jobs required. 
-   This controls the number of VMR instances of each type that are statically created when the tile is deployed. 
-   VMRs are then dynamically allocated at service instance creation time post-deployment.
-<p class="note"><strong>Note</strong>: `Medium-VMR` job instances are used by service instances created from the `shared` service plan.</p>
-<p class="note"><strong>Note</strong>: The number of job instances can be increased after the tile is deployed without impacting already bound applications however reducing the number of instances can result in application failure and total message loss.</p>
+1. Use the drop-down menus to configure the number of VMR job instances that are available in each of the five service plans mentioned above. These job instances are statically created when the tile is deployed. Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances. <br/><br/> Five Shared-VMR service instances can be hosted on a single Shared-VMR job instance. As such the maximum number of Shared-VMR service instances that can concurrently exist for the <code>Shared-VMR</code> service plan is equal to five times the number of <code>Shared-VMR</code> job instances. Conversely three HA VMR job instances are required for a single HA VMR service instance. As such the maximum number of HA VMR service instances that can concurrently exist for the <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code> service plans is equal to one-third the number of their corresponding job instances.
+<p class="note"><strong>Note</strong>: The number of job instances can be increased after the tile is deployed without impacting already bound applications however reducing the number of instances can result in application failure and message loss.</p>
 <p class="note"><strong>Note</strong>: The size of the persistent disk can be changed both before and after deployment. 
   Increasing the size of the persistent disks will impact the service of already bound applications however messages will not be lost. 
-  Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable VMRs, and/or undefined behaviors. 
-  Solace recommends keeping the default values for **VM Type**.</p>
-<p class="note"><strong>Note</strong>: The maximum number of service instances that can concurrently exist for the <code>shared</code> service plan is equal to five times the number of <code>Medium-VMR</code> instances.</p>
+  Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable VMRs, and/or undefined behaviors.</p>
+<p class="note"><strong>Note</strong>: Solace recommends keeping the default values for **VM Type**.</p>
     <%= image_tag('Resource_Config.png') %>
 
 1. Click **Save**.

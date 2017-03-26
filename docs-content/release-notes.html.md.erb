@@ -5,6 +5,20 @@ owner: Partners
 
 Release Notes for Solace Messaging for Pivotal Cloud Foundry (PCF).
 
+### v1.0.0
+
+**Release Date: April 7, 2017**
+
+Features included in the release:
+
+* Evaluation GA
+* Highly available service plans for redundancy introduced: <code>medium-ha</code>, and <code>large-ha</code>
+* VMRs externally accessible via FQDNs allowing SolAdmin and other management applications to access the VMRs hosting PCF service instances
+* Tile supports deployment in IPSec enabled PCF instances
+* Contains VMR release v8.2.0.x
+* Requires Java buildpack v3.7.1 or later
+
+
 ### v0.3.0
 
 **Release Date: December 7, 2016**
@@ -14,7 +28,7 @@ Features included in the release:
 * Second open beta
 * The tile allows a TLS server certificate to be configured for the deployed VMRs. 
   This allows encrypted TLS data connections between Virtual Message Routers (VMRs) and applications as well as the Solace service broker.
-* Community service plan is introduced. This plan uses the Community Edition VMR to host PCF service instances. 
+* <code>community</code> service plan is introduced. This plan uses the Community Edition VMR to host PCF service instances. 
   It is a feature-limited version of the VMR with a perpetual license.
 * Contains VMR release v7.2pcf2.1.6
 * Requires BOSH stemcell v3263 ubuntu-trusty
