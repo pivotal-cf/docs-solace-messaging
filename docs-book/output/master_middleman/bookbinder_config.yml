@@ -5,9 +5,9 @@
 :subnav_templates:
   solace-messaging: pivotal_solace_messaging
 :template_variables: 
-:local_repo_dir: "/Users/pivotal/workspace/docs-solace-messaging"
+:local_repo_dir: "/home/gbertin/workspace-SolaceDev/docs-solace-messaging"
 :workspace: !ruby/object:Pathname
-  path: "/Users/pivotal/workspace/docs-solace-messaging/docs-book/output/master_middleman/source"
+  path: "/home/gbertin/workspace-SolaceDev/docs-solace-messaging/docs-book/output/master_middleman/source"
 :feedback_enabled: 
 :repo_link_enabled: true
 :repo_links:
