@@ -1,11 +1,17 @@
 ---
-title: Solace Messaging for Pivotal Cloud Foundry (Beta)
+title: Solace Messaging for Pivotal Cloud Foundry
 owner: Partners
 ---
 
-Solace Messaging for PCF enables developers to take advantage of the leading multi-cloud, multi-protocol messaging solution which makes application inter-connectivity easy and makes production applications scalable, robust, high-performant, and easy to manage.  Solace Messaging supports all kinds of messaging APIs, QoS, and data streaming as part of one platform across all clouds in a high performance, WAN optimized, easy to manage solution. It's easily deployed in your public and private cloud environments and forms the perfect backbone for single or multi-cloud messaging support of your cloud native micro-services, IoT, big data capture, and next generation digital applications.
+Solace Messaging for PCF enables developers to take advantage of the leading multi-cloud, multi-protocol messaging solution which makes application inter-connectivity easy and makes production applications scalable, robust, high-performant, and easy to manage.  
 
-Solace Messaging for PCF provides plans for both shared message router instances for cost-effective development as well as a variety of plans for dedicated message routers of varying performance and scale for robust test and production deployments.
+Solace Messaging was designed to be deployed across all your IT environments including your non-cloud datacenter, all leading public clouds ([AWS](http://dev.solace.com/clouds/amazon-web-services/), [Azure](http://dev.solace.com/clouds/azure/) and [Google Cloud Platform](http://dev.solace.com/clouds/google-cloud/)) and the popular Platform as a Service, Pivotal Cloud Foundry, in order to provide a uniform messaging fabric for all your applications and to connect all your applications no matter where they are deployed.
+
+<%= image_tag('solace-environments.png') %>
+
+Solace Messaging supports all kinds of messaging APIs, QoS, and data streaming as part of one platform across all clouds in a high performance, WAN optimized, easy to manage solution. It's easily deployed in your public and private cloud environments and forms the perfect backbone for single or multi-cloud messaging support of your cloud native micro-services, IoT, big data capture, and next generation digital applications.
+
+Solace Messaging for PCF provides plans for both shared message router instances for cost-effective development as well as a variety of plans for dedicated message routers of varying performance, scale, and high-availability. Together they meet the requirements for a range of robust test and production deployments.
 
 One of the key strengths of Solace Messaging is its [support for many different open transports and protocols](http://dev.solace.com/tech/#multi-service), making Solace message routers ideal data distribution platforms to connect to any application.
 
@@ -32,10 +38,11 @@ For developers, there are a few resources to help you easily get started with So
 There is also simple sample code which shows you how to easily connect to a Solace Messaging Service Instance:
 
 * [Getting Started Examples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java).
+* [Solace Messaging Demo Application](https://github.com/SolaceLabs/sl-cf-solace-messaging-demo)
 
 ## <a id='marketplace-plans'></a>PCF Marketplace Plans
 
-Solace Messaging currently offers the following plans to meet the needs of applications. More plans will be introduced as the Solace Messaging for PCF tile evolves towards GA.
+Solace Messaging currently offers the following plans to meet the needs of applications.
 
 <table border="1" class="nice">
 	<tr>
@@ -44,15 +51,22 @@ Solace Messaging currently offers the following plans to meet the needs of appli
 	</tr>
   <tr>
     <td>Shared</td>
-    <td>A single Message VPN in a shared Solace Message Router. Useful for light traffic and development. This plan is not feature limited but does have a time limited 90-day evaluation period.</td>
+    <td>A single Message VPN in a shared Solace Message Router. Useful for light traffic and development. This plan is fully featured but does have a time limited 90-day evaluation period.</td>
   </tr>
   <tr>
     <td>Large</td>
-    <td>A single message VPN on a dedicated Solace Message Router. This plan is not feature limited but does have a time limited 90-day evaluation period.</td>
+    <td>A single message VPN on a dedicated Solace Message Router. This plan is fully featured but does have a time limited 90-day evaluation period.</td>
   </tr>
   <tr>
     <td>Community</td>
     <td>A single message VPN on a dedicated Solace Message Router. The plan does not have a time limit but is limited by the features available on the Community Edition VMR.</td>
+  <tr>
+    <td>Medium-HA</td>
+    <td>A single message VPN implemented across 3 medium Solace Message Routers in a highly available configuration. This plan is fully featured but does have a time limited 90-day evaluation period.</td>
+  </tr>
+  <tr>
+    <td>Large-HA</td>
+    <td>A single message VPN implemented across 3 large Solace Message Routers in a highly available configuration. This plan is fully featured but does have a time limited 90-day evaluation period.</td>
   </tr>
 </table>
 
@@ -80,25 +94,28 @@ Solace Messaging is a Managed Service. The tile deploys the Virtual Message Rout
 
 Current Solace Messaging for Pivotal Cloud Foundry Details:
 
-* **Version**: v0.3.0
-* **Release Date**: December 7, 2016
-* **Software component version**: Solace Messaging for PCF v0.3.0
-* **Solace Virtual Message Router version**: v7.2pcf2.1.6, which is similar in functionality to VMR v7.2.1
-* **Compatible Ops Manager Version(s)**: v1.7.x, v1.8.x
-* **Compatible Elastic Runtime Version(s)**: v1.7.x, v1.8.x
+* **Version**: v1.0.0
+* **Release Date**: April 7, 2017
+* **Software component version**: Solace Messaging for PCF v1.0.0
+* **Solace Virtual Message Router version**: v8.2.0.x
+* **Compatible Ops Manager Version(s)**: v1.8.x, v1.9.x, v1.10.x 
+* **Compatible Elastic Runtime Version(s)**: v1.8.x, 1.9.x, v1.10.x
 * **vSphere support?** Yes
 * **AWS support?** Yes
-* Solace Messaging is expected to function on other PCF-supported IaaS platforms as it does in the above IaaS platforms
+* **Google Cloud Compute support?** Yes
+* **Azure support?** Yes
+* **OpenStack support?** Yes
+* **IPSec support?** Yes
 
-## <a id='limitations'></a>Beta Limitations
+## <a id='limitations'></a>Current Limitations
 
 This version of Solace Messaging for PCF currently has the following limitations:
 
-* No support for Solace Message Router High availability
 * No support for Client certificate-based authentication
 * No support for LDAP and RADIUS-based authentication
-* No routes are set up which would allow access to the Virtual Message Router from external networks
 * All Persistent Messages are lost during a tile upgrade
+
+These limitations will be addressed in a future version of the Solace tile.
 
 ## <a id='feedback'></a>Feedback
 
