@@ -127,12 +127,14 @@ From the **Settings** tab of the Solace Messaging tile
 
 1. Configure the [Optional Settings](#configure_optional)
    * [Message Router Config](#optional_message_router_config)
-   * TLS Config
-   * Application Access
-   * LDAP Config
-   * System Logging
+   * [TLS Config](#optional_tls_config)
+   * [Service Access](#optional_service_access)
+   * [Application Access](#optional_application_access)
+   * [LDAP Settings](#optional_ldap_settings)
+   * [System Logging](#optional_system_logging)
+   * [TCP Routes](#optional_tcp_routes)
 
-1. Apply Changes
+1. [Apply Changes](#apply_changes)
 
 
 ###<a id='configure_required'></a> Required Settings
@@ -156,7 +158,8 @@ The following settings are required because user input is necessary
 1. Under **Admin user password**, pick a password for the Virtual Message Routers `admin` user.
 
     <%= image_tag('form_management_access_admin_user_password.png') %>
-1. Optional - see CONFIGURING LDAP
+1. [(Optional) if you configured LDAP](#optional_management_access)
+
 1. Click **Save**.
 
 <a id='required_stemcell'>**Stemcell**</a>
@@ -240,9 +243,117 @@ This checkbox should never be selected in production deployments, instead the fr
 1. Click **Service Access**
 
     <%= image_tag('select_1_service_access.png') %>
-1. Enable the **Enable global access to plans of service solace_messaging** option.
+1. Check the **Enable global access to plans of service solace_messaging** option.
     <%= image_tag('form_service_access.png') %>
 <p class="note"><strong>Note</strong>: To control access to Solace Messaging service plans on a case-by-case basis, do not enable this option.</p>
+
+1. Click **Save**.
+
+
+<a id='optional_management_access'>**(Optional) Management Access**</a>
+
+1. Click **Management Access**.
+
+    <%= image_tag('select_1_management_access.png') %> 
+
+1. If you configured [LDAP](#optional_ldap_settings), you may choose to have the LDAP Server provide the authentication and authorization for the management roles on a Solace service Instance.
+    <%= image_tag('form_management_access_ldap.png') %>
+1. (Optional) - Configure Groups with VMR administration read-only priviliges
+    <%= image_tag('form_management_access_ldap_readonly.png') %>
+1. (Optional) - Configure Groups with VMR administration read-write priviliges
+    <%= image_tag('form_management_access_ldap_readwrite.png') %>
+1. (Optional) - Configure Groups with VMR administration administrator priviliges
+    <%= image_tag('form_management_access_ldap_admin.png') %>
+
+1. Click **Save**.
+
+<a id='optional_application_access'>**(Optional) Application Access**</a>
+
+1. Click **Application Access**
+
+    <%= image_tag('select_1_application_access.png') %>
+1. Using the defaults, the VMR will use its internal database for user credentials per service instance. If you configured LDAP, you may request the VMR to use the LDAP Server for authentication and authorization of when a client attempts to access a Solace messaging service instance.
+    <%= image_tag('form_application_access.png') %>
+
+1. Click **Save**.
+
+<a id='optional_ldap_settings'>**(Optional) LDAP Settings**</a>
+
+1. Click **LDAP Settings**
+
+    <%= image_tag('select_1_ldap_settings.png') %>
+1. Default: **LDAP Disabled**
+    <%= image_tag('form_ldap_settings.png') %>
+
+<p class="note"><strong>Note</strong> Using the default <strong>LDAP Disabled</strong>, the VMR will use its internal database for management and user credentials per service instance. To use an LDAP store you must select <strong>LDAP Enabled</strong> and provide all the required settings for your LDAP server.</p>
+1. Click **LDAP Enabled**
+
+    <%= image_tag('form_ldap_settings_enabled.png') %>
+1. Set LDAP Server URL
+
+    <%= image_tag('form_ldap_settings_server_url.png') %>
+1. Set LDAP TLS Preference
+
+    <%= image_tag('form_ldap_settings_starttls.png') %>
+1. Set LDAP Credentials to use with the LDAP Server
+
+    <%= image_tag('form_ldap_settings_credentials.png') %>
+
+1. Set User Search Base
+
+    <%= image_tag('form_ldap_settings_user_search_base.png') %>
+1. Set User Search Filter
+
+    <%= image_tag('form_ldap_settings_user_search_filter.png') %>
+1. Set User Group Membership Attribute Name
+
+    <%= image_tag('form_ldap_settings_user_group_membership_attribute_name.png') %>
+1. Click **Save**.
+
+Once you configure LDAP, you should make your configuration choices for [Management Access](#optional_management_access)  and [Application Access](#optional_application_access).
+
+
+<a id='optional_system_logging'>**(Optional) System Logging**</a>
+
+1. Click **System Logging**
+
+    <%= image_tag('select_1_system_logging.png') %>
+1. Default: **System Logging Disabled**
+
+    <%= image_tag('form_system_logging.png') %>
+1. Click: **System Logging Enabled**
+
+    <%= image_tag('form_system_logging_enabled.png') %>
+1. Set the external syslog hostname
+
+    <%= image_tag('form_system_logging_server.png') %>
+1. Set the external syslog port
+
+    <%= image_tag('form_system_logging_port.png') %>
+1. Set the external syslog network protocol
+
+    <%= image_tag('form_system_logging_protocol.png') %>
+1. Select what logs to send to the external syslog server
+
+    <%= image_tag('form_system_logging_vmr_commands.png') %>
+    <%= image_tag('form_system_logging_vmr_events.png') %>
+    <%= image_tag('form_system_logging_vmr_system.png') %>
+    <%= image_tag('form_system_logging_sb.png') %>
+
+1. Click **Save**.
+
+<a id='optional_tcp_routes'>**(Optional) TCP Routes**</a>
+
+1. Click **TCP Routes**
+
+    <%= image_tag('select_1_tcp_routes.png') %>
+1. Default: **TCP Routes Disabled**
+
+    <%= image_tag('form_tcp_routes.png') %>
+1. Click: **TCP Routes Enabled**
+
+    <%= image_tag('form_tcp_routes_enabled_1.png') %>
+    <%= image_tag('form_tcp_routes_enabled_2.png') %>
 
 1. Click **Save**.
 
