@@ -21,9 +21,12 @@ To retrieve the information required to connect to the VMR, perform the followin
   $ cf env YOUR-APP
   </pre>
 1. Locate your Solace Messaging service instance in `VCAP_SERVICES` and record the following fields:
-  * `managementUsername`: The service instance's management username
-  * `managementPassword`: The service instance's management password
   * `managementHostnames`: The VMR's management hostnames
+  * When Management Access is set to 'VMR Internal'
+      * `managementUsername`: The service instance's management username
+      * `managementPassword`: The service instance's management password
+  * When Management Access is set to 'LDAP Server'
+      * The management username and password are to be provided by the LDAP Administrator
   <br><br>
   For more information about the `VCAP_SERVICES` fields, see the [Understanding Credentials](credentials.html) topic.
 

@@ -11,7 +11,27 @@ Each service instance represents a Message VPN on a Solace Virtual Message Route
 
 Creating a service instance also gives the developer permissions to manage the Message VPN through the SolAdmin administration tool. For more information, see the [Managing the Message VPN](managing.html) topic.
 
-The following tutorials will show you how to create a Solace Messaging service called *solace-messaging-instance* and bind this service instance to an application named *web-backend*.
+A service instance can be customized at creation time and updated as well using parameters when certain features are enabled.
+
+1. When LDAP is enabled, these parameters can be used to control application access to a service instance.
+ * ldapGroupAdminReadOnly : Admin ReadOnly permissions are granted to the provided value for that parameter. A connecting client will be limited to only reading messages in the Message VPN.
+ * ldapGroupAdminReadWrite: Admin ReadWrite permissions are granted to the provided value for that parameter. A connection client will be able to Read and Write messages in the Message VPN.
+
+1. When TCP Routes are enabled, and unless the configuration per procotol is "Not Allowed", you may use these parameters with valid values: "true", "false" to control TCP Routes per service instance.
+ * tcp\_route\_enabled
+ * smf\_tcp\_route\_enabled
+ * smf\_tls\_tcp\_route\_enabled
+ * smf\_zip\_tcp\_route\_enabled
+ * web\_messaging\_tcp\_route\_enabled
+ * web\_messaging\_tls\_tcp\_route\_enabled
+ * mqtt\_tcp\_route\_enabled
+ * mqtt\_tls\_tcp\_route\_enabled
+ * mqtt\_ws\_tcp\_route\_enabled
+ * mqtt\_wss\_tcp\_route\_enabled
+ * rest\_tcp\_route\_enabled
+ * rest\_tls\_tcp\_route\_enabled
+
+The following tutorials will show you how to create a Solace Messaging service called *solace-messaging-instance* and bind this service instance to an application named *web-backend*. We will also show you how to update the service instance with optional parameter if their features are enabled.
 
 ##<a id='cf-cli'></a> Create and Bind a Service Instance with the cf CLI
 
@@ -46,6 +66,15 @@ To create and bind an instance of the Solace Messaging service with the cf CLI, 
 	<pre class="terminal">
 	$ cf create-service solace-messaging shared solace-messaging-instance
 	Creating service instance solace-messaging-instance in org example / space development as user@example.com...
+	OK
+	</pre>
+
+1. Update the service instance of the Solace Messaging service assuming both LDAP and TCP Routes are enabled, this will grant external access to the SMF messaging protocol, and grant Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups.
+
+
+	<pre class="terminal">
+        $ cf update-service solace-messaging-instance -c '{ "smf_tcp_route_enabled" : "true", "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com", "ldapGroupAdminReadWrite" : "cn=username2,ou=groups,dc=solace,dc=com" }'
+	Updating service instance solace-messaging-instance user...
 	OK
 	</pre>
 

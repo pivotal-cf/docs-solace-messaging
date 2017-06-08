@@ -139,8 +139,6 @@ From the **Settings** tab of the Solace Messaging tile
 
 ###<a id='configure_required'></a> Required Settings
 
-The following settings are required because user input is necessary
-
 <a id='required_azs_and_network'>**Assign AZs and Networks**</a>
 
 1. From the **Settings** tab of the Solace Messaging tile, click **Assign AZs and Networks** 
@@ -158,7 +156,7 @@ The following settings are required because user input is necessary
 1. Under **Admin user password**, pick a password for the Virtual Message Routers `admin` user.
 
     <%= image_tag('form_management_access_admin_user_password.png') %>
-1. [(Optional) if you configured LDAP](#optional_management_access)
+1. [(Optional) if you wish to use LDAP](#optional_management_access)
 
 1. Click **Save**.
 
@@ -265,6 +263,8 @@ This checkbox should never be selected in production deployments, instead the fr
 1. (Optional) - Configure Groups with VMR administration administrator priviliges
     <%= image_tag('form_management_access_ldap_admin.png') %>
 
+<p class="note"><strong>Note</strong> Cloud Operators need to have global access to the VMRs deployed by the tile.  This will allow them to administer the VMRs with SolAdmin, CLI or SEMP-based tools. Cloud operators might have different roles.  Each role requires one of the three types of access-level: administrator, read-write and read-only.  When using "VMR Internal" the cloud operators access to a single administrator level role using the admin password. With "LDAP Server" users can be assigned to groups in LDAP mapping to their respective roles.</p>
+
 1. Click **Save**.
 
 <a id='optional_application_access'>**(Optional) Application Access**</a>
@@ -285,13 +285,14 @@ This checkbox should never be selected in production deployments, instead the fr
 1. Default: **LDAP Disabled**
     <%= image_tag('form_ldap_settings.png') %>
 
-<p class="note"><strong>Note</strong> Using the default <strong>LDAP Disabled</strong>, the VMR will use its internal database for management and user credentials per service instance. To use an LDAP store you must select <strong>LDAP Enabled</strong> and provide all the required settings for your LDAP server.</p>
+<p class="note"><strong>Note</strong> Using the default <strong>LDAP Disabled</strong>, the VMR will use its internal database for management and user credentials per service instance. To use an LDAP store you must select <strong>LDAP Enabled</strong> and provide all the required settings for your LDAP server. </p>
 1. Click **LDAP Enabled**
 
     <%= image_tag('form_ldap_settings_enabled.png') %>
 1. Set LDAP Server URL
 
     <%= image_tag('form_ldap_settings_server_url.png') %>
+<p class="note"><strong>Note</strong> Consider network accessiblity of the provided LDAP server, You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config) </p>
 1. Set LDAP TLS Preference
 
     <%= image_tag('form_ldap_settings_starttls.png') %>
@@ -310,8 +311,7 @@ This checkbox should never be selected in production deployments, instead the fr
     <%= image_tag('form_ldap_settings_user_group_membership_attribute_name.png') %>
 1. Click **Save**.
 
-Once you configure LDAP, you should make your configuration choices for [Management Access](#optional_management_access)  and [Application Access](#optional_application_access).
-
+In order to have an effective LDAP configuration, please configure LDAP for [Management Access](#optional_management_access)  and [Application Access](#optional_application_access).  **If neither [Management Access](#optional_management_access) nor [Application Access](#optional_application_access) are configured for LDAP, the VMR will continue to use its internal database for management and user credentials.**
 
 <a id='optional_system_logging'>**(Optional) System Logging**</a>
 
@@ -327,6 +327,7 @@ Once you configure LDAP, you should make your configuration choices for [Managem
 1. Set the external syslog hostname
 
     <%= image_tag('form_system_logging_server.png') %>
+<p class="note"><strong>Note</strong> Consider network accessiblity of the provided syslog server, You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config) </p>
 1. Set the external syslog port
 
     <%= image_tag('form_system_logging_port.png') %>
@@ -354,6 +355,7 @@ Once you configure LDAP, you should make your configuration choices for [Managem
 
     <%= image_tag('form_tcp_routes_enabled_1.png') %>
     <%= image_tag('form_tcp_routes_enabled_2.png') %>
+<p class="note"><strong>Note</strong> Fine grained control is available by protocol. If you choose <strong>"Not Allowed"</strong> A TCP Route will never be created for this protocol, even if requested at service creation time. If you choose <strong>"Disabled by default"</strong> At service creation time, a TCP Route will not be created for this protocol. Unless a user provided parameter overrides it with a "true" setting. If you choose <strong>"Enabled by default"</strong> A TCP Route will be created for this protocol at service creation time, unless a user provided parameters overrides it with "false" setting.  </p>
 
 1. Click **Save**.
 
