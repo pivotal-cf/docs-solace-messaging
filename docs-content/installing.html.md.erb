@@ -355,7 +355,37 @@ In order to have an effective LDAP configuration, please configure LDAP for [Man
 
     <%= image_tag('form_tcp_routes_enabled_1.png') %>
     <%= image_tag('form_tcp_routes_enabled_2.png') %>
+
 <p class="note"><strong>Note</strong> Fine grained control is available by protocol. If you choose <strong>"Not Allowed"</strong> A TCP Route will never be created for this protocol, even if requested at service creation time. If you choose <strong>"Disabled by default"</strong> At service creation time, a TCP Route will not be created for this protocol. Unless a user provided parameter overrides it with a "true" setting. If you choose <strong>"Enabled by default"</strong> A TCP Route will be created for this protocol at service creation time, unless a user provided parameters overrides it with "false" setting.  </p>
+
+
+<p class="note"><strong>TCP Routes</strong> A solace_router uaa agent is required to use the TCP Routes feature. If using a new version of the Elastic Runtime, the solace_router uaa client may be present already, and there is no need to provide cf credentials. Please check your installation for the presence of the solace_router uaa client, this may be found under Pivotal Elastic Runtime\->Credentials\->UAA. When a solace_router is not found, you will need to create one. Instructions on how to create one are provided below.</p>
+
+<p class="note"><strong>TCP Routes</strong> Please lookup the UAA 'Admin Client Credentials' which will be needed.</p>
+
+<p class="note"><strong>TCP Routes</strong> Install uaac if you don't already have it.</p>
+  <pre class="terminal">
+  $ gem install cf-uaac
+  </pre>
+<p class="note"><strong>TCP Routes</strong> Login to CF, target the uaa api, login with uaac using the 'Admin Client Credentials'</p>
+  <pre class="terminal">
+  $ cf api api.YOUR-SYSTEM-DOMAIN
+  $ cf login 
+  $ uaac target uaa.sys.YOUR-SYSTEM-DOMAIN
+  $ uaac token client get admin
+  </pre>
+<p class="note"><strong>TCP Routes</strong> Create the solace\_router uaa client with the necessary persmissions, assign it <strong>a good secret password</strong></p>
+  <pre class="terminal">
+  $ uaac client add solace_router --name solace_router --scope uaa.none --authorized_grant_types "refresh_token,client_credentials" \
+  $ --authorities "routing.routes.read,routing.routes.write,routing.router_groups.read,cloud_controller.read,cloud_controller.write,cloud_controller.admin" \
+  $ -s "A\_GOOD\_SECRET\_PASSWORD"
+  </pre>
+<p class="note"><strong>TCP Routes</strong> Please consider Cloud Foundry quotas, networking and firewalls when using TCP Routes. For example removing the limits on reserved route ports.</p>
+  <pre class="terminal">
+  $ cf update-quota default --reserved-route-ports -1
+  </pre>
+
+<p class="note"><strong>TCP Routes</strong> use solace_router and the <strong>A_GOOD_SECRET_PASSWORD</strong> as the cf credentials for TCP Routes.</p>
 
 1. Click **Save**.
 
