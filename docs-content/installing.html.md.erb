@@ -119,20 +119,21 @@ To configure Solace Messaging for PCF, perform the following steps:
 From the **Settings** tab of the Solace Messaging tile
   <%= image_tag('select_settings.png') %>
 
-1. Configure the [Required Settings](#configure_required).
+1. Configure the [**Required Settings**](#configure_required).
    * [**Assign AZs and Networks**](#required_azs_and_network)
    * [**Management Access**](#required_management_access)
    * [**Stemcell**](#required_stemcell)
    * [**Resource Config**](#required_resource_config)
 
-1. Configure the [Optional Settings](#configure_optional)
-   * [Message Router Config](#optional_message_router_config)
-   * [TLS Config](#optional_tls_config)
-   * [Service Access](#optional_service_access)
-   * [Application Access](#optional_application_access)
-   * [LDAP Settings](#optional_ldap_settings)
-   * [System Logging](#optional_system_logging)
-   * [TCP Routes](#optional_tcp_routes)
+1. Configure the [**Optional Settings**](#configure_optional)
+   * [**Message Router Config**](#optional_message_router_config)
+   * [**TLS Config**](#optional_tls_config)
+   * [**Management Access (LDAP)**](#optional_management_access)
+   * [**Service Access**](#optional_service_access)
+   * [**Application Access**](#optional_application_access)
+   * [**LDAP Settings**](#optional_ldap_settings)
+   * [**System Logging**](#optional_system_logging)
+   * [**TCP Routes**](#optional_tcp_routes)
 
 1. [Apply Changes](#apply_changes)
 
@@ -143,7 +144,7 @@ From the **Settings** tab of the Solace Messaging tile
 
 1. From the **Settings** tab of the Solace Messaging tile, click **Assign AZs and Networks** 
     <%= image_tag('select_1_assign_azs_and_networks.png') %>
-1. Under **AZ and Network Assignments**, Choose the network and availability zones where Solace Messaging should run. 
+1. Under **AZ and Network Assignments**, Choose the network and availability zones where Solace Messaging should run. If you are deploying Solace Messaging with high availability plans, please consider using multiple availability zones for maximum fault tolerance.
 
     <%= image_tag('form_assign_azs_and_networks.png') %>
 1. Click **Save**.
@@ -175,7 +176,7 @@ A stemcell import may be necessary if the minimum stemcell required for Solace M
 1. Click **Resource Config**.
 
     <%= image_tag('select_1_resource_config.png') %> 
-1. Use the drop-down menus to configure the number of VMR job instances that are available in each of the five service plans mentioned above. These job instances are statically created when the tile is deployed. Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances. <br/><br/> Five Shared-VMR service instances can be hosted on a single Shared-VMR job instance. As such the maximum number of Shared-VMR service instances that can concurrently exist for the <code>Shared-VMR</code> service plan is equal to five times the number of <code>Shared-VMR</code> job instances. Conversely three HA VMR job instances are required for a single HA VMR service instance. As such the maximum number of HA VMR service instances that can concurrently exist for the <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code> service plans is equal to one-third the number of their corresponding job instances.
+1. Use the drop-down menus to configure the number of VMR job instances that are available in each of the five service plans mentioned above. These job instances are statically created when the tile is deployed. Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances. <br/><br/> Five Shared-VMR service instances can be hosted on a single Shared-VMR job instance. As such the maximum number of Shared-VMR service instances that can concurrently exist for the <code>Shared-VMR</code> service plan is equal to five times the number of <code>Shared-VMR</code> job instances. Conversely three HA VMR job instances are required for a single HA VMR service instance. As such the maximum number of HA VMR service instances that can concurrently exist for the <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code> service plans is equal to one-third the number of their corresponding job instances. In order for <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code> service plans to provide high availability fault tolerance please make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more. Solace does not recommend using high availability service plans in production, if you have only one availability zone the deployment is not fault tolerant.
 <p class="note"><strong>Note</strong>: The number of job instances can be increased after the tile is deployed without impacting already bound applications however reducing the number of instances can result in application failure and message loss.</p>
 <p class="note"><strong>Note</strong>: The size of the persistent disk can be changed both before and after deployment. 
   Increasing the size of the persistent disks will impact the service of already bound applications however messages will not be lost. 
