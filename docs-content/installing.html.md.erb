@@ -363,7 +363,7 @@ In order to have an effective LDAP configuration, please configure LDAP for [Man
 
 <p class="note"><strong>TCP Routes</strong> A solace_router uaa agent is required to use the TCP Routes feature. If using a new version of the Elastic Runtime (1.11, 1.10.11, 1.9.24, 1.8.46), the solace_router uaa client may be present already, and there is no need to provide cf credentials. Please check your installation for the presence of the solace_router uaa client, this may be found under Pivotal Elastic Runtime\->Credentials\->UAA. When a solace_router is not found, you will need to create one. Instructions on how to create one are provided below.</p>
 
-<p class="note"><strong>TCP Routes</strong> Please lookup the UAA 'Admin Client Credentials' which will be needed.</p>
+<p class="note"><strong>TCP Routes</strong> Please lookup the UAA 'Admin Client Credentials' which will be needed to create the solace_router.</p>
 
 <p class="note"><strong>TCP Routes</strong> Install uaac if you don't already have it.</p>
   <pre class="terminal">
@@ -381,6 +381,10 @@ In order to have an effective LDAP configuration, please configure LDAP for [Man
   $ uaac client add solace_router --name solace_router --scope uaa.none --authorized_grant_types "refresh_token,client_credentials" \
   $ --authorities "routing.routes.read,routing.routes.write,routing.router_groups.read,cloud_controller.read,cloud_controller.write,cloud_controller.admin" \
   $ -s "A\_GOOD\_SECRET\_PASSWORD"
+  </pre>
+<p class="note"><strong>TCP Routes</strong> Please ensure that you have a 'tcp' domain.</p>
+  <pre class="terminal">
+  $ cf create-shared-domain tcp.YOUR-DOMAIN --router-group default-tcp
   </pre>
 <p class="note"><strong>TCP Routes</strong> Please consider Cloud Foundry quotas, networking and firewalls when using TCP Routes. For example removing the limits on reserved route ports.</p>
   <pre class="terminal">
