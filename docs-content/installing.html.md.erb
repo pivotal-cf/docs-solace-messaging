@@ -90,14 +90,14 @@ Review the resource and IP requirements for installing the Solace Messaging for 
 <p id="tableNote" class="note"><strong><sup>1</sup> Note</strong>: You can modify the number of Instances and Persistent disk size when configuring the Solace Messaging for PCF tile for the VMR jobs.
 For more information, see the <a href="#configure">Configure Solace Messaging for PCF</a> tile below.</p> 
 
-<p id="tableNote" class="note"><strong><sup>2</sup> Note</strong>: A single high-availability Solace Messaging service instance requires three (3) HA VMR job instances to be used. As such the number of HA VMR job instances specified for the HA VMR instances should be multiple of 3. If it is not the remaining job instances will go unused.</p>
+<p id="tableNote" class="note"><strong><sup>2</sup> Note</strong>: A single high-availability Solace Messaging service instance requires three (3) HA VMR job instances to be used. As such the number of HA VMR job instances specified for the HA VMR instances should be multiple of 3. If it is not, the remaining job instances go unused.</p>
 
 
 ## <a id='prereqs'></a>Prerequisites
 
 The Solace Messaging for PCF Service Broker requires the following:
 
-* Java buildpack v3.7.1 or higher.
+* Java buildpack v3.7.1 or later.
 * The MySQL for PCF tile. When configuring the tile, set the maximum storage in the **Service Plan** section to 100 MB. 
   For information on how to install and configure the tile, see the MySQL for PCF [documentation](http://docs.pivotal.io/p-mysql/index.html).
 
@@ -119,13 +119,13 @@ To configure Solace Messaging for PCF, perform the following steps:
 From the **Settings** tab of the Solace Messaging tile
   <%= image_tag('select_settings.png') %>
 
-1. Configure the [**Required Settings**](#configure_required).
+1. Configure the [**Required Settings**](#configure_required):
    * [**Assign AZs and Networks**](#required_azs_and_network)
    * [**Management Access**](#required_management_access)
    * [**Stemcell**](#required_stemcell)
    * [**Resource Config**](#required_resource_config)
 
-1. Configure the [**Optional Settings**](#configure_optional)
+1. Configure the [**Optional Settings**](#configure_optional):
    * [**Message Router Config**](#optional_message_router_config)
    * [**TLS Config**](#optional_tls_config)
    * [**Management Access (LDAP)**](#optional_management_access)
@@ -135,21 +135,21 @@ From the **Settings** tab of the Solace Messaging tile
    * [**System Logging**](#optional_system_logging)
    * [**TCP Routes**](#optional_tcp_routes)
 
-1. [Apply Changes](#apply_changes)
+1. [Apply Changes](#apply_changes).
 
 
 ###<a id='configure_required'></a> Required Settings
 
-<a id='required_azs_and_network'>**Assign AZs and Networks**</a>
+<a id='required_azs_and_network'></a>**Assign AZs and Networks**
 
-1. From the **Settings** tab of the Solace Messaging tile, click **Assign AZs and Networks** 
+1. From the **Settings** tab of the Solace Messaging tile, click **Assign AZs and Networks**.
     <%= image_tag('select_1_assign_azs_and_networks.png') %>
 1. Under **AZ and Network Assignments**, Choose the network and availability zones where Solace Messaging should run. If you are deploying Solace Messaging with high availability plans, please consider using multiple availability zones for maximum fault tolerance.
 
     <%= image_tag('form_assign_azs_and_networks.png') %>
 1. Click **Save**.
 
-<a id='required_management_access'>**Management Access**</a>
+<a id='required_management_access'></a>**Management Access**
 
 1. Click **Management Access**.
 
@@ -157,11 +157,11 @@ From the **Settings** tab of the Solace Messaging tile
 1. Under **Admin user password**, pick a password for the Virtual Message Routers `admin` user.
 
     <%= image_tag('form_management_access_admin_user_password.png') %>
-1. [(Optional) if you wish to use LDAP](#optional_management_access)
+1. [(Optional) if you wish to use LDAP](#optional_management_access).
 
 1. Click **Save**.
 
-<a id='required_stemcell'>**Stemcell**</a>
+<a id='required_stemcell'></a>**Stemcell**
 
 A stemcell import may be necessary if the minimum stemcell required for Solace Messaging tile is not found.
 
@@ -169,9 +169,9 @@ A stemcell import may be necessary if the minimum stemcell required for Solace M
 
     <%= image_tag('select_1_stemcell.png') %> 
 1. Click **Import Stemcell** to import the required stemcell for your installation of Pivotal Cloud Foundry.
-  * [Dowload Stemcells for PCF](https://network.pivotal.io/products/stemcells)
+  * [Download Stemcells for PCF](https://network.pivotal.io/products/stemcells)
 
-<a id='required_resource_config'>**Resource Config**</a>
+<a id='required_resource_config'></a>**Resource Config**
 
 1. Click **Resource Config**.
 
@@ -190,7 +190,7 @@ A stemcell import may be necessary if the minimum stemcell required for Solace M
 
 ###<a id='configure_optional'></a> Optional Settings
 
-<a id='optional_message_router_config'>**(Optional) Message Router Config**</a>
+<a id='optional_message_router_config'></a>**(Optional) Message Router Config**
 
 1. Click **Message Router Config**.
 
@@ -203,7 +203,7 @@ For an example, see [Example Environment Variable](credentials.html#example).
 
 1. Click **Save**.
 
-<a id='optional_tls_config'>**(Optional) TLS Config**</a>
+<a id='optional_tls_config'></a>**(Optional) TLS Config**
 
 1. Click **TLS Config**. 
 
@@ -213,7 +213,7 @@ For an example, see [Example Environment Variable](credentials.html#example).
 
     <%= image_tag('form_tls_config.png') %> 
 
-1. Click 'TLS Enabled'
+1. Click **TLS Enabled**.
 
     <%= image_tag('form_tls_config_enabled.png') %> 
 By enabling and configuring TLS, you allow messaging between applications and the Solace VMRs to be encrypted. 
@@ -225,7 +225,7 @@ If TLS is not configured, the TLS specific URLs continue to be passed in the `VC
 Generated certificates are equivalent to self-signed certificates.
 
     <%= image_tag('form_tls_config_server_certificate.png') %>
-<p class="note"><strong>Note</strong>: The server certifcate configured will be used by all Solace VMRs deployed and as such all VMRs deployed in a PCF instances will have the same identification.</p>
+<p class="note"><strong>Note</strong>: The server certificate configured will be used by all Solace VMRs deployed and as such all VMRs deployed in a PCF instances will have the same identification.</p>
     <%= image_tag('form_tls_config_disable_sb_cert_validation.png') %>
 <p class="note"><strong>Note</strong>: Communication between the Solace Messaging Service Broker and VMRs is also encrypted if a TLS certificate is configured. 
 The Service Broker uses the Container Certificate Trust Store Framework to validate the server certificate returned by VMRs. 
@@ -238,9 +238,9 @@ This checkbox should never be selected in production deployments, instead the fr
 
 1. Click **Save**.
 
-<a id='optional_service_access'>**(Optional) Service Access**</a>
+<a id='optional_service_access'></a>**(Optional) Service Access**
 
-1. Click **Service Access**
+1. Click **Service Access**.
 
     <%= image_tag('select_1_service_access.png') %>
 1. Check the **Enable global access to plans of service solace_messaging** option.
@@ -250,7 +250,7 @@ This checkbox should never be selected in production deployments, instead the fr
 1. Click **Save**.
 
 
-<a id='optional_management_access'>**(Optional) Management Access**</a>
+<a id='optional_management_access'></a>**(Optional) Management Access**
 
 1. Click **Management Access**.
 
@@ -258,18 +258,17 @@ This checkbox should never be selected in production deployments, instead the fr
 
 1. If you configured [LDAP](#optional_ldap_settings), you may choose to have the LDAP Server provide the authentication and authorization for the management roles on a Solace service Instance.
     <%= image_tag('form_management_access_ldap.png') %>
-1. (Optional) - Configure Groups with VMR administration read-only priviliges
+1. (Optional) - Configure Groups with VMR administration read-only privilege.
     <%= image_tag('form_management_access_ldap_readonly.png') %>
-1. (Optional) - Configure Groups with VMR administration read-write priviliges
+1. (Optional) - Configure Groups with VMR administration read-write privileges.
     <%= image_tag('form_management_access_ldap_readwrite.png') %>
-1. (Optional) - Configure Groups with VMR administration administrator priviliges
+1. (Optional) - Configure Groups with VMR administration administrator privileges.
     <%= image_tag('form_management_access_ldap_admin.png') %>
-
-<p class="note"><strong>Note</strong> Cloud Operators need to have global access to the VMRs deployed by the tile.  This will allow them to administer the VMRs with SolAdmin, CLI or SEMP-based tools. Cloud operators might have different roles.  Each role requires one of the three types of access-level: administrator, read-write and read-only.  When using "VMR Internal" the cloud operators access to a single administrator level role using the admin password. With "LDAP Server" users can be assigned to groups in LDAP mapping to their respective roles.</p>
+<p class="note"><strong>Note</strong>: Cloud Operators need to have global access to the VMRs deployed by the tile.  This will allow them to administer the VMRs with SolAdmin, CLI or SEMP-based tools. Cloud operators might have different roles.  Each role requires one of the three types of access-level: administrator, read-write and read-only.  When using "VMR Internal" the cloud operators access to a single administrator level role using the admin password. With "LDAP Server" users can be assigned to groups in LDAP mapping to their respective roles.</p>
 
 1. Click **Save**.
 
-<a id='optional_application_access'>**(Optional) Application Access**</a>
+<a id='optional_application_access'></a>**(Optional) Application Access**
 
 1. Click **Application Access**
 
@@ -279,64 +278,63 @@ This checkbox should never be selected in production deployments, instead the fr
 
 1. Click **Save**.
 
-<a id='optional_ldap_settings'>**(Optional) LDAP Settings**</a>
+<a id='optional_ldap_settings'>**</a>(Optional) LDAP Settings**.
 
 1. Click **LDAP Settings**
 
     <%= image_tag('select_1_ldap_settings.png') %>
-1. Default: **LDAP Disabled**
+1. Default: **LDAP Disabled**.
     <%= image_tag('form_ldap_settings.png') %>
-
-<p class="note"><strong>Note</strong> Using the default <strong>LDAP Disabled</strong>, the VMR will use its internal database for management and user credentials per service instance. To use an LDAP store you must select <strong>LDAP Enabled</strong> and provide all the required settings for your LDAP server. </p>
-1. Click **LDAP Enabled**
+<p class="note"><strong>Note</strong>: Using the default <strong>LDAP Disabled</strong>, the VMR will use its internal database for management and user credentials per service instance. To use an LDAP store you must select <strong>LDAP Enabled</strong> and provide all the required settings for your LDAP server. </p>
+1. Click **LDAP Enabled**.
 
     <%= image_tag('form_ldap_settings_enabled.png') %>
-1. Set LDAP Server URL
+1. Set LDAP Server URL.
 
     <%= image_tag('form_ldap_settings_server_url.png') %>
-<p class="note"><strong>Note</strong> Consider network accessiblity of the provided LDAP server, You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config) </p>
-1. Set LDAP TLS Preference
+<p class="note"><strong>Note</strong>: Consider network accessibility of the provided LDAP server, You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config) </p>
+1. Set LDAP TLS Preference.
 
     <%= image_tag('form_ldap_settings_starttls.png') %>
-1. Set LDAP Credentials to use with the LDAP Server
+1. Set LDAP Credentials to use with the LDAP Server.
 
     <%= image_tag('form_ldap_settings_credentials.png') %>
 
-1. Set User Search Base
+1. Set User Search Base.
 
     <%= image_tag('form_ldap_settings_user_search_base.png') %>
-1. Set User Search Filter
+1. Set User Search Filter.
 
     <%= image_tag('form_ldap_settings_user_search_filter.png') %>
-1. Set User Group Membership Attribute Name
+1. Set User Group Membership Attribute Name.
 
     <%= image_tag('form_ldap_settings_user_group_membership_attribute_name.png') %>
 1. Click **Save**.
 
 In order to have an effective LDAP configuration, please configure LDAP for [Management Access](#optional_management_access)  and [Application Access](#optional_application_access).  **If neither [Management Access](#optional_management_access) nor [Application Access](#optional_application_access) are configured for LDAP, the VMR will continue to use its internal database for management and user credentials.**
 
-<a id='optional_system_logging'>**(Optional) System Logging**</a>
+<a id='optional_system_logging'></a>**(Optional) System Logging**
 
-1. Click **System Logging**
+1. Click **System Logging**.
 
     <%= image_tag('select_1_system_logging.png') %>
-1. Default: **System Logging Disabled**
+1. Default: **System Logging Disabled**.
 
     <%= image_tag('form_system_logging.png') %>
-1. Click: **System Logging Enabled**
+1. Click **System Logging Enabled**.
 
     <%= image_tag('form_system_logging_enabled.png') %>
-1. Set the external syslog hostname
+1. Set the external syslog hostname.
 
     <%= image_tag('form_system_logging_server.png') %>
-<p class="note"><strong>Note</strong> Consider network accessiblity of the provided syslog server, You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config) </p>
-1. Set the external syslog port
+<p class="note"><strong>Note</strong>: Consider network accessibility of the provided syslog server, You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config) </p>
+1. Set the external syslog port.
 
     <%= image_tag('form_system_logging_port.png') %>
-1. Set the external syslog network protocol
+1. Set the external syslog network protocol.
 
     <%= image_tag('form_system_logging_protocol.png') %>
-1. Select what logs to send to the external syslog server
+1. Select what logs to send to the external syslog server.
 
     <%= image_tag('form_system_logging_vmr_commands.png') %>
     <%= image_tag('form_system_logging_vmr_events.png') %>
@@ -345,26 +343,21 @@ In order to have an effective LDAP configuration, please configure LDAP for [Man
 
 1. Click **Save**.
 
-<a id='optional_tcp_routes'>**(Optional) TCP Routes**</a>
+<a id='optional_tcp_routes'></a>**(Optional) TCP Routes**
 
-1. Click **TCP Routes**
+1. Click **TCP Routes**.
 
     <%= image_tag('select_1_tcp_routes.png') %>
-1. Default: **TCP Routes Disabled**
+1. Default: **TCP Routes Disabled**.
 
     <%= image_tag('form_tcp_routes.png') %>
-1. Click: **TCP Routes Enabled**
+1. Click **TCP Routes Enabled**.
 
     <%= image_tag('form_tcp_routes_enabled_1.png') %>
     <%= image_tag('form_tcp_routes_enabled_2.png') %>
-
-<p class="note"><strong>Note</strong> Fine grained control is available by protocol. If you choose <strong>"Not Allowed"</strong> a TCP Route will never be created for this protocol, even if requested at service creation time. If you choose <strong>"Disabled by default"</strong> at service creation time, a TCP Route will not be created for this protocol unless a user provided parameter overrides it with a "true" setting. If you choose <strong>"Enabled by default"</strong> a TCP Route will be created for this protocol at service creation time, unless a user provided parameter overrides it with "false" setting.  </p>
-
-
-<p class="note"><strong>TCP Routes</strong> A solace_router uaa agent is required to use the TCP Routes feature. If using a new version of the Elastic Runtime (1.11, 1.10.11, 1.9.24, 1.8.46), the solace_router uaa client may be present already, and there is no need to provide cf credentials. Please check your installation for the presence of the solace_router uaa client, this may be found under Pivotal Elastic Runtime\->Credentials\->UAA. When a solace_router is not found, you will need to create one. Instructions on how to create one are provided below.</p>
-
-<p class="note"><strong>TCP Routes</strong> Please lookup the UAA 'Admin Client Credentials' which will be needed to create the solace_router.</p>
-
+  <p class="note"><strong>Note</strong>: Fine grained control is available by protocol. If you choose <strong>"Not Allowed"</strong> a TCP Route will never be created for this protocol, even if requested at service creation time. If you choose <strong>"Disabled by default"</strong> at service creation time, a TCP Route will not be created for this protocol unless a user provided parameter overrides it with a "true" setting. If you choose <strong>"Enabled by default"</strong> a TCP Route will be created for this protocol at service creation time, unless a user provided parameter overrides it with "false" setting.  </p>
+<p class="note"><strong>TCP Routes</strong> A solace\_router uaa agent is required to use the TCP Routes feature. If using a new version of the Elastic Runtime (v1.11, v1.10.11, v1.9.24, v1.8.46), the solace\_router uaa client may be present already, and there is no need to provide cf credentials. Check your installation for the presence of the solace\_router uaa client, this may be found under Pivotal Elastic Runtime\->Credentials\->UAA. When a solace\_router is not found, you will need to create one. Instructions on how to create one are provided below.</p>
+<p class="note"><strong>TCP Routes</strong> Lookup the UAA 'Admin Client Credentials' which will be needed to create the solace\_router.</p>
 <p class="note"><strong>TCP Routes</strong> Install uaac if you don't already have it.</p>
   <pre class="terminal">
   $ gem install cf-uaac
@@ -376,29 +369,29 @@ In order to have an effective LDAP configuration, please configure LDAP for [Man
   $ uaac target uaa.sys.YOUR-SYSTEM-DOMAIN
   $ uaac token client get admin
   </pre>
-<p class="note"><strong>TCP Routes</strong> Create the solace\_router uaa client with the necessary persmissions, assign it <strong>a good secret password</strong></p>
+<p class="note"><strong>TCP Routes</strong> Create the solace\_router uaa client with the necessary permissions, assign it <strong>a good secret password</strong></p>
   <pre class="terminal">
-  $ uaac client add solace_router --name solace_router --scope uaa.none --authorized_grant_types "refresh_token,client_credentials" \
-  $ --authorities "routing.routes.read,routing.routes.write,routing.router_groups.read,cloud_controller.read,cloud_controller.write,cloud_controller.admin" \
+  $ uaac client add solace_router --name solace\_router --scope uaa.none --authorized\_grant\_types "refresh\_token,client\_credentials" \
+  $ --authorities "routing.routes.read,routing.routes.write,routing.router\_groups.read,cloud\_controller.read,cloud\_controller.write,cloud\_controller.admin" \
   $ -s "A\_GOOD\_SECRET\_PASSWORD"
   </pre>
-<p class="note"><strong>TCP Routes</strong> Please ensure that you have a 'tcp' domain.</p>
+<p class="note"><strong>TCP Routes</strong> Ensure that you have a 'tcp' domain.</p>
   <pre class="terminal">
   $ cf create-shared-domain tcp.YOUR-DOMAIN --router-group default-tcp
   </pre>
-<p class="note"><strong>TCP Routes</strong> Please consider Cloud Foundry quotas, networking and firewalls when using TCP Routes. For example removing the limits on reserved route ports.</p>
+<p class="note"><strong>TCP Routes</strong> Consider Cloud Foundry quotas, networking and firewalls when using TCP Routes. For example, removing the limits on reserved route ports.</p>
   <pre class="terminal">
   $ cf update-quota default --reserved-route-ports -1
   </pre>
-
-<p class="note"><strong>TCP Routes</strong> use solace_router and the <strong>A_GOOD_SECRET_PASSWORD</strong> as the cf credentials for TCP Routes.</p>
+<p class="note"><strong>TCP Routes</strong> use solace\_router and the <strong>A\_GOOD\_SECRET\_PASSWORD</strong> as the cf credentials for TCP Routes.</p>
 
 1. Click **Save**.
 
 ###<a id='apply_changes'></a> Apply Changes
 
-In order to apply changes, all the settings for the Solace tile need to be have "Check marks".
-    <%= image_tag('select_all_done.png') %>
+In order to apply changes, all the settings for the Solace tile need to be marked with green checkmarks.
+
+<%= image_tag('select_all_done.png') %>
 
 1. Click **Installation Dashboard** at the top left corner of the screen to leave the tile configuration and go back to dashboard.
 
