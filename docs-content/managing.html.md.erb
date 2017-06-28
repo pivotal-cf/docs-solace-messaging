@@ -22,17 +22,17 @@ To retrieve the information required to connect to the VMR, perform the followin
   </pre>
 1. Locate your Solace Messaging service instance in `VCAP_SERVICES` and record the following fields:
   * `managementHostnames`: The VMR's management hostnames
-  * When Management Access is set to 'VMR Internal'
+  * When Management Access is set to `VMR Internal`
       * `managementUsername`: The service instance's management username
       * `managementPassword`: The service instance's management password
-  * When Management Access is set to 'LDAP Server'
+  * When Management Access is set to `LDAP Server`
       * The management username and password are to be provided by the LDAP Administrator
   <br><br>
   For more information about the `VCAP_SERVICES` fields, see the [Understanding Credentials](credentials.html) topic.
 
 ## <a id='connect'></a> Connect to the Solace VMR
 
-The ``managementHostnames`` are externally accessible FQDNs and can be used directly from within Soladmin. The procedure is as follows:
+The `managementHostnames` are externally accessible FQDNs and can be used directly from within SolAdmin. The procedure is as follows:
 
 1. Download and install the SolAdmin administration tool from the [Solace Developers Portal Download Page](http://dev.solace.com/downloads/).
 1. Start SolAdmin.
