@@ -14,24 +14,24 @@ Creating a service instance also gives the developer permissions to manage the M
 A service instance can be customized at creation time and updated as well using parameters when certain features are enabled.
 
 1. When LDAP is enabled, these parameters can be used to control management access to a service instance.
- * ldapGroupAdminReadOnly : Admin ReadOnly permissions are granted to the provided value for that parameter.
+ * ldapGroupAdminReadOnly: Admin ReadOnly permissions are granted to the provided value for that parameter.
  * ldapGroupAdminReadWrite: Admin ReadWrite permissions are granted to the provided value for that parameter.
 
-1. When TCP Routes are enabled, and unless the configuration per procotol is "Not Allowed", you may use these parameters with valid values: "true", "false" to control TCP Routes per service instance.
- * tcp\_route\_enabled
- * smf\_tcp\_route\_enabled
- * smf\_tls\_tcp\_route\_enabled
- * smf\_zip\_tcp\_route\_enabled
- * web\_messaging\_tcp\_route\_enabled
- * web\_messaging\_tls\_tcp\_route\_enabled
- * mqtt\_tcp\_route\_enabled
- * mqtt\_tls\_tcp\_route\_enabled
- * mqtt\_ws\_tcp\_route\_enabled
- * mqtt\_wss\_tcp\_route\_enabled
- * rest\_tcp\_route\_enabled
- * rest\_tls\_tcp\_route\_enabled
+1. When TCP Routes are enabled, and unless the configuration per procotol is "Not Allowed", you may use these parameters with valid values: `true`, `false` to control TCP Routes per service instance.
+ * `tcp\_route\_enabled`
+ * `smf\_tcp\_route\_enabled`
+ * `smf\_tls\_tcp\_route\_enabled`
+ * `smf\_zip\_tcp\_route\_enabled`
+ * `web\_messaging\_tcp\_route\_enabled`
+ * `web\_messaging\_tls\_tcp\_route\_enabled`
+ * `mqtt\_tcp\_route\_enabled`
+ * `mqtt\_tls\_tcp\_route\_enabled`
+ * `mqtt\_ws\_tcp\_route\_enabled`
+ * `mqtt\_wss\_tcp\_route\_enabled`
+ * `rest\_tcp\_route\_enabled`
+ * `rest\_tls\_tcp\_route\_enabled`
 
-The following tutorials will show you how to create a Solace Messaging service called *solace-messaging-instance* and bind this service instance to an application named *web-backend*. We will also show you how to update the service instance with optional parameter if their features are enabled.
+The following tutorials show you how to create a Solace Messaging service called *solace-messaging-instance* and bind this service instance to an application named *web-backend*. It also shows you how to update the service instances with optional parameter if their features are enabled.
 
 ##<a id='cf-cli'></a> Create and Bind a Service Instance with the cf CLI
 
@@ -70,7 +70,9 @@ To create and bind an instance of the Solace Messaging service with the cf CLI, 
 	</pre>
 
 
-1. (Optional) Update the service instance of the Solace Messaging service assuming both LDAP and TCP Routes are enabled, this will grant external access to the SMF messaging protocol, and grant Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups.
+1. (Optional) Update the service instance of the Solace Messaging service assuming both LDAP and TCP Routes are enabled.
+This grants external access to the SMF messaging protocol, and grant Admin ReadOnly and Admin ReadWrite to the Message VPN
+for this service instance to the provided LDAP groups.
 
 
 	<pre class="terminal">
@@ -79,7 +81,7 @@ To create and bind an instance of the Solace Messaging service with the cf CLI, 
 	OK
 	</pre>
 
-<p class="note"><strong>Note</strong>: Updating a Service Instance that has existing application bindings can be a service affecting operation. An existing application may need to unbind and rebind to obtain its updated Solace Messaging Credentials</p>
+    <p class="note"><strong>Note</strong>: Updating a Service Instance that has existing application bindings can be a service affecting operation. An existing application may need to unbind and rebind to obtain its updated Solace Messaging Credentials</p>
 
 1. Bind the instance to an application.
   <pre class="terminal">
