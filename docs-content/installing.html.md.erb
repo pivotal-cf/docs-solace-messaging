@@ -122,6 +122,7 @@ From the **Settings** tab of the Solace Messaging tile
 1. Configure the [**Required Settings**](#configure_required):
    * [**Assign AZs and Networks**](#required_azs_and_network)
    * [**Management Access**](#required_management_access)
+   * [**TCP Routes**](#required_tcp_routes)
    * [**Stemcell**](#required_stemcell)
    * [**Resource Config**](#required_resource_config)
 
@@ -159,6 +160,18 @@ From the **Settings** tab of the Solace Messaging tile
     <%= image_tag('form_management_access_admin_user_password.png') %>
 1. [(Optional) if you wish to use LDAP](#optional_management_access).
 
+1. Click **Save**.
+
+<a id='required_tcp_routes'></a>**TCP Routes (Required Save)**
+
+If you wish to Disable TCP Routing and you didn't click Save you may get a 'unknown property "solace_router"' exception when you attempt to Apply Changes.
+
+1. Click **TCP Routes**.
+
+    <%= image_tag('select_1_tcp_routes.png') %>
+1. Default: **TCP Routes Disabled**.
+
+    <%= image_tag('form_tcp_routes.png') %>
 1. Click **Save**.
 
 <a id='required_stemcell'></a>**Stemcell**
