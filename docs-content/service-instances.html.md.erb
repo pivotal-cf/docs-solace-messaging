@@ -18,18 +18,18 @@ A service instance can be customized at creation time and updated as well using 
  * ldapGroupAdminReadWrite: Admin ReadWrite permissions are granted to the provided value for that parameter.
 
 1. When TCP Routes are enabled, and unless the configuration per procotol is "Not Allowed", you may use these parameters with valid values: `true`, `false` to control TCP Routes per service instance.
- * `tcp\_route\_enabled`
- * `smf\_tcp\_route\_enabled`
- * `smf\_tls\_tcp\_route\_enabled`
- * `smf\_zip\_tcp\_route\_enabled`
- * `web\_messaging\_tcp\_route\_enabled`
- * `web\_messaging\_tls\_tcp\_route\_enabled`
- * `mqtt\_tcp\_route\_enabled`
- * `mqtt\_tls\_tcp\_route\_enabled`
- * `mqtt\_ws\_tcp\_route\_enabled`
- * `mqtt\_wss\_tcp\_route\_enabled`
- * `rest\_tcp\_route\_enabled`
- * `rest\_tls\_tcp\_route\_enabled`
+ * `tcp_route_enabled`
+ * `smf_tcp_route_enabled`
+ * `smf_tls_tcp_route_enabled`
+ * `smf_zip_tcp_route_enabled`
+ * `web_messaging_tcp_route_enabled`
+ * `web_messaging_tls_tcp_route_enabled`
+ * `mqtt_tcp_route_enabled`
+ * `mqtt_tls_tcp_route_enabled`
+ * `mqtt_ws_tcp_route_enabled`
+ * `mqtt_wss_tcp_route_enabled`
+ * `rest_tcp_route_enabled`
+ * `rest_tls_tcp_route_enabled`
 
 The following tutorials show you how to create a Solace Messaging service called *solace-messaging-instance* and bind this service instance to an application named *web-backend*. It also shows you how to update the service instances with optional parameter if their features are enabled.
 
@@ -83,10 +83,10 @@ for this service instance to the provided LDAP groups.
 
     <p class="note"><strong>Note</strong>: Updating a Service Instance that has existing application bindings can be a service affecting operation. An existing application may need to unbind and rebind to obtain its updated Solace Messaging Credentials</p>
 
-1. Bind the instance to an application.
+1. Bind the instance to an application called 'web-backend'
   <pre class="terminal">
   $ cf bind-service web-backend solace-messaging-instance
-  Binding service solace-messaging-instance to app YOUR-APP in org example / space development as user@example.com...
+  Binding service solace-messaging-instance to app web-backend in org example / space development as user@example.com...
   OK
   TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
   </pre>
@@ -103,9 +103,12 @@ To create and bind an instance of the Solace Messaging service in Apps Manager, 
 1. Click **Marketplace** in the left navigation.
 1. Click **Solace Messaging**.
 1. Select the appropriate service plan for your application. See [PCF Marketplace Plans](index.html#marketplace-plans) for how the service plans differ.
+  <%= image_tag('appsmanager_solace_messaging_marketplace_selection.png') %> 
 1. Enter an **Instance Name** and select a space under **Add to Space**. To bind the service instance to an application, select an application under **Bind to App**. Then click **Add**. 
-  <%= image_tag('config-instance.png') %> 
+  <%= image_tag('appsmanager_solace_messaging_create_service.png') %> 
 1. You can also bind an application to a service instance by navigating to the application page, clicking **Services**, then clicking **Bind a Service**.
-  <%= image_tag('app-page.png') %>
+  <%= image_tag('appsmanager_solace_messaging_service_list_empty.png') %>
 1. Select a service instance to bind to the application and click **Bind**.
-  <%= image_tag('add-binding.png') %>
+  <%= image_tag('appsmanager_solace_messaging_bind_service_selected.png') %>
+1. Once the service is bound you will find it listed under **Services**.
+  <%= image_tag('appsmanager_solace_messaging_service_list_has_service.png') %>
