@@ -100,13 +100,15 @@ for this service instance to the provided LDAP groups.
 To create and bind an instance of the Solace Messaging service in Apps Manager, perform the following steps:
 
 1. Navigate to `apps.YOUR-SYSTEM-DOMAIN` in a browser and log in.
-1. Click **Marketplace** in the left navigation.
+1. Select the org and space in which you wish to create the Solace Messaging service.
+1. Click on Service
+1. Click on **Add Service**.
 1. Click **Solace Messaging**.
 1. Select the appropriate service plan for your application. See [PCF Marketplace Plans](index.html#marketplace-plans) for how the service plans differ.
   <%= image_tag('appsmanager_solace_messaging_marketplace_selection.png') %> 
 1. Enter an **Instance Name** and select a space under **Add to Space**. To bind the service instance to an application, select an application under **Bind to App**. Then click **Add**. 
   <%= image_tag('appsmanager_solace_messaging_create_service.png') %> 
-1. You can also bind an application to a service instance by navigating to the application page, clicking **Services**, then clicking **Bind a Service**.
+1. If you did not bind the service to an application earlier at service creation time, you can bind an application to a service instance by navigating to the application page, clicking **Services**, then clicking **Bind a Service**.
   <%= image_tag('appsmanager_solace_messaging_service_list_empty.png') %>
 1. Select a service instance to bind to the application and click **Bind**.
   <%= image_tag('appsmanager_solace_messaging_bind_service_selected.png') %>
