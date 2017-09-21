@@ -37,7 +37,7 @@ For developers, there are a few resources to help you easily get started with So
 
 There is also simple sample code which shows you how to easily connect to a Solace Messaging Service Instance:
 
-* [Getting Started Examples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java).
+* [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java).
 * [Solace Messaging Demo Application](https://github.com/SolaceLabs/sl-cf-solace-messaging-demo)
 
 ## <a id='marketplace-plans'></a>PCF Marketplace Plans
@@ -69,6 +69,31 @@ Solace Messaging currently offers the following plans to meet the needs of appli
     <td>A single message VPN implemented across 3 large Solace Message Routers in a highly available configuration. This plan is fully featured but does have a time limited 90-day evaluation period.</td>
   </tr>
 </table>
+
+## <a id='cloud-integration'></a>Cloud Integration 
+
+A Solace Messaging deployment under Pivotal Cloud Foundry can configured to support integration with existing cloud services and hybrid cloud deployments.
+
+### <a id='pcf-solace-messaging-intergration-tcp_routes'></a>TCP Routes
+
+TCP Routes allows accessing Solace messaging services hosted inside your PCF domain from external networks. By default a PCF hosted service is not accessible to external networks.
+
+Having TCP Routes enables many use cases:
+
+ * IoT – devices using MQTT or REST can connect to Solace messaging services from outside PCF to communicate with your applications deployed inside PCF, look for the 'TCP Routes for IoT - MQTT Java Application Tutorial' [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java/tcp-routes-mqtt/).
+ * Mobile Applications – mobile and web applications can use web messaging to connect to Solace messaging services from outside PCF to communicate with your applications deployed inside PCF.
+ * External client applications – applications deployed outside PCF can communicate via messaging with applications deployed inside PCF by connecting to a Solace messaging service deployed in PCF.
+ * Hybrid cloud – other Solace appliances or VMRs deployed outside PCF can establish bridge connections to Solace messaging services inside your PCF cloud.
+
+  To use TCP Routes please enable it at installation time with a selection of default settings for each messaging protocol that you wish to use. Once enabled, TCP Routes can be fine tuned per service at service creation time.
+
+### <a id='pcf-solace-messaging-intergration-system_logging'></a>System Logging
+
+System Logging allows redirecting the logs from the Solace Messaging PCF components to an external syslog service.
+
+### <a id='pcf-solace-messaging-intergration-ldap'></a>LDAP
+
+Enables the use of an LDAP server for the VMR's authentication and authorization needs. The configuration allows granting an LDAP server control over Management access and/or Application access.
 
 ## <a id='solace-messaging-features'></a>Solace Messaging Features
 
