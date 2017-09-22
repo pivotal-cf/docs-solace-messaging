@@ -1,15 +1,33 @@
 ---
-title: Creating and Binding Solace Messaging Service Instances
+title: Solace Messaging Service Instances
 owner: Partners
 ---
 
-This topic describes how developers create and bind instances of the Solace Messaging service.
+This topic describes how developers can manages instances of Solace Messaging services.
 
-After deploying the Solace Messaging for Pivotal Cloud Foundry (PCF) tile, the Solace Messaging service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service and bind it to applications that need to exchange messages.
+##<a id='about_solace_service_instance'></a>About the Solace Service Instance
 
-Each service instance represents a Message VPN on a Solace Virtual Message Router (VMR). By binding an application to the instance, developers give the application permission to access this Message VPN through a client username. For more information about how developers can use the credentials provided by the binding, see the [Understanding Solace Messaging Credentials](credentials.html) topic.
+A Solace Service Instance represents a Message VPN on a Solace Virtual Message Router (VMR). A Message VPN allows for many separate applications to share a single message router while still remaining independent and separated. To learn more about Message VPNs, see [Core Concepts](https://docs.solace.com/Features/Core-Concepts.htm)
+
+After deploying the Solace Messaging for Pivotal Cloud Foundry (PCF) tile, the Solace Messaging service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service which they can make available to applications that need to exchange messages.
+
+By [binding](bindings.html) an application to the instance or [creating a service key](servicekeys.html) for the instance, developers give the application permission to access this Message VPN through a client username or LDAP. For more information about how developers can use the credentials provided by the binding or service keys, see the [Understanding Solace Messaging Credentials](credentials.html) topic.
 
 Creating a service instance also gives the developer permissions to manage the Message VPN through the SolAdmin administration tool. For more information, see the [Managing the Message VPN](managing.html) topic.
+
+The following tutorials will show you:
+
+ * Using the cf Cli:
+   * How to create a Solace Messaging service called *solace-messaging-instance* with no added service-specific parameters.
+   * How to create a Solace Messaging service called *solace-messaging-instance-IoT* with added service-specific parameters.
+   * How to update the service instance *solace-messaging-instance* with service-specific parameters.
+   * How to delete a service instance.
+ * Using Apps Manager
+   * How to create a service instance.
+
+While the provided tutorials are relevant to Solace Messaging, they do no provide a complete set of examples of how to manage service instances in Cloud Foundry. To learn more about [Managing Service Instances with Cloud Foundry](https://docs.cloudfoundry.org/devguide/services/managing-services.html).
+
+##<a id='service-specific-configuration'></a>Service Specific Parameters
 
 A service instance can be customized at creation time and updated as well using parameters when certain features are enabled.
 
@@ -31,11 +49,12 @@ A service instance can be customized at creation time and updated as well using 
  * `rest_tcp_route_enabled`
  * `rest_tls_tcp_route_enabled`
 
-The following tutorials show you how to create a Solace Messaging service called *solace-messaging-instance* and bind this service instance to an application named *web-backend*. It also shows you how to update the service instances with optional parameter if their features are enabled.
+Service specific configuration parameters are a JSON object that is provided either in-line or in a file. To learn more about See [Arbitrary Parameters](https://docs.cloudfoundry.org/devguide/services/managing-services.html#arbitrary-params-create)
 
-##<a id='cf-cli'></a> Create and Bind a Service Instance with the cf CLI
 
-To create and bind an instance of the Solace Messaging service with the cf CLI, perform the following steps:
+##<a id='cf-cli-create1'></a> Create a Service Instance with the cf CLI
+
+To create an instance of the Solace Messaging service with the cf CLI, perform the following steps:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
@@ -61,43 +80,192 @@ To create and bind an instance of the Solace Messaging service with the cf CLI, 
 	service          plans                                                description
 	solace-messaging shared, large, community, medium-ha, large-ha        Solace Messaging for real-time, multi-protocol data distribution
 	</pre>
-1. Create an instance of the Solace Messaging service. Select the appropriate service plan for your application. See [PCF Marketplace Plans](index.html#marketplace-plans) for how the service plans differ. The following example uses the `large-ha` service plan.
+1. Create an instance of the Solace Messaging service. Select the appropriate service plan for your application. See [PCF Marketplace Plans](index.html#marketplace-plans) for how the service plans differ. The following example uses the `large-ha` service plan and no service-specific parameters.
 
 	<pre class="terminal">
-	$ cf create-service solace-messaging shared solace-messaging-instance
+	$ cf create-service solace-messaging large-ha solace-messaging-instance
 	Creating service instance solace-messaging-instance in org example / space development as user@example.com...
 	OK
 	</pre>
+	<p class="note"><strong>Note</strong>:Any parameter dependent features will simply use their defaults. For example if you have TCP Routes enabled or LDAP enabled, all the selections made at tile installation time will be applicable to the created service as per tile configuration.</p>
+
+1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](servicekeys.html).
 
 
-1. (Optional) Update the service instance of the Solace Messaging service assuming both LDAP and TCP Routes are enabled.
-This grants external access to the SMF messaging protocol, and grant Admin ReadOnly and Admin ReadWrite to the Message VPN
-for this service instance to the provided LDAP groups.
+##<a id='cf-cli-create2'></a> Create a Service Instance with the cf CLI having service-specific parameters
+
+To create an instance of the Solace Messaging service with the cf CLI with service-specific parameters, perform the following steps:
+
+1. Set your API endpoint to the Cloud Controller of your deployment.
+  <pre class="terminal">
+  $ cf api api.YOUR-SYSTEM-DOMAIN
+  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
+  OK
+  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+  Not logged in. Use 'cf login' to log in.
+  </pre>
+1. Log in to your deployment and select an org and a space.
+  <pre class="terminal">
+  $ cf login
+  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+  Email> user<span>@</span>example.com
+  Password>
+  </pre>
+1. List the Marketplace services and locate the Solace Messaging service and its associated service plans.
+	<pre class="terminal">
+	$ cf marketplace
+	Getting services from marketplace in org example / space development as user<span>@</span>example.com...
+	OK
+
+	service          plans                                                description
+	solace-messaging shared, large, community, medium-ha, large-ha        Solace Messaging for real-time, multi-protocol data distribution
+	</pre>
+1. Create an instance of the Solace Messaging service. Select the appropriate service plan for your application. See [PCF Marketplace Plans](index.html#marketplace-plans) for how the service plans differ. Add applicable service-specific parameters. The following example uses the `shared` service plan with service-specific parameters for TCP Routes that enable opening an MQTT TLS port to support IoT devices.
+
+	<pre class="terminal">
+	$ cf create-service solace-messaging shared solace-messaging-instance-IoT -c '{ "mqtt_tls_tcp_route_enabled" : "true" }'
+	Creating service instance solace-messaging-instance-IoT in org example / space development as user@example.com...
+	OK
+	</pre>
+1. Getting details about the created service.
+
+	<pre class="terminal">
+	$ cf service solace-messaging-instance-IoT
+
+	Service instance: solace-messaging-instance-IoT
+	Service: solace-messaging
+	Bound apps:
+	Tags:
+	Plan: shared
+	Description: Solace Messaging for real-time, multi-protocol data distribution
+	Documentation url: http://docs.solace.com
+	Dashboard:
+
+	Last Operation
+	Status: create succeeded
+	Message:
+	Started: 2020-01-01T00:00:00Z
+	Started: 2020-01-01T00:00:00Z
+	</pre>
+1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](servicekeys.html).
+
+
+##<a id='cf-cli-update'></a>Update a Service Instance with the cf CLI
+
+Sometime you may wish to update an existing service instance to enable or disable a special feature. 
+For example you may want to close some TCP Routes port for a given protocol, let's say MQTT Plain Text port due to security concerns.
+Or you may wish adjust LDAP Admin access.
+
+To update an instance of the Solace Messaging service with the cf CLI, perform the following steps:
+
+1. Set your API endpoint to the Cloud Controller of your deployment.
+  <pre class="terminal">
+  $ cf api api.YOUR-SYSTEM-DOMAIN
+  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
+  OK
+  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+  Not logged in. Use 'cf login' to log in.
+  </pre>
+1. Log in to your deployment and select an org and a space.
+  <pre class="terminal">
+  $ cf login
+  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+  Email> user<span>@</span>example.com
+  Password>
+  </pre>
+1. Locate the previously created service
+	<pre class="terminal">
+	$ cf services
+	Getting services in org example / space dev as user<span>@</span>example.com...
+	OK
+
+	name                        service            plan     bound apps   last operation
+	solace-messaging-instance   solace-messaging   large-ha              create succeeded
+	</pre>
+
+1. Update the service instance of the Solace Messaging service assuming both LDAP and TCP Routes are enabled.
+This disabled external access to the MQTT Plain Text messaging protocol, and grants Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups.
 
 
 	<pre class="terminal">
-        $ cf update-service solace-messaging-instance -c '{ "smf_tcp_route_enabled" : "true", "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com", "ldapGroupAdminReadWrite" : "cn=username2,ou=groups,dc=solace,dc=com" }'
+        $ cf update-service solace-messaging-instance -c '{ "mqtt_tcp_route_enabled" : "false", "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com", "ldapGroupAdminReadWrite" : "cn=username2,ou=groups,dc=solace,dc=com" }'
 	Updating service instance solace-messaging-instance user...
 	OK
 	</pre>
 
-    <p class="note"><strong>Note</strong>: Updating a Service Instance that has existing application bindings can be a service affecting operation. An existing application may need to unbind and rebind to obtain its updated Solace Messaging Credentials</p>
+    <p class="note"><strong>Note</strong>: Updating a Service Instance that has existing application bindings or service keys can be a service affecting operation. An existing application using bindings may need to unbind and rebind to obtain its updated Solace Messaging Credentials, an existing application using service keys will need to get a new service key.</p>
 
-1. Bind the instance to an application called 'web-backend'
+1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](servicekeys.html).
+
+##<a id='cf-cli-delete'></a>Deleting a Service Instance with the cf CLI
+
+A Service instance may be deleted once it has no bindings and no service keys.
+<p class="note"><strong>Note</strong>: Deleting a Service Instance is non recoverable, all data that was in the service instance will be lost.</p>
+
+To delete an instance of the Solace Messaging service with the cf CLI, perform the following steps:
+
+1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
-  $ cf bind-service web-backend solace-messaging-instance
-  Binding service solace-messaging-instance to app web-backend in org example / space development as user@example.com...
+  $ cf api api.YOUR-SYSTEM-DOMAIN
+  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
   OK
-  TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
+  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+  Not logged in. Use 'cf login' to log in.
   </pre>
-1. Restage the application for the binding to take effect.
+1. Log in to your deployment and select an org and a space.
   <pre class="terminal">
-  $ cf restage web-backend
+  $ cf login
+  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+  Email> user<span>@</span>example.com
+  Password>
   </pre>
+1. Locate the previously created service
+	<pre class="terminal">
+	$ cf services
+	Getting services in org example / space dev as user<span>@</span>example.com...
+	OK
 
-##<a id='apps-man'></a> Create and Bind a Service Instance in Apps Manager
+	name                            service            plan     bound apps   last operation
+	solace-messaging-instance-IoT   solace-messaging   shared                create succeeded
+	</pre>
 
-To create and bind an instance of the Solace Messaging service in Apps Manager, perform the following steps:
+1. Delete the service instance "solace-messaging-instance-IoT" of the Solace Messaging service.
+
+
+	<pre class="terminal">
+	$ cf delete-service solace-messaging-instance-IoT
+
+	Really delete the service solace-messaging-instance-IoT?> yes
+	Deleting service solace-messaging-instance-IoT in org example / space dev as user<span>@</span>example.com...
+	OK
+
+	Delete in progress. Use 'cf services' or 'cf service solace-messaging-instance-IoT' to check operation status.
+	</pre>
+
+1. You can monitor the progress of the delete operation.
+
+	<pre class="terminal">
+	$ cf services
+	Getting services in org example / space dev as user<span>@</span>example.com...
+	OK
+
+	name                            service            plan     bound apps   last operation
+	solace-messaging-instance-IoT   solace-messaging   shared                delete in progress
+	</pre>
+
+	Notice the 'delete in progress', this service will be removed once the deletion is completed.
+
+	<pre class="terminal">
+	$ cf services
+	Getting services in org example / space dev as user<span>@</span>example.com...
+	OK
+
+	No services found
+	</pre>
+
+##<a id='apps-man-create'></a> Create a Service Instance in Apps Manager
+
+To create an instance of the Solace Messaging service in Apps Manager, perform the following steps:
 
 1. Navigate to `apps.YOUR-SYSTEM-DOMAIN` in a browser and log in.
 1. Select the org and space in which you wish to create the Solace Messaging service.
@@ -106,11 +274,7 @@ To create and bind an instance of the Solace Messaging service in Apps Manager, 
 1. Click **Solace Messaging**.
 1. Select the appropriate service plan for your application. See [PCF Marketplace Plans](index.html#marketplace-plans) for how the service plans differ.
   <%= image_tag('appsmanager_solace_messaging_marketplace_selection.png') %> 
-1. Enter an **Instance Name** and select a space under **Add to Space**. To bind the service instance to an application, select an application under **Bind to App**. Then click **Add**. 
-  <%= image_tag('appsmanager_solace_messaging_create_service.png') %> 
-1. If you did not bind the service to an application earlier at service creation time, you can bind an application to a service instance by navigating to the application page, clicking **Services**, then clicking **Bind a Service**.
-  <%= image_tag('appsmanager_solace_messaging_service_list_empty.png') %>
-1. Select a service instance to bind to the application and click **Bind**.
-  <%= image_tag('appsmanager_solace_messaging_bind_service_selected.png') %>
-1. Once the service is bound you will find it listed under **Services**.
-  <%= image_tag('appsmanager_solace_messaging_service_list_has_service.png') %>
+1. Enter an **Instance Name** and select a space under **Add to Space**. Then click **Add**. 
+  <%= image_tag('appsmanager_solace_messaging_create_service_do_not_bind.png') %> 
+1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](servicekeys.html).
+

@@ -31,7 +31,9 @@ For cloud operators, the following section shows you how to install and configur
 
 For developers, there are a few resources to help you easily get started with Solace Messaging for PCF. Within this documentation, see the following sections:
 
-* [Service Instances and Bindings](service-instances.html)
+* [Service Instances](service-instances.html)
+* [Bindings](bindings.html)
+* [Service Keys](servicekeys.html)
 * [Solace Messaging Credentials](credentials.html)
 * [Managing the Message VPN](managing.html)
 
@@ -83,7 +85,7 @@ Having TCP Routes enables many use cases:
  * IoT – devices using MQTT or REST can connect to Solace messaging services from outside PCF to communicate with your applications deployed inside PCF, look for the 'TCP Routes for IoT - MQTT Java Application Tutorial' [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java/tcp-routes-mqtt/).
  * Mobile Applications – mobile and web applications can use web messaging to connect to Solace messaging services from outside PCF to communicate with your applications deployed inside PCF.
  * External client applications – applications deployed outside PCF can communicate via messaging with applications deployed inside PCF by connecting to a Solace messaging service deployed in PCF.
- * Hybrid cloud – other Solace appliances or VMRs deployed outside PCF can establish bridge connections to Solace messaging services inside your PCF cloud.
+ * Hybrid cloud – other Solace appliances or VMRs deployed outside PCF can establish bridge connections to Solace messaging services inside your PCF cloud. For more details please see about [Working with Message VPN Bridges](https://docs.solace.com/Features/Working-With-Message-VPN-Bridges.htm)
 
   To use TCP Routes please enable it at installation time with a selection of default settings for each messaging protocol that you wish to use. Once enabled, TCP Routes can be fine tuned per service at service creation time.
 
