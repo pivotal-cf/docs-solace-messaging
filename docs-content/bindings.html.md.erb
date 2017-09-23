@@ -5,13 +5,17 @@ owner: Partners
 
 This topic describes how developers can bind an application to instances of the Solace Messaging service.
 
-An application deployed in Cloud Foundry can be offered a Solace Messaging Service Instance by binding it to the service instance.
+##<a id='about-bindings'></a>About Bindings
 
-By binding an application to the instance, developers give the application permission to access this Solace Message VPN through a client username or LDAP.
+In order for an application deployed in Cloud Foundry to obtain credentials for a Solace Messaging Service Instance, a developer needs to bind the application to the service instance.
+
+The act of binding the application to a service instance produces [Solace Messaging Credentials](credentials.html), which become available in `VCAP_SERVICES` environment variable for the application as deployed in Cloud Foundry.
+
+The act of unbindng the application from the service instance revokes the credentials.
 
 The following tutorials assumes you have created a Solace Messaging service called *solace-messaging-instance* as discussed in [Service Instances](service-instances.html) and that you have push an application called *web-backend*.
 
-The tutorials will show you how to bind this service instance to an application named *web-backend*. 
+The tutorials will show you how to bind this service instance to the application named *web-backend*. 
 
 ##<a id='bind-cf-cli'></a>Bind a Service Instance with the cf CLI
 

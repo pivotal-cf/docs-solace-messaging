@@ -11,7 +11,7 @@ A Solace Service Instance represents a Message VPN on a Solace Virtual Message R
 
 After deploying the Solace Messaging for Pivotal Cloud Foundry (PCF) tile, the Solace Messaging service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service which they can make available to applications that need to exchange messages.
 
-By [binding](bindings.html) an application to the instance or [creating a service key](servicekeys.html) for the instance, developers give the application permission to access this Message VPN through a client username or LDAP. For more information about how developers can use the credentials provided by the binding or service keys, see the [Understanding Solace Messaging Credentials](credentials.html) topic.
+By [binding](bindings.html) an application to the instance or [creating a service key](service-keys.html) for the instance, developers give the application permission to access this Message VPN through a client username or LDAP. For more information about how developers can use the credentials provided by the binding or service keys, see the [Understanding Solace Messaging Credentials](credentials.html) topic.
 
 Creating a service instance also gives the developer permissions to manage the Message VPN through the SolAdmin administration tool. For more information, see the [Managing the Message VPN](managing.html) topic.
 
@@ -89,7 +89,7 @@ To create an instance of the Solace Messaging service with the cf CLI, perform t
 	</pre>
 	<p class="note"><strong>Note</strong>:Any parameter dependent features will simply use their defaults. For example if you have TCP Routes enabled or LDAP enabled, all the selections made at tile installation time will be applicable to the created service as per tile configuration.</p>
 
-1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](servicekeys.html).
+1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](service-keys.html).
 
 
 ##<a id='cf-cli-create2'></a> Create a Service Instance with the cf CLI having service-specific parameters
@@ -147,7 +147,7 @@ To create an instance of the Solace Messaging service with the cf CLI with servi
 	Started: 2020-01-01T00:00:00Z
 	Started: 2020-01-01T00:00:00Z
 	</pre>
-1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](servicekeys.html).
+1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](service-keys.html).
 
 
 ##<a id='cf-cli-update'></a>Update a Service Instance with the cf CLI
@@ -195,7 +195,7 @@ This disabled external access to the MQTT Plain Text messaging protocol, and gra
 
     <p class="note"><strong>Note</strong>: Updating a Service Instance that has existing application bindings or service keys can be a service affecting operation. An existing application using bindings may need to unbind and rebind to obtain its updated Solace Messaging Credentials, an existing application using service keys will need to get a new service key.</p>
 
-1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](servicekeys.html).
+1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](service-keys.html).
 
 ##<a id='cf-cli-delete'></a>Deleting a Service Instance with the cf CLI
 
@@ -276,5 +276,5 @@ To create an instance of the Solace Messaging service in Apps Manager, perform t
   <%= image_tag('appsmanager_solace_messaging_marketplace_selection.png') %> 
 1. Enter an **Instance Name** and select a space under **Add to Space**. Then click **Add**. 
   <%= image_tag('appsmanager_solace_messaging_create_service_do_not_bind.png') %> 
-1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](servicekeys.html).
+1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](service-keys.html).
 
