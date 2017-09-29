@@ -9,7 +9,7 @@ This topic describes how developers can bind an application to instances of the 
 
 In order for an application deployed in Cloud Foundry to obtain credentials for a Solace Messaging Service Instance, a developer needs to bind the application to the service instance.
 
-The act of binding the application to a service instance produces [Solace Messaging Credentials](credentials.html), which become available in `VCAP_SERVICES` environment variable for the application as deployed in Cloud Foundry.
+The act of binding the application to a service instance produces [Solace Messaging Credentials](credentials.html), which becomes available in `VCAP_SERVICES` environment variable for the application as deployed in Cloud Foundry.
 
 The act of unbindng the application from the service instance revokes the credentials.
 
@@ -68,9 +68,9 @@ To bind an instance of the Solace Messaging service in Apps Manager, perform the
 
 1. Navigate to `apps.YOUR-SYSTEM-DOMAIN` in a browser and log in.
 1. Select the org and space in which you wish to create the Solace Messaging service.
-1. Clicking "Apps" , clicking the app name *web-backend*, clicking **Services**, then clicking **Bind a Service**.
+1. Click **Apps**, click the app name **web-backend**, click **Services**, then click **Bind a Service**.
   <%= image_tag('appsmanager_solace_messaging_service_list_empty.png') %>
 1. Select a service instance to bind to the application and click **Bind**.
   <%= image_tag('appsmanager_solace_messaging_bind_service_selected.png') %>
-1. Once the service is bound you will find it listed under **Services**.
+1. Once the service is bound, you will find it listed under **Services**.
   <%= image_tag('appsmanager_solace_messaging_service_list_has_service.png') %>

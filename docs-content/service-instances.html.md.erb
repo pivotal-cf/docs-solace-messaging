@@ -3,7 +3,7 @@ title: Solace Messaging Service Instances
 owner: Partners
 ---
 
-This topic describes how developers can manages instances of Solace Messaging services.
+This topic describes how developers can manage instances of Solace Messaging services.
 
 ##<a id='about_solace_service_instance'></a>About the Solace Service Instance
 
@@ -87,7 +87,7 @@ To create an instance of the Solace Messaging service with the cf CLI, perform t
 	Creating service instance solace-messaging-instance in org example / space development as user@example.com...
 	OK
 	</pre>
-	<p class="note"><strong>Note</strong>:Any parameter dependent features will simply use their defaults. For example if you have TCP Routes enabled or LDAP enabled, all the selections made at tile installation time will be applicable to the created service as per tile configuration.</p>
+	<p class="note"><strong>Note</strong>: Any parameter dependent features will simply use their defaults. For example if you have TCP Routes enabled or LDAP enabled, all the selections made at tile installation time will be applicable to the created service as per tile configuration.</p>
 
 1. Make this new service instance accessible to an application by [binding](bindings.html) or [creating a service key](service-keys.html).
 
@@ -152,7 +152,7 @@ To create an instance of the Solace Messaging service with the cf CLI with servi
 
 ##<a id='cf-cli-update'></a>Update a Service Instance with the cf CLI
 
-Sometime you may wish to update an existing service instance to enable or disable a special feature. 
+Sometimes, you may wish to update an existing service instance to enable or disable a special feature. 
 For example you may want to close some TCP Routes port for a given protocol, let's say MQTT Plain Text port due to security concerns.
 Or you may wish adjust LDAP Admin access.
 
@@ -184,7 +184,7 @@ To update an instance of the Solace Messaging service with the cf CLI, perform t
 	</pre>
 
 1. Update the service instance of the Solace Messaging service assuming both LDAP and TCP Routes are enabled.
-This disabled external access to the MQTT Plain Text messaging protocol, and grants Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups.
+This disables external access to the MQTT Plain Text messaging protocol, and grants Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups.
 
 
 	<pre class="terminal">
@@ -269,7 +269,7 @@ To create an instance of the Solace Messaging service in Apps Manager, perform t
 
 1. Navigate to `apps.YOUR-SYSTEM-DOMAIN` in a browser and log in.
 1. Select the org and space in which you wish to create the Solace Messaging service.
-1. Click on Service
+1. Click on **Service**.
 1. Click on **Add Service**.
 1. Click **Solace Messaging**.
 1. Select the appropriate service plan for your application. See [PCF Marketplace Plans](index.html#marketplace-plans) for how the service plans differ.
