@@ -119,7 +119,7 @@ To install Solace Messaging for PCF, perform the following steps:
 To configure Solace Messaging for PCF, perform the following steps:
 
 
-From the **Settings** tab of the Solace Messaging tile:
+From the **Settings** tab of the Solace Messaging tile
   <%= image_tag('select_settings.png') %>
 
 1. Configure the [**Required Settings**](#configure_required):
@@ -208,9 +208,9 @@ You might need to import a stemcell import if the minimum stemcell required for 
    In order for <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code> service plans to provide high availability fault tolerance,
    make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more.
    If you have only one availability zone, the deployment is not fault tolerant and Solace does not recommend using high availability service plans under this scenario.
-<p class="note"><strong>Note</strong>: The number of job instances can be increased after the tile is deployed without impacting already bound apps. However, reducing the number of instances can result in app failure and message loss.</p>
+<p class="note"><strong>Note</strong>: The number of job instances can be increased after the tile is deployed without impacting already bound apps however reducing the number of instances can result in app failure and message loss.</p>
 <p class="note"><strong>Note</strong>: The size of the persistent disk can be changed both before and after deployment. 
-  Increasing the size of the persistent disks will impact the service of already bound apps, however, messages will not be lost. 
+  Increasing the size of the persistent disks will impact the service of already bound apps however messages will not be lost. 
   Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable VMRs, and/or undefined behaviors.</p>
 <p class="note"><strong>Note</strong>: Solace recommends keeping the default values for **VM Type**,
   a reduction of the RAM or CPU capacity may lead to a deployment failure, or service degradation.</p>

@@ -30,12 +30,12 @@ This release includes:
 
 Features included in the release:
 
-* Evaluation GA.
-* Highly available service plans for redundancy introduced: <code>medium-ha</code>, and <code>large-ha</code>.
-* VMRs externally accessible via FQDNs allowing SolAdmin and other management applications to access the VMRs hosting PCF service instances.
-* Tile supports deployment in IPsec enabled PCF instances.
-* Contains VMR release v8.2.0.x.
-* Requires Java buildpack v3.7.1 or later.
+* Evaluation GA
+* Highly available service plans for redundancy introduced: <code>medium-ha</code>, and <code>large-ha</code>
+* VMRs externally accessible via FQDNs allowing SolAdmin and other management applications to access the VMRs hosting PCF service instances
+* Tile supports deployment in IPsec enabled PCF instances
+* Contains VMR release v8.2.0.x
+* Requires Java buildpack v3.7.1 or later
 
 
 ### v0.3.0
@@ -44,14 +44,14 @@ Features included in the release:
 
 Features included in the release:
 
-* Second open beta.
+* Second open beta
 * The tile allows a TLS server certificate to be configured for the deployed VMRs. 
   This allows encrypted TLS data connections between Virtual Message Routers (VMRs) and applications as well as the Solace service broker.
 * <code>community</code> service plan is introduced. This plan uses the Community Edition VMR to host PCF service instances. 
   It is a feature-limited version of the VMR with a perpetual license.
-* Contains VMR release v7.2pcf2.1.6.
-* Requires BOSH stemcell v3263 ubuntu-trusty.
-* Requires Java buildpack v3.7.1 or later.
+* Contains VMR release v7.2pcf2.1.6
+* Requires BOSH stemcell v3263 ubuntu-trusty
+* Requires Java buildpack v3.7.1 or later
 
 
 ### v0.2.0
@@ -60,12 +60,12 @@ Features included in the release:
 
 Features included in the release:
 
-* First open beta.
+* First open beta
 * The tile deploys as a Managed Service; it deploys Virtual Message Routers (VMRs) during the tile install.
-* Ability to configure two flavors of VMRs: Large and Medium.
+* Ability to configure two flavors of VMRs: Large and Medium
 * The service plans names changed. These are the new service plans names:
-  * `shared`: Provides a service instance on a Medium VMR shared with other service instances.
-  * `large`: Provides a service instance on a dedicated Large VMR.
+  * `shared`: Provides a service instance on a Medium VMR shared with other service instances
+  * `large`: Provides a service instance on a dedicated Large VMR
 * Tile upgrade is improved. Service Plan Configuration is maintained across upgrades. All stored messages are still lost.
 
 ### v0.1.30
@@ -74,11 +74,11 @@ Features included in the release:
 
 Features included in this release:
 
-* MVP private beta.
-* Uses customer-provided Virtual Message Routers (VMRs).
-* Ability to configures multiple VMRs.
+* MVP private beta
+* Uses customer-provided Virtual Message Routers (VMRs)
+* Ability to configures multiple VMRs
 * Provides these two service plans:
-  1. Shared VMR: Provides a service instance on a VMR shared with other service instances.
-  1. Dedicated VMR: Provides a service instance on a dedicated VMR.
+  1. Shared VMR: Provides a service instance on a VMR shared with other service instances
+  1. Dedicated VMR: Provides a service instance on a dedicated VMR
 * Tile is upgradeable within Ops Manager — All service plan configuration and messages are lost during upgrades.
 * Service Broker uses external MySQL service.
