@@ -9,15 +9,15 @@ This topic describes how developers can manage service keys for Solace Messaging
 
 A service key is a way of obtaining credentials for a Solace Messaging service instance.
 
-When using service keys the developer assumes the responsibility of passing the credentials associated with the service key to the application. 
+When using service keys the developer assumes the responsibility of passing the credentials associated with the service key to the app. 
 
 The act of creating a service key for a service instance produces [Solace Messaging Credentials](credentials.html), these credentials will be associated with the service key.
 
 The act of deleting a service key of a service instance revokes the associated credentials.
 
-Obtaining credential using service keys can be used for applications that are not hosted in Cloud Foundry. A typical use case is when you have TCP Routes enabled and you have applications running outside Cloud Foundry that needs access to Solace Messaging Services running inside Cloud Foundry.
+Obtaining credential using service keys can be used for apps that are not hosted in Cloud Foundry. A typical use case is when you have TCP Routes enabled and you have apps running outside Cloud Foundry that needs access to Solace Messaging Services running inside Cloud Foundry.
 
-The following tutorials assume you have created a Solace Messaging service called *solace-messaging-instance* as discussed in [Service Instances](service-instances.html) and that you have some application running outside of Cloud Foundry.
+The following tutorials assume you have created a Solace Messaging service called *solace-messaging-instance* as discussed in [Service Instances](service-instances.html) and that you have some app running outside of Cloud Foundry.
 
 Learn more from Cloud Foundry about [Managing service keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html)
 
@@ -98,7 +98,7 @@ To create a service key for an existing Solace Messaging service with the cf CLI
   (...)
   }
   </pre>
-  <p class="note"><strong>Note</strong>: With TCP Routes enabled, the applications hosted outside Cloud Foundry should use all the *public* ports for messaging.</p>
+  <p class="note"><strong>Note</strong>: With TCP Routes enabled, the apps hosted outside Cloud Foundry should use all the *public* ports for messaging.</p>
 
 
 ##<a id='saving-service-key-cf-cli'></a>Saving Service Key Credentials
@@ -108,7 +108,7 @@ To create a service key for an existing Solace Messaging service with the cf CLI
 1. Save the service key credentials to a file.
 
 This will save the contents of the service key credentials to a file called external-mobile-app.key.
-A developer is responsible to pass this file to an application that needs to use the solace-messaging-instance
+A developer is responsible to pass this file to an app that needs to use the solace-messaging-instance
 
   <pre class="terminal">
   $ cf service-key solace-messaging-instance external-mobile-app | grep -v Getting > external-mobile-app.key
@@ -116,7 +116,7 @@ A developer is responsible to pass this file to an application that needs to use
 
 ##<a id='delete-service-key-cf-cli'></a>Deleting a Service Key for a Service Instance with the cf CLI
 
-  To revoke an application's permission to use a Solace Messaging Instance you can delete its service key.
+  To revoke an app's permission to use a Solace Messaging Instance you can delete its service key.
 
   Assuming you have created a service key *external-mobile-app* for *solace-messaging-instance*.
 
