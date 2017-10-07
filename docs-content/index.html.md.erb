@@ -5,7 +5,7 @@ owner: Partners
 
 Solace Messaging for Pivotal Cloud Foundry (PCF) enables developers to take advantage of the leading multi-cloud, multi-protocol messaging solution which makes app inter-connectivity easy and makes production apps scalable, robust, high-performant, and easy to manage.  
 
-Solace Messaging was designed to be deployed across all your IT environments including your non-cloud datacenter, all leading public clouds ([AWS](http://dev.solace.com/clouds/amazon-web-services/), [Azure](http://dev.solace.com/clouds/azure/) and [Google Cloud Platform](http://dev.solace.com/clouds/google-cloud/)) and the popular Platform as a Service, Pivotal Cloud Foundry, in order to provide a uniform messaging fabric for all your apps and to connect all your apps no matter where they are deployed.
+Solace Messaging was designed to be deployed across all your IT environments including your non-cloud datacenter, all leading public clouds ([AWS](http://dev.solace.com/clouds/amazon-web-services/), [Azure](http://dev.solace.com/clouds/azure/) and [Google Cloud Platform](http://dev.solace.com/clouds/google-cloud/)) and the popular Platform as a Service, PCF, in order to provide a uniform messaging fabric for all your apps and to connect all your apps no matter where they are deployed.
 
 <%= image_tag('solace-environments.png') %>
 
@@ -39,7 +39,7 @@ For developers, there are a few resources to help you easily get started with So
 
 There is also simple sample code which shows you how to easily connect to a Solace Messaging Service Instance:
 
-* [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java).
+* [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java)
 * [Solace Messaging Demo App](https://github.com/SolaceLabs/sl-cf-solace-messaging-demo)
 
 ## <a id='marketplace-plans'></a>PCF Marketplace Plans
@@ -74,7 +74,7 @@ Solace Messaging currently offers the following plans to meet the needs of apps.
 
 ## <a id='cloud-integration'></a>Cloud Integration 
 
-A Solace Messaging deployment under Pivotal Cloud Foundry can be configured to support integration with existing cloud services and hybrid cloud deployments.
+A Solace Messaging deployment under PCF can be configured to support integration with existing cloud services and hybrid cloud deployments.
 
 ### <a id='pcf-solace-messaging-intergration-tcp_routes'></a>TCP Routes
 
@@ -84,21 +84,22 @@ TCP Routes allows access to Solace messaging services hosted inside your PCF dom
 
 Having TCP Routes enables many use cases:
 
- * Hybrid cloud – other Solace appliances or VMRs deployed outside PCF can establish a [Bridge](https://docs.solace.com/Features/Working-With-Message-VPN-Bridges.htm) or [Multinode Routing](https://docs.solace.com/Features/Multi-Node-Routing.htm) connections to Solace messaging services inside your PCF cloud. 
- * External client apps – apps deployed outside PCF can communicate via messaging with apps deployed inside PCF by connecting to a Solace messaging service deployed in PCF.
- * IoT – devices using MQTT or REST can connect to Solace messaging services from outside PCF to communicate with your apps deployed inside PCF, look for the 'TCP Routes for IoT - MQTT Java Application Tutorial' [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java/tcp-routes-mqtt/).
- * Mobile Apps – mobile and web apps can use [web messaging](https://docs.solace.com/Features/Web-Messaging-Concepts/Web-Messaging-Concepts.htm) to connect to Solace messaging services from outside PCF to communicate with your apps deployed inside PCF.
+ * Hybrid cloud---other Solace appliances or VMRs deployed outside PCF can establish a [Bridge](https://docs.solace.com/Features/Working-With-Message-VPN-Bridges.htm) or [Multinode Routing](https://docs.solace.com/Features/Multi-Node-Routing.htm) connections to Solace messaging services inside your PCF cloud. 
+ * External client apps---apps deployed outside PCF can communicate via messaging with apps deployed inside PCF by connecting to a Solace messaging service deployed in PCF.
+ * IoT---devices using MQTT or REST can connect to Solace messaging services from outside PCF to communicate with your apps deployed inside PCF, look for the *TCP Routes for IoT---MQTT Java Application Tutorial* [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java/tcp-routes-mqtt/).
+ * Mobile Apps---mobile and web apps can use [web messaging](https://docs.solace.com/Features/Web-Messaging-Concepts/Web-Messaging-Concepts.htm) to connect to Solace messaging services from outside PCF to communicate with your apps deployed inside PCF.
 
   To use TCP Routes, you need to [enable and configure TCP Routes at installation time](installing.html#optional_tcp_routes) with a selection of default settings for each messaging protocol that you wish to use. Once enabled, TCP Routes can be fine tuned per service at service creation time.
 
 ### <a id='pcf-solace-messaging-intergration-system_logging'></a>System Logging
 
-System Logging allows for redirecting the logs from the Solace Messaging PCF components to an external syslog service. To use System Logging you need to [enable and configure System Logging at installation time](installing.html#optional_system_logging)
+System Logging allows for redirecting the logs from the Solace Messaging PCF components to an external syslog service. To use System Logging you need to [enable and configure System Logging at installation time](installing.html#optional_system_logging).
 
 ### <a id='pcf-solace-messaging-intergration-ldap'></a>LDAP
 
-Enables the use of an LDAP server for the VMR's authentication and authorization needs. The configuration allows granting an LDAP server control over Management access and/or Application access.
-To use LDAP you need to [Enable and configure LDAP at installation time](installing.html#optional_ldap_settings) and make a choice about [Management Access](installing.html#optional_management_access) and [Application Access](installing.html#optional_application_access) 
+Enables the use of an LDAP server for the VMR's authentication and authorization needs.
+The configuration allows granting an LDAP server control over Management access and Application access.
+To use LDAP you need to [Enable and configure LDAP at installation time](installing.html#optional_ldap_settings) and make a choice about [Management Access](installing.html#optional_management_access) and [Application Access](installing.html#optional_application_access).
 
 ## <a id='solace-messaging-features'></a>Solace Messaging Features
 
