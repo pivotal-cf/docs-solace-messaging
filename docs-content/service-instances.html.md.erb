@@ -20,7 +20,7 @@ developers give the app permission to access this Message VPN through a client u
 For more information about how developers can use the credentials provided by the binding or service keys,
 see [Understanding Solace Messaging Credentials](credentials.html).
 
-Creating a service instance also gives the developer permissions to manage the Message VPN through the SolAdmin administration tool.
+Creating a service instance also gives the developer permissions to manage the Message VPN through a Web UI on the VMR or the SolAdmin administration tool.
 For more information, see [Managing the Message VPN](managing.html).
 
 The following procedures show you:
@@ -157,7 +157,7 @@ To create an instance of the Solace Messaging service with the cf CLI with servi
 	Plan: shared
 	Description: Solace Messaging for real-time, multi-protocol data distribution
 	Documentation url: http://docs.solace.com
-	Dashboard:
+	Dashboard: https://shared-vmr-0.YOUR-SYSTEM-DOMAIN/#/msg-vpns/djAwMQ==?token=YWJj.jsalkdj01041024laqksdjalsdh8ayulaksfnaosfr0817u04ualknaglnzs0v8u0qusflasknrflknifQ%3D%3D.eHl6
 
 	Last Operation
 	Status: create succeeded
@@ -165,6 +165,7 @@ To create an instance of the Solace Messaging service with the cf CLI with servi
 	Started: 2020-01-01T00:00:00Z
 	Started: 2020-01-01T00:00:00Z
 	</pre>
+	<p class="note"><strong>Note</strong>: The Dashboard URL provides a Web UI to manage the service instance.</p>
 1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
 
 
