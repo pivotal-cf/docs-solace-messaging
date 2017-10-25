@@ -5,41 +5,6 @@ owner: Partners
 
 Developers can manage the Message VPN associated with a service instance by using the Dashboard URL of the service and by connecting to the VMR with the SolAdmin administration tool.
 
-## <a id='manage_with_webui'></a>Managing with WebUI
-
-The VMR contains an Alpha version of a WebUI tool that offers limited but growing set of VMR managment capabilities.
-The WebUI is accessible when a service is created.
-
-### <a id='retrieve_dashboard'></a>Retrieve WebUI information
-
-1. Look for the 'Dashboard' by getting details about the created service.
-
-	<pre class="terminal">
-	$ cf service solace-messaging-instance-IoT
-
-	Service instance: solace-messaging-instance-IoT
-	Service: solace-messaging
-	Bound apps:
-	Tags:
-	Plan: shared
-	Description: Solace Messaging for real-time, multi-protocol data distribution
-	Documentation url: http://docs.solace.com
-	Dashboard: https://shared-vmr-0.YOUR-SYSTEM-DOMAIN/#/msg-vpns/djAwMQ==?token=YWJj.jsalkdj01041024laqksdjalsdh8ayulaksfnaosfr0817u04ualknaglnzs0v8u0qusflasknrflknifQ%3D%3D.eHl6
-
-	Last Operation
-	Status: create succeeded
-	Message:
-	Started: 2020-01-01T00:00:00Z
-	Started: 2020-01-01T00:00:00Z
-	</pre>
-2. Use the provided URL in a browser.
-
-
-### <a id='sample_Webui'></a>Sample Web UI
-
-  <%= image_tag('sample_webui.png') %>
-
-
 ## <a id='manage_with_semp'></a>Managing with SolAdmin 
 
 To manage the Message VPN associated with a service instance by connecting to the VMR with the SolAdmin administration tool.
@@ -104,4 +69,39 @@ The `managementHostnames` and `activeManagementHostname` are externally accessib
 1. Click **Ok**. The VMR should now appear in the **Managed Appliances** list.
 	<%= image_tag('soladmin_router_list.png') %>
 1. To learn how to use SolAdmin to manage your Message VPN, see the included context specific tool help within the SolAdmin tool itself.
+
+
+## <a id='manage_with_webui'></a>Managing with WebUI
+
+The VMR contains an Alpha version of a WebUI tool that offers limited but growing set of VMR managment capabilities.
+The WebUI is accessible when a service is created.
+
+### <a id='retrieve_dashboard'></a>Retrieve WebUI information
+
+1. Look for the 'Dashboard' by getting details about the created service.
+
+	<pre class="terminal">
+	$ cf service solace-messaging-instance-IoT
+
+	Service instance: solace-messaging-instance-IoT
+	Service: solace-messaging
+	Bound apps:
+	Tags:
+	Plan: shared
+	Description: Solace Messaging for real-time, multi-protocol data distribution
+	Documentation url: http://docs.solace.com
+	Dashboard: https://shared-vmr-0.YOUR-SYSTEM-DOMAIN/#/msg-vpns/djAwMQ==?token=YWJj.jsalkdj01041024laqksdjalsdh8ayulaksfnaosfr0817u04ualknaglnzs0v8u0qusflasknrflknifQ%3D%3D.eHl6
+
+	Last Operation
+	Status: create succeeded
+	Message:
+	Started: 2020-01-01T00:00:00Z
+	Started: 2020-01-01T00:00:00Z
+	</pre>
+2. Use the provided URL in a browser.
+
+
+### <a id='sample_Webui'></a>Sample Web UI
+
+  <%= image_tag('sample_webui.png') %>
 
