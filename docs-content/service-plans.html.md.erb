@@ -1,0 +1,355 @@
+---
+title: Solace Messaging Service Plans
+owner: Partners
+---
+
+Solace Messaging for Pivotal Cloud Foundry (PCF) offers multiple Service Plans to support various use cases.
+
+Each service plan configures the VMR for given capacity, Pools of VMs are dedicated for each plan by **VM Type** seen in [Resource Config](installing.html#required_resource_config) during installation.
+
+## <a id='plan_shared'></a>Shared Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single Message VPN in a shared Solace Message Router. Useful for light traffic and development.</td>
+  </tr>
+
+  <tr>
+  <th>VM Pool</th>
+  <td colspan=2>Shared-VMR</td>
+  </tr>
+
+  <tr>
+  <th colspan>Service Instances per VM</th>
+  <td colspan=2>5</td>
+  </tr>
+
+  <tr>
+  <th>Max Per Service Instance</th>
+  <th>Evaluation Tile <a href="#tableNote1"><sup>1</sup></th>
+  <th>Enterprise Tile <a href="#tableNote2"><sup>2</sup></th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td>100</td>
+  <td>190</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td>200</td>
+  <td>200</td>
+  </tr>
+
+
+  <tr>
+  <th>Subscriptions</th>
+  <td>100000</td>
+  <td>100000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td>200</td>
+  <td>200</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td>1000</td>
+  <td>1000</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td>200</td>
+  <td>200</td>
+  </tr>
+
+</table>
+
+## <a id='plan_large'></a>Large Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single message VPN on a dedicated Large Solace Message Router. </td>
+  </tr>
+
+  <tr>
+  <th colspan>VM Pool</th>
+  <td colspan=2>Large-VMR</td>
+  </tr>
+
+  <tr>
+  <th colspan>Max Service Instances per VM</th>
+  <td colspan=2>1</td>
+  </tr>
+
+  <tr>
+  <th>Max Per Service Instance</th>
+  <th>Evaluation Tile <a href="#tableNote1"><sup>1</sup></th>
+  <th>Enterprise Tile <a href="#tableNote2"><sup>2</sup></th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td>500</td>
+  <td>990</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td>1000</td>
+  <td>10000 - ( REST Connections 6000 )</td>
+  </tr>
+
+
+  <tr>
+  <th>Subscriptions</th>
+  <td>500000</td>
+  <td>500000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td>1000</td>
+  <td>1000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td>5000</td>
+  <td>50000</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td>1000</td>
+  <td>10000</td>
+  </tr>
+
+</table>
+
+## <a id='plan_community'></a>Community Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single message VPN on a dedicated Solace Message Router. The plan does not have a time limit but is limited by the features available on the Community Edition VMR. This plan is only available in the <b>Evaluation Tile</b>.</td>
+  </tr>
+
+  <tr>
+  <th colspan>VM Pool</th>
+  <td colspan=2>Community-VMR</td>
+  </tr>
+
+  <tr>
+  <th colspan>Service Instances per VM</th>
+  <td colspan=2>1</td>
+  </tr>
+
+  <tr>
+  <th>Max Per Service Instance</th>
+  <th>Evaluation Tile</th>
+  <th>Enterprise Tile</th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td>90</td>
+  <td>N/A</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td>100</td>
+  <td>N/A</td>
+  </tr>
+
+
+  <tr>
+  <th>Subscriptions</th>
+  <td>500000</td>
+  <td>N/A</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td>100</td>
+  <td>N/A</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td>500</td>
+  <td>N/A</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td>100</td>
+  <td>N/A</td>
+  </tr>
+
+</table>
+
+
+## <a id='plan_large_ha'></a>Large HA Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single message VPN implemented across 3 Large Solace Message Routers in a highly available configuration.</td>
+  </tr>
+
+  <tr>
+  <th colspan>VM Pool</th>
+  <td colspan=2>Large-HA-VMR</td>
+  </tr>
+
+  <tr>
+  <th colspan>Max Service Instances per VM</th>
+  <td colspan=2>1</td>
+  </tr>
+
+  <tr>
+  <th>Max Per Service Instance</th>
+  <th>Evaluation Tile <a href="#tableNote1"><sup>1</sup></th>
+  <th>Enterprise Tile <a href="#tableNote2"><sup>2</sup></th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td>500</td>
+  <td>990</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td>1000</td>
+  <td>10000 - ( REST Connections 6000 )</td>
+  </tr>
+
+
+  <tr>
+  <th>Subscriptions</th>
+  <td>500000</td>
+  <td>500000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td>1000</td>
+  <td>1000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td>5000</td>
+  <td>50000</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td>1000</td>
+  <td>10000</td>
+  </tr>
+
+</table>
+
+
+## <a id='plan_medium_ha'></a>Medium HA Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single message VPN implemented across 3 Medium Solace Message Routers in a highly available configuration.</td>
+  </tr>
+
+  <tr>
+  <th colspan>VM Pool</th>
+  <td colspan=2>Medium-HA-VMR</td>
+  </tr>
+
+  <tr>
+  <th colspan>Max Service Instances per VM</th>
+  <td colspan=2>1</td>
+  </tr>
+
+  <tr>
+  <th>Max Per Service Instance</th>
+  <th>Evaluation Tile <a href="#tableNote1"><sup>1</sup></th>
+  <th>Enterprise Tile <a href="#tableNote2"><sup>2</sup></th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td>500</td>
+  <td>990</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td>1000</td>
+  <td>1000</td>
+  </tr>
+
+  <tr>
+  <th>Subscriptions</th>
+  <td>500000</td>
+  <td>500000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td>1000</td>
+  <td>1000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td>5000</td>
+  <td>5000</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td>1000</td>
+  <td>1000</td>
+  </tr>
+
+</table>
+
+<br>
+
+<p id='tableNote1' class="note"><strong><sup>1</sup> Note</strong>: This Evaluation Tile plan is fully featured but has a time limited 90-day evaluation period.</p>
+<p id='tableNote2' class="note"><strong><sup>2</sup> Note</strong>: For access to the Enterprise Edition version of the Solace Messaging for PCF Tile, please contact <a href='https://solace.com/support' target="_blank">Solace Support</a> or your local <a href='mailto:info@solace.com?Subject=Enterprise Edition of Solace Messaging For PCF' target="_blank">Solace sales representative</a>.</p>
+
