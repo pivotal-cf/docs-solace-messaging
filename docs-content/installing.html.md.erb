@@ -33,67 +33,70 @@ Review the resource and IP requirements for installing the Solace Messaging for 
   </tr>
   <tr>
     <td>Large-VMR</td>
-    <td>1<a href="#tableNote"><sup>1</sup></a></td>
+    <td>1<a href="#tableNote1"><sup>1</sup></a></td>
     <td>4</td>
     <td>12288</td>
     <td>10240</td>
-    <td>40960<a href="#tableNote"><sup>1</sup></a></td>
+    <td>40960<a href="#tableNote1"><sup>1</sup></a></td>
     <td>1</td>
     <td>0</td>
   </tr>
   <tr>
     <td>Shared-VMR</td>
-    <td>1<a href="#tableNote"><sup>1</sup></a></td>
+    <td>1<a href="#tableNote1"><sup>1</sup></a></td>
     <td>2</td>
     <td>4096</td>
     <td>10240</td>
-    <td>20480<a href="#tableNote"><sup>1</sup></a></td>
+    <td>20480<a href="#tableNote1"><sup>1</sup></a></td>
     <td>1</td>
     <td>0</td>
   </tr>
   <tr>
-    <td>Community-VMR</td>
-    <td>1<a href="#tableNote"><sup>1</sup></a></td>
+  <td>Community-VMR <a href="#tableNote3"><sup>3</sup></td>
+    <td>1<a href="#tableNote1"><sup>1</sup></a></td>
     <td>2</td>
     <td>4096</td>
     <td>10240</td>
-    <td>20480<a href="#tableNote"><sup>1</sup></a></td>
+    <td>20480<a href="#tableNote1"><sup>1</sup></a></td>
     <td>1</td>
     <td>0</td>
   </tr>
   <tr>
     <td>Medium-HA-VMR</td>
     <td>3
-	<a href="#tableNote"><sup>1, </sup></a>
+	<a href="#tableNote1"><sup>1, </sup></a>
 	<a href="#tableNote2"><sup>2</sup></a></td>
     <td>2</td>
     <td>4096</td>
     <td>10240</td>
-    <td>20480<a href="#tableNote"><sup>1</sup></a></td>
+    <td>20480<a href="#tableNote1"><sup>1</sup></a></td>
     <td>1</td>
     <td>0</td>
   </tr>
   <tr>
     <td>Large-HA-VMR</td>
     <td>3
-	<a href="#tableNote"><sup>1, </sup></a>
+	<a href="#tableNote1"><sup>1, </sup></a>
 	<a href="#tableNote2"><sup>2</sup></a></td>
     <td>4</td>
     <td>12288</td>
     <td>10240</td>
-    <td>40960<a href="#tableNote"><sup>1</sup></a></td>
+    <td>40960<a href="#tableNote1"><sup>1</sup></a></td>
     <td>1</td>
     <td>0</td>
   </tr>
 </table>
 
-<p id="tableNote" class="note"><strong><sup>1</sup> Note</strong>: You can modify the number of Instances and Persistent disk size
+<p id="tableNote1" class="note"><strong><sup>1</sup> Note</strong>: You can modify the number of Instances and Persistent disk size
    when configuring the Solace Messaging for PCF tile for the VMR jobs.
    For more information, see the <a href="#configure">Configure Solace Messaging for PCF</a> tile below.</p> 
 
-<p id="tableNote" class="note"><strong><sup>2</sup> Note</strong>: A single high-availability Solace Messaging service instance requires three (3) HA VMR job instances to be used.
-   As such the number of HA VMR job instances specified for the HA VMR instances should be multiple of 3.
+<p id="tableNote2" class="note"><strong><sup>2</sup> Note</strong>: A single high-availability Solace Messaging service instance requires three (3) HA VMR job instances to be used.
+   As such the number of HA VMR job instances specified for the HA VMR instances should be a multiple of 3.
    If it is not, the remaining job instances go unused.</p>
+
+<p id="tableNote3" class="note"><strong><sup>3</sup> Note</strong>: The Community-VMR plan is only available in the Evaluation Edition of Solace Messaging for PCF Tile.</p>
+
 
 
 ## <a id='prereqs'></a>Prerequisites

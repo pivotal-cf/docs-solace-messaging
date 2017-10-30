@@ -3,11 +3,15 @@ title: Managing the Message VPN
 owner: Partners
 ---
 
-Developers can manage the Message VPN associated with a service instance by connecting to the VMR with the SolAdmin administration tool.
+Developers can manage the Message VPN associated with a service instance by using the Dashboard URL of the service and by connecting to the VMR with the SolAdmin administration tool.
 
-## <a id='retrieve'></a>Retrieve Information 
+## <a id='manage_with_semp'></a>Managing with SolAdmin 
 
-To retrieve the information required to connect to the VMR, perform the following steps:
+This section describes how to manage the Message VPN associated with a service instance by connecting to the VMR with the SolAdmin administration tool.
+
+### <a id='retrieve_bound_app'></a>Retrieve Information from a bound app
+
+To retrieve the information required to connect to the VMR from a bound app, perform the following steps:
 
 1. Log in to your deployment and choose the org and space where your Solace Messaging service instance and bound app exists.
   <pre class="terminal">
@@ -20,8 +24,30 @@ To retrieve the information required to connect to the VMR, perform the followin
   <pre class="terminal">
   $ cf env YOUR-APP
   </pre>
-1. Locate your Solace Messaging service instance in `VCAP_SERVICES` and record the following fields:
-  * `managementHostnames`: The VMR's management hostnames
+
+
+### <a id='retrieve_service_key'></a>Retrieve Information from a Service Key
+
+To retrieve the information required to connect to the VMR from a Service Key, perform the following steps:
+
+1. Log in to your deployment and choose the org and space where your Solace Messaging service instance and Service Key exists.
+  <pre class="terminal">
+  $ cf login
+  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+  Email> user<span>@</span>example.com
+  Password>
+  </pre>
+1. View the Service Key:
+  <pre class="terminal">
+  $ cf service-key solace-messaging-instance my-service-key
+  </pre>
+
+
+### <a id='locate_credentials'></a>Locate the management host and credentials
+
+1. Both the `VCAP_SERVICES` and Service Key contain the same information, look for and record the following fields:
+  * `managementHostnames`: The VMR's management hostnames. There will be multiple entries for Services on HA Plans.
+  * `activeManagementHostname`: A single entry that is dynamically routed to the active node for an HA Service. Will always be the same as `managementHostnames` for non HA plans.
   * When Management Access is set to `VMR Internal`
       * `managementUsername`: The service instance's management username
       * `managementPassword`: The service instance's management password
@@ -30,16 +56,51 @@ To retrieve the information required to connect to the VMR, perform the followin
   <br><br>
   For more information about the `VCAP_SERVICES` fields, see the [Understanding Credentials](credentials.html) topic.
 
-## <a id='connect'></a> Connect to the Solace VMR
+### <a id='connect'></a> Connect to the Solace VMR
 
-The `managementHostnames` are externally accessible FQDNs and can be used directly from within SolAdmin. The procedure is as follows:
+The `managementHostnames` and `activeManagementHostname` are externally accessible FQDNs and can be used directly from within SolAdmin using standard ports for HTTP (80) and HTTPS (443). The procedure is as follows:
 
 1. Download and install the SolAdmin administration tool from the [Solace Developers Portal Download Page](http://dev.solace.com/downloads/).
 1. Start SolAdmin.
 1. Click **Manage** to open the **Manage Appliance** window.
   <%= image_tag('soladmin_manage.png') %>
-1. Under **Management Host**, enter the management hostname of the VMR recorded above.
+1. Under **Management Host**, enter the active management hostname of the VMR recorded above.
 1. Under **User Name** and **Password**, enter the management username and password recorded above.
 1. Click **Ok**. The VMR should now appear in the **Managed Appliances** list.
 	<%= image_tag('soladmin_router_list.png') %>
 1. To learn how to use SolAdmin to manage your Message VPN, see the included context specific tool help within the SolAdmin tool itself.
+
+
+## <a id='manage_with_webui'></a>Managing with the WebUI
+
+The VMR contains an Alpha version of a WebUI tool that offers a limited but growing set of VMR management capabilities for the Solace Messaging services.  This Alpha version is being released to provide customers with a view of our direction and to obtain early feedback on the look and feel of the WebUI.  As it does not yet have full management feature support for this GA version of the message router, full support for the management of the router is available via SolAdmin and CLI.  The WebUI is accessible when a service is created. 
+
+### <a id='retrieve_dashboard'></a>Retrieve WebUI information
+
+1. Look for the 'Dashboard' by getting details about the created service.
+
+	<pre class="terminal">
+	$ cf service solace-messaging-instance-IoT
+
+	Service instance: solace-messaging-instance-IoT
+	Service: solace-messaging
+	Bound apps:
+	Tags:
+	Plan: shared
+	Description: Solace Messaging for real-time, multi-protocol data distribution
+	Documentation url: http://docs.solace.com
+	Dashboard: https://shared-vmr-0.YOUR-SYSTEM-DOMAIN/#/msg-vpns/djAwMQ==?token=YWJj.jsalkdj01041024laqksdjalsdh8ayulaksfnaosfr0817u04ualknaglnzs0v8u0qusflasknrflknifQ%3D%3D.eHl6
+
+	Last Operation
+	Status: create succeeded
+	Message:
+	Started: 2020-01-01T00:00:00Z
+	Started: 2020-01-01T00:00:00Z
+	</pre>
+2. Use the provided URL in a browser.
+
+
+### <a id='sample_Webui'></a>Sample Web UI
+
+  <%= image_tag('sample_webui.png') %>
+

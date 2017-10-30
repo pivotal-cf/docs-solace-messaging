@@ -1,0 +1,234 @@
+---
+title: Solace Messaging Troubleshooting 
+owner: Partners
+---
+
+This topic describes how operators and developers can troubleshoot instances of Solace Messaging services.
+
+A [Solace Messaging Service Instance](service-instances.html) is backed by a Message VPN on one or many Solace Virtual Message Router (VMR), depending on the chosen Plan.
+
+You can discover the VMR(s) backing a Service Instance from the [Solace Messaging Credentials](credentials.html) which become available by [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance.
+
+##<a id='operator'></a>Operator Troubleshooting
+
+The operator will have access to the logs of all the components of Solace Messaging for PCF.
+
+* Service Broker Logs
+* VMR Logs
+* VMR Agent Logs
+
+An installation of Solace Messaging for PCF may be configured to use [System Logging](installing.html#optional_system_logging) as a means of gathering all logs.
+
+###<a id='operator_logs'></a>Accessing logs 
+
+The following locations in Solace Messaging BOSH VMs will hold logs of interest that can help in troubleshooting issues.
+
+* All VM job logs
+ * /var/vcap/sys/log
+* All VMR Logs
+ * /var/vcap/store/prepare_vmr/volumes/jail/logs
+
+To access service broker logs, perform the following steps:
+
+1. Set your API endpoint to the Cloud Controller of your deployment.
+  <pre class="terminal">
+  $ cf api api.YOUR-SYSTEM-DOMAIN
+  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
+  OK
+  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.82.0)
+  Not logged in. Use 'cf login' to log in.
+  </pre>
+1. Log in to your deployment and select an org and a space.
+  <pre class="terminal">
+  $ cf login
+  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+  Email> user<span>@</span>example.com
+  Password>
+  </pre>
+1. Target the `solace` org and `solace-messaging` space.
+	<pre class="terminal">
+	$ cf target -o solace -s solace-messaging
+	api endpoint:   https://api.local.pcfdev.io
+	api version:    2.82.0
+	user:           admin
+	org:            solace
+	space:          solace-messaging
+	</pre>
+1. Discover the Solace Messaging Service Broker App name.
+	<pre class="terminal">
+	$ cf apps
+	Gettings apps in org solace /space solace-messaging as user@example.com...
+	OK
+
+	name                              requested state   instances   memory   disk   urls
+	solace-messaging-1.2.0            started           1/1         1G       512M   solace-messaging.YOUR-SYSTEM-DOMAIN
+
+	OK
+	</pre>
+	<p class="note"><strong>Note</strong>: Take note of the application name. In this case 'solace-messaging-1.2.0'</p>
+1. To watch the logs of Solace Messaging Service Broker
+	<pre class="terminal">
+	$ cf logs solace-messaging-1.2.0 | tee saved_solace-messaging-1.2.0.txt
+	Retrieving logs for app solace-messaging-1.2.0 in org solace /space solace-messaging as user@example.com...
+	....
+	</pre>
+
+###<a id='operator_diag'></a>Additional Diagnostics
+
+  In addition to regular logging, VMR tools can help gather diagnotics logs on demand.
+
+For example, having identified a problem with a given Solace Service Instance, the operator can access the backing VMR to examine logs and gather diagnositics.
+
+The backing VMR for a given Service Instance can be identified from the IPs used in the bindings or service keys.
+
+Alternatively the IP mentioned in the service broker logs or message when an exception occurs.
+
+The operator should look for the VM in the Solace Messaging bosh deployment with the matching IP.
+
+1. Getting additional diagnostics from "Large-VMR/0" VM.
+  <pre class="terminal">
+  $ bosh ssh Large-VMR/0
+  # sudo -i
+  # /var/vcap/jobs/vmr\_agent/bin/gather\_diagnostics.sh
+  </pre>
+Then you can look at the gathered logs under /var/vcap/store/prepare_vmr/volumes/jail/logs
+
+
+##<a id='developer'></a>Developer Troubleshooting
+
+A Developer using Solace Messaging for PCF may encounter errors when using Cloud Foundry Command-Line Interface (cf CLI) to perform basic operations on a Solace Messaging for PCF service instance.
+
+In general most errors are about these types:
+
+ * Reaching limits ( plan limits, inventory fully used )
+ * Communication problems between the Service Broker and the VM inventory it manages
+ * Unexpected health state, such as degraded High Availability setup
+
+While this list it not complete, it provides representative samples with explanations and possible resolutions, some of the resolutions will require operator intervention.
+
+
+<table border="1" class="nice">
+<tr><th colspan=2>Deployment limits reached for a given plan</th></th>
+<tr><th>Operation</th><td>
+<pre class="terminal">
+cf create-service solace-messaging large
+</pre>
+</td></tr>
+<tr><th>Error</th><td>
+<pre class="terminal">
+Server error, status code: 502, error code: 10001, message: Service broker error: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: No matching Solace Message VPNs available.
+</pre>
+</td></tr>
+  <tr><th>Explanation</th><td>This can happen when the service broker does not find any Solace Message VPNs in its inventory for the requested service plan.</td></tr>
+  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated VMRs that support the given plan, in this case a Large-VMR.</td></tr>
+</table>
+
+  <br>
+
+<table border="1" class="nice">
+<tr><th colspan=2>Invalid Parameter</th></th>
+<tr><th>Operation</th><td>
+<pre class="terminal">
+cf update-service my-large-instance -c '{"some_option": "some_value" }'
+</pre>
+</td></tr>
+<tr><th>Error</th><td>
+<pre class="terminal">
+Server error, status code: 502, error code: 10001, message: Service broker error: Unrecognized parameter key some_option
+</pre>
+</td></tr>
+  <tr><th>Explanation</th><td>This can happen when the service broker does not recognize the parameter name.</td></tr>
+  <tr><th>Possible Action(s)</th><td>Use correct parameters, please see <a href='service-instances.html#service-specific-configuration'>Service Specific Parameters</a></td></tr>
+</table>
+
+  <br>
+
+<table border="1" class="nice">
+<tr><th colspan=2>Invalid Parameter: The required feature is not enabled (TCP Routes)</th></th>
+<tr><th>Operation</th><td>
+<pre class="terminal">
+cf update-service my-large-instance -c '{ "mqtt_tcp_route_enabled" : "false" }'
+</pre>
+</td></tr>
+<tr><th>Error</th><td>
+<pre class="terminal">
+Server error, status code: 502, error code: 10001, message: Service broker error: The parameter mqtt_tcp_route_enabled is invalid given the current configuration. It requires [ TCP Routes Enabled ]
+</pre>
+</td></tr>
+  <tr><th>Explanation</th><td>As indicated in the error, the given parameter is only valid when TCP Routes is enabled.</td></tr>
+  <tr><th>Possible Action(s)</th><td>See about <a href='installing.html#optional_tcp_routes'>Configuring TCP Routes</a></td></tr>
+</table>
+
+  <br>
+
+<table border="1" class="nice">
+<tr><th colspan=2>Invalid Parameter: The required feature is not enabled (LDAP)</th></th>
+<tr><th>Operation</th><td>
+<pre class="terminal">
+cf update-service my-large-instance -c '{ "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com" }'
+</pre>
+</td></tr>
+<tr><th>Error</th><td>
+<pre class="terminal">
+Server error, status code: 502, error code: 10001, message: Service broker error: The parameter ldapGroupAdminReadOnly is invalid given the current configuration. It requires [ LDAP Enabled, Management Access set to LDAP ]
+</pre>
+</td></tr>
+  <tr><th>Explanation</th><td>As indicated in the error, the given parameter is only valid when LDAP is enabled and Management Access is set to LDAP.</td></tr>
+  <tr><th>Possible Action(s)</th><td>See about <a href='installing.html#optional_ldap_settings'>Configuring LDAP</a> and <a href='installing.html#optional_management_access'>Management Access to use LDAP</a></td></tr>
+</table>
+
+  <br>
+
+<table border="1" class="nice">
+<tr><th colspan=2>Communication failure: The VMR is not reachable.</th></th>
+<tr><th>Operation</th><td>
+<pre class="terminal">
+cf delete-service -f my-large-instance
+</pre>
+</td></tr>
+<tr><th>Error</th><td>
+<pre class="terminal">
+cf service my-large-instance
+
+Service instance: my-large-instance
+Service: solace-messaging
+Bound apps:
+Tags:
+Plan: large
+Description: Solace Messaging Enterprise Edition for real-time, multi-protocol data distribution
+Documentation url: http://docs.solace.com
+Dashboard: https://large-vmr-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
+
+Last Operation
+Status: delete failed
+Message: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: Unable to delete Service, the associated Message VPN v001 on 10.244.0.3 is not currently available
+Started: 2020-01-00T00:00:00Z
+Updated: 2020-01-00T00:00:00Z
+</pre>
+</td></tr>
+<tr><th>Explanation</th><td>The Service Broker cannot delete this instance because the Message VPN is flagged as unavailable. This happens when the backing VMR is not reachable.</td></tr>
+<tr><th>Possible Action(s)</th><td>The operator should examine the solace deployment and see why VM 10.244.0.3 is not available.<p>The service delete operation can be reattempted once the VM health is restored.</td></tr>
+</table>
+
+  <br>
+
+<table border="1" class="nice">
+<tr><th colspan=2>HA service degradation.</th></th>
+<tr><th>Operation</th><td>
+<pre class="terminal">
+cf bind-service my-app my-ha-instance
+</pre>
+</td></tr>
+<tr><th>Error</th><td>
+<pre class="terminal">
+MessageRouterException: Primary VMR 10.233.0.3 HA Group Status is degraded v001 for messageVpn v001
+</pre>
+</td></tr>
+<tr><th>Explanation</th><td>The Service Broker will always reject to perform an operation for an HA service when the HA status is degraded. There is a variety of reasons that can be given in the message. Other operations on the same Message Router will fail as well.</td></tr>
+<tr><th>Possible Action(s)</th><td>The operator should examine the solace deployment and see why VM 10.244.0.3 is not available.<p>CF operation can be reattempted once the VM health is restored and the HA status is not degraded.</td></tr>
+</table>
+
+  <br>
+
+
+
