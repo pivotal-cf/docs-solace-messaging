@@ -104,8 +104,11 @@ The following issues may arise while upgrading a tile:
 Action Failed get_task: result: 1 of 1 drain scripts failed. Failed Jobs: containers.
 </pre>
 </td></tr>
-<tr><th>Explanation</th><td>The above can happen when BOSH is shutting down VMs in a High Availability group. This is because the HA group is not in a good state and is preventing the VM to shutdown is necessary to avoid service interruption.</td></tr>
-<tr><th>Possible Action</th><td>The user should log into the failing VM and look at the log file located at /var/vcap/sys/log/containers/drain.stdout.log to determine the underlying cause.</td></tr>
+<tr><th>Explanation</th><td>A pre-condition was not met. An HA group was not in a healthy state at the start of the upgrade.
+This check is done at the shutdown of each VM in an HA group.</td></tr>
+<tr><th>Possible Action</th><td>Ensure an HA Group is healthy. The user can log into the failing VM and look at the log file located at /var/vcap/sys/log/containers/drain.stdout.log to determine the underlying cause.
+Once an HA Group is healthy, an upgrade can be retried.
+</td></tr>
 </table>
 
 <br>
@@ -117,9 +120,11 @@ Action Failed get_task: result: 1 of 1 drain scripts failed. Failed Jobs: contai
 Action Failed get_task: result: 1 of 1 post-start scripts failed. Failed Jobs: containers.
 </pre>
 </td></tr>
-<tr><th>Explanation</th><td>While upgrading a High Availability pair,  the VMR that was just upgraded will rejoin the HA group and synchronize its message-spool with the active router. If the synchronization fails to progress then the post-start script will fail and the above error will be displayed in ops manager.
+<tr><th>Explanation</th>
+<td>
+The upgrade was stopped due to a detected failure to ensure services remain available.
 </td></tr>
-<tr><th>Possible Action</th><td>The user should log into the failing VM and look at the log file located at /var/vcap/sys/log/containers/post-start.stdout.log to determine the underlying cause.</td></tr>
+<tr><th>Possible Action</th><td>The user should log into the failing VM and look at the log file located at /var/vcap/sys/log/containers/post-start.stdout.log to determine the underlying cause. Once the issue is fixed, an upgrade can be retried</td></tr>
 </table>
 
 
