@@ -476,3 +476,36 @@ In order to apply changes, all the settings for the Solace tile need to be marke
    for information about creating instances of the Solace Messaging service and binding them to apps.
 
 
+## <a id='upgrades'></a>Upgrades
+
+Solace Messaging for PCF supports upgrades starting with release 1.3.0. This means that future releases can upgrade a deployment if the deployment is 1.3.0 or higher.
+In-Service-Upgrades are supported from release 1.3.0 for High-Availability Service Plans.
+
+### <a id='upgrades_non_ha'></a>Non - High Availability Upgrades
+
+Upgrades are service affecting for non-HA service plans <code>Shared-VMR</code>, <code>Community-VMR</code> and <code>Large-VMR</code>.
+
+The messaging service for an application will experience an outage that shall last no longer than the time it takes to upgrade the VMR and start it up again.
+
+### <a id='upgrades_ha'></a>High Availability Upgrades
+
+Upgrades are non service affecting for High Availability plans <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code>, this means there will always be a service available during upgrades. Upgrades will affect each VM providing the HA Service one at a time.
+
+An application using an HA service will experience at least one switch-over during an upgrade, and at most two switch-overs.
+
+Please see our [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java) for some examples of how HA connections are used, as well as [Configuring-Client-Connections](https://docs.solace.com/Solace-Messaging-APIs/Developer-Guide/Configuring-Connection-T.htm) for additional information on client connection setup to allow for switch-overs during upgrades.
+
+Keeping services available is designed into the upgrade process. 
+
+Failures in upgrades are due to either pre-conditions or post-conditions, and are intended to keep services available in case of any failure.
+
+The following pre-conditions must be met before an upgrade can proceed, otherwise the upgrade will abort.
+
+* The version of the tile being upgraded must be version 1.3.0 or higher.
+* The Redundancy state of HA services must be healthy.
+
+
+If any failure were to occur during an upgrade, services would remain available. 
+
+Please see the [Troubleshooting Guide](troubleshooting.html#upgrade_errors) for further details.
+
