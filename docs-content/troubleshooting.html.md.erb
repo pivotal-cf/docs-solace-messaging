@@ -5,13 +5,13 @@ owner: Partners
 
 This topic describes how operators and developers can troubleshoot instances of Solace Messaging services.
 
-A [Solace Messaging Service Instance](service-instances.html) is backed by a Message VPN on one or many Solace Virtual Message Router (VMR), depending on the chosen Plan.
+A [Solace Messaging Service Instance](service-instances.html) is backed by a Message VPN on one or many Solace Virtual Message Router (VMR), depending on the chosen plan.
 
-You can discover the VMR(s) backing a Service Instance from the [Solace Messaging Credentials](credentials.html) which become available by [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance.
+You can discover the VMR(s) backing a service instance from the [Solace Messaging Credentials](credentials.html) which become available by [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance.
 
 ##<a id='operator'></a>Operator Troubleshooting
 
-The operator will have access to the logs of all the components of Solace Messaging for PCF.
+The operator will have access to the logs of all the components of Solace Messaging for PCF:
 
 * Service Broker Logs
 * VMR Logs
@@ -19,16 +19,16 @@ The operator will have access to the logs of all the components of Solace Messag
 
 An installation of Solace Messaging for PCF may be configured to use [System Logging](installing.html#optional_system_logging) as a means of gathering all logs.
 
-###<a id='operator_logs'></a>Accessing logs 
+###<a id='operator_logs'></a>Accessing Logs 
 
-The following locations in Solace Messaging BOSH VMs will hold logs of interest that can help in troubleshooting issues.
+The following locations in Solace Messaging BOSH VMs will hold logs of interest that can help in troubleshooting issues:
 
 * All VM job logs
  * /var/vcap/sys/log
 * All VMR Logs
  * /var/vcap/store/prepare_vmr/volumes/jail/logs
 
-To access service broker logs, perform the following steps:
+To access service broker logs, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
@@ -75,13 +75,11 @@ To access service broker logs, perform the following steps:
 
 ###<a id='operator_diag'></a>Additional Diagnostics
 
-  In addition to regular logging, VMR tools can help gather diagnotics logs on demand.
+In addition to regular logging, VMR tools can help gather diagnotics logs on demand.
 
-For example, having identified a problem with a given Solace Service Instance, the operator can access the backing VMR to examine logs and gather diagnositics.
+For example, having identified a problem with a given Solace service instance, the operator can access the backing VMR to examine logs and gather diagnositics.
 
-The backing VMR for a given Service Instance can be identified from the IPs used in the bindings or service keys.
-
-Alternatively the IP mentioned in the service broker logs or message when an exception occurs.
+The backing VMR for a given service instance can be identified from the IPs used in the bindings or service keys, or mentioned in the service broker logs or message when an exception occurs.
 
 The operator should look for the VM in the Solace Messaging bosh deployment with the matching IP.
 
@@ -104,7 +102,7 @@ The following issues may arise while upgrading a tile:
 Action Failed get_task: result: 1 of 1 drain scripts failed. Failed Jobs: containers.
 </pre>
 </td></tr>
-<tr><th>Explanation</th><td>A pre-condition was not met. An HA group was not in a healthy state at the start of the upgrade.
+<tr><th>Explanation</th><td>A pre-condition was not met. A high availability (HA) group was not in a healthy state at the start of the upgrade.
 This check is done at the shutdown of each VM in an HA group.</td></tr>
 <tr><th>Possible Action</th><td>Ensure an HA Group is healthy. The user can log into the failing VM and look at the log file located at /var/vcap/sys/log/containers/drain.stdout.log to determine the underlying cause.
 Once an HA Group is healthy, an upgrade can be retried.
@@ -124,21 +122,21 @@ Action Failed get_task: result: 1 of 1 post-start scripts failed. Failed Jobs: c
 <td>
 The upgrade was stopped due to a detected failure to ensure services remain available.
 </td></tr>
-<tr><th>Possible Action</th><td>The user should log into the failing VM and look at the log file located at /var/vcap/sys/log/containers/post-start.stdout.log to determine the underlying cause. Once the issue is fixed, an upgrade can be retried</td></tr>
+<tr><th>Possible Action</th><td>The user should log into the failing VM and look at the log file located at /var/vcap/sys/log/containers/post-start.stdout.log to determine the underlying cause. Once the issue is fixed, an upgrade can be retried.</td></tr>
 </table>
 
 
 ##<a id='developer'></a>Developer Troubleshooting
 
-A Developer using Solace Messaging for PCF may encounter errors when using Cloud Foundry Command-Line Interface (cf CLI) to perform basic operations on a Solace Messaging for PCF service instance.
+A developer using Solace Messaging for PCF may encounter errors when using Cloud Foundry Command-Line Interface (cf CLI) to perform basic operations on a Solace Messaging for PCF service instance.
 
-In general most errors are about these types:
+In general, most errors are about these types:
 
- * Reaching limits ( plan limits, inventory fully used )
- * Communication problems between the Service Broker and the VM inventory it manages
- * Unexpected health state, such as degraded High Availability setup
+ * Reaching limits (plan limits, inventory fully used)
+ * Communication problems between the service broker and the VM inventory it manages
+ * Unexpected health state, such as a degraded high availability setup
 
-While this list it not complete, it provides representative samples with explanations and possible resolutions, some of the resolutions will require operator intervention.
+While this list it not complete, it provides representative samples with explanations and possible resolutions. Some of the resolutions will require operator intervention.
 
 
 <table border="1" class="nice">
@@ -153,7 +151,7 @@ cf create-service solace-messaging large
 Server error, status code: 502, error code: 10001, message: Service broker error: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: No matching Solace Message VPNs available.
 </pre>
 </td></tr>
-  <tr><th>Explanation</th><td>This can happen when the service broker does not find any Solace Message VPNs in its inventory for the requested service plan.</td></tr>
+  <tr><th>Explanation</th><td>The service broker does not find any Solace Message VPNs in its inventory for the requested service plan.</td></tr>
   <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated VMRs that support the given plan, in this case a Large-VMR.</td></tr>
 </table>
 
@@ -171,8 +169,8 @@ cf update-service my-large-instance -c '{"some_option": "some_value" }'
 Server error, status code: 502, error code: 10001, message: Service broker error: Unrecognized parameter key some_option
 </pre>
 </td></tr>
-  <tr><th>Explanation</th><td>This can happen when the service broker does not recognize the parameter name.</td></tr>
-  <tr><th>Possible Action(s)</th><td>Use correct parameters, please see <a href='service-instances.html#service-specific-configuration'>Service Specific Parameters</a></td></tr>
+  <tr><th>Explanation</th><td>The service broker does not recognize the parameter name.</td></tr>
+  <tr><th>Possible Action(s)</th><td>Use the correct parameters. Please see <a href='service-instances.html#service-specific-configuration'>Service Specific Parameters</a>.</td></tr>
 </table>
 
   <br>
@@ -190,7 +188,7 @@ Server error, status code: 502, error code: 10001, message: Service broker error
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>As indicated in the error, the given parameter is only valid when TCP Routes is enabled.</td></tr>
-  <tr><th>Possible Action(s)</th><td>See about <a href='installing.html#optional_tcp_routes'>Configuring TCP Routes</a></td></tr>
+  <tr><th>Possible Action(s)</th><td>See <a href='installing.html#optional_tcp_routes'>Configuring TCP Routes</a>.</td></tr>
 </table>
 
   <br>
@@ -208,7 +206,7 @@ Server error, status code: 502, error code: 10001, message: Service broker error
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>As indicated in the error, the given parameter is only valid when LDAP is enabled and Management Access is set to LDAP.</td></tr>
-  <tr><th>Possible Action(s)</th><td>See about <a href='installing.html#optional_ldap_settings'>Configuring LDAP</a> and <a href='installing.html#optional_management_access'>Management Access to use LDAP</a></td></tr>
+  <tr><th>Possible Action(s)</th><td>See <a href='installing.html#optional_ldap_settings'>Configuring LDAP</a> and <a href='installing.html#optional_management_access'>Management Access to use LDAP</a>.</td></tr>
 </table>
 
   <br>
@@ -240,7 +238,7 @@ Started: 2020-01-00T00:00:00Z
 Updated: 2020-01-00T00:00:00Z
 </pre>
 </td></tr>
-<tr><th>Explanation</th><td>The Service Broker cannot delete this instance because the Message VPN is flagged as unavailable. This happens when the backing VMR is not reachable.</td></tr>
+<tr><th>Explanation</th><td>The service broker cannot delete this instance because the Message VPN is flagged as unavailable. This happens when the backing VMR is not reachable.</td></tr>
 <tr><th>Possible Action(s)</th><td>The operator should examine the solace deployment and see why VM 10.244.0.3 is not available.<p>The service delete operation can be reattempted once the VM health is restored.</td></tr>
 </table>
 
@@ -258,8 +256,8 @@ cf bind-service my-app my-ha-instance
 MessageRouterException: Primary VMR 10.233.0.3 HA Group Status is degraded v001 for messageVpn v001
 </pre>
 </td></tr>
-<tr><th>Explanation</th><td>The Service Broker will always reject to perform an operation for an HA service when the HA status is degraded. There is a variety of reasons that can be given in the message. Other operations on the same Message Router will fail as well.</td></tr>
-<tr><th>Possible Action(s)</th><td>The operator should examine the solace deployment and see why VM 10.244.0.3 is not available.<p>CF operation can be reattempted once the VM health is restored and the HA status is not degraded.</td></tr>
+<tr><th>Explanation</th><td>The service broker will always reject an operation for an HA service when the HA status is degraded. A variety of reasons may be given in the message. Other operations on the same Message Router will fail as well.</td></tr>
+<tr><th>Possible Action(s)</th><td>The operator should examine the Solace deployment and see why VM 10.244.0.3 is not available.<p>CF operation can be reattempted once the VM health is restored and the HA status is not degraded.</td></tr>
 </table>
 
   <br>
