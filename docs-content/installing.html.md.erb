@@ -87,13 +87,9 @@ Review the resource and IP requirements for installing the Solace Messaging for 
   </tr>
 </table>
 
-<p id="tableNote1" class="note"><strong><sup>1</sup> Note</strong>: You can modify the number of Instances and Persistent disk size
-   when configuring the Solace Messaging for PCF tile for the VMR jobs.
-   For more information, see the <a href="#configure">Configure Solace Messaging for PCF</a> tile below.</p> 
+<p id="tableNote1" class="note"><strong><sup>1</sup> Note</strong>: You can modify the number of instances and persistent disk size when configuring the Solace Messaging for PCF tile for the VMR jobs. For more information, see the <a href="#configure">Configure Solace Messaging for PCF</a> tile below.</p> 
 
-<p id="tableNote2" class="note"><strong><sup>2</sup> Note</strong>: A single high-availability Solace Messaging service instance requires three (3) HA VMR job instances to be used.
-   As such the number of HA VMR job instances specified for the HA VMR instances should be a multiple of 3.
-   If it is not, the remaining job instances go unused.</p>
+<p id="tableNote2" class="note"><strong><sup>2</sup> Note</strong>: A single high availability Solace Messaging service instance requires three (3) HA VMR job instances to be used. As such, the number of HA VMR job instances specified for the HA VMR instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
 
 <p id="tableNote3" class="note"><strong><sup>3</sup> Note</strong>: The Community-VMR plan is only available in the Evaluation Edition of Solace Messaging for PCF Tile.</p>
 
@@ -109,7 +105,7 @@ The Solace Messaging for PCF Service Broker requires the following:
 
 ##<a id='install'></a> Install Solace Messaging for PCF 
 
-To install Solace Messaging for PCF, perform the following steps:
+To install Solace Messaging for PCF, do the following:
 
 1. Download the product file from Pivotal Network.
 1. Upload the product file on the Ops Manager **Installation Dashboard**.
@@ -119,8 +115,7 @@ To install Solace Messaging for PCF, perform the following steps:
 
 ##<a id='configure'></a> Configure Solace Messaging for PCF
 
-To configure Solace Messaging for PCF, perform the following steps:
-
+To configure Solace Messaging for PCF, do the following:
 
 From the **Settings** tab of the Solace Messaging tile:
   <%= image_tag('select_settings.png') %>
@@ -171,8 +166,7 @@ From the **Settings** tab of the Solace Messaging tile:
 
 <a id='required_tcp_routes'></a>**TCP Routes (Save required)**
 
-You need to open this pane and click **Save** even if using the default setting. 
-If you want to enable TCP routes, see <a href="#optional_tcp_routes">(Optional) TCP Routes</a>.
+You need to open this pane and click **Save** even if using the default setting. If you want to enable TCP routes, see <a href="#optional_tcp_routes">(Optional) TCP Routes</a>.
 
 1. Click **TCP Routes**.
 
@@ -182,8 +176,7 @@ If you want to enable TCP routes, see <a href="#optional_tcp_routes">(Optional) 
     <%= image_tag('form_tcp_routes.png') %>
 1. Click **Save**.
 
-<p class="note"><strong>Note</strong>: Failing to click <strong>Save</strong> might result in an <code>unknown property "solace_router"</code> exception
-   when you attempt to Apply Changes.</p>
+<p class="note"><strong>Note</strong>: Failing to click <strong>Save</strong> might result in an <code>unknown property "solace_router"</code> exception when you attempt to Apply Changes.</p>
 
 <a id='required_stemcell'></a>**Stemcell**
 
@@ -204,22 +197,19 @@ You might need to import a stemcell import if the minimum stemcell required for 
    These job instances are statically created when the tile is deployed.
    Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances.<br/><br/>
    Five Shared-VMR service instances can be hosted on a single Shared-VMR job instance.
-   As such the maximum number of Shared-VMR service instances that can concurrently exist for the <code>Shared-VMR</code> service plan is equal to five times the number of <code>Shared-VMR</code> job instances.
-   Conversely three HA VMR job instances are required for a single HA VMR service instance.
-   As such the maximum number of HA VMR service instances that can concurrently exist for the <code>Large-HA-VMR</code>
-   and <code>Medium-HA-VMR</code> service plans is equal to one-third the number of their corresponding job instances.
-   In order for <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code> service plans to provide high availability fault tolerance,
-   make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more.
+   As such, the maximum number of Shared-VMR service instances that can concurrently exist for the <code>Shared-VMR</code> service plan is equal to five times the number of <code>Shared-VMR</code> job instances.
+   Conversely, three HA VMR job instances are required for a single HA VMR service instance.
+   As such, the maximum number of HA VMR service instances that can concurrently exist for the <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code> service plans is equal to one-third the number of their corresponding job instances.
+   In order for <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code> service plans to provide high availability fault tolerance, make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more.
    If you have only one availability zone, the deployment is not fault tolerant and Solace does not recommend using high availability service plans under this scenario.
 <p class="note"><strong>Note</strong>: The number of job instances can be increased after the tile is deployed without impacting already bound apps. However, reducing the number of instances can result in app failure and message loss.</p>
 <p class="note"><strong>Note</strong>: The size of the persistent disk can be changed both before and after deployment. 
-  Increasing the size of the persistent disks will impact the service of already bound apps, however, messages will not be lost. 
+  Increasing the size of the persistent disks will impact the service of already bound apps. However, messages will not be lost. 
   Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable VMRs, and/or undefined behaviors.</p>
-<p class="note"><strong>Note</strong>: Solace recommends keeping the default values for **VM Type**,
-  a reduction of the RAM or CPU capacity may lead to a deployment failure, or service degradation.</p>
+<p class="note"><strong>Note</strong>: Solace recommends keeping the default values for **VM Type**. A reduction of the RAM or CPU capacity may lead to a deployment failure or service degradation.</p>
 <p class="note"><strong>Note</strong>: The deploy-all and delete-all are required errands for the installation and removal of the Solace Service Broker.
    Solace recommends leaving the default VM Type.
-   The VM Type for these errands is not related to the required resources of the Solace Service Broker which runs in the Elastic Runtime.</p>
+   The VM Type for these errands is not related to the required resources of the Solace Service Broker, which runs in Elastic Runtime.</p>
     <%= image_tag('form_resource_config.png') %>
 
 1. Click **Save**.
@@ -263,15 +253,14 @@ If TLS is not configured, the TLS specific URLs continue to be passed in the `VC
    Generated certificates are equivalent to self-signed certificates.
 
     <%= image_tag('form_tls_config_server_certificate.png') %>
-<p class="note"><strong>Note</strong>: The server certificate configured will be used by all Solace VMRs deployed
-   and as such all VMRs deployed in a PCF instances will have the same identification.</p>
+<p class="note"><strong>Note</strong>: The server certificate configured will be used by all Solace VMRs deployed. As such, all VMRs deployed in a PCF instances will have the same identification.</p>
     <%= image_tag('form_tls_config_disable_sb_cert_validation.png') %>
 <p class="note"><strong>Note</strong>: Communication between the Solace Messaging Service Broker and VMRs is also encrypted if a TLS certificate is configured. 
 The Service Broker uses the Container Certificate Trust Store Framework to validate the server certificate returned by VMRs. 
 So if the framework is not operational when the tile is deployed the Service Broker will be unable to validate server certificates sent by the VMRs
 and the tile will fail to deploy. 
-In development environments it may be acceptable to not require server certificate validation in which case the <strong>Disable RSA Server Certificate validation on the Service Broker (For development only)</strong> checkbox can be selected. 
-This checkbox should never be selected in production deployments, instead the framework should be made operational.</p>
+In development environments, it may be acceptable to not require server certificate validation, in which case the <strong>Disable RSA Server Certificate validation on the Service Broker (For development only)</strong> checkbox can be selected. 
+This checkbox should never be selected in production deployments. Instead, the framework should be made operational.</p>
 
 1. (Optional) Configure **Message Router's Trusted Root Certificates**.
    These certificates will be stored in the trust store on the VMRs.
@@ -299,7 +288,7 @@ This checkbox should never be selected in production deployments, instead the fr
     <%= image_tag('select_1_management_access.png') %> 
 
 1. If you configured [LDAP](#optional_ldap_settings), you may choose to have the LDAP Server provide the authentication
-   and authorization for the management roles on a Solace service Instance.
+   and authorization for the management roles on a Solace service instance.
     <%= image_tag('form_management_access_ldap.png') %>
 1. (Optional) Configure Groups with VMR administration read-only privilege.
     <%= image_tag('form_management_access_ldap_readonly.png') %>
@@ -322,8 +311,7 @@ This checkbox should never be selected in production deployments, instead the fr
 
     <%= image_tag('select_1_application_access.png') %>
 1. Using the defaults, the VMR will use its internal database for user credentials per service instance.
-   If you configured LDAP, you may request the VMR to use the LDAP Server for authentication
-   and authorization of when a client attempts to access a Solace messaging service instance.
+   If you configured LDAP, you may request the VMR to use the LDAP Server for authentication and authorization of when a client attempts to access a Solace Messaging service instance.
     <%= image_tag('form_application_access.png') %>
 
 1. Click **Save**.
@@ -346,7 +334,7 @@ This checkbox should never be selected in production deployments, instead the fr
 
     <%= image_tag('form_ldap_settings_server_url.png') %>
 <p class="note"><strong>Note</strong>: Consider network accessibility of the provided LDAP server,
-   you may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config) </p>
+   you may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config).</p>
 1. Set LDAP TLS Preference.
 
     <%= image_tag('form_ldap_settings_starttls.png') %>
@@ -367,8 +355,7 @@ This checkbox should never be selected in production deployments, instead the fr
 
 In order to have an effective LDAP configuration, configure LDAP for [Management Access](#optional_management_access)
 and [Application Access](#optional_application_access). 
-**If neither [Management Access](#optional_management_access) nor [Application Access](#optional_application_access) are configured for LDAP,
-the VMR will continue to use its internal database for management and user credentials.**
+**If neither [Management Access](#optional_management_access) nor [Application Access](#optional_application_access) are configured for LDAP, the VMR will continue to use its internal database for management and user credentials.**
 
 <a id='optional_system_logging'></a>**(Optional) System Logging**
 
@@ -385,8 +372,7 @@ the VMR will continue to use its internal database for management and user crede
 1. Set the external syslog hostname.
 
     <%= image_tag('form_system_logging_server.png') %>
-<p class="note"><strong>Note</strong>: Consider network accessibility of the provided syslog server,
-   you may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config).</p>
+<p class="note"><strong>Note</strong>: Consider network accessibility of the provided syslog server. You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config).</p>
 1. Set the external syslog port.
 
     <%= image_tag('form_system_logging_port.png') %>
@@ -415,33 +401,28 @@ the VMR will continue to use its internal database for management and user crede
 
     <%= image_tag('form_tcp_routes_enabled_1.png') %>
     <%= image_tag('form_tcp_routes_enabled_2.png') %>
-  <p class="note"><strong>Note</strong>: Fine grained control is available by protocol.
-     If you choose <strong>"Not Allowed"</strong> a TCP Route will never be created for this protocol,
-     even if requested at service creation time.
-     If you choose <strong>"Disabled by default"</strong> at service creation time,
-     a TCP Route will not be created for this protocol unless a user provided parameter overrides it with a "true" setting.
-     If you choose <strong>"Enabled by default"</strong> a TCP Route will be created for this protocol at service creation time,
-     unless a user provided parameter overrides it with "false" setting.  </p>
+  <p class="note"><strong>Note</strong>: Fine-grained control is available by protocol.
+     If you choose <strong>"Not Allowed"</strong>, a TCP Route will never be created for this protocol, even if requested at service creation time.
+     If you choose <strong>"Disabled by default"</strong>, at service creation time, a TCP Route will not be created for this protocol unless a user-provided parameter overrides it with a "true" setting.
+     If you choose <strong>"Enabled by default"</strong>, a TCP Route will be created for this protocol at service creation time, unless a user-provided parameter overrides it with "false" setting.</p>
 <p class="note"><strong>TCP Routes</strong> A solace\_router uaa agent is required to use the TCP Routes feature.
-   If using a new version of the Elastic Runtime (v1.11, v1.10.11, v1.9.24, v1.8.46),
-   the solace\_router uaa client may be present already, and there is no need to provide cf credentials.
-   Check your installation for the presence of the solace\_router uaa client,
-   this may be found under Pivotal Elastic Runtime\->Credentials\->UAA.
+   If using a new version of the Elastic Runtime (v1.11, v1.10.11, v1.9.24, v1.8.46), the solace\_router uaa client may be present already, and there is no need to provide cf credentials.
+   Check your installation for the presence of the solace\_router uaa client, this may be found under Pivotal Elastic Runtime\->Credentials\->UAA.
    When a solace\_router is not found, you will need to create one.
    Instructions on how to create one are provided below.</p>
-<p class="note"><strong>TCP Routes</strong> Lookup the UAA 'Admin Client Credentials' which will be needed to create the solace\_router.</p>
+<p class="note"><strong>TCP Routes</strong> Look up the UAA 'Admin Client Credentials', which will be needed to create the solace\_router.</p>
 <p class="note"><strong>TCP Routes</strong> Install uaac if you don't already have it.</p>
   <pre class="terminal">
   $ gem install cf-uaac
   </pre>
-<p class="note"><strong>TCP Routes</strong> Login to CF, target the uaa api, login with uaac using the 'Admin Client Credentials'</p>
+<p class="note"><strong>TCP Routes</strong> Login to CF, target the UAA API, and log in with uaac using the 'Admin Client Credentials'.</p>
   <pre class="terminal">
   $ cf api api.YOUR-SYSTEM-DOMAIN
   $ cf login 
   $ uaac target uaa.sys.YOUR-SYSTEM-DOMAIN
   $ uaac token client get admin
   </pre>
-<p class="note"><strong>TCP Routes</strong> Create the solace\_router uaa client with the necessary permissions, assign it <strong>a good secret password</strong></p>
+<p class="note"><strong>TCP Routes</strong> Create the solace\_router uaa client with the necessary permissions and assign it a password.</p>
   <pre class="terminal">
   $ uaac client add solace_router --name solace\_router --scope uaa.none --authorized\_grant\_types "refresh\_token,client\_credentials" \
   $ --authorities "routing.routes.read,routing.routes.write,routing.router\_groups.read,cloud\_controller.read,cloud\_controller.write,cloud\_controller.admin" \
@@ -472,40 +453,39 @@ In order to apply changes, all the settings for the Solace tile need to be marke
 1. Click **Apply Changes** to deploy the tile.
 
     <%= image_tag('apply_changes.png') %>
-1. After the tile has deployed, see [Creating and Binding Solace Messaging Service Instances](service-instances.html)
-   for information about creating instances of the Solace Messaging service and binding them to apps.
+1. After the tile has deployed, see [Creating and Binding Solace Messaging Service Instances](service-instances.html) for information about creating instances of the Solace Messaging service and binding them to apps.
 
 
 ## <a id='upgrades'></a>Upgrades
 
-Solace Messaging for PCF supports upgrades starting with release 1.3.0. This means that future releases can upgrade a deployment if the deployment is 1.3.0 or higher.
-In-Service-Upgrades are supported from release 1.3.0 for High-Availability Service Plans.
+Solace Messaging for PCF supports upgrades starting with release 1.3.0. Future releases can upgrade a deployment if the deployment is 1.3.0 or higher.
+In-Service-Upgrades are supported from release 1.3.0 for high-availability service plans.
 
 ### <a id='upgrades_non_ha'></a>Non - High Availability Upgrades
 
-Upgrades are service affecting for non-HA service plans <code>Shared-VMR</code>, <code>Community-VMR</code> and <code>Large-VMR</code>.
+Upgrades are service-affecting for non-HA service plans <code>Shared-VMR</code>, <code>Community-VMR</code>, and <code>Large-VMR</code>.
 
-The messaging service for an application will experience an outage that shall last no longer than the time it takes to upgrade the VMR and start it up again.
+The messaging service for an application will experience an outage that lasts no longer than the time it takes to upgrade the VMR and start it up again.
 
 ### <a id='upgrades_ha'></a>High Availability Upgrades
 
-Upgrades are non service affecting for High Availability plans <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code>, this means there will always be a service available during upgrades. Upgrades will affect each VM providing the HA Service one at a time.
+Upgrades are non-service-affecting for high-availability plans <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code>, so there will always be a service available during upgrades. Upgrades will affect each VM providing the HA service one at a time.
 
 An application using an HA service will experience at least one switch-over during an upgrade, and at most two switch-overs.
 
 Please see our [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java) for some examples of how HA connections are used, as well as [Configuring-Client-Connections](https://docs.solace.com/Solace-Messaging-APIs/Developer-Guide/Configuring-Connection-T.htm) for additional information on client connection setup to allow for switch-overs during upgrades.
 
-Keeping services available is designed into the upgrade process. 
+The upgrade process is designed to keep services available. 
 
 Failures in upgrades are due to either pre-conditions or post-conditions, and are intended to keep services available in case of any failure.
 
-The following pre-conditions must be met before an upgrade can proceed, otherwise the upgrade will abort.
+The following pre-conditions must be met before an upgrade can proceed, or the upgrade will abort.
 
 * The version of the tile being upgraded must be version 1.3.0 or higher.
-* The Redundancy state of HA services must be healthy.
+* The redundancy state of HA services must be healthy.
 
 
-If any failure were to occur during an upgrade, services would remain available. 
+If any failure occurs during an upgrade, services will remain available. 
 
 Please see the [Troubleshooting Guide](troubleshooting.html#upgrade_errors) for further details.
 
