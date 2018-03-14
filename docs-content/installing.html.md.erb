@@ -225,7 +225,7 @@ You might need to import a stemcell import if the minimum stemcell required for 
 1. Under **Starting Port**, enter a port where the messaging services on the VMRs (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`.  
 The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. 
 For an example, see [Example Environment Variable](credentials.html#example).
-
+<p class="note"><strong>Note</strong>: The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
     <%= image_tag('form_message_router_config.png') %>
 
 1. Click **Save**.
