@@ -263,4 +263,26 @@ MessageRouterException: Primary VMR 10.233.0.3 HA Group Status is degraded v001 
   <br>
 
 
+<table border="1" class="nice">
+<tr><th colspan=2>Orphaned Resource Policy</th></th>
+<tr><th>Operation</th><td>
+<pre class="terminal">
+cf unbind-service my-app my-service-instance
+</pre>
+</td></tr>
+<tr><th>Error</th><td>
+<pre class="terminal">
+Server error, status code: 502, error code: 10001, message: Service instance test-shared: Service broker error: Operation canceled. Orphaned Endpoints Policy was violated.
+Endpoints owned by v002.cu000001 must first be deleted:
+        Queues: [ someQ ]
+        Topics Endpoints: [ someTPE ]
+</pre>
+</td></tr>
+<tr><th>Explanation</th><td>The service broker will reject unbinding when the client-username that was used by the application owns [Endpoints](https://docs.solace.com/Features/Endpoints.htm) such as Queues and Topic Endpoints.</td></tr>
+<tr><th>Possible Action(s)</th><td>Delete the Endpoints before unbinding.</td></tr>
+</table>
+
+  <br>
+
+
 
