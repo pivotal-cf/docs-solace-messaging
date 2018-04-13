@@ -210,6 +210,8 @@ You might need to import a stemcell import if the minimum stemcell required for 
 <p class="note"><strong>Note</strong>: The deploy-all and delete-all are required errands for the installation and removal of the Solace Service Broker.
    Solace recommends leaving the default VM Type.
    The VM Type for these errands is not related to the required resources of the Solace Service Broker, which runs in Elastic Runtime.</p>
+<p class="note"><strong>Note</strong>: The solace_tests errand will test that a deployment has completed as expected and that it is ready for service. Solace recommends always running this errand after a deployment.
+   Solace recommends leaving the default VM Type.</p>
     <%= image_tag('form_resource_config.png') %>
 
 1. Click **Save**.
