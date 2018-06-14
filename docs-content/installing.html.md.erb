@@ -1,14 +1,14 @@
 ---
-title: Installing and Configuring Solace Messaging for Pivotal Cloud Foundry
+title: Installing and Configuring Solace PubSub+ for Pivotal Cloud Foundry
 owner: Partners
 ---
 
-This topic describes how to install and configure Solace Messaging for Pivotal Cloud Foundry (PCF). 
-Before installing Solace Messaging for PCF, you must complete the [prerequisites](#prereqs).
+This topic describes how to install and configure Solace PubSub+ for Pivotal Cloud Foundry (PCF). 
+Before installing Solace PubSub+ for PCF, you must complete the [prerequisites](#prereqs).
 
 ##<a id='resource-reqs'></a> Review Resource Requirements
 
-Review the resource and IP requirements for installing the Solace Messaging for PCF tile.
+Review the resource and IP requirements for installing the Solace PubSub+ for PCF tile.
 
 <table border="1" class="nice">
 	<tr>
@@ -32,7 +32,7 @@ Review the resource and IP requirements for installing the Solace Messaging for 
     <td>1</td>
   </tr>
   <tr>
-    <td>Large-VMR</td>
+    <td>Large</td>
     <td>1<a href="#tableNote1"><sup>1</sup></a></td>
     <td>4</td>
     <td>12288</td>
@@ -42,7 +42,7 @@ Review the resource and IP requirements for installing the Solace Messaging for 
     <td>0</td>
   </tr>
   <tr>
-    <td>Shared-VMR</td>
+    <td>Shared</td>
     <td>1<a href="#tableNote1"><sup>1</sup></a></td>
     <td>2</td>
     <td>4096</td>
@@ -52,17 +52,7 @@ Review the resource and IP requirements for installing the Solace Messaging for 
     <td>0</td>
   </tr>
   <tr>
-  <td>Community-VMR <a href="#tableNote3"><sup>3</sup></td>
-    <td>1<a href="#tableNote1"><sup>1</sup></a></td>
-    <td>2</td>
-    <td>4096</td>
-    <td>10240</td>
-    <td>20480<a href="#tableNote1"><sup>1</sup></a></td>
-    <td>1</td>
-    <td>0</td>
-  </tr>
-  <tr>
-    <td>Medium-HA-VMR</td>
+    <td>Medium-HA</td>
     <td>3
 	<a href="#tableNote1"><sup>1, </sup></a>
 	<a href="#tableNote2"><sup>2</sup></a></td>
@@ -74,7 +64,7 @@ Review the resource and IP requirements for installing the Solace Messaging for 
     <td>0</td>
   </tr>
   <tr>
-    <td>Large-HA-VMR</td>
+    <td>Large-HA</td>
     <td>3
 	<a href="#tableNote1"><sup>1, </sup></a>
 	<a href="#tableNote2"><sup>2</sup></a></td>
@@ -87,37 +77,34 @@ Review the resource and IP requirements for installing the Solace Messaging for 
   </tr>
 </table>
 
-<p id="tableNote1" class="note"><strong><sup>1</sup> Note</strong>: You can modify the number of instances and persistent disk size when configuring the Solace Messaging for PCF tile for the VMR jobs. For more information, see the <a href="#configure">Configure Solace Messaging for PCF</a> tile below.</p> 
+<p id="tableNote1" class="note"><strong><sup>1</sup> Note</strong>: You can modify the number of instances and persistent disk size when configuring the Solace PubSub+ for PCF tile for the Solace PubSub+ Message Broker jobs. For more information, see the <a href="#configure">Configure Solace PubSub+ for PCF</a> tile below.</p> 
 
-<p id="tableNote2" class="note"><strong><sup>2</sup> Note</strong>: A single high availability Solace Messaging service instance requires three (3) HA VMR job instances to be used. As such, the number of HA VMR job instances specified for the HA VMR instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
-
-<p id="tableNote3" class="note"><strong><sup>3</sup> Note</strong>: The Community-VMR plan is only available in the Evaluation Edition of Solace Messaging for PCF Tile.</p>
-
+<p id="tableNote2" class="note"><strong><sup>2</sup> Note</strong>: A single high availability Solace PubSub+ service instance requires three (3) HA Solace PubSub+ Message Broker job instances to be used. As such, the number of HA Solace PubSub+ Message Broker job instances specified for the HA Solace PubSub+ Message Broker instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
 
 
 ## <a id='prereqs'></a>Prerequisites
 
-The Solace Messaging for PCF Service Broker requires the following:
+The Solace PubSub+ for PCF Service Broker requires the following:
 
 * Java buildpack v3.7.1 or later.
 * The MySQL for PCF tile. When configuring the tile, set the maximum storage in the **Service Plan** section to 100 MB. 
   For information on how to install and configure the tile, see [MySQL for Pivotal Cloud Foundry](http://docs.pivotal.io/p-mysql/index.html).
 
-##<a id='install'></a> Install Solace Messaging for PCF 
+##<a id='install'></a> Install Solace PubSub+ for PCF 
 
-To install Solace Messaging for PCF, do the following:
+To install Solace PubSub+ for PCF, do the following:
 
 1. Download the product file from Pivotal Network.
 1. Upload the product file on the Ops Manager **Installation Dashboard**.
-1. Click **Add** next to the uploaded Solace Messaging tile in the Ops Manager **Available Products** view to add it to your staging area.
-1. Click the **Solace Messaging** tile.
+1. Click **Add** next to the uploaded Solace PubSub+ tile in the Ops Manager **Available Products** view to add it to your staging area.
+1. Click the **Solace PubSub+** tile.
 1. Follow the steps in the section below to configure the tile.
 
-##<a id='configure'></a> Configure Solace Messaging for PCF
+##<a id='configure'></a> Configure Solace PubSub+ for PCF
 
-To configure Solace Messaging for PCF, do the following:
+To configure Solace PubSub+ for PCF, do the following:
 
-From the **Settings** tab of the Solace Messaging tile:
+From the **Settings** tab of the Solace PubSub+ tile:
   <%= image_tag('select_settings.png') %>
 
 1. Configure the [**Required Settings**](#configure_required):
@@ -144,10 +131,10 @@ From the **Settings** tab of the Solace Messaging tile:
 
 <a id='required_azs_and_network'></a>**Assign AZs and Networks**
 
-1. From the **Settings** tab of the Solace Messaging tile, click **Assign AZs and Networks**.
+1. From the **Settings** tab of the Solace PubSub+ tile, click **Assign AZs and Networks**.
     <%= image_tag('select_1_assign_azs_and_networks.png') %>
-1. Under **AZ and Network Assignments**, choose the network and availability zones where Solace Messaging should run.
-   If you are deploying Solace Messaging with high availability plans, consider using multiple availability zones for maximum fault tolerance.
+1. Under **AZ and Network Assignments**, choose the network and availability zones where Solace PubSub+ should run.
+   If you are deploying Solace PubSub+ with high availability plans, consider using multiple availability zones for maximum fault tolerance.
 
     <%= image_tag('form_assign_azs_and_networks.png') %>
 1. Click **Save**.
@@ -180,7 +167,7 @@ You need to open this pane and click **Save** even if using the default setting.
 
 <a id='required_stemcell'></a>**Stemcell**
 
-You might need to import a stemcell import if the minimum stemcell required for Solace Messaging for PCF is not found.
+You might need to import a stemcell import if the minimum stemcell required for Solace PubSub+ for PCF is not found.
 
 1. Click **Stemcell**.
 
@@ -193,19 +180,19 @@ You might need to import a stemcell import if the minimum stemcell required for 
 1. Click **Resource Config**.
 
     <%= image_tag('select_1_resource_config.png') %> 
-1. Use the drop-down menus to configure the number of VMR job instances that are available in each of the five service plans mentioned above.
+1. Use the drop-down menus to configure the number of Solace PubSub+ Message Broker job instances that are available in each of the five service plans mentioned above.
    These job instances are statically created when the tile is deployed.
    Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances.<br/><br/>
-   Five Shared-VMR service instances can be hosted on a single Shared-VMR job instance.
-   As such, the maximum number of Shared-VMR service instances that can concurrently exist for the <code>Shared-VMR</code> service plan is equal to five times the number of <code>Shared-VMR</code> job instances.
-   Conversely, three HA VMR job instances are required for a single HA VMR service instance.
-   As such, the maximum number of HA VMR service instances that can concurrently exist for the <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code> service plans is equal to one-third the number of their corresponding job instances.
-   In order for <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code> service plans to provide high availability fault tolerance, make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more.
+   Five Shared service instances can be hosted on a single Shared job instance.
+   As such, the maximum number of Shared service instances that can concurrently exist for the <code>Shared</code> service plan is equal to five times the number of <code>Shared</code> job instances.
+   Conversely, three HA Solace PubSub+ Message Broker job instances are required for a single HA Solace PubSub+ Message Broker service instance.
+   As such, the maximum number of HA Solace PubSub+ Message Broker service instances that can concurrently exist for the <code>Large-HA</code> and <code>Medium-HA</code> service plans is equal to one-third the number of their corresponding job instances.
+   In order for <code>Large-HA</code> and <code>Medium-HA</code> service plans to provide high availability fault tolerance, make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more.
    If you have only one availability zone, the deployment is not fault tolerant and Solace does not recommend using high availability service plans under this scenario.
 <p class="note"><strong>Note</strong>: The number of job instances can be increased after the tile is deployed without impacting already bound apps. However, reducing the number of instances can result in app failure and message loss.</p>
 <p class="note"><strong>Note</strong>: The size of the persistent disk can be changed both before and after deployment. 
   Increasing the size of the persistent disks will impact the service of already bound apps. However, messages will not be lost. 
-  Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable VMRs, and/or undefined behaviors.</p>
+  Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable Solace PubSub+ Message Broker, and/or undefined behaviors.</p>
 <p class="note"><strong>Note</strong>: Solace recommends keeping the default values for **VM Type**. A reduction of the RAM or CPU capacity may lead to a deployment failure or service degradation.</p>
 <p class="note"><strong>Note</strong>: The deploy-all and delete-all are required errands for the installation and removal of the Solace Service Broker.
    Solace recommends leaving the default VM Type.
@@ -224,7 +211,7 @@ You might need to import a stemcell import if the minimum stemcell required for 
 1. Click **Message Router Config**.
 
     <%= image_tag('select_1_message_router_config.png') %> 
-1. Under **Starting Port**, enter a port where the messaging services on the VMRs (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`.  
+1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ Message Brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`.  
 The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. 
 For an example, see [Example Environment Variable](credentials.html#example).
 <p class="note"><strong>Note</strong>: The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
@@ -245,27 +232,27 @@ For an example, see [Example Environment Variable](credentials.html#example).
 1. Click **TLS Enabled**.
 
     <%= image_tag('form_tls_config_enabled.png') %> 
-By enabling and configuring TLS, you allow messaging between apps and the Solace VMRs to be encrypted. 
+By enabling and configuring TLS, you allow messaging between apps and the Solace PubSub+ Message Broker to be encrypted. 
 Apps requiring encryption would then need to use the TLS-specific URLs passed in the `VCAP_SERVICES` environment variable. 
 For more information about the `VCAP_SERVICES` environment variable, see [Example Environment Variable](credentials.html#example). 
-If TLS is not configured, the TLS specific URLs continue to be passed in the `VCAP_SERVICES` environment variable but fail to connect to a VMR if used.
+If TLS is not configured, the TLS specific URLs continue to be passed in the `VCAP_SERVICES` environment variable but fail to connect to a PubSub+ Message Broker if used.
 
 1. Configure **Message Router's RSA certificate (Server Certificate)** either by pasting in a certificate and private key in PEM format
    or asking one to be generated by clicking **Generate RSA Certificate**. 
    Generated certificates are equivalent to self-signed certificates.
 
     <%= image_tag('form_tls_config_server_certificate.png') %>
-<p class="note"><strong>Note</strong>: The server certificate configured will be used by all Solace VMRs deployed. As such, all VMRs deployed in a PCF instances will have the same identification.</p>
+<p class="note"><strong>Note</strong>: The server certificate configured will be used by all Solace PubSub+ Message Brokers deployed. As such, all Solace PubSub+ Message Brokers deployed in a PCF instances will have the same identification.</p>
     <%= image_tag('form_tls_config_disable_sb_cert_validation.png') %>
-<p class="note"><strong>Note</strong>: Communication between the Solace Messaging Service Broker and VMRs is also encrypted if a TLS certificate is configured. 
-The Service Broker uses the Container Certificate Trust Store Framework to validate the server certificate returned by VMRs. 
-So if the framework is not operational when the tile is deployed the Service Broker will be unable to validate server certificates sent by the VMRs
+<p class="note"><strong>Note</strong>: Communication between the Solace PubSub+ Service Broker and Solace PubSub+ Message Broker is also encrypted if a TLS certificate is configured. 
+The Service Broker uses the Container Certificate Trust Store Framework to validate the server certificate returned by Solace PubSub+ Message Brokers. 
+So if the framework is not operational when the tile is deployed the Service Broker will be unable to validate server certificates sent by the Solace PubSub+ Message Brokers
 and the tile will fail to deploy. 
 In development environments, it may be acceptable to not require server certificate validation, in which case the <strong>Disable RSA Server Certificate validation on the Service Broker (For development only)</strong> checkbox can be selected. 
 This checkbox should never be selected in production deployments. Instead, the framework should be made operational.</p>
 
 1. (Optional) Configure **Message Router's Trusted Root Certificates**.
-   These certificates will be stored in the trust store on the VMRs.
+   These certificates will be stored in the trust store on the Solace PubSub+ Message Brokers.
    They are required if you choose to use LDAP with TLS.
     <%= image_tag('form_tls_config_trusted_root_certificates.png') %>
 
@@ -276,9 +263,9 @@ This checkbox should never be selected in production deployments. Instead, the f
 1. Click **Service Access**.
 
     <%= image_tag('select_1_service_access.png') %>
-1. Check the **Enable global access to plans of service solace_messaging** option.
+1. Check the **Enable global access to plans of service solace_pubsub** option.
     <%= image_tag('form_service_access.png') %>
-<p class="note"><strong>Note</strong>: To control access to Solace Messaging service plans on a case-by-case basis, do not enable this option.</p>
+<p class="note"><strong>Note</strong>: To control access to Solace PubSub+ service plans on a case-by-case basis, do not enable this option.</p>
 
 1. Click **Save**.
 
@@ -292,14 +279,14 @@ This checkbox should never be selected in production deployments. Instead, the f
 1. If you configured [LDAP](#optional_ldap_settings), you may choose to have the LDAP Server provide the authentication
    and authorization for the management roles on a Solace service instance.
     <%= image_tag('form_management_access_ldap.png') %>
-1. (Optional) Configure Groups with VMR administration read-only privilege.
+1. (Optional) Configure Groups with Solace PubSub+ Message Brokers administration read-only privilege.
     <%= image_tag('form_management_access_ldap_readonly.png') %>
-1. (Optional) Configure Groups with VMR administration read-write privileges.
+1. (Optional) Configure Groups with Solace PubSub+ Message Brokers administration read-write privileges.
     <%= image_tag('form_management_access_ldap_readwrite.png') %>
-1. (Optional) Configure Groups with VMR administration administrator privileges.
+1. (Optional) Configure Groups with Solace PubSub+ Message Brokers administration administrator privileges.
     <%= image_tag('form_management_access_ldap_admin.png') %>
-<p class="note"><strong>Note</strong>: Cloud Operators need to have global access to the VMRs deployed by the tile.
-   This will allow them to administer the VMRs with SolAdmin, CLI or SEMP-based tools.
+<p class="note"><strong>Note</strong>: Cloud Operators need to have global access to the Solace PubSub+ Message Brokers deployed by the tile.
+   This will allow them to administer the Solace PubSub+ Message Brokers with SolAdmin, CLI or SEMP-based tools.
    Cloud operators might have different roles.
    Each role requires one of the three types of access-level: administrator, read-write and read-only.
    When using "VMR Internal" the cloud operators access to a single administrator level role using the admin password.
@@ -312,8 +299,8 @@ This checkbox should never be selected in production deployments. Instead, the f
 1. Click **Application Access**
 
     <%= image_tag('select_1_application_access.png') %>
-1. Using the defaults, the VMR will use its internal database for user credentials per service instance.
-   If you configured LDAP, you may request the VMR to use the LDAP Server for authentication and authorization of when a client attempts to access a Solace Messaging service instance.
+1. Using the defaults, the Solace PubSub+ Message Broker will use its internal database for user credentials per service instance.
+   If you configured LDAP, you may request the Solace PubSub+ Message Broker to use the LDAP Server for authentication and authorization of when a client attempts to access a Solace PubSub+ service instance.
     <%= image_tag('form_application_access.png') %>
 
 1. Click **Save**.
@@ -327,7 +314,7 @@ This checkbox should never be selected in production deployments. Instead, the f
     LDAP is disabled by default. 
   <%= image_tag('form_ldap_settings.png') %>
 <p class="note"><strong>Note</strong>: Using the default <strong>LDAP Disabled</strong>, 
-   the VMR will use its internal database for management and user credentials per service instance.
+   the Solace PubSub+ Message Broker will use its internal database for management and user credentials per service instance.
    To use an LDAP store you must select <strong>LDAP Enabled</strong> and provide all the required settings for your LDAP server. </p>
 1. Click **LDAP Enabled**.
 
@@ -357,7 +344,7 @@ This checkbox should never be selected in production deployments. Instead, the f
 
 In order to have an effective LDAP configuration, configure LDAP for [Management Access](#optional_management_access)
 and [Application Access](#optional_application_access). 
-**If neither [Management Access](#optional_management_access) nor [Application Access](#optional_application_access) are configured for LDAP, the VMR will continue to use its internal database for management and user credentials.**
+**If neither [Management Access](#optional_management_access) nor [Application Access](#optional_application_access) are configured for LDAP, the Solace PubSub+ Message Broker will continue to use its internal database for management and user credentials.**
 
 <a id='optional_system_logging'></a>**(Optional) System Logging**
 
@@ -455,23 +442,23 @@ In order to apply changes, all the settings for the Solace tile need to be marke
 1. Click **Apply Changes** to deploy the tile.
 
     <%= image_tag('apply_changes.png') %>
-1. After the tile has deployed, see [Creating and Binding Solace Messaging Service Instances](service-instances.html) for information about creating instances of the Solace Messaging service and binding them to apps.
+1. After the tile has deployed, see [Creating and Binding Solace PubSub+ Service Instances](service-instances.html) for information about creating instances of the Solace PubSub+ service and binding them to apps.
 
 
 ## <a id='upgrades'></a>Upgrades
 
-Solace Messaging for PCF supports upgrades starting with release 1.3.0. Future releases can upgrade a deployment if the deployment is 1.3.0 or higher.
+Solace PubSub+ for PCF supports upgrades starting with release 1.3.0. Future releases can upgrade a deployment if the deployment is 1.3.0 or higher.
 In-Service-Upgrades are supported from release 1.3.0 for high-availability service plans.
 
 ### <a id='upgrades_non_ha'></a>Non-High Availability Upgrades
 
-Upgrades are service-affecting for non-HA service plans <code>Shared-VMR</code>, <code>Community-VMR</code>, and <code>Large-VMR</code>.
+Upgrades are service-affecting for non-HA service plans <code>Shared</code>, and <code>Large</code>.
 
-The messaging service for an application will experience an outage that lasts no longer than the time it takes to upgrade the VMR and start it up again.
+The messaging service for an application will experience an outage that lasts no longer than the time it takes to upgrade the Solace PubSub+ Message Broker and start it up again.
 
 ### <a id='upgrades_ha'></a>High Availability Upgrades
 
-Upgrades are non-service-affecting for high-availability plans <code>Large-HA-VMR</code> and <code>Medium-HA-VMR</code>, so there will always be a service available during upgrades. Upgrades will affect each VM providing the HA service one at a time.
+Upgrades are non-service-affecting for high-availability plans <code>Large-HA</code> and <code>Medium-HA</code>, so there will always be a service available during upgrades. Upgrades will affect each VM providing the HA service one at a time.
 
 An application using an HA service will experience at least one switch-over during an upgrade, and at most two switch-overs.
 

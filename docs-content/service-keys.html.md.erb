@@ -1,32 +1,32 @@
 ---
-title: Service Keys for Solace Messaging Service Instances
+title: Service Keys for Solace PubSub+ Service Instances
 owner: Partners
 ---
 
-This topic describes how developers can manage service keys for Solace Messaging service instances.
+This topic describes how developers can manage service keys for Solace PubSub+ service instances.
 
 ##<a id='service-keys'></a>About Service Keys
 
-A service key is a way of obtaining credentials for a Solace Messaging service instance.
+A service key is a way of obtaining credentials for a Solace PubSub+ service instance.
 
 When using service keys, the developer assumes the responsibility of passing the credentials associated with the service key to the app. 
 
-Creating a service key for a service instance produces [Solace Messaging Credentials](credentials.html),
+Creating a service key for a service instance produces [Solace PubSub+ Credentials](credentials.html),
 these credentials will be associated with the service key.
 
 Deleting a service key of a service instance revokes the associated credentials.
 
 Obtaining credential using service keys can be used for apps that are not hosted in Pivotal Cloud Foundry (PCF).
-A typical use case is when you have TCP Routes enabled and you have apps running outside PCF that need access to Solace Messaging Services running inside PCF.
+A typical use case is when you have TCP Routes enabled and you have apps running outside PCF that need access to Solace PubSub+ Services running inside PCF.
 
-The following procedures assume you have created a Solace Messaging service called `solace-messaging-instance`
+The following procedures assume you have created a Solace PubSub+ service called `solace-pubsub-instance`
 as discussed in [Service Instances](service-instances.html) and that you have some app running outside of PCF.
 
 For more information about managing service keys, see [Managing Service Keys](https://docs.pivotal.io/pivotalcf/devguide/services/service-keys.html).
 
 ##<a id='create-service-key-cf-cli'></a>Create a Service Key for a Service Instance with the cf CLI
 
-To create a service key for an existing Solace Messaging service with the cf Command Line Interface (CLI), perform the following steps:
+To create a service key for an existing Solace PubSub+ service with the cf Command Line Interface (CLI), perform the following steps:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
@@ -52,33 +52,33 @@ To create a service key for an existing Solace Messaging service with the cf Com
    Getting services in org example / space dev as user<span>@</span>example.com...
    OK
    name                        service            plan     bound apps   last operation
-   solace-messaging-instance   solace-messaging   large-ha              create succeeded
+   solace-pubsub-instance      solace-pubsub      large-ha              create succeeded
   </pre>
 
-1. Create the service key for the solace-messaging-instance and name it `external-mobile-app`.
+1. Create the service key for the solace-pubsub-instance and name it `external-mobile-app`.
   <pre class="terminal">
-  $ cf create-service-key solace-messaging-instance external-mobile-app
-  Creating service key external-mobile-app for service instance solace-messaging-instance as user<span>@</span>example.com...
+  $ cf create-service-key solace-pubsub-instance external-mobile-app
+  Creating service key external-mobile-app for service instance solace-pubsub-instance as user<span>@</span>example.com...
   OK
   </pre>
 
 1. List the service keys for our service instance.
   <pre class="terminal">
-  $ cf service-keys solace-messaging-instance
-  Getting keys for service instance solace-messaging-instance as user<span>@</span>example.com...
+  $ cf service-keys solace-pubsub-instance
+  Getting keys for service instance solace-pubsub-instance as user<span>@</span>example.com...
   name
   external-mobile-app
   </pre>
 
 ##<a id='getting-service-key-cf-cli'></a>Get Service Key Credentials
 
- Assuming you have created a service key `external-mobile-app` for `solace-messaging-instance`. 
+ Assuming you have created a service key `external-mobile-app` for `solace-pubsub-instance`. 
 
 1. Get the service key credentials.
 
   <pre class="terminal">
-  $ cf service-key solace-messaging-instance external-mobile-app
-  Getting key external-mobile-app for service instance solace-messaging-instance as user<span>@</span>example.com...
+  $ cf service-key solace-pubsub-instance external-mobile-app
+  Getting key external-mobile-app for service instance solace-pubsub-instance as user<span>@</span>example.com...
 
   {
   "clientPassword": "848e5357-2185-4c6c-bd98-8afc2da26492",
@@ -94,7 +94,7 @@ To create a service key for an existing Solace Messaging service with the cf Com
   ],
   (...)
   "managementHostnames": [
-   "shared-vmr-0.local.pcfdev.io"
+   "shared-0.local.pcfdev.io"
   ],
   "managementPassword": "39159deafcd44b0ebee9d504807dbdd1",
   "managementUsername": "v002-mgmt",
@@ -106,31 +106,31 @@ To create a service key for an existing Solace Messaging service with the cf Com
 
 ##<a id='saving-service-key-cf-cli'></a>Save Service Key Credentials
 
- Assuming you have created a service key `external-mobile-app` for `solace-messaging-instance`. 
+ Assuming you have created a service key `external-mobile-app` for `solace-pubsub-instance`. 
 
 1. Save the service key credentials to a file.
 
 This saves the contents of the service key credentials to a file called `external-mobile-app.key`.
-A developer is responsible to pass this file to an app that needs to use the solace-messaging-instance
+A developer is responsible to pass this file to an app that needs to use the solace-pubsub-instance
 
   <pre class="terminal">
-  $ cf service-key solace-messaging-instance external-mobile-app | grep -v Getting > external-mobile-app.key
+  $ cf service-key solace-pubsub-instance external-mobile-app | grep -v Getting > external-mobile-app.key
   </pre>
 
 ##<a id='delete-service-key-cf-cli'></a>Delete a Service Key for a Service Instance with the cf CLI
 
-  To revoke an app's permission to use a Solace Messaging Instance, you can delete its service key.
+  To revoke an app's permission to use a Solace PubSub+ Instance, you can delete its service key.
 
-  Assuming you have created a service key `external-mobile-app` for `solace-messaging-instance`.
+  Assuming you have created a service key `external-mobile-app` for `solace-pubsub-instance`.
 
 1. Delete the service key for the service instance.
 
 
   <pre class="terminal">
-  $ cf delete-service-key solace-messaging-instance external-mobile-app
+  $ cf delete-service-key solace-pubsub-instance external-mobile-app
 
   Really delete the service key external-mobile-app?> yes
-  Deleting key external-mobile-app for service instance solace-messaging-instance as user<span>@</span>example.com...
+  Deleting key external-mobile-app for service instance solace-pubsub-instance as user<span>@</span>example.com...
   OK
   </pre>
 

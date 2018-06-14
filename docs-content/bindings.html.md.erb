@@ -1,28 +1,28 @@
 ---
-title: Binding to Solace Messaging Service Instances
+title: Binding to Solace PubSub+ Service Instances
 owner: Partners
 ---
 
-This topic describes how developers can bind an app to instances of the Solace Messaging service.
+This topic describes how developers can bind an app to instances of the Solace PubSub+ service.
 
 ##<a id='about-bindings'></a>About Bindings
 
-For an app deployed in Pivotal Cloud Foundry (PCF) to obtain credentials for a Solace Messaging service instance,
+For an app deployed in Pivotal Cloud Foundry (PCF) to obtain credentials for a Solace PubSub+ service instance,
 a developer needs to bind the app to the service instance.
 
-Binding the app to a service instance produces [Solace Messaging Credentials](credentials.html),
+Binding the app to a service instance produces [Solace PubSub+ Credentials](credentials.html),
 which become available in the `VCAP_SERVICES` environment variable for the app as deployed in PCF.
 
 Unbindng the app from the service instance revokes the credentials.
 
-The following procedures assume you have created a Solace Messaging service called `solace-messaging-instance`
+The following procedures assume you have created a Solace PubSub+ service called `solace-pubsub-instance`
 as discussed in [Service Instances](service-instances.html) and that you have a deployed app called `web-backend`.
 
 The procedures show you how to bind this service instance to the app named `web-backend`. 
 
 ##<a id='bind-cf-cli'></a>Bind a Service Instance with the cf CLI
 
-To bind an instance of the Solace Messaging service with the cf Command Line Interface (CLI) tool, perform the following steps:
+To bind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool, perform the following steps:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
@@ -49,13 +49,13 @@ To bind an instance of the Solace Messaging service with the cf Command Line Int
 	OK
 
 	name                        service            plan     bound apps   last operation
-	solace-messaging-instance   solace-messaging   large-ha              create succeeded
+	solace-pubsub-instance      solace-pubsub      large-ha              create succeeded
 	</pre>
 
 1. Bind the instance to an app called `web-backend`.
   <pre class="terminal">
-  $ cf bind-service web-backend solace-messaging-instance
-  Binding service solace-messaging-instance to app web-backend in org example / space development as user<span>@</span>example.com...
+  $ cf bind-service web-backend solace-pubsub-instance
+  Binding service solace-pubsub-instance to app web-backend in org example / space development as user<span>@</span>example.com...
   OK
   TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
   </pre>
@@ -67,10 +67,10 @@ To bind an instance of the Solace Messaging service with the cf Command Line Int
 
 ##<a id='apps-man'></a>Bind a Service Instance in Apps Manager
 
-To bind an instance of the Solace Messaging service in Apps Manager, perform the following steps:
+To bind an instance of the Solace PubSub+ service in Apps Manager, perform the following steps:
 
 1. Navigate to `apps.YOUR-SYSTEM-DOMAIN` in a browser and log in.
-1. Select the org and space in which you wish to create the Solace Messaging service.
+1. Select the org and space in which you wish to create the Solace PubSub+ service.
 1. Click **Apps**, click the app name **web-backend**, click **Services**, then click **Bind a Service**.
   <%= image_tag('appsmanager_solace_messaging_service_list_empty.png') %>
 1. Select a service instance to bind to the app and click **Bind**.
