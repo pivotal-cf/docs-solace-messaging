@@ -86,9 +86,11 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
 
 The Solace PubSub+ for PCF Service Broker requires the following:
 
-* Java buildpack v3.7.1 or later.
-* The MySQL for PCF tile. When configuring the tile, set the maximum storage in the **Service Plan** section to 100 MB. 
-  For information on how to install and configure the tile, see [MySQL for Pivotal Cloud Foundry](http://docs.pivotal.io/p-mysql/index.html).
+* Java buildpack v3.7.1 or later. XXX Revisit buildpack version.
+* MySQL database which can be made available in one of these methods:
+  * Internal deployment as part of the Solace PubSub+ for PCF on a management VM, see <a href="#required_mysql_internal">Using MySQL from an internal deployment</a>
+  * External when mysql is already deployed outside PCF, it may be offered as a CUPS to Solace PubSub+ for PCF, see <a href="#required_mysql_external">Using MySQL from an external deployment</a>
+  * As service from a deployment of [MySQL for Pivotal Cloud Foundry](http://docs.pivotal.io/p-mysql/index.html). Please ensure to configure for a High Availability setup and with service plans offering a minimum of 100 MB. see <a href="#required_mysql_as_service">Using MySQL as a Service</a>
 
 ##<a id='install'></a> Install Solace PubSub+ for PCF 
 
@@ -110,6 +112,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
 1. Configure the [**Required Settings**](#configure_required):
    * [**Assign AZs and Networks**](#required_azs_and_network)
    * [**Management Access**](#required_management_access)
+   * [**MySQL Configuration**](#required_mysql_configuration)
    * [**TCP Routes**](#required_tcp_routes)
    * [**Stemcell**](#required_stemcell)
    * [**Resource Config**](#required_resource_config)
@@ -137,6 +140,22 @@ From the **Settings** tab of the Solace PubSub+ tile:
    If you are deploying Solace PubSub+ with high availability plans, consider using multiple availability zones for maximum fault tolerance.
 
     <%= image_tag('form_assign_azs_and_networks.png') %>
+1. Click **Save**.
+
+<a id='required_mysql_configuration'></a>**MySQL Configuration**
+
+
+1. Click **MySQL Configuration**.
+
+##TODO: IMAGE
+    <%= image_tag('select_1_management_access.png') %> 
+1. Select a MySQL configuration for the service broker's database.
+
+
+## TODO Image
+    <%= image_tag('form_management_access_admin_user_password.png') %>
+1. [(Optional) if you want to use LDAP](#optional_management_access).
+
 1. Click **Save**.
 
 <a id='required_management_access'></a>**Management Access**
