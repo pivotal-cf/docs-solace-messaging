@@ -75,12 +75,35 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
     <td>1</td>
     <td>0</td>
   </tr>
+  <tr>
+    <td>Management</td>
+    <td>1<a href="#tableNote3"><sup>3</sup></a></td>
+    <td>1</td>
+    <td>2048</td>
+    <td>10240</td>
+    <td>10240</td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>Arbitrator</td>
+    <td>0<a href="#tableNote4"><sup>4</sup></a></td>
+    <td>1</td>
+    <td>1024</td>
+    <td>10240</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
 </table>
 
 <p id="tableNote1" class="note"><strong><sup>1</sup> Note</strong>: You can modify the number of instances and persistent disk size when configuring the Solace PubSub+ for PCF tile for the Solace PubSub+ Message Broker jobs. For more information, see the <a href="#configure">Configure Solace PubSub+ for PCF</a> tile below.</p> 
 
 <p id="tableNote2" class="note"><strong><sup>2</sup> Note</strong>: A single high availability Solace PubSub+ service instance requires three (3) HA Solace PubSub+ Message Broker job instances to be used. As such, the number of HA Solace PubSub+ Message Broker job instances specified for the HA Solace PubSub+ Message Broker instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
 
+<p id="tableNote3" class="note"><strong><sup>3</sup> Note</strong>: The management node is only required when choosing to deploy with one of the internal MySQL database options. You can set this to zero if you choose 'MySQL For PCF' or 'External MySQL'. A single instance is required if you choose the 'Internal MySQL' option, two intances are required if you choose the 'Internal MySQL (Highly Available Service Broker)'.</p>
+
+<p id="tableNote4" class="note"><strong><sup>4</sup> Note</strong>: One arbirator node is required when choosing to deploy with the 'Internal MySQL (Highly Available Service Broker)' database option. Otherwise set this to zero.</p>
 
 ## <a id='prereqs'></a>Prerequisites
 
@@ -107,7 +130,7 @@ To install Solace PubSub+ for PCF, do the following:
 To configure Solace PubSub+ for PCF, do the following:
 
 From the **Settings** tab of the Solace PubSub+ tile:
-  <%= image_tag('select_settings.png') %>
+  <%= image_tag('select_tile_settings.png') %>
 
 1. Configure the [**Required Settings**](#configure_required):
    * [**Assign AZs and Networks**](#required_azs_and_network)
@@ -118,7 +141,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
    * [**Resource Config**](#required_resource_config)
 
 1. Configure the [**Optional Settings**](#configure_optional):
-   * [**Message Router Config**](#optional_message_router_config)
+   * [**Message Broker Config**](#optional_message_broker_config)
    * [**TLS Config**](#optional_tls_config)
    * [**Management Access (LDAP)**](#optional_management_access)
    * [**Service Access**](#optional_service_access)
@@ -147,14 +170,18 @@ From the **Settings** tab of the Solace PubSub+ tile:
 
 1. Click **MySQL Configuration**.
 
-##TODO: IMAGE
-    <%= image_tag('select_1_management_access.png') %> 
-1. Select a MySQL configuration for the service broker's database.
+    <%= image_tag('select_1_mysql.png') %> 
+1. Select one of the supported MySQL configuration for the service broker's database.
 
 
-## TODO Image
-    <%= image_tag('form_management_access_admin_user_password.png') %>
-1. [(Optional) if you want to use LDAP](#optional_management_access).
+    <%= image_tag('form_mysql_default.png') %>
+1. The default option is for a Internal MySQL deployed to a single management VM. This option does not provide a high availability deployment.
+
+    <%= image_tag('form_mysql_internal_ha.png') %>
+
+    <%= image_tag('form_mysql_for_pcf.png') %>
+
+    <%= image_tag('form_mysql_external.png') %>
 
 1. Click **Save**.
 
@@ -163,9 +190,9 @@ From the **Settings** tab of the Solace PubSub+ tile:
 1. Click **Management Access**.
 
     <%= image_tag('select_1_management_access.png') %> 
-1. Under **Admin user password**, pick a password for the Virtual Message Routers `admin` user.
+1. Under **Admin user password**, pick a password for the message brokers `admin` user.
 
-    <%= image_tag('form_management_access_admin_user_password.png') %>
+    <%= image_tag('form_management_access_admin_user_password_new.png') %>
 1. [(Optional) if you want to use LDAP](#optional_management_access).
 
 1. Click **Save**.
@@ -179,7 +206,7 @@ You need to open this pane and click **Save** even if using the default setting.
     <%= image_tag('select_1_tcp_routes.png') %>
 1. Default: **TCP Routes Disabled**.
 
-    <%= image_tag('form_tcp_routes.png') %>
+    <%= image_tag('form_tcp_routes_new.png') %>
 1. Click **Save**.
 
 <p class="note"><strong>Note</strong>: Failing to click <strong>Save</strong> might result in an <code>unknown property "solace_router"</code> exception when you attempt to Apply Changes.</p>
@@ -199,7 +226,7 @@ You might need to import a stemcell import if the minimum stemcell required for 
 1. Click **Resource Config**.
 
     <%= image_tag('select_1_resource_config.png') %> 
-1. Use the drop-down menus to configure the number of Solace PubSub+ Message Broker job instances that are available in each of the five service plans mentioned above.
+1. Use the drop-down menus to configure the number of Solace PubSub+ Message Broker job instances that are available in each of the service plans mentioned above.
    These job instances are statically created when the tile is deployed.
    Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances.<br/><br/>
    Five Shared service instances can be hosted on a single Shared job instance.
@@ -218,23 +245,23 @@ You might need to import a stemcell import if the minimum stemcell required for 
    The VM Type for these errands is not related to the required resources of the Solace Service Broker, which runs in Elastic Runtime.</p>
 <p class="note"><strong>Note</strong>: The solace_tests errand will test that a deployment has completed as expected and that it is ready for service. Solace recommends always running this errand after a deployment.
    Solace recommends leaving the default VM Type.</p>
-    <%= image_tag('form_resource_config.png') %>
+    <%= image_tag('form_resource_config_new.png') %>
 
 1. Click **Save**.
 
 
 ###<a id='configure_optional'></a> Optional Settings
 
-<a id='optional_message_router_config'></a>**(Optional) Message Router Config**
+<a id='optional_message_broker_config'></a>**(Optional) Message Broker Config**
 
 1. Click **Message Router Config**.
 
-    <%= image_tag('select_1_message_router_config.png') %> 
+    <%= image_tag('select_1_message_broker_config.png') %> 
 1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ Message Brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`.  
 The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. 
 For an example, see [Example Environment Variable](credentials.html#example).
 <p class="note"><strong>Note</strong>: The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
-    <%= image_tag('form_message_router_config.png') %>
+    <%= image_tag('form_message_broker_config.png') %>
 
 1. Click **Save**.
 
@@ -246,11 +273,11 @@ For an example, see [Example Environment Variable](credentials.html#example).
 
     TLS is disabled by default.
 
-    <%= image_tag('form_tls_config.png') %> 
+    <%= image_tag('form_tls_config_new.png') %> 
 
 1. Click **TLS Enabled**.
 
-    <%= image_tag('form_tls_config_enabled.png') %> 
+    <%= image_tag('form_tls_config_enabled_new.png') %> 
 By enabling and configuring TLS, you allow messaging between apps and the Solace PubSub+ Message Broker to be encrypted. 
 Apps requiring encryption would then need to use the TLS-specific URLs passed in the `VCAP_SERVICES` environment variable. 
 For more information about the `VCAP_SERVICES` environment variable, see [Example Environment Variable](credentials.html#example). 
@@ -260,7 +287,7 @@ If TLS is not configured, the TLS specific URLs continue to be passed in the `VC
    or asking one to be generated by clicking **Generate RSA Certificate**. 
    Generated certificates are equivalent to self-signed certificates.
 
-    <%= image_tag('form_tls_config_server_certificate.png') %>
+    <%= image_tag('form_tls_config_server_certificate_new.png') %>
 <p class="note"><strong>Note</strong>: The server certificate configured will be used by all Solace PubSub+ Message Brokers deployed. As such, all Solace PubSub+ Message Brokers deployed in a PCF instances will have the same identification.</p>
     <%= image_tag('form_tls_config_disable_sb_cert_validation.png') %>
 <p class="note"><strong>Note</strong>: Communication between the Solace PubSub+ Service Broker and Solace PubSub+ Message Broker is also encrypted if a TLS certificate is configured. 
@@ -273,7 +300,7 @@ This checkbox should never be selected in production deployments. Instead, the f
 1. (Optional) Configure **Message Router's Trusted Root Certificates**.
    These certificates will be stored in the trust store on the Solace PubSub+ Message Brokers.
    They are required if you choose to use LDAP with TLS.
-    <%= image_tag('form_tls_config_trusted_root_certificates.png') %>
+    <%= image_tag('form_tls_config_trusted_root_certificates_new.png') %>
 
 1. Click **Save**.
 
@@ -297,18 +324,18 @@ This checkbox should never be selected in production deployments. Instead, the f
 
 1. If you configured [LDAP](#optional_ldap_settings), you may choose to have the LDAP Server provide the authentication
    and authorization for the management roles on a Solace service instance.
-    <%= image_tag('form_management_access_ldap.png') %>
+    <%= image_tag('form_management_access_ldap_new.png') %>
 1. (Optional) Configure Groups with Solace PubSub+ Message Brokers administration read-only privilege.
-    <%= image_tag('form_management_access_ldap_readonly.png') %>
+    <%= image_tag('form_management_access_ldap_readonly_new.png') %>
 1. (Optional) Configure Groups with Solace PubSub+ Message Brokers administration read-write privileges.
-    <%= image_tag('form_management_access_ldap_readwrite.png') %>
+    <%= image_tag('form_management_access_ldap_readwrite_new.png') %>
 1. (Optional) Configure Groups with Solace PubSub+ Message Brokers administration administrator privileges.
-    <%= image_tag('form_management_access_ldap_admin.png') %>
+    <%= image_tag('form_management_access_ldap_admin_new.png') %>
 <p class="note"><strong>Note</strong>: Cloud Operators need to have global access to the Solace PubSub+ Message Brokers deployed by the tile.
    This will allow them to administer the Solace PubSub+ Message Brokers with SolAdmin, CLI or SEMP-based tools.
    Cloud operators might have different roles.
    Each role requires one of the three types of access-level: administrator, read-write and read-only.
-   When using "VMR Internal" the cloud operators access to a single administrator level role using the admin password.
+   When using "Message Broker Internal" the cloud operators access to a single administrator level role using the admin password.
    With "LDAP Server" users can be assigned to groups in LDAP mapping to their respective roles.</p>
 
 1. Click **Save**.
@@ -320,7 +347,7 @@ This checkbox should never be selected in production deployments. Instead, the f
     <%= image_tag('select_1_application_access.png') %>
 1. Using the defaults, the Solace PubSub+ Message Broker will use its internal database for user credentials per service instance.
    If you configured LDAP, you may request the Solace PubSub+ Message Broker to use the LDAP Server for authentication and authorization of when a client attempts to access a Solace PubSub+ service instance.
-    <%= image_tag('form_application_access.png') %>
+    <%= image_tag('form_application_access_new.png') %>
 
 1. Click **Save**.
 
@@ -331,13 +358,13 @@ This checkbox should never be selected in production deployments. Instead, the f
     <%= image_tag('select_1_ldap_settings.png') %>
 
     LDAP is disabled by default. 
-  <%= image_tag('form_ldap_settings.png') %>
+  <%= image_tag('form_ldap_settings_new.png') %>
 <p class="note"><strong>Note</strong>: Using the default <strong>LDAP Disabled</strong>, 
    the Solace PubSub+ Message Broker will use its internal database for management and user credentials per service instance.
    To use an LDAP store you must select <strong>LDAP Enabled</strong> and provide all the required settings for your LDAP server. </p>
 1. Click **LDAP Enabled**.
 
-    <%= image_tag('form_ldap_settings_enabled.png') %>
+    <%= image_tag('form_ldap_settings_enabled_new.png') %>
 1. Set LDAP Server URL.
 
     <%= image_tag('form_ldap_settings_server_url.png') %>
@@ -345,7 +372,7 @@ This checkbox should never be selected in production deployments. Instead, the f
    you may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config).</p>
 1. Set LDAP TLS Preference.
 
-    <%= image_tag('form_ldap_settings_starttls.png') %>
+    <%= image_tag('form_ldap_settings_starttls_new.png') %>
 1. Set LDAP Credentials to use with the LDAP Server.
 
     <%= image_tag('form_ldap_settings_credentials.png') %>
@@ -376,7 +403,7 @@ and [Application Access](#optional_application_access).
 
 1. Click **System Logging Enabled**.
 
-    <%= image_tag('form_system_logging_enabled.png') %>
+    <%= image_tag('form_system_logging_enabled_new.png') %>
 1. Set the external syslog hostname.
 
     <%= image_tag('form_system_logging_server.png') %>
@@ -389,10 +416,10 @@ and [Application Access](#optional_application_access).
     <%= image_tag('form_system_logging_protocol.png') %>
 1. Select what logs to send to the external syslog server.
 
-    <%= image_tag('form_system_logging_vmr_commands.png') %>
-    <%= image_tag('form_system_logging_vmr_events.png') %>
-    <%= image_tag('form_system_logging_vmr_system.png') %>
-    <%= image_tag('form_system_logging_sb.png') %>
+    <%= image_tag('form_system_logging_mb_commands.png') %>
+    <%= image_tag('form_system_logging_mb_events.png') %>
+    <%= image_tag('form_system_logging_mb_system.png') %>
+    <%= image_tag('form_system_logging_sb_agent.png') %>
 
 1. Click **Save**.
 
@@ -404,11 +431,11 @@ and [Application Access](#optional_application_access).
 
     TCP routes are disabled by default.
 
-    <%= image_tag('form_tcp_routes.png') %>
+    <%= image_tag('form_tcp_routes_new.png') %>
 1. Click **TCP Routes Enabled**.
 
-    <%= image_tag('form_tcp_routes_enabled_1.png') %>
-    <%= image_tag('form_tcp_routes_enabled_2.png') %>
+    <%= image_tag('form_tcp_routes_enabled_1_new.png') %>
+    <%= image_tag('form_tcp_routes_enabled_2_new.png') %>
   <p class="note"><strong>Note</strong>: Fine-grained control is available by protocol.
      If you choose <strong>"Not Allowed"</strong>, a TCP Route will never be created for this protocol, even if requested at service creation time.
      If you choose <strong>"Disabled by default"</strong>, at service creation time, a TCP Route will not be created for this protocol unless a user-provided parameter overrides it with a "true" setting.
@@ -466,8 +493,8 @@ In order to apply changes, all the settings for the Solace tile need to be marke
 
 ## <a id='upgrades'></a>Upgrades
 
-Solace PubSub+ for PCF supports upgrades starting with release 1.3.0. Future releases can upgrade a deployment if the deployment is 1.3.0 or higher.
-In-Service-Upgrades are supported from release 1.3.0 for high-availability service plans.
+Solace PubSub+ for PCF supports upgrades starting with release 2.0.0. Future releases can upgrade a deployment if the deployment is 2.0.0 or higher.
+In-Service-Upgrades are supported from release 2.0.0 for high-availability service plans.
 
 ### <a id='upgrades_non_ha'></a>Non-High Availability Upgrades
 
@@ -489,7 +516,7 @@ Failures in upgrades are due to either pre-conditions or post-conditions, and ar
 
 The following pre-conditions must be met before an upgrade can proceed, or the upgrade will abort.
 
-* The version of the tile being upgraded must be version 1.3.0 or higher.
+* The version of the tile being upgraded must be version 2.0.0 or higher.
 * The redundancy state of HA services must be healthy.
 
 
