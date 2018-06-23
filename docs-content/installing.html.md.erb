@@ -101,9 +101,9 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
 
 <p id="tableNote2" class="note"><strong><sup>2</sup> Note</strong>: A single high availability Solace PubSub+ service instance requires three (3) HA Solace PubSub+ Message Broker job instances to be used. As such, the number of HA Solace PubSub+ Message Broker job instances specified for the HA Solace PubSub+ Message Broker instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
 
-<p id="tableNote3" class="note"><strong><sup>3</sup> Note</strong>: The management vm is only required when choosing to deploy with one of the internal MySQL database options. You can set this to zero if you choose 'MySQL For PCF' or 'External MySQL'. A single instance is required if you choose the 'Internal MySQL' option, two intances are required if you choose the 'Internal MySQL (Highly Available)'.</p>
+<p id="tableNote3" class="note"><strong><sup>3</sup> Note</strong>: The management vm is only required when choosing to deploy with one of the internal MySQL database options. You can set this to zero if you choose 'MySQL For PCF' or 'External MySQL'. A single instance is required if you choose the 'Internal MySQL' option, two instances are required if you choose the 'Internal MySQL (Highly Available)'.</p>
 
-<p id="tableNote4" class="note"><strong><sup>4</sup> Note</strong>: One arbirator vm is required when choosing to deploy with the 'Internal MySQL (Highly Available)' database option. Otherwise set this to zero.</p>
+<p id="tableNote4" class="note"><strong><sup>4</sup> Note</strong>: One arbitrator vm is required when choosing to deploy with the 'Internal MySQL (Highly Available)' database option. Otherwise set this to zero.</p>
 
 ## <a id='prereqs'></a>Prerequisites
 
@@ -177,12 +177,12 @@ From the **Settings** tab of the Solace PubSub+ tile:
 
     <p></p>
     <a id='required_mysql_internal'></a>
-    <p class="note"><strong>Internal MySQL</strong>: The default option is for a 'Internal MySQL' deployed to a single management VM. This option does not provide a high availability deployment.</p>
+    <p class="note"><strong>Internal MySQL</strong>: The default option is for a 'Internal MySQL' deployed to a single management VM. This option does not provide a high availability deployment of MySQL and not recommended for a production deployment of Solace PubSub+ for PCF..</p>
     <%= image_tag('form_mysql_default_new.png') %>
     <p></p>
 
     <a id='required_mysql_internal_ha'></a>
-    <p class="note"><strong>Internal MySQL (Highly Available)</strong>: Recommended for a production deployment when choosing 'Internal MySQL'. Please ensure to allocate two management VMs, and one arbirator VM, the arbirator VM should be located in a different availability zone than the management VMs. The Load Balancer setup needs to ensure to point to the two management VMs with healthcheck port 1936. The Load Balancer setup must be sticky. For more details please See [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer)</p>
+    <p class="note"><strong>Internal MySQL (Highly Available)</strong>: Please ensure to allocate two management VMs, and one arbitrator VM, the arbitrator VM should be located in a different availability zone than the management VMs. The Load Balancer setup needs to ensure to point to the two management VMs with healthcheck port 1936. The Load Balancer setup must be sticky. For more details please See [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer)</p>
     <%= image_tag('form_mysql_internal_ha_new.png') %>
     <p></p>
 

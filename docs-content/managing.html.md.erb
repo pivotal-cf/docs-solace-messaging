@@ -48,7 +48,7 @@ To retrieve the information required to connect to the Solace PubSub+ Message Br
 1. Both the `VCAP_SERVICES` and Service Key contain the same information, look for and record the following fields:
   * `managementHostnames`: The Solace PubSub+ Message Broker's management hostnames. There will be multiple entries for Services on HA Plans.
   * `activeManagementHostname`: A single entry that is dynamically routed to the active node for an HA Service. Will always be the same as `managementHostnames` for non HA plans.
-  * When Management Access is set to `VMR Internal`
+  * When Management Access is set to `Message Broker Internal`
       * `managementUsername`: The service instance's management username
       * `managementPassword`: The service instance's management password
   * When Management Access is set to `LDAP Server`
