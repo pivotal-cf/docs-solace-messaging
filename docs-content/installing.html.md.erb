@@ -32,7 +32,7 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
     <td>1</td>
   </tr>
   <tr>
-    <td>Large</td>
+    <td>Enterprise Large</td>
     <td>1<a href="#tableNote1"><sup>1</sup></a></td>
     <td>4</td>
     <td>12288</td>
@@ -42,7 +42,7 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
     <td>0</td>
   </tr>
   <tr>
-    <td>Shared</td>
+    <td>Enterprise Shared</td>
     <td>1<a href="#tableNote1"><sup>1</sup></a></td>
     <td>2</td>
     <td>4096</td>
@@ -52,7 +52,7 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
     <td>0</td>
   </tr>
   <tr>
-    <td>Medium-HA</td>
+    <td>Enterprise Medium-HA</td>
     <td>3
 	<a href="#tableNote1"><sup>1, </sup></a>
 	<a href="#tableNote2"><sup>2</sup></a></td>
@@ -64,7 +64,7 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
     <td>0</td>
   </tr>
   <tr>
-    <td>Large-HA</td>
+    <td>Enterprise Large-HA</td>
     <td>3
 	<a href="#tableNote1"><sup>1, </sup></a>
 	<a href="#tableNote2"><sup>2</sup></a></td>
@@ -244,11 +244,11 @@ You might need to import a stemcell import if the minimum stemcell required for 
 1. Use the drop-down menus to configure the number of Solace PubSub+ Message Broker job instances that are available in each of the service plans mentioned above.
    These job instances are statically created when the tile is deployed.
    Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances.<br/><br/>
-   Five Shared service instances can be hosted on a single Shared job instance.
-   As such, the maximum number of Shared service instances that can concurrently exist for the <code>Shared</code> service plan is equal to five times the number of <code>Shared</code> job instances.
+   Five Enterprise Shared service instances can be hosted on a single Enterprise Shared job instance.
+   As such, the maximum number of Enterprise Shared service instances that can concurrently exist for the <code>Enterprise Shared</code> service plan is equal to five times the number of <code>Enterprise Shared</code> job instances.
    Conversely, three HA Solace PubSub+ Message Broker job instances are required for a single HA Solace PubSub+ Message Broker service instance.
-   As such, the maximum number of HA Solace PubSub+ Message Broker service instances that can concurrently exist for the <code>Large-HA</code> and <code>Medium-HA</code> service plans is equal to one-third the number of their corresponding job instances.
-   In order for <code>Large-HA</code> and <code>Medium-HA</code> service plans to provide high availability fault tolerance, make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more.
+   As such, the maximum number of HA Solace PubSub+ Message Broker service instances that can concurrently exist for the <code>Enterprise Large-HA</code> and <code>Enterprise Medium-HA</code> service plans is equal to one-third the number of their corresponding job instances.
+   In order for <code>Enterprise Large-HA</code> and <code>Enterprise Medium-HA</code> service plans to provide high availability fault tolerance, make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more.
    If you have only one availability zone, the deployment is not fault tolerant and Solace does not recommend using high availability service plans under this scenario.
 <p class="note"><strong>Note</strong>: The number of job instances can be increased after the tile is deployed without impacting already bound apps. However, reducing the number of instances can result in app failure and message loss.</p>
 <p class="note"><strong>Note</strong>: The size of the persistent disk can be changed both before and after deployment. 
@@ -260,7 +260,7 @@ You might need to import a stemcell import if the minimum stemcell required for 
    The VM Type for these errands is not related to the required resources of the Solace Service Broker, which runs in Elastic Runtime.</p>
 <p class="note"><strong>Note</strong>: The solace_tests errand will test that a deployment has completed as expected and that it is ready for service. Solace recommends always running this errand after a deployment.
    Solace recommends leaving the default VM Type.</p>
-    <%= image_tag('form_resource_config_new.png') %>
+    <%= image_tag('form_resource_config_renamed.png') %>
 
 1. Click **Save**.
 
@@ -513,13 +513,13 @@ In-Service-Upgrades are supported from release 2.0.0 for high-availability servi
 
 ### <a id='upgrades_non_ha'></a>Non-High Availability Upgrades
 
-Upgrades are service-affecting for non-HA service plans <code>Shared</code>, and <code>Large</code>.
+Upgrades are service-affecting for non-HA service plans <code>Enterprise Shared</code>, and <code>Enterprise Large</code>.
 
 The messaging service for an application will experience an outage that lasts no longer than the time it takes to upgrade the Solace PubSub+ Message Broker and start it up again.
 
 ### <a id='upgrades_ha'></a>High Availability Upgrades
 
-Upgrades are non-service-affecting for high-availability plans <code>Large-HA</code> and <code>Medium-HA</code>, so there will always be a service available during upgrades. Upgrades will affect each VM providing the HA service one at a time.
+Upgrades are non-service-affecting for high-availability plans <code>Enterprise Large-HA</code> and <code>Enterprise Medium-HA</code>, so there will always be a service available during upgrades. Upgrades will affect each VM providing the HA service one at a time.
 
 An application using an HA service will experience at least one switch-over during an upgrade, and at most two switch-overs.
 

@@ -83,14 +83,13 @@ The backing Solace PubSub+ Message Brokers for a given service instance can be i
 
 The operator should look for the VM in the Solace PubSub+ bosh deployment with the matching IP.
 
-1. Getting additional diagnostics from "Large/0" VM.
+1. Getting additional diagnostics from "EnterpriseLarge/0" VM.
   <pre class="terminal">
-  $ bosh ssh Large/0
+  $ bosh ssh EnterpriseLarge/0
   # sudo -i
-## TODO
   # /var/vcap/jobs/broker\_agent/bin/gather\_diagnostics.sh
   </pre>
-Then you can look at the gathered logs under /var/vcap/store/containers/pubsub/volumes/jail/logs
+Then you can look at the gathered logs under /var/vcap/store/diag
 
 ###<a id='upgrade_errors'></a>Upgrade Issues
 
@@ -144,7 +143,7 @@ While this list it not complete, it provides representative samples with explana
 <tr><th colspan=2>Deployment limits reached for a given plan</th></th>
 <tr><th>Operation</th><td>
 <pre class="terminal">
-cf create-service solace-pubsub large
+cf create-service solace-pubsub enteprise-large
 </pre>
 </td></tr>
 <tr><th>Error</th><td>
@@ -153,7 +152,7 @@ Server error, status code: 502, error code: 10001, message: Service broker error
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>The service broker does not find any Solace Message VPNs in its inventory for the requested service plan.</td></tr>
-  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated Solace PubSub+ Message Brokers that support the given plan, in this case a Large.</td></tr>
+  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated Solace PubSub+ Message Brokers that support the given plan, in this case a enteprise-large.</td></tr>
 </table>
 
   <br>
@@ -227,10 +226,10 @@ Service instance: my-large-instance
 Service: solace-pubsub
 Bound apps:
 Tags:
-Plan: large
-Description: Solace PubSub+ Enterprise Edition for real-time, multi-protocol data distribution
+Plan: enterprise-large
+Description: Solace PubSub+ Message Broker for real-time, multi-protocol data distribution
 Documentation url: http://docs.solace.com
-Dashboard: https://large-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
+Dashboard: https://enterprise-large-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
 
 Last Operation
 Status: delete failed

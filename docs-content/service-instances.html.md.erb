@@ -89,15 +89,15 @@ To create an instance of the Solace PubSub+ service with the cf CLI, perform the
 	Getting services from marketplace in org example / space development as user<span>@</span>example.com...
 	OK
 
-	service          plans                                                description
-	solace-pubsub    shared, large, medium-ha, large-ha                   Solace PubSub+ for real-time, multi-protocol data distribution
+	service          plans                                                                                            description
+	solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ Message Broker for real-time, multi-protocol data distribution
 	</pre>
 1. Create an instance of the Solace PubSub+ service. Select the appropriate service plan for your app.
    For how the service plans differ, see [PCF Marketplace Plans](index.html#marketplace-plans).
-   The following example uses the `large-ha` service plan and no service-specific parameters.
+   The following example uses the `enterprise-large-ha` service plan and no service-specific parameters.
 
 	<pre class="terminal">
-	$ cf create-service solace-pubsub large-ha solace-pubsub-instance
+	$ cf create-service solace-pubsub enterprise-large-ha solace-pubsub-instance
 	Creating service instance solace-pubsub-instance in org example / space development as user@example.com...
 	OK
 	</pre>
@@ -133,17 +133,17 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
 	Getting services from marketplace in org example / space development as user<span>@</span>example.com...
 	OK
 
-	service          plans                                                description
-	solace-pubsub    shared, large, medium-ha, large-ha                   Solace PubSub+ for real-time, multi-protocol data distribution
+	service          plans                                                                                            description
+	solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ Message Broker for real-time, multi-protocol data distribution
 	</pre>
 1. Create an instance of the Solace PubSub+ service.
    Select the appropriate service plan for your app.
    For how the service plans differ, see [PCF Marketplace Plans](index.html#marketplace-plans).
    Add applicable service-specific parameters.
-   The following example uses the `shared` service plan with service-specific parameters for TCP Routes that enable opening an MQTT TLS port to support IoT devices.
+   The following example uses the `enterprise-shared` service plan with service-specific parameters for TCP Routes that enable opening an MQTT TLS port to support IoT devices.
 
 	<pre class="terminal">
-	$ cf create-service solace-pubsub shared solace-pubsub-instance-IoT -c '{ "mqtt_tls_tcp_route_enabled" : "true" }'
+	$ cf create-service solace-pubsub enterprise-shared solace-pubsub-instance-IoT -c '{ "mqtt_tls_tcp_route_enabled" : "true" }'
 	Creating service instance solace-pubsub-instance-IoT in org example / space development as user@example.com...
 	OK
 	</pre>
@@ -156,10 +156,10 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
 	Service: solace-pubsub
 	Bound apps:
 	Tags:
-	Plan: shared
-	Description: Solace PubSub+ for real-time, multi-protocol data distribution
+	Plan: enterprise-shared
+	Description: Solace PubSub+ Message Broker for real-time, multi-protocol data distribution
 	Documentation url: http://docs.solace.com
-	Dashboard: https://shared-0.YOUR-SYSTEM-DOMAIN/#/msg-vpns/djAwMQ==?token=YWJj.jsalkdj01041024laqksdjalsdh8ayulaksfnaosfr0817u04ualknaglnzs0v8u0qusflasknrflknifQ%3D%3D.eHl6
+	Dashboard: https://enterprise-shared-0.YOUR-SYSTEM-DOMAIN/#/msg-vpns/djAwMQ==?token=YWJj.jsalkdj01041024laqksdjalsdh8ayulaksfnaosfr0817u04ualknaglnzs0v8u0qusflasknrflknifQ%3D%3D.eHl6
 
 	Last Operation
 	Status: create succeeded
@@ -200,8 +200,8 @@ To update an instance of the Solace PubSub+ service with the cf CLI, perform the
 	Getting services in org example / space dev as user<span>@</span>example.com...
 	OK
 
-	name                        service            plan     bound apps   last operation
-	solace-pubsub-instance      solace-pubsub      large-ha              create succeeded
+	name                        service            plan                bound apps   last operation
+	solace-pubsub-instance      solace-pubsub      enterprise-large-ha              create succeeded
 	</pre>
 
 1. Update the service instance of the Solace PubSub+ service assuming both LDAP and TCP Routes are enabled.
@@ -249,8 +249,8 @@ To delete an instance of the Solace PubSub+ service with the cf CLI, perform the
 	Getting services in org example / space dev as user<span>@</span>example.com...
 	OK
 
-	name                            service            plan     bound apps   last operation
-	solace-pubsub-instance-IoT      solace-pubsub      shared                create succeeded
+	name                            service            plan                bound apps   last operation
+	solace-pubsub-instance-IoT      solace-pubsub      enterprise-shared                create succeeded
 	</pre>
 
 1. Delete the service instance `solace-pubsub-instance-IoT` of the Solace PubSub+ service.
@@ -273,8 +273,8 @@ To delete an instance of the Solace PubSub+ service with the cf CLI, perform the
 	Getting services in org example / space dev as user<span>@</span>example.com...
 	OK
 
-	name                            service            plan     bound apps   last operation
-	solace-pubsub-instance-IoT      solace-pubsub      shared                delete in progress
+	name                            service            plan                bound apps   last operation
+	solace-pubsub-instance-IoT      solace-pubsub      enterprise-shared                delete in progress
 	</pre>
 
 	Notice the `delete in progress`, this service is removed after the deletion is completed.
@@ -298,8 +298,8 @@ To create an instance of the Solace PubSub+ service in Apps Manager, perform the
 1. Click **Solace PubSub+**.
 1. Select the appropriate service plan for your app.
    For now the service plans differ, see [PCF Marketplace Plans](index.html#marketplace-plans).
-  <%= image_tag('appsmanager_solace_messaging_marketplace_selection.png') %> 
+  <%= image_tag('appsmanager_select_solace_pubsub_plan_short_form.png') %> 
 1. Enter an **Instance Name** and select a space under **Add to Space**. Then click **Add**. 
-  <%= image_tag('appsmanager_solace_messaging_create_service_do_not_bind.png') %> 
+  <%= image_tag('appsmanager_solace_messaging_create_service_do_not_bind_short_form_new.png') %> 
 1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
 
