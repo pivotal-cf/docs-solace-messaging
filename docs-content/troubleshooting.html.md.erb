@@ -15,7 +15,7 @@ The operator will have access to the logs of all the components of Solace PubSub
 
 * Service Broker Logs
 * Service Broker Agent Logs
-* Solace PubSub+ Message Broker Logs
+* Solace PubSub+ message broker Logs
 
 An installation of Solace PubSub+ for PCF may be configured to use [System Logging](installing.html#optional_system_logging) as a means of gathering all logs.
 
@@ -25,7 +25,7 @@ The following locations in Solace PubSub+ BOSH VMs will hold logs of interest th
 
 * All VM job logs
  * /var/vcap/sys/log
-* All Solace PubSub+ Message Broker Logs
+* All Solace PubSub+ message broker Logs
  * /var/vcap/store/containers/pubsub/volumes/jail/logs
 
 To access service broker logs, do the following:
@@ -75,11 +75,11 @@ To access service broker logs, do the following:
 
 ###<a id='operator_diag'></a>Additional Diagnostics
 
-In addition to regular logging, Solace PubSub+ Message Brokers tools can help gather diagnotics logs on demand.
+In addition to regular logging, Solace PubSub+ message brokers tools can help gather diagnotics logs on demand.
 
-For example, having identified a problem with a given Solace service instance, the operator can access the backing Solace PubSub+ Message Brokers to examine logs and gather diagnositics.
+For example, having identified a problem with a given Solace service instance, the operator can access the backing Solace PubSub+ message brokers to examine logs and gather diagnositics.
 
-The backing Solace PubSub+ Message Brokers for a given service instance can be identified from the IPs used in the bindings or service keys, or mentioned in the service broker logs or message when an exception occurs.
+The backing Solace PubSub+ message brokers for a given service instance can be identified from the IPs used in the bindings or service keys, or mentioned in the service broker logs or message when an exception occurs.
 
 The operator should look for the VM in the Solace PubSub+ bosh deployment with the matching IP.
 
@@ -152,7 +152,7 @@ Server error, status code: 502, error code: 10001, message: Service broker error
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>The service broker does not find any Solace Message VPNs in its inventory for the requested service plan.</td></tr>
-  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated Solace PubSub+ Message Brokers that support the given plan, in this case a enteprise-large.</td></tr>
+  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated Solace PubSub+ message brokers that support the given plan, in this case a enteprise-large.</td></tr>
 </table>
 
   <br>
@@ -212,7 +212,7 @@ Server error, status code: 502, error code: 10001, message: Service broker error
   <br>
 
 <table border="1" class="nice">
-<tr><th colspan=2>Communication failure: The Solace PubSub+ Message Brokers is not reachable.</th></th>
+<tr><th colspan=2>Communication failure: The Solace PubSub+ message brokers is not reachable.</th></th>
 <tr><th>Operation</th><td>
 <pre class="terminal">
 cf delete-service -f my-large-instance
@@ -227,7 +227,7 @@ Service: solace-pubsub
 Bound apps:
 Tags:
 Plan: enterprise-large
-Description: Solace PubSub+ Message Broker for real-time, multi-protocol data distribution
+Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
 Documentation url: http://docs.solace.com
 Dashboard: https://enterprise-large-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
 
@@ -238,7 +238,7 @@ Started: 2020-01-00T00:00:00Z
 Updated: 2020-01-00T00:00:00Z
 </pre>
 </td></tr>
-<tr><th>Explanation</th><td>The service broker cannot delete this instance because the Message VPN is flagged as unavailable. This happens when the backing Solace PubSub+ Message Broker is not reachable.</td></tr>
+<tr><th>Explanation</th><td>The service broker cannot delete this instance because the Message VPN is flagged as unavailable. This happens when the backing Solace PubSub+ message broker is not reachable.</td></tr>
 <tr><th>Possible Action(s)</th><td>The operator should examine the solace deployment and see why VM 10.244.0.3 is not available.<p>The service delete operation can be reattempted once the VM health is restored.</td></tr>
 </table>
 
