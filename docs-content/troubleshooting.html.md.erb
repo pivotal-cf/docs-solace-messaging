@@ -1,32 +1,32 @@
 ---
-title: Solace Messaging Troubleshooting 
+title: Solace PubSub+ Troubleshooting 
 owner: Partners
 ---
 
-This topic describes how operators and developers can troubleshoot instances of Solace Messaging services.
+This topic describes how operators and developers can troubleshoot instances of Solace PubSub+ services.
 
-A [Solace Messaging Service Instance](service-instances.html) is backed by a Message VPN on one or many Solace Virtual Message Router (VMR), depending on the chosen plan.
+A [Solace PubSub+ Service Instance](service-instances.html) is backed by a Message VPN on one or many Solace PubSub+ Software Message Broker, depending on the chosen plan.
 
-You can discover the VMR(s) backing a service instance from the [Solace Messaging Credentials](credentials.html) which become available by [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance.
+You can discover the Solace PubSub+ Software Message Broker backing a service instance from the [Solace PubSub+ Credentials](credentials.html) which become available by [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance.
 
 ##<a id='operator'></a>Operator Troubleshooting
 
-The operator will have access to the logs of all the components of Solace Messaging for PCF:
+The operator will have access to the logs of all the components of Solace PubSub+ for PCF:
 
 * Service Broker Logs
-* VMR Logs
-* VMR Agent Logs
+* Service Broker Agent Logs
+* Solace PubSub+ message broker Logs
 
-An installation of Solace Messaging for PCF may be configured to use [System Logging](installing.html#optional_system_logging) as a means of gathering all logs.
+An installation of Solace PubSub+ for PCF may be configured to use [System Logging](installing.html#optional_system_logging) as a means of gathering all logs.
 
 ###<a id='operator_logs'></a>Accessing Logs 
 
-The following locations in Solace Messaging BOSH VMs will hold logs of interest that can help in troubleshooting issues:
+The following locations in Solace PubSub+ BOSH VMs will hold logs of interest that can help in troubleshooting issues:
 
 * All VM job logs
  * /var/vcap/sys/log
-* All VMR Logs
- * /var/vcap/store/prepare_vmr/volumes/jail/logs
+* All Solace PubSub+ message broker Logs
+ * /var/vcap/store/containers/pubsub/volumes/jail/logs
 
 To access service broker logs, do the following:
 
@@ -45,51 +45,51 @@ To access service broker logs, do the following:
   Email> user<span>@</span>example.com
   Password>
   </pre>
-1. Target the `solace` org and `solace-messaging` space.
+1. Target the `solace` org and `solace-broker` space.
 	<pre class="terminal">
-	$ cf target -o solace -s solace-messaging
-	api endpoint:   https://api.local.pcfdev.io
+	$ cf target -o solace -s solace-broker
+	api endpoint:   https://api.YOUR-SYSTEM-DOMAIN
 	api version:    2.82.0
 	user:           admin
 	org:            solace
-	space:          solace-messaging
+	space:          solace-broker
 	</pre>
-1. Discover the Solace Messaging Service Broker App name.
+1. Discover the Solace PubSub+ Service Broker App name.
 	<pre class="terminal">
 	$ cf apps
-	Gettings apps in org solace /space solace-messaging as user@example.com...
+	Gettings apps in org solace /space solace-broker as user@example.com...
 	OK
 
 	name                              requested state   instances   memory   disk   urls
-	solace-messaging-1.2.0            started           1/1         1G       512M   solace-messaging.YOUR-SYSTEM-DOMAIN
+	solace-broker-1.2.0            started           1/1         1G       512M   solace-broker.YOUR-SYSTEM-DOMAIN
 
 	OK
 	</pre>
-	<p class="note"><strong>Note</strong>: Take note of the application name. In this case 'solace-messaging-1.2.0'</p>
-1. To watch the logs of Solace Messaging Service Broker
+	<p class="note"><strong>Note</strong>: Take note of the application name. In this case 'solace-broker-1.2.0'</p>
+1. To watch the logs of Solace PubSub+ Service Broker
 	<pre class="terminal">
-	$ cf logs solace-messaging-1.2.0 | tee saved_solace-messaging-1.2.0.txt
-	Retrieving logs for app solace-messaging-1.2.0 in org solace /space solace-messaging as user@example.com...
+	$ cf logs solace-broker-1.2.0 | tee saved_solace-broker-1.2.0.txt
+	Retrieving logs for app solace-broker-1.2.0 in org solace /space solace-broker as user@example.com...
 	....
 	</pre>
 
 ###<a id='operator_diag'></a>Additional Diagnostics
 
-In addition to regular logging, VMR tools can help gather diagnotics logs on demand.
+In addition to regular logging, Solace PubSub+ message brokers tools can help gather diagnotics logs on demand.
 
-For example, having identified a problem with a given Solace service instance, the operator can access the backing VMR to examine logs and gather diagnositics.
+For example, having identified a problem with a given Solace service instance, the operator can access the backing Solace PubSub+ message brokers to examine logs and gather diagnositics.
 
-The backing VMR for a given service instance can be identified from the IPs used in the bindings or service keys, or mentioned in the service broker logs or message when an exception occurs.
+The backing Solace PubSub+ message brokers for a given service instance can be identified from the IPs used in the bindings or service keys, or mentioned in the service broker logs or message when an exception occurs.
 
-The operator should look for the VM in the Solace Messaging bosh deployment with the matching IP.
+The operator should look for the VM in the Solace PubSub+ bosh deployment with the matching IP.
 
-1. Getting additional diagnostics from "Large-VMR/0" VM.
+1. Getting additional diagnostics from "EnterpriseLarge/0" VM.
   <pre class="terminal">
-  $ bosh ssh Large-VMR/0
+  $ bosh ssh EnterpriseLarge/0
   # sudo -i
-  # /var/vcap/jobs/vmr\_agent/bin/gather\_diagnostics.sh
+  # /var/vcap/jobs/broker\_agent/bin/gather\_diagnostics.sh
   </pre>
-Then you can look at the gathered logs under /var/vcap/store/prepare_vmr/volumes/jail/logs
+Then you can look at the gathered logs under /var/vcap/store/diag
 
 ###<a id='upgrade_errors'></a>Upgrade Issues
 
@@ -128,7 +128,7 @@ The upgrade was stopped due to a detected failure to ensure services remain avai
 
 ##<a id='developer'></a>Developer Troubleshooting
 
-A developer using Solace Messaging for PCF may encounter errors when using Cloud Foundry Command-Line Interface (cf CLI) to perform basic operations on a Solace Messaging for PCF service instance.
+A developer using Solace PubSub+ for PCF may encounter errors when using Cloud Foundry Command-Line Interface (cf CLI) to perform basic operations on a Solace PubSub+ for PCF service instance.
 
 In general, most errors are about these types:
 
@@ -143,7 +143,7 @@ While this list it not complete, it provides representative samples with explana
 <tr><th colspan=2>Deployment limits reached for a given plan</th></th>
 <tr><th>Operation</th><td>
 <pre class="terminal">
-cf create-service solace-messaging large
+cf create-service solace-pubsub enteprise-large
 </pre>
 </td></tr>
 <tr><th>Error</th><td>
@@ -152,7 +152,7 @@ Server error, status code: 502, error code: 10001, message: Service broker error
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>The service broker does not find any Solace Message VPNs in its inventory for the requested service plan.</td></tr>
-  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated VMRs that support the given plan, in this case a Large-VMR.</td></tr>
+  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated Solace PubSub+ message brokers that support the given plan, in this case a enteprise-large.</td></tr>
 </table>
 
   <br>
@@ -212,7 +212,7 @@ Server error, status code: 502, error code: 10001, message: Service broker error
   <br>
 
 <table border="1" class="nice">
-<tr><th colspan=2>Communication failure: The VMR is not reachable.</th></th>
+<tr><th colspan=2>Communication failure: The Solace PubSub+ message brokers is not reachable.</th></th>
 <tr><th>Operation</th><td>
 <pre class="terminal">
 cf delete-service -f my-large-instance
@@ -223,13 +223,13 @@ cf delete-service -f my-large-instance
 cf service my-large-instance
 
 Service instance: my-large-instance
-Service: solace-messaging
+Service: solace-pubsub
 Bound apps:
 Tags:
-Plan: large
-Description: Solace Messaging Enterprise Edition for real-time, multi-protocol data distribution
+Plan: enterprise-large
+Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
 Documentation url: http://docs.solace.com
-Dashboard: https://large-vmr-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
+Dashboard: https://enterprise-large-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
 
 Last Operation
 Status: delete failed
@@ -238,7 +238,7 @@ Started: 2020-01-00T00:00:00Z
 Updated: 2020-01-00T00:00:00Z
 </pre>
 </td></tr>
-<tr><th>Explanation</th><td>The service broker cannot delete this instance because the Message VPN is flagged as unavailable. This happens when the backing VMR is not reachable.</td></tr>
+<tr><th>Explanation</th><td>The service broker cannot delete this instance because the Message VPN is flagged as unavailable. This happens when the backing Solace PubSub+ message broker is not reachable.</td></tr>
 <tr><th>Possible Action(s)</th><td>The operator should examine the solace deployment and see why VM 10.244.0.3 is not available.<p>The service delete operation can be reattempted once the VM health is restored.</td></tr>
 </table>
 

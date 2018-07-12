@@ -17,8 +17,8 @@ sections:
   - repository:
       name: docs-content
       ref: staging
-    directory: solace-messaging
-    subnav_template: pivotal_solace_messaging.erb       
+    directory: solace-pubsub
+    subnav_template: pivotal_solace_pubsub.erb       
 
 template_variables:                             # optional
 

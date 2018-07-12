@@ -1,21 +1,21 @@
 ---
-title: Solace Messaging for PCF
+title: Solace PubSub+ for PCF
 owner: Partners
 ---
 
-Solace Messaging for Pivotal Cloud Foundry (PCF) enables developers to take advantage of the leading multi-cloud, multi-protocol messaging solution which makes app interconnectivity easy and makes production apps scalable, robust, high-performant, and easy to manage.  
+Solace PubSub+ for Pivotal Cloud Foundry (PCF) enables you to take advantage of the leading multi-cloud, multi-protocol messaging solution which makes app interconnectivity easy and makes production apps scalable, robust, high-performant, and easy to manage.
 
-Solace Messaging was designed to be deployed across all your IT environments including your non-cloud datacenter, all leading public clouds ([AWS](http://dev.solace.com/clouds/amazon-web-services/), [Azure](http://dev.solace.com/clouds/azure/), and [Google Cloud Platform](http://dev.solace.com/clouds/google-cloud/)) and the popular Platform as a Service, PCF, in order to provide a uniform messaging fabric for all your apps and connect them no matter where they are deployed.
+Solace PubSub+ was designed to be deployed across all your IT environments including your non-cloud datacenter, all leading public clouds ([AWS](http://dev.solace.com/clouds/amazon-web-services/), [Azure](http://dev.solace.com/clouds/azure/), and [Google Cloud Platform](http://dev.solace.com/clouds/google-cloud/)) and the popular Platform as a Service, PCF, in order to provide a uniform messaging fabric for all your apps and connect them no matter where they are deployed.
 
-<%= image_tag('solace-environments.png') %>
+<%= image_tag('solace-environments_new.png') %>
 
-Solace Messaging supports all kinds of messaging APIs, QoS, and data streaming as part of one platform across all clouds in a high-performance, WAN-optimized, easy-to-manage solution. It is easily deployed in your public and private cloud environments and forms the perfect backbone for single or multi-cloud messaging support of your cloud-native micro-services, IoT, big data capture, and next-generation digital apps.
+Solace PubSub+ supports all kinds of messaging APIs, QoS, and data streaming as part of one platform across all clouds in a high-performance, WAN-optimized, easy-to-manage solution. It is easily deployed in your public and private cloud environments and forms the perfect backbone for single or multi-cloud messaging support of your cloud-native micro-services, IoT, big data capture, and next-generation digital apps.
 
-Solace Messaging for PCF provides plans for both shared message router instances for cost-effective development as well as a variety of plans for dedicated message routers of varying performance, scale, and high-availability. Together, they meet the requirements for a range of robust test and production deployments.
+Solace PubSub+ for PCF provides plans for both shared message broker instances for cost-effective development as well as a variety of plans for dedicated message brokers of varying performance, scale, and high-availability. Together, they meet the requirements for a range of robust test and production deployments.
 
-One of the key strengths of Solace Messaging is its [support for many different open transports and protocols](http://dev.solace.com/tech/#multi-service), making Solace message routers ideal data distribution platforms to connect to any app.
+One of the key strengths of Solace PubSub+ is its [support for many different open transports and protocols](http://dev.solace.com/tech/#multi-service), making Solace PubSub+ message brokers ideal data distribution platforms to connect to any app.
 
-<%= image_tag('solace-overview.png') %>
+<%= image_tag('solace-overview_new.png') %>
 
 
 ## <a id='getting-started'></a>Getting Started
@@ -24,151 +24,145 @@ In addition to the documentation here, there is also a wealth of information on 
 
 ### <a id='cloud-operators'></a>Cloud Operators
 
-For cloud operators, the following section shows you how to install and configure Solace Messaging for PCF in your environments.
+For cloud operators, the following section shows you how to install and configure Solace PubSub+ for PCF in your environments.
 
 * [Tile Installation and Configuration](installing.html)
 
 ### <a id='developers'></a>Developers
 
-For developers, there are a few resources to help you easily get started with Solace Messaging for PCF. Within this documentation, see the following sections:
+For developers, there are a few resources to help you easily get started with Solace PubSub+ for PCF. Within this documentation, see the following sections:
 
 * [Service Instances](service-instances.html)
 * [Bindings](bindings.html)
 * [Service Keys](service-keys.html)
-* [Solace Messaging Credentials](credentials.html)
+* [Solace PubSub+ Credentials](credentials.html)
 * [Managing the Message VPN](managing.html)
 
-There is also simple sample code which shows you how to easily connect to a Solace Messaging Service Instance:
+There is also simple sample code which shows you how to easily connect to a Solace PubSub+ Service Instance:
 
 * [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java)
-* [Solace Messaging Demo App](https://github.com/SolaceLabs/sl-cf-solace-messaging-demo)
+* [Solace PubSub+ Demo App](https://github.com/SolaceLabs/sl-cf-solace-messaging-demo)
 
 ## <a id='marketplace-plans'></a>PCF Marketplace Plans
 
-Solace Messaging currently offers the following plans: 
+Solace PubSub+ for PCF currently offers the following plans: 
 
 <table border="1" class="nice">
 	<tr>
 		<th>Service Plan</th>
 		<th>Description</th>
-		<th>Evaluation Tile</th>
+		<th>Enterprise Evaluation Tile</th>
 		<th>Enterprise Tile <a href="#tableNote2"><sup>2</sup></a></th>
 	</tr>
   <tr>
-    <td><a href='service-plans.html#plan_shared'>Shared</a></td>
-    <td>A single Message VPN in a shared Solace Message Router. Useful for light traffic and development.</td>
+    <td><a href='service-plans.html#plan_enterprise_shared'>Enterprise Shared</a></td>
+    <td>A single Message VPN in a shared Solace message broker. Useful for light traffic and development.</td>
     <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
     <td>&#10004;</td>
   </tr>
   <tr>
-    <td><a href='service-plans.html#plan_large'>Large</a></td>
-    <td>A single message VPN on a dedicated Solace Message Router. </td>
+    <td><a href='service-plans.html#plan_enterprise_large'>Enterprise Large</a></td>
+    <td>A single message VPN on a dedicated Solace message broker. </td>
     <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
     <td>&#10004;</td>
   </tr>
   <tr>
-    <td><a href='service-plans.html#plan_community'>Community</a></td>
-    <td>A single message VPN on a dedicated Solace Message Router. The plan does not have a time limit but is limited by the features available on the Community Edition VMR.</td>
-    <td>&#10004;</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><a href='service-plans.html#plan_medium_ha'>Medium-HA</a></td>
-    <td>A single message VPN implemented across 3 medium Solace Message Routers in a highly-available configuration. </td>
+    <td><a href='service-plans.html#plan_enterprise_medium_ha'>Enterprise Medium-HA</a></td>
+    <td>A single message VPN implemented across 3 medium Solace message brokers in a highly-available configuration. </td>
     <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
     <td>&#10004;</td>
   </tr>
   <tr>
-    <td><a href='service-plans.html#plan_large_ha'>Large-HA</a></td>
-    <td>A single message VPN implemented across 3 large Solace Message Routers in a highly-available configuration. </td>
+    <td><a href='service-plans.html#plan_enterprise_large_ha'>Enterprise Large-HA</a></td>
+    <td>A single message VPN implemented across 3 large Solace message brokers in a highly-available configuration. </td>
     <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
     <td>&#10004;</td>
   </tr>
 </table>
 
-<p id='tableNote1' class="note"><strong><sup>1</sup> Note</strong>: This Evaluation Tile plan is fully featured but has a time-limited 90-day evaluation period.</p>
-<p id='tableNote2' class="note"><strong><sup>2</sup> Note</strong>: For access to the Enterprise Edition version of the Solace Messaging for PCF Tile, please contact <a href='https://solace.com/support' target="_blank">Solace Support</a> or your local <a href='mailto:info@solace.com?Subject=Enterprise Edition of Solace Messaging For PCF' target="_blank">Solace sales representative</a>.</p>
+<p id='tableNote1' class="note"><strong><sup>1</sup> Note</strong>: This Enterprise Evaluation Tile plan is fully featured but has a time-limited 90-day evaluation period.</p>
+<p id='tableNote2' class="note"><strong><sup>2</sup> Note</strong>: For access to the Enterprise version of the Solace PubSub+ for PCF Tile, please contact <a href='https://solace.com/support' target="_blank">Solace Support</a> or your local <a href='mailto:info@solace.com?Subject=Enterprise version of Solace PubSub+ For PCF' target="_blank">Solace sales representative</a>.</p>
 
 ## <a id='cloud-integration'></a>Cloud Integration 
 
-A Solace Messaging deployment under PCF can be configured to support integration with existing cloud services and hybrid cloud deployments.
+A Solace PubSub+ deployment under PCF can be configured to support integration with existing cloud services and hybrid cloud deployments.
 
 ### <a id='pcf-solace-messaging-intergration-tcp_routes'></a>TCP Routes
 
 TCP routes allow access to Solace messaging services hosted inside your PCF domain from external networks. By default, a PCF-hosted service is not accessible to external networks.
 
-<%= image_tag('arch_tcp_routes.png') %>
+<%= image_tag('arch_tcp_routes_new.png') %>
 
 Having TCP routes enables many use cases:
 
- * **Hybrid cloud:** Other Solace appliances or VMRs deployed outside PCF can establish [Bridge](https://docs.solace.com/Features/Working-With-Message-VPN-Bridges.htm) connections to Solace messaging services inside your PCF cloud. 
- * **External client app:** Apps deployed outside PCF can communicate via messaging with apps deployed inside PCF by connecting to a Solace messaging service deployed in PCF.
- * **IoT:** Devices using MQTT or REST can connect to Solace messaging services from outside PCF to communicate with your apps deployed inside PCF, look for the *TCP Routes for IoT---MQTT Java Application Tutorial* [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java/tcp-routes-mqtt/).
- * **Mobile apps:** Mobile and web apps can use [web messaging](https://docs.solace.com/Features/Web-Messaging-Concepts/Web-Messaging-Concepts.htm) to connect to Solace messaging services from outside PCF to communicate with your apps deployed inside PCF.
+ * **Hybrid cloud:** Other Solace PubSub+ message brokers deployed outside PCF can establish [Bridge](https://docs.solace.com/Features/Working-With-Message-VPN-Bridges.htm) connections to Solace PubSub+ services inside your PCF cloud. 
+ * **External client app:** Apps deployed outside PCF can communicate via messaging with apps deployed inside PCF by connecting to a Solace PubSub+ service deployed in PCF.
+ * **IoT:** Devices using MQTT or REST can connect to Solace PubSub+ services from outside PCF to communicate with your apps deployed inside PCF, look for the *TCP Routes for IoT---MQTT Java Application Tutorial* [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java/tcp-routes-mqtt/).
+ * **Mobile apps:** Mobile and web apps can use [web messaging](https://docs.solace.com/Features/Web-Messaging-Concepts/Web-Messaging-Concepts.htm) to connect to Solace PubSub+ services from outside PCF to communicate with your apps deployed inside PCF.
 
 To use TCP routes, you must [enable and configure TCP Routes at installation time](installing.html#optional_tcp_routes) with a selection of default settings for each messaging protocol you wish to use. Once enabled, TCP routes can be fine-tuned per service at service creation time.
 
 ### <a id='pcf-solace-messaging-intergration-system_logging'></a>System Logging
 
-System logging allows you to redirect the logs from the Solace Messaging PCF components to an external syslog service. To use system logging, you must [enable and configure system logging at installation time](installing.html#optional_system_logging).
+System logging allows you to redirect the logs from the Solace PubSub+ PCF components to an external syslog service. To use system logging, you must [enable and configure system logging at installation time](installing.html#optional_system_logging).
 
 ### <a id='pcf-solace-messaging-intergration-ldap'></a>LDAP
 
-You can enable the use of an LDAP server for the VMR's authentication and authorization needs.
+You can enable the use of an LDAP server for the Solace PubSub+ message broker's authentication and authorization needs.
 This configuration allows you to grant an LDAP server control over Management access and Application access.
 To use LDAP, you must [enable and configure LDAP at installation time](installing.html#optional_ldap_settings) and make a choice about [Management Access](installing.html#optional_management_access) and [Application Access](installing.html#optional_application_access).
 
-## <a id='solace-messaging-features'></a>Solace Messaging Features
+## <a id='solace-messaging-features'></a>Solace PubSub+ Features
 
-In addition to easy and natural APIs for your apps, Solace Messaging supports the following key features:
+In addition to easy and natural APIs for your apps, Solace PubSub+ supports the following key features:
 
 * [Easy integration with 3rd party products](http://dev.solace.com/integration-guides/) such as big data, ESBs, JEE, DataPower, and more.
 * [Comprehensive authentication, authorization, and encryption](http://dev.solace.com/tech/#security) features to ensure that your infrastructure and information are protected at all times.
 * [The most robust data movement infrastructure available today](http://dev.solace.com/tech/#robustness), offering fault tolerance and disaster recovery.
-* [Integrated federation and distribution](http://dev.solace.com/tech/#federation) for connectivity between Solace message routers.
+* [Integrated federation and distribution](http://dev.solace.com/tech/#federation) for connectivity between Solace message brokers.
 * [High-performance](http://dev.solace.com/tech/#high-performance) messaging middleware which can cost-effectively meet the needs of any app.
 * [Fast, efficient WAN distribution](http://dev.solace.com/tech/#wan-distribution).
 * [Simplified operations](http://dev.solace.com/tech/#management-monitoring) with multiple management administration interfaces.
-* [Virtualize application groups on a single Solace message router](http://dev.solace.com/tech/#virtualization) with complete message isolation through Solace Message VPNs.
+* [Virtualize application groups on a single Solace message broker](http://dev.solace.com/tech/#virtualization) with complete message isolation through Solace Message VPNs.
 
 ## <a id='architecture'></a>Architecture
 
-Solace Messaging is a managed service. The tile deploys the Virtual Message Routers onto PCF's IaaS. The Solace Messaging tile registers a service broker with PCF and exposes its service plans in the PCF Marketplace. The diagram below provides an overview of the product architecture of Solace Messaging for PCF.
+Solace PubSub+ is a managed service. The tile deploys the PubSub+ message brokers onto PCF's IaaS. The Solace PubSub+ tile registers a service broker with PCF and exposes its service plans in the PCF Marketplace. The diagram below provides an overview of the product architecture of Solace PubSub+ for PCF.
 
-<%= image_tag('Deployment-overview.png') %>
+<%= image_tag('Deployment-overview_new.png') %>
 
 ## <a id='snapshot'></a>Product Snapshot
 
-<p class='note'><strong>Note:</strong> As of PCF v2.0, Elastic Runtime is renamed Pivotal Application Service (PAS).</p>
+<p class='note'><strong>Note:</strong> As a Major and renamed release, upgrades from the older named product solace-messaging (v1.4.0 and below) to solace-pubsub are not possible.  However, going forward it will be possible to upgrade from Solace PubSub+ for PCF 2.0.0 to subsequent releases.
 
-The following table provides version and version-support information about Solace Messaging for PCF.
+The following table provides version and version-support information about Solace PubSub+ for PCF.
 
 <table class="nice">
     <th>Element</th>
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>v1.4.0</td>
+        <td>v2.0.0</td>
     </tr>
     <tr>
         <td>Editions</td>
-	<td>Evaluation, <a href='https://solace.com/support'>Enterprise</a></td>
+	<td>Enterprise Evaluation, <a href='https://solace.com/support'>Enterprise</a></td>
     </tr>
     <tr>
         <td>Release date</td>
-        <td>April 13, 2018</td>
+        <td>July 12, 2018</td>
     </tr>
     <tr>
-        <td>Solace Virtual Message Router version</td>
-        <td>v8.9.0.x</td>
+        <td>Solace PubSub+ message broker version</td>
+        <td>v8.11.0.x</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>
-        <td>v1.11.x, v1.12.x, v2.0.x, and v2.1.x</td>
+        <td>v1.12.x, v2.0.x, v2.1.x, and v2.2.x</td>
     </tr>
     <tr>
         <td>Compatible Pivotal Application Service version(s)</td>
-        <td>v1.11.x, v1.12.x, v2.0.x, and v2.1.x</td>
+        <td>v1.12.x, v2.0.x, v2.1.x, and v2.2.x</td>
     </tr>
     <tr>
         <td>IaaS support</td>
@@ -179,11 +173,11 @@ The following table provides version and version-support information about Solac
         <td>Yes</td>
     </tr>
 </table>
-
+\* As of PCF v2.0, <em>Elastic Runtime</em> is renamed <em>Pivotal Application Service (PAS)</em>.
 
 ## <a id='limitations'></a>Current Limitations
 
-This version of Solace Messaging for PCF currently has the following limitations:
+This version of Solace PubSub+ for PCF currently has the following limitations:
 
 * No support for client certificate-based authentication.
 * No support for RADIUS-based authentication.
