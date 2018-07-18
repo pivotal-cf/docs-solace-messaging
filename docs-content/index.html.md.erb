@@ -18,17 +18,17 @@ One of the key strengths of Solace PubSub+ is its [support for many different op
 <%= image_tag('solace-overview_new.png') %>
 
 
-## <a id='getting-started'></a>Getting Started
+## <a id='getting-started'></a> Getting Started
 
 In addition to the documentation here, there is also a wealth of information on the [Solace Developer Portal](http://dev.solace.com).
 
-### <a id='cloud-operators'></a>Cloud Operators
+### <a id='cloud-operators'></a> Cloud Operators
 
-For cloud operators, the following section shows you how to install and configure Solace PubSub+ for PCF in your environments.
+For cloud operators, the following section shows how to install and configure Solace PubSub+ for PCF in your environments.
 
 * [Tile Installation and Configuration](installing.html)
 
-### <a id='developers'></a>Developers
+### <a id='developers'></a> Developers
 
 For developers, there are a few resources to help you easily get started with Solace PubSub+ for PCF. Within this documentation, see the following sections:
 
@@ -43,7 +43,8 @@ There is also simple sample code which shows you how to easily connect to a Sola
 * [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java)
 * [Solace PubSub+ Demo App](https://github.com/SolaceLabs/sl-cf-solace-messaging-demo)
 
-## <a id='marketplace-plans'></a>PCF Marketplace Plans
+
+## <a id='marketplace-plans'></a> PCF Marketplace Plans
 
 Solace PubSub+ for PCF currently offers the following plans: 
 
@@ -62,32 +63,33 @@ Solace PubSub+ for PCF currently offers the following plans:
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_large'>Enterprise Large</a></td>
-    <td>A single message VPN on a dedicated Solace message broker. </td>
+    <td>A single message VPN on a dedicated Solace message broker.</td>
     <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
     <td>&#10004;</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_medium_ha'>Enterprise Medium-HA</a></td>
-    <td>A single message VPN implemented across 3 medium Solace message brokers in a highly-available configuration. </td>
+    <td>A single message VPN implemented across 3 medium Solace message brokers in a highly-available configuration.</td>
     <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
     <td>&#10004;</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_large_ha'>Enterprise Large-HA</a></td>
-    <td>A single message VPN implemented across 3 large Solace message brokers in a highly-available configuration. </td>
+    <td>A single message VPN implemented across 3 large Solace message brokers in a highly-available configuration.</td>
     <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
     <td>&#10004;</td>
   </tr>
 </table>
 
-<p id='tableNote1' class="note"><strong><sup>1</sup> Note</strong>: This Enterprise Evaluation Tile plan is fully featured but has a time-limited 90-day evaluation period.</p>
-<p id='tableNote2' class="note"><strong><sup>2</sup> Note</strong>: For access to the Enterprise version of the Solace PubSub+ for PCF Tile, please contact <a href='https://solace.com/support' target="_blank">Solace Support</a> or your local <a href='mailto:info@solace.com?Subject=Enterprise version of Solace PubSub+ For PCF' target="_blank">Solace sales representative</a>.</p>
+<p id='tableNote1' class="note"><strong><sup>1</sup> Note:</strong> This Enterprise Evaluation Tile plan is fully featured but has a time-limited 90-day evaluation period.</p>
+<p id='tableNote2' class="note"><strong><sup>2</sup> Note:</strong> For access to the Enterprise version of the Solace PubSub+ for PCF Tile, please contact <a href='https://solace.com/support' target="_blank">Solace Support</a> or your local <a href='mailto:info@solace.com?Subject=Enterprise version of Solace PubSub+ For PCF' target="_blank">Solace sales representative</a>.</p>
 
-## <a id='cloud-integration'></a>Cloud Integration 
+
+## <a id='cloud-integration'></a> Cloud Integration 
 
 A Solace PubSub+ deployment under PCF can be configured to support integration with existing cloud services and hybrid cloud deployments.
 
-### <a id='pcf-solace-messaging-intergration-tcp_routes'></a>TCP Routes
+### <a id='pcf-solace-messaging-intergration-tcp_routes'></a> TCP Routes
 
 TCP routes allow access to Solace messaging services hosted inside your PCF domain from external networks. By default, a PCF-hosted service is not accessible to external networks.
 
@@ -102,17 +104,16 @@ Having TCP routes enables many use cases:
 
 To use TCP routes, you must [enable and configure TCP Routes at installation time](installing.html#optional_tcp_routes) with a selection of default settings for each messaging protocol you wish to use. Once enabled, TCP routes can be fine-tuned per service at service creation time.
 
-### <a id='pcf-solace-messaging-intergration-system_logging'></a>System Logging
+### <a id='pcf-solace-messaging-intergration-system_logging'></a> System Logging
 
 System logging allows you to redirect the logs from the Solace PubSub+ PCF components to an external syslog service. To use system logging, you must [enable and configure system logging at installation time](installing.html#optional_system_logging).
 
-### <a id='pcf-solace-messaging-intergration-ldap'></a>LDAP
+### <a id='pcf-solace-messaging-intergration-ldap'></a> LDAP
 
-You can enable the use of an LDAP server for the Solace PubSub+ message broker's authentication and authorization needs.
-This configuration allows you to grant an LDAP server control over Management access and Application access.
-To use LDAP, you must [enable and configure LDAP at installation time](installing.html#optional_ldap_settings) and make a choice about [Management Access](installing.html#optional_management_access) and [Application Access](installing.html#optional_application_access).
+You can enable the use of an LDAP server for the Solace PubSub+ message broker's authentication and authorization needs. This configuration allows you to grant an LDAP server control over Management access and Application access. To use LDAP, you must [enable and configure LDAP at installation time](installing.html#optional_ldap_settings) and make a choice about [Management Access](installing.html#optional_management_access) and [Application Access](installing.html#optional_application_access).
 
-## <a id='solace-messaging-features'></a>Solace PubSub+ Features
+
+## <a id='solace-messaging-features'></a> Solace PubSub+ Features
 
 In addition to easy and natural APIs for your apps, Solace PubSub+ supports the following key features:
 
@@ -125,15 +126,19 @@ In addition to easy and natural APIs for your apps, Solace PubSub+ supports the 
 * [Simplified operations](http://dev.solace.com/tech/#management-monitoring) with multiple management administration interfaces.
 * [Virtualize application groups on a single Solace message broker](http://dev.solace.com/tech/#virtualization) with complete message isolation through Solace Message VPNs.
 
-## <a id='architecture'></a>Architecture
+
+## <a id='architecture'></a> Architecture
 
 Solace PubSub+ is a managed service. The tile deploys the PubSub+ message brokers onto PCF's IaaS. The Solace PubSub+ tile registers a service broker with PCF and exposes its service plans in the PCF Marketplace. The diagram below provides an overview of the product architecture of Solace PubSub+ for PCF.
 
 <%= image_tag('Deployment-overview_new.png') %>
 
-## <a id='snapshot'></a>Product Snapshot
 
-<p class='note'><strong>Note:</strong> As a Major and renamed release, upgrades from the older named product solace-messaging (v1.4.0 and below) to solace-pubsub are not possible.  However, going forward it will be possible to upgrade from Solace PubSub+ for PCF 2.0.0 to subsequent releases.
+## <a id='snapshot'></a> Product Snapshot
+
+<p class='note'><strong>Note:</strong> As of PCF v2.0, Elastic Runtime is renamed Pivotal Application Service (PAS).</p>
+
+<p class='note'><strong>Note:</strong> As a major and renamed release, upgrades from the older named product solace-messaging (v1.4.0 and below) to solace-pubsub are not possible. However, it will be possible going forward to upgrade from Solace PubSub+ for PCF v2.0 to subsequent releases.</p>
 
 The following table provides version and version-support information about Solace PubSub+ for PCF.
 
@@ -173,15 +178,16 @@ The following table provides version and version-support information about Solac
         <td>Yes</td>
     </tr>
 </table>
-\* As of PCF v2.0, <em>Elastic Runtime</em> is renamed <em>Pivotal Application Service (PAS)</em>.
 
-## <a id='limitations'></a>Current Limitations
+
+## <a id='limitations'></a> Current Limitations
 
 This version of Solace PubSub+ for PCF currently has the following limitations:
 
 * No support for client certificate-based authentication.
 * No support for RADIUS-based authentication.
 
-## <a id='feedback'></a>Feedback
+
+## <a id='feedback'></a> Feedback
 
 Provide any bugs, feature requests, or questions to [Solace Support](https://solace.com/support).
