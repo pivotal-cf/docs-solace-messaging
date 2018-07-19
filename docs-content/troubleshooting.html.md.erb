@@ -9,7 +9,8 @@ A [Solace PubSub+ Service Instance](service-instances.html) is backed by a Messa
 
 You can discover the Solace PubSub+ Software Message Broker backing a service instance from the [Solace PubSub+ Credentials](credentials.html) which become available by [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance.
 
-##<a id='operator'></a>Operator Troubleshooting
+
+## <a id='operator'></a> Operator Troubleshooting
 
 The operator will have access to the logs of all the components of Solace PubSub+ for PCF:
 
@@ -19,7 +20,7 @@ The operator will have access to the logs of all the components of Solace PubSub
 
 An installation of Solace PubSub+ for PCF may be configured to use [System Logging](installing.html#optional_system_logging) as a means of gathering all logs.
 
-###<a id='operator_logs'></a>Accessing Logs 
+### <a id='operator_logs'></a> Accessing Logs 
 
 The following locations in Solace PubSub+ BOSH VMs will hold logs of interest that can help in troubleshooting issues:
 
@@ -38,6 +39,7 @@ To access service broker logs, do the following:
   API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.82.0)
   Not logged in. Use 'cf login' to log in.
   </pre>
+
 1. Log in to your deployment and select an org and a space.
   <pre class="terminal">
   $ cf login
@@ -45,6 +47,7 @@ To access service broker logs, do the following:
   Email> user<span>@</span>example.com
   Password>
   </pre>
+
 1. Target the `solace` org and `solace-broker` space.
 	<pre class="terminal">
 	$ cf target -o solace -s solace-broker
@@ -54,6 +57,7 @@ To access service broker logs, do the following:
 	org:            solace
 	space:          solace-broker
 	</pre>
+
 1. Discover the Solace PubSub+ Service Broker App name.
 	<pre class="terminal">
 	$ cf apps
@@ -66,6 +70,7 @@ To access service broker logs, do the following:
 	OK
 	</pre>
 	<p class="note"><strong>Note</strong>: Take note of the application name. In this case 'solace-broker-1.2.0'</p>
+
 1. To watch the logs of Solace PubSub+ Service Broker
 	<pre class="terminal">
 	$ cf logs solace-broker-1.2.0 | tee saved_solace-broker-1.2.0.txt
@@ -73,7 +78,7 @@ To access service broker logs, do the following:
 	....
 	</pre>
 
-###<a id='operator_diag'></a>Additional Diagnostics
+### <a id='operator_diag'></a> Additional Diagnostics
 
 In addition to regular logging, Solace PubSub+ message brokers tools can help gather diagnotics logs on demand.
 
@@ -83,15 +88,15 @@ The backing Solace PubSub+ message brokers for a given service instance can be i
 
 The operator should look for the VM in the Solace PubSub+ bosh deployment with the matching IP.
 
-1. Getting additional diagnostics from "EnterpriseLarge/0" VM.
+1. Get additional diagnostics from "EnterpriseLarge/0" VM.
   <pre class="terminal">
   $ bosh ssh EnterpriseLarge/0
   # sudo -i
   # /var/vcap/jobs/broker\_agent/bin/gather\_diagnostics.sh
   </pre>
-Then you can look at the gathered logs under /var/vcap/store/diag
+  Then you can look at the gathered logs under `/var/vcap/store/diag`.
 
-###<a id='upgrade_errors'></a>Upgrade Issues
+### <a id='upgrade_errors'></a> Upgrade Issues
 
 The following issues may arise while upgrading a tile:
 
@@ -126,7 +131,7 @@ The upgrade was stopped due to a detected failure to ensure services remain avai
 </table>
 
 
-##<a id='developer'></a>Developer Troubleshooting
+## <a id='developer'></a> Developer Troubleshooting
 
 A developer using Solace PubSub+ for PCF may encounter errors when using Cloud Foundry Command-Line Interface (cf CLI) to perform basic operations on a Solace PubSub+ for PCF service instance.
 
@@ -137,7 +142,6 @@ In general, most errors are about these types:
  * Unexpected health state, such as a degraded high availability setup
 
 While this list it not complete, it provides representative samples with explanations and possible resolutions. Some of the resolutions will require operator intervention.
-
 
 <table border="1" class="nice">
 <tr><th colspan=2>Deployment limits reached for a given plan</th></th>
@@ -262,7 +266,6 @@ MessageRouterException: Primary VMR 10.233.0.3 HA Group Status is degraded v001 
 
   <br>
 
-
 <table border="1" class="nice">
 <tr><th colspan=2>Orphaned Resource Policy</th></th>
 <tr><th>Operation</th><td>
@@ -283,6 +286,3 @@ Endpoints owned by v002.cu000001 must first be deleted:
 </table>
 
   <br>
-
-
-
