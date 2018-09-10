@@ -262,7 +262,10 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
 1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ message brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example).
 <p class="note"><strong>Note:</strong> The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
-    <%= image_tag('form_message_broker_config.png') %>
+    <%= image_tag('form_message_broker_config_starting_port.png') %>
+
+1. <a id='default_orphaned_resource_policy'></a>Under **Default Orphaned Resource Policy**, Please choose a default policy for your deployment. This default policy is used when a service does not have its own policy. See [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy) for more details about the options.
+    <%= image_tag('form_message_broker_config_default_orphaned_resource_policy.png') %>
 
 1. Click **Save**.
 

@@ -121,6 +121,8 @@ A developer is responsible to pass this file to an app that needs to use the sol
 
   To revoke an app's permission to use a Solace PubSub+ Instance, you can delete its service key.
 
+  A [Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy) or [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy) is checked and applied during service key deletion when service key linked credentials are being removed.
+
   Assuming you have created a service key `external-mobile-app` for `solace-pubsub-instance`.
 
 1. Delete the service key for the service instance.
