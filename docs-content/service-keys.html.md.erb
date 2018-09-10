@@ -51,8 +51,8 @@ To create a service key for an existing Solace PubSub+ service with the cf Comma
    $ cf services
    Getting services in org example / space dev as user<span>@</span>example.com...
    OK
-   name                        service            plan     bound apps   last operation
-   solace-pubsub-instance      solace-pubsub      large-ha              create succeeded
+   name                        service            plan                bound apps   last operation
+   solace-pubsub-instance      solace-pubsub      enterprise-large-ha              create succeeded
   </pre>
 
 1. Create the service key for the solace-pubsub-instance and name it `external-mobile-app`.
@@ -94,7 +94,7 @@ To create a service key for an existing Solace PubSub+ service with the cf Comma
   ],
   (...)
   "managementHostnames": [
-   "shared-0.local.pcfdev.io"
+   "enterprise-shared-0.local.pcfdev.io"
   ],
   "managementPassword": "39159deafcd44b0ebee9d504807dbdd1",
   "managementUsername": "v002-mgmt",
