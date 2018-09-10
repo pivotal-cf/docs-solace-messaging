@@ -302,6 +302,17 @@ By enabling and configuring TLS, you allow messaging between apps and the Solace
 
 1. Click **Save**.
 
+#### <a id='optional_credhub'></a>(Optional) Secure Service Instance Credentials
+
+1. Click **Secure Service Instance Credentials**.
+    <%= image_tag('select_1_secure_service_instance_credentials.png') %>
+
+1. Check the **Secure service instance credentials** option.
+    <%= image_tag('form_secure_service_instance_credentials.png') %>
+<p class="note"><strong>Note:</strong> This enables credentials storage on CredHub capable deployments.</p>
+
+1. Click **Save**.
+
 #### <a id='optional_management_access'></a> (Optional) Management Access
 
 1. Click **Management Access**.
@@ -449,7 +460,7 @@ A solace\_router UAA agent is required to use the TCP Routes feature. If using a
 
 In order to apply changes, all the settings for the Solace tile must be marked with green checkmarks.
 
-<%= image_tag('select_all_done_new.png') %>
+<%= image_tag('select_all_done_new2.png') %>
 
 1. Click **Installation Dashboard** at the top left corner of the screen to leave the tile configuration and go back to dashboard.
     <%= image_tag('link_installation_dashboard_new.png') %>
