@@ -186,8 +186,8 @@ From the **Settings** tab of the Solace PubSub+ tile:
     <%= image_tag('form_mysql_default_new.png') %>
     <p></p>
     <a id='required_mysql_internal_ha'></a>
-    **Internal MySQL (Highly Available)**: Make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. The Load Balancer setup must ensure to point to the two management VMs with healthcheck port `1936`. The Load Balancer setup must be sticky. For more information, see [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer).
-    <%= image_tag('form_mysql_internal_ha_new.png') %>
+    **Internal MySQL (Highly Available)**: Make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. When using a Load Balancer setup, ensure to point to the two management VMs with healthcheck port `1936`. The Load Balancer setup must be sticky. For more information, see [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer). Without a Load Balancer the Service Broker relies on mysql driver for failover functions.
+    <%= image_tag('form_mysql_internal_ha_new2.png') %>
     <p></p>
     <a id='required_mysql_for_pcf'></a>
     **MySQL for PCF**: When MySQL for PCF Tile is available, select a highly available service plan with a minimum of 100&nbsp;MB database size.
@@ -308,7 +308,7 @@ By enabling and configuring TLS, you allow messaging between apps and the Solace
     <%= image_tag('select_1_secure_service_instance_credentials.png') %>
 
 1. Check the **Secure service instance credentials** option.
-    <%= image_tag('form_secure_service_instance_credentials.png') %>
+    <%= image_tag('form_secure_service_instance_credentials_new.png') %>
 <p class="note"><strong>Note:</strong> This enables credentials storage on CredHub capable deployments.</p>
 
 1. Click **Save**.
