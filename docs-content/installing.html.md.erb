@@ -77,6 +77,28 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
     <td>0</td>
   </tr>
   <tr>
+    <td>Standard Medium</td>
+    <td>1<a href="#tableNote1"><sup>1</sup></a></td>
+    <td>2</td>
+    <td>4096</td>
+    <td>10240</td>
+    <td>20480<a href="#tableNote1"><sup>1</sup></a></td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>Standard Medium-HA</td>
+    <td>3
+	<a href="#tableNote1"><sup>1, </sup></a>
+	<a href="#tableNote2"><sup>2</sup></a></td>
+    <td>2</td>
+    <td>4096</td>
+    <td>10240</td>
+    <td>20480<a href="#tableNote1"><sup>1</sup></a></td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
     <td>Management</td>
     <td>1<a href="#tableNote3"><sup>3</sup></a></td>
     <td>1</td>
@@ -479,13 +501,13 @@ If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not 
 
 ### <a id='upgrades_non_ha'></a> Non-High Availability Upgrades
 
-Upgrades are service-affecting for non-HA service plans `Enterprise Shared`, and `Enterprise Large`.
+Upgrades are service-affecting for non-HA service plans `Enterprise Shared`, `Enterprise Large`, and `Standard Medium`.
 
 The messaging service for an application will experience an outage that lasts no longer than the time it takes to upgrade the Solace PubSub+ message broker and start it up again.
 
 ### <a id='upgrades_ha'></a> High Availability Upgrades
 
-Upgrades are non-service-affecting for high-availability plans `Enterprise Large-HA` and `Enterprise Medium-HA`, so there will always be a service available during upgrades. Upgrades will affect each VM providing the HA service one at a time.
+Upgrades are non-service-affecting for high-availability plans `Enterprise Large-HA`, `Enterprise Medium-HA` and `Standard Medium-HA`, so there will always be a service available during upgrades. Upgrades will affect each VM providing the HA service one at a time.
 
 An application using an HA service will experience at least one switch-over during an upgrade, and at most two switch-overs.
 
