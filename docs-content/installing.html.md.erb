@@ -102,9 +102,9 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
 
 <p id="tableNote2" class="note"><strong><sup>2</sup> Note:</strong> A single high availability Solace PubSub+ service instance requires three (3) HA Solace PubSub+ message broker job instances to be used. As such, the number of HA Solace PubSub+ message broker job instances specified for the HA Solace PubSub+ message broker instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
 
-<p id="tableNote3" class="note"><strong><sup>3</sup> Note:</strong> The management VM is only required when choosing to deploy with one of the internal MySQL database options. You can set this to zero if you choose 'MySQL For PCF' or 'External MySQL'. A single instance is required if you choose the 'Internal MySQL' option, while two instances are required if you choose the 'Internal MySQL (Highly Available)'.</p>
+<p id="tableNote3" class="note"><strong><sup>3</sup> Note:</strong> The management VM is only required when choosing to deploy with one of the internal MySQL database options. You can set this to zero if you choose 'MySQL For PCF' or 'External MySQL'. Two instances are required for a production setup when using 'Internal MySQL' or 'Internal MySQL (Highly Available)'.</p>
 
-<p id="tableNote4" class="note"><strong><sup>4</sup> Note:</strong> One arbitrator VM is required when choosing to deploy with the 'Internal MySQL (Highly Available)' database option. Otherwise set this to zero.</p>
+<p id="tableNote4" class="note"><strong><sup>4</sup> Note:</strong> One arbitrator VM is required for a production setup when choosing to deploy with the 'Internal MySQL' or 'Internal MySQL (Highly Available)' database option. Otherwise set this to zero.</p>
 
 
 ## <a id='prereqs'></a> Prerequisites
@@ -182,11 +182,11 @@ From the **Settings** tab of the Solace PubSub+ tile:
 1. Select one of the supported MySQL configuration for the service broker's database.
     <p></p>
     <a id='required_mysql_internal'></a>
-    **Internal MySQL**: The default option is for an 'Internal MySQL' deployed to a single management VM. This option does not provide a high availability deployment of MySQL and not recommended for a production deployment of Solace PubSub+ for PCF.
+    **Internal MySQL**: The default option is for an 'Internal MySQL' deployed to a single management VM. For a production setup please make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. Without a Load Balancer the Service Broker relies on mysql driver for failover functions using up to two management VMs when available.
     <%= image_tag('form_mysql_default_new.png') %>
     <p></p>
     <a id='required_mysql_internal_ha'></a>
-    **Internal MySQL (Highly Available)**: Make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. When using a Load Balancer setup, ensure to point to the two management VMs with healthcheck port `1936`. The Load Balancer setup must be sticky. For more information, see [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer). Without a Load Balancer the Service Broker relies on mysql driver for failover functions.
+    **Internal MySQL (Highly Available)**: Make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. When using a Load Balancer setup, ensure to point to the two management VMs with healthcheck port `1936`. The Load Balancer setup must be sticky. For more information, see [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer). Without a Load Balancer the Service Broker relies on mysql driver for failover functions using up to two management VMs when available.
     <%= image_tag('form_mysql_internal_ha_new2.png') %>
     <p></p>
     <a id='required_mysql_for_pcf'></a>
