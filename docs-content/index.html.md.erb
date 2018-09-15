@@ -43,47 +43,50 @@ There is also simple sample code which shows you how to easily connect to a Sola
 * [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java)
 * [Solace PubSub+ Demo App](https://github.com/SolaceLabs/sl-cf-solace-messaging-demo)
 
+## <a id='tiles'></a> Solace PubSub+ for PCF Tiles
+
+Solace offers two PubSub+ for PCF tiles: the Enterprise Evaluation tile and the Enterprise tile.
+
+The Enterprise Evaluation tile is comprised of two message brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise Evaluation Edition. PubSub+ Standard is a forever free enterprise-grade message broker that supports publish/subscribe, queueing, request/reply, and streaming, along with integrated high availability (HA) and disaster recovery (DR). The PubSub+ Enterprise Evaluation Edition is a free 90-day evaluation version of the PubSub+ Enterprise edition, which supports all the features of PubSub+ Standard, but with increased performance and scaling. You can download an Enterprise Evaluation tile [here](https://network.pivotal.io/products/solace-pubsub/). Also, if you are interested in a support plan for Solace PubSub+ for PCF, contact <a href='https://solace.com/support' target="_blank">Solace Support</a> or your local <a href='mailto:info@solace.com?Subject=Enterprise version of Solace PubSub+ For PCF' target="_blank">Solace sales representative</a>.
+ 
+The Enterprise tile is also comprised of two message brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise. Contact <a href='https://solace.com/support' target="_blank">Solace Support</a> for information on how to obtain this tile and associated support plans.
+
 
 ## <a id='marketplace-plans'></a> PCF Marketplace Plans
 
-Solace PubSub+ for PCF currently offers the following plans: 
+Solace PubSub+ for PCF currently offers the following service plans for both the Enterprise Evaluation and Enterprise tiles:
 
 <table border="1" class="nice">
 	<tr>
 		<th>Service Plan</th>
 		<th>Description</th>
-		<th>Enterprise Evaluation Tile</th>
-		<th>Enterprise Tile <a href="#tableNote2"><sup>2</sup></a></th>
 	</tr>
+
   <tr>
     <td><a href='service-plans.html#plan_enterprise_shared'>Enterprise Shared</a></td>
-    <td>A single Message VPN in a shared Solace message broker. Useful for light traffic and development.</td>
-    <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
-    <td>&#10004;</td>
+    <td>A single Message VPN in a shared Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker. Useful for light traffic and development.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_large'>Enterprise Large</a></td>
-    <td>A single message VPN on a dedicated Solace message broker.</td>
-    <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
-    <td>&#10004;</td>
+    <td>A single message VPN on a dedicated Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker with associated properties set to high values.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_medium_ha'>Enterprise Medium-HA</a></td>
-    <td>A single message VPN implemented across 3 medium Solace message brokers in a highly-available configuration.</td>
-    <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
-    <td>&#10004;</td>
+    <td>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_large_ha'>Enterprise Large-HA</a></td>
-    <td>A single message VPN implemented across 3 large Solace message brokers in a highly-available configuration.</td>
-    <td>&#10004; <a href="#tableNote1"><sup>1</sup></a></td>
-    <td>&#10004;</td>
+    <td>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to high values.</td>
+  </tr>
+  <tr>
+    <td><a href='service-plans.html#plan_standard_medium'>Standard Medium</a></td>
+    <td>A single message VPN on a dedicated Solace PubSub+ Standard message broker with associated properties set to moderate values.</td>
+  </tr>
+  <tr>
+    <td><a href='service-plans.html#plan_standard_medium_ha'>Standard Medium-HA</a></td>
+    <td>A single message VPN spanning 3 Solace PubSub+ Standard message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
   </tr>
 </table>
-
-<p id='tableNote1' class="note"><strong><sup>1</sup> Note:</strong> This Enterprise Evaluation Tile plan is fully featured but has a time-limited 90-day evaluation period.</p>
-<p id='tableNote2' class="note"><strong><sup>2</sup> Note:</strong> For access to the Enterprise version of the Solace PubSub+ for PCF Tile, please contact <a href='https://solace.com/support' target="_blank">Solace Support</a> or your local <a href='mailto:info@solace.com?Subject=Enterprise version of Solace PubSub+ For PCF' target="_blank">Solace sales representative</a>.</p>
-
 
 ## <a id='cloud-integration'></a> Cloud Integration 
 
@@ -147,7 +150,7 @@ The following table provides version and version-support information about Solac
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>v2.0.2</td>
+        <td>v2.1.0</td>
     </tr>
     <tr>
         <td>Editions</td>
@@ -155,19 +158,19 @@ The following table provides version and version-support information about Solac
     </tr>
     <tr>
         <td>Release date</td>
-        <td>August 3, 2018</td>
+        <td>September 14, 2018</td>
     </tr>
     <tr>
         <td>Solace PubSub+ message broker version</td>
-        <td>v8.11.0.x</td>
+        <td>v8.12.0.x</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>
-        <td>v1.12.x, v2.0.x, v2.1.x, and v2.2.x</td>
+        <td>v2.0.x, v2.1.x, v2.2.x, and v2.3.x</td>
     </tr>
     <tr>
         <td>Compatible Pivotal Application Service version(s)</td>
-        <td>v1.12.x, v2.0.x, v2.1.x, and v2.2.x</td>
+        <td>v2.0.x, v2.1.x, v2.2.x, and v2.3.x</td>
     </tr>
     <tr>
         <td>IaaS support</td>

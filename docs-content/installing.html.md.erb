@@ -77,6 +77,28 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
     <td>0</td>
   </tr>
   <tr>
+    <td>Standard Medium</td>
+    <td>1<a href="#tableNote1"><sup>1</sup></a></td>
+    <td>2</td>
+    <td>4096</td>
+    <td>10240</td>
+    <td>20480<a href="#tableNote1"><sup>1</sup></a></td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>Standard Medium-HA</td>
+    <td>3
+	<a href="#tableNote1"><sup>1, </sup></a>
+	<a href="#tableNote2"><sup>2</sup></a></td>
+    <td>2</td>
+    <td>4096</td>
+    <td>10240</td>
+    <td>20480<a href="#tableNote1"><sup>1</sup></a></td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
     <td>Management</td>
     <td>1<a href="#tableNote3"><sup>3</sup></a></td>
     <td>1</td>
@@ -102,9 +124,9 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
 
 <p id="tableNote2" class="note"><strong><sup>2</sup> Note:</strong> A single high availability Solace PubSub+ service instance requires three (3) HA Solace PubSub+ message broker job instances to be used. As such, the number of HA Solace PubSub+ message broker job instances specified for the HA Solace PubSub+ message broker instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
 
-<p id="tableNote3" class="note"><strong><sup>3</sup> Note:</strong> The management VM is only required when choosing to deploy with one of the internal MySQL database options. You can set this to zero if you choose 'MySQL For PCF' or 'External MySQL'. A single instance is required if you choose the 'Internal MySQL' option, while two instances are required if you choose the 'Internal MySQL (Highly Available)'.</p>
+<p id="tableNote3" class="note"><strong><sup>3</sup> Note:</strong> The management VM is only required when choosing to deploy with one of the internal MySQL database options. You can set this to zero if you choose 'MySQL For PCF' or 'External MySQL'. Two instances are required for a production setup when using 'Internal MySQL' or 'Internal MySQL (Highly Available)'.</p>
 
-<p id="tableNote4" class="note"><strong><sup>4</sup> Note:</strong> One arbitrator VM is required when choosing to deploy with the 'Internal MySQL (Highly Available)' database option. Otherwise set this to zero.</p>
+<p id="tableNote4" class="note"><strong><sup>4</sup> Note:</strong> One arbitrator VM is required for a production setup when choosing to deploy with the 'Internal MySQL' or 'Internal MySQL (Highly Available)' database option. Otherwise set this to zero.</p>
 
 
 ## <a id='prereqs'></a> Prerequisites
@@ -182,12 +204,12 @@ From the **Settings** tab of the Solace PubSub+ tile:
 1. Select one of the supported MySQL configuration for the service broker's database.
     <p></p>
     <a id='required_mysql_internal'></a>
-    **Internal MySQL**: The default option is for an 'Internal MySQL' deployed to a single management VM. This option does not provide a high availability deployment of MySQL and not recommended for a production deployment of Solace PubSub+ for PCF.
+    **Internal MySQL**: The default option is for an 'Internal MySQL' deployed to a single management VM. For a production setup please make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. Without a Load Balancer the Service Broker relies on mysql driver for failover functions using up to two management VMs when available.
     <%= image_tag('form_mysql_default_new.png') %>
     <p></p>
     <a id='required_mysql_internal_ha'></a>
-    **Internal MySQL (Highly Available)**: Make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. The Load Balancer setup must ensure to point to the two management VMs with healthcheck port `1936`. The Load Balancer setup must be sticky. For more information, see [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer).
-    <%= image_tag('form_mysql_internal_ha_new.png') %>
+    **Internal MySQL (Highly Available)**: Make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. When using a Load Balancer setup, ensure to point to the two management VMs with healthcheck port `1936`. The Load Balancer setup must be sticky. For more information, see [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer). Without a Load Balancer the Service Broker relies on mysql driver for failover functions using up to two management VMs when available.
+    <%= image_tag('form_mysql_internal_ha_new2.png') %>
     <p></p>
     <a id='required_mysql_for_pcf'></a>
     **MySQL for PCF**: When MySQL for PCF Tile is available, select a highly available service plan with a minimum of 100&nbsp;MB database size.
@@ -249,7 +271,7 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 <p class="note"><strong>Note:</strong> Solace recommends keeping the default values for <strong>VM Type</strong>. A reduction of the RAM or CPU capacity may lead to a deployment failure or service degradation.</p>
 <p class="note"><strong>Note:</strong> The deploy-all and delete-all are required errands for the installation and removal of the Solace Service Broker. Solace recommends leaving the default VM Type. The VM Type for these errands is not related to the required resources of the Solace Service Broker, which runs in Elastic Runtime.</p>
 <p class="note"><strong>Note:</strong> The solace_tests errand will test that a deployment has completed as expected and that it is ready for service. Solace recommends always running this errand after a deployment. Solace recommends leaving the default VM Type.</p>
-    <%= image_tag('form_resource_config_renamed.png') %>
+    <%= image_tag('form_resource_config_new2.png') %>
 
 1. Click **Save**.
 
@@ -262,7 +284,10 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
 1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ message brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example).
 <p class="note"><strong>Note:</strong> The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
-    <%= image_tag('form_message_broker_config.png') %>
+    <%= image_tag('form_message_broker_config_starting_port.png') %>
+
+1. <a id='default_orphaned_resource_policy'></a>Under **Default Orphaned Resource Policy**, Please choose a default policy for your deployment. This default policy is used when a service does not have its own policy. See [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy) for more details about the options.
+    <%= image_tag('form_message_broker_config_default_orphaned_resource_policy.png') %>
 
 1. Click **Save**.
 
@@ -296,6 +321,17 @@ By enabling and configuring TLS, you allow messaging between apps and the Solace
 1. Check the **Enable global access to plans of service solace_pubsub** option.
     <%= image_tag('form_service_access_new.png') %>
 <p class="note"><strong>Note:</strong> To control access to Solace PubSub+ service plans on a case-by-case basis, do not enable this option. Once this is enabled, it cannot be disabled from this form. It must be revoked by the operator manually.</p>
+
+1. Click **Save**.
+
+#### <a id='optional_credhub'></a>(Optional) Secure Service Instance Credentials
+
+1. Click **Secure Service Instance Credentials**.
+    <%= image_tag('select_1_secure_service_instance_credentials.png') %>
+
+1. Check the **Secure service instance credentials** option.
+    <%= image_tag('form_secure_service_instance_credentials_new.png') %>
+<p class="note"><strong>Note:</strong> This enables credentials storage on CredHub capable deployments.</p>
 
 1. Click **Save**.
 
@@ -446,7 +482,7 @@ A solace\_router UAA agent is required to use the TCP Routes feature. If using a
 
 In order to apply changes, all the settings for the Solace tile must be marked with green checkmarks.
 
-<%= image_tag('select_all_done_new.png') %>
+<%= image_tag('select_all_done_new2.png') %>
 
 1. Click **Installation Dashboard** at the top left corner of the screen to leave the tile configuration and go back to dashboard.
     <%= image_tag('link_installation_dashboard_new.png') %>
@@ -465,13 +501,13 @@ If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not 
 
 ### <a id='upgrades_non_ha'></a> Non-High Availability Upgrades
 
-Upgrades are service-affecting for non-HA service plans `Enterprise Shared`, and `Enterprise Large`.
+Upgrades are service-affecting for non-HA service plans `Enterprise Shared`, `Enterprise Large`, and `Standard Medium`.
 
 The messaging service for an application will experience an outage that lasts no longer than the time it takes to upgrade the Solace PubSub+ message broker and start it up again.
 
 ### <a id='upgrades_ha'></a> High Availability Upgrades
 
-Upgrades are non-service-affecting for high-availability plans `Enterprise Large-HA` and `Enterprise Medium-HA`, so there will always be a service available during upgrades. Upgrades will affect each VM providing the HA service one at a time.
+Upgrades are non-service-affecting for high-availability plans `Enterprise Large-HA`, `Enterprise Medium-HA` and `Standard Medium-HA`, so there will always be a service available during upgrades. Upgrades will affect each VM providing the HA service one at a time.
 
 An application using an HA service will experience at least one switch-over during an upgrade, and at most two switch-overs.
 
