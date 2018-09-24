@@ -3,8 +3,7 @@ title: Installing and Configuring Solace PubSub+ for Pivotal Cloud Foundry
 owner: Partners
 ---
 
-This topic describes how to install and configure Solace PubSub+ for Pivotal Cloud Foundry (PCF). 
-Before installing Solace PubSub+ for PCF, you must complete the [prerequisites](#prereqs).
+This topic describes how to install and configure Solace PubSub+ for Pivotal Cloud Foundry (PCF). Before installing Solace PubSub+ for PCF, you must complete the [prerequisites](#prereqs).
 
 
 ## <a id='resource-reqs'></a> Review Resource Requirements
@@ -139,7 +138,7 @@ Solace PubSub+ for PCF requires the following:
      * [Internal MySQL](#required_mysql_internal)
      * [Internal MySQL (Highly Available)](#required_mysql_internal_ha)
   * As service from a deployment of [MySQL for Pivotal Cloud Foundry](http://docs.pivotal.io/p-mysql/index.html). Please ensure to configure for a High Availability setup and with service plans offering a minimum of 100&nbsp;MB. See [MySQL for PCF](#required_mysql_for_pcf).
-  * External when mysql is already deployed outside PCF, it may be offered as a user provided service instance to Solace PubSub+ for PCF, see <a href="#required_mysql_external">External MySQL</a>
+  * External when MySQL is already deployed outside PCF, it may be offered as a user provided service instance to Solace PubSub+ for PCF, see [External MySQL](#required_mysql_external).
 
 
 ## <a id='install'></a> Install Solace PubSub+ for PCF 
@@ -204,15 +203,15 @@ From the **Settings** tab of the Solace PubSub+ tile:
 1. Select one of the supported MySQL configuration for the service broker's database.
     <p></p>
     <a id='required_mysql_internal'></a>
-    **Internal MySQL**: The default option is for an 'Internal MySQL' deployed to a single management VM. For a production setup please make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. Without a Load Balancer the Service Broker relies on mysql driver for failover functions using up to two management VMs when available.
+    **Internal MySQL**: The default option is for an 'Internal MySQL' deployed to a single management VM. For a production setup please make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. Without a load balancer, the service broker relies on MySQL driver for failover functions using up to two management VMs when available.
     <%= image_tag('form_mysql_default_new.png') %>
     <p></p>
     <a id='required_mysql_internal_ha'></a>
-    **Internal MySQL (Highly Available)**: Make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. When using a Load Balancer setup, ensure to point to the two management VMs with healthcheck port `1936`. The Load Balancer setup must be sticky. For more information, see [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer). Without a Load Balancer the Service Broker relies on mysql driver for failover functions using up to two management VMs when available.
+    **Internal MySQL (Highly Available)**: Make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. When using a load balancer setup, ensure to point to the two management VMs with health check port `1936`. The load balancer setup must be sticky. For more information, see [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer). Without a load balancer, the service broker relies on MySQL driver for failover functions using up to two management VMs when available.
     <%= image_tag('form_mysql_internal_ha_new2.png') %>
     <p></p>
     <a id='required_mysql_for_pcf'></a>
-    **MySQL for PCF**: When MySQL for PCF Tile is available, select a highly available service plan with a minimum of 100&nbsp;MB database size.
+    **MySQL for PCF**: When MySQL for PCF tile is available, select a highly available service plan with a minimum of 100&nbsp;MB database size.
     <%= image_tag('form_mysql_for_pcf_new.png') %>
     <p></p>
     <a id='required_mysql_external'></a>
@@ -235,9 +234,9 @@ From the **Settings** tab of the Solace PubSub+ tile:
 
 1. Click **Save**.
 
-#### <a id='required_tcp_routes'></a> TCP Routes (Save required)
+#### <a id='required_tcp_routes'></a> TCP Routes (Save Required)
 
-Open this pane and click **Save** even if using the default setting. If you want to enable TCP routes, [(Optional) TCP Routes](#optional_tcp_routes).
+Open this pane and click **Save** even if using the default setting. If you want to enable TCP routes, follow the procedure in [(Optional) TCP Routes](#optional_tcp_routes).
 
 1. Click **TCP Routes**.
     <%= image_tag('select_1_tcp_routes.png') %>
@@ -265,12 +264,12 @@ You might need to import a stemcell import if the minimum stemcell required for 
     <%= image_tag('select_1_resource_config.png') %>
 
 1. Use the drop-down menus to configure the number of Solace PubSub+ message broker job instances that are available in each of the service plans mentioned above. These job instances are statically created when the tile is deployed. Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances.<br/><br/>
-Five Enterprise Shared service instances can be hosted on a single Enterprise Shared job instance. As such, the maximum number of Enterprise Shared service instances that can concurrently exist for the <code>Enterprise Shared</code> service plan is equal to five times the number of <code>Enterprise Shared</code> job instances. Conversely, three HA Solace PubSub+ message broker job instances are required for a single HA Solace PubSub+ message broker service instance. As such, the maximum number of HA Solace PubSub+ message broker service instances that can concurrently exist for the <code>Enterprise Large-HA</code> and <code>Enterprise Medium-HA</code> service plans is equal to one-third the number of their corresponding job instances. In order for <code>Enterprise Large-HA</code> and <code>Enterprise Medium-HA</code> service plans to provide high availability fault tolerance, make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more. If you have only one availability zone, the deployment is not fault tolerant and Solace does not recommend using high availability service plans under this scenario.
-<p class="note"><strong>Note:</strong> The number of job instances can be increased after the tile is deployed without impacting already bound apps. However, reducing the number of instances can result in app failure and message loss.</p>
-<p class="note"><strong>Note:</strong> The size of the persistent disk can be changed both before and after deployment. Increasing the size of the persistent disks will impact the service of already bound apps. However, messages will not be lost. Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable Solace PubSub+ message broker, and/or undefined behaviors.</p>
-<p class="note"><strong>Note:</strong> Solace recommends keeping the default values for <strong>VM Type</strong>. A reduction of the RAM or CPU capacity may lead to a deployment failure or service degradation.</p>
-<p class="note"><strong>Note:</strong> The deploy-all and delete-all are required errands for the installation and removal of the Solace Service Broker. Solace recommends leaving the default VM Type. The VM Type for these errands is not related to the required resources of the Solace Service Broker, which runs in Elastic Runtime.</p>
-<p class="note"><strong>Note:</strong> The solace_tests errand will test that a deployment has completed as expected and that it is ready for service. Solace recommends always running this errand after a deployment. Solace recommends leaving the default VM Type.</p>
+Five Enterprise Shared service instances can be hosted on a single Enterprise Shared job instance. As such, the maximum number of Enterprise Shared service instances that can concurrently exist for the `Enterprise Shared` service plan is equal to five times the number of `Enterprise Shared` job instances. Conversely, three HA Solace PubSub+ message broker job instances are required for a single HA Solace PubSub+ message broker service instance. As such, the maximum number of HA Solace PubSub+ message broker service instances that can concurrently exist for the `Enterprise Large-HA` and `Enterprise Medium-HA` service plans is equal to one-third the number of their corresponding job instances. In order for `Enterprise Large-HA` and `Enterprise Medium-HA` service plans to provide high availability fault tolerance, make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more. If you have only one availability zone, the deployment is not fault tolerant and Solace does not recommend using high availability service plans under this scenario.
+    <p class="note"><strong>Note:</strong> The number of job instances can be increased after the tile is deployed without impacting already bound apps. However, reducing the number of instances can result in app failure and message loss.</p>
+    <p class="note"><strong>Note:</strong> The size of the persistent disk can be changed both before and after deployment. Increasing the size of the persistent disks will impact the service of already bound apps. However, messages will not be lost. Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable Solace PubSub+ message broker, and/or undefined behaviors.</p>
+    <p class="note"><strong>Note:</strong> Solace recommends keeping the default values for <strong>VM Type</strong>. A reduction of the RAM or CPU capacity may lead to a deployment failure or service degradation.</p>
+    <p class="note"><strong>Note:</strong> The deploy-all and delete-all are required errands for the installation and removal of the Solace Service Broker. Solace recommends leaving the default VM Type. The VM Type for these errands is not related to the required resources of the Solace Service Broker, which runs in Elastic Runtime.</p>
+    <p class="note"><strong>Note:</strong> The solace_tests errand will test that a deployment has completed as expected and that it is ready for service. Solace recommends always running this errand after a deployment. Solace recommends leaving the default VM Type.</p>
     <%= image_tag('form_resource_config_new2.png') %>
 
 1. Click **Save**.
@@ -283,10 +282,10 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
     <%= image_tag('select_1_message_broker_config.png') %> 
 
 1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ message brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example).
-<p class="note"><strong>Note:</strong> The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
+    <p class="note"><strong>Note:</strong> The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
     <%= image_tag('form_message_broker_config_starting_port.png') %>
 
-1. <a id='default_orphaned_resource_policy'></a>Under **Default Orphaned Resource Policy**, Please choose a default policy for your deployment. This default policy is used when a service does not have its own policy. See [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy) for more details about the options.
+1. <a id='default_orphaned_resource_policy'></a> Under **Default Orphaned Resource Policy**, choose a default policy for your deployment. This default policy is used when a service does not have its own policy. See [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy) for more details about the options.
     <%= image_tag('form_message_broker_config_default_orphaned_resource_policy.png') %>
 
 1. Click **Save**.
@@ -300,13 +299,13 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
 1. Click **TLS Enabled**.
     <%= image_tag('form_tls_config_enabled_new.png') %> 
-By enabling and configuring TLS, you allow messaging between apps and the Solace PubSub+ message broker to be encrypted. Apps requiring encryption would then need to use the TLS-specific URLs passed in the `VCAP_SERVICES` environment variable. For more information about the `VCAP_SERVICES` environment variable, see [Example Environment Variable](credentials.html#example). If TLS is not configured, the TLS specific URLs continue to be passed in the `VCAP_SERVICES` environment variable but fail to connect to a PubSub+ Message Broker if used.
+    By enabling and configuring TLS, you allow messaging between apps and the Solace PubSub+ message broker to be encrypted. Apps requiring encryption would then need to use the TLS-specific URLs passed in the `VCAP_SERVICES` environment variable. For more information about the `VCAP_SERVICES` environment variable, see [Example Environment Variable](credentials.html#example). If TLS is not configured, the TLS specific URLs continue to be passed in the `VCAP_SERVICES` environment variable but fail to connect to a PubSub+ Message Broker if used.
 
 1. Configure **Message Broker's RSA certificate (Server Certificate)** either by pasting in a certificate and private key in PEM format or asking one to be generated by clicking **Generate RSA Certificate**. Generated certificates are equivalent to self-signed certificates.
     <%= image_tag('form_tls_config_server_certificate_new.png') %>
-<p class="note"><strong>Note:</strong> The server certificate configured will be used by all Solace PubSub+ message brokers deployed. As such, all Solace PubSub+ message brokers deployed in a PCF instances will have the same identification.</p>
+    <p class="note"><strong>Note:</strong> The server certificate configured will be used by all Solace PubSub+ message brokers deployed. As such, all Solace PubSub+ message brokers deployed in a PCF instances will have the same identification.</p>
     <%= image_tag('form_tls_config_disable_sb_cert_validation.png') %>
-<p class="note"><strong>Note:</strong> Communication between the Solace PubSub+ Service Broker and Solace PubSub+ message broker is also encrypted if a TLS certificate is configured. The Service Broker uses the Container Certificate Trust Store Framework to validate the server certificate returned by Solace PubSub+ message brokers. So if the framework is not operational when the tile is deployed, the Service Broker will be unable to validate server certificates sent by the Solace PubSub+ message brokers and the tile will fail to deploy. In development environments, it may be acceptable to not require server certificate validation, in which case the <strong>Disable RSA Server Certificate validation on the Service Broker (For development only)</strong> checkbox can be selected. This checkbox should never be selected in production deployments. Instead, the framework should be made operational.</p>
+    <p class="note"><strong>Note:</strong> Communication between the Solace PubSub+ Service Broker and Solace PubSub+ message broker is also encrypted if a TLS certificate is configured. The Service Broker uses the Container Certificate Trust Store Framework to validate the server certificate returned by Solace PubSub+ message brokers. So if the framework is not operational when the tile is deployed, the Service Broker will be unable to validate server certificates sent by the Solace PubSub+ message brokers and the tile will fail to deploy. In development environments, it may be acceptable to not require server certificate validation, in which case the <strong>Disable RSA Server Certificate validation on the Service Broker (For development only)</strong> checkbox can be selected. This checkbox should never be selected in production deployments. Instead, the framework should be made operational.</p>
 
 1. (Optional) Configure **Message Broker's Trusted Root Certificates**. These certificates will be stored in the trust store on the Solace PubSub+ message brokers. They are required if you choose to use LDAP with TLS.
     <%= image_tag('form_tls_config_trusted_root_certificates_new.png') %>
@@ -320,7 +319,7 @@ By enabling and configuring TLS, you allow messaging between apps and the Solace
 
 1. Check the **Enable global access to plans of service solace_pubsub** option.
     <%= image_tag('form_service_access_new.png') %>
-<p class="note"><strong>Note:</strong> To control access to Solace PubSub+ service plans on a case-by-case basis, do not enable this option. Once this is enabled, it cannot be disabled from this form. It must be revoked by the operator manually.</p>
+    <p class="note"><strong>Note:</strong> To control access to Solace PubSub+ service plans on a case-by-case basis, do not enable this option. Once this is enabled, it cannot be disabled from this form. It must be revoked by the operator manually.</p>
 
 1. Click **Save**.
 
@@ -331,7 +330,7 @@ By enabling and configuring TLS, you allow messaging between apps and the Solace
 
 1. Check the **Secure service instance credentials** option.
     <%= image_tag('form_secure_service_instance_credentials_new.png') %>
-<p class="note"><strong>Note:</strong> This enables credentials storage on CredHub capable deployments.</p>
+    <p class="note"><strong>Note:</strong> This enables credentials storage on CredHub capable deployments.</p>
 
 1. Click **Save**.
 
@@ -351,7 +350,7 @@ By enabling and configuring TLS, you allow messaging between apps and the Solace
 
 1. (Optional) Configure Groups with Solace PubSub+ message brokers administration administrator privileges.
     <%= image_tag('form_management_access_ldap_admin_new.png') %>
-<p class="note"><strong>Note:</strong> Cloud Operators need to have global access to the Solace PubSub+ message brokers deployed by the tile. This will allow them to administer the Solace PubSub+ message brokers with SolAdmin, CLI, or SEMP-based tools. Cloud operators might have different roles. Each role requires one of the three types of access-level: administrator, read-write, and read-only. When using "Message Broker Internal", the cloud operators access to a single administrator level role using the admin password. With "LDAP Server", users can be assigned to groups in LDAP mapping to their respective roles.</p>
+    <p class="note"><strong>Note:</strong> Cloud Operators need to have global access to the Solace PubSub+ message brokers deployed by the tile. This will allow them to administer the Solace PubSub+ message brokers with SolAdmin, CLI, or SEMP-based tools. Cloud operators might have different roles. Each role requires one of the three types of access-level: administrator, read-write, and read-only. When using "Message Broker Internal", the cloud operators access to a single administrator level role using the admin password. With "LDAP Server", users can be assigned to groups in LDAP mapping to their respective roles.</p>
 
 1. Click **Save**.
 
@@ -412,7 +411,7 @@ and [Application Access](#optional_application_access). **If neither [Management
 
 1. Set the external syslog hostname.
     <%= image_tag('form_system_logging_server.png') %>
-<p class="note"><strong>Note:</strong> Consider the network accessibility of the provided syslog server. You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config).</p>
+    <p class="note"><strong>Note:</strong> Consider the network accessibility of the provided syslog server. You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config).</p>
 
 1. Set the external syslog port.
     <%= image_tag('form_system_logging_port.png') %>
@@ -438,9 +437,9 @@ and [Application Access](#optional_application_access). **If neither [Management
 1. Click **TCP Routes Enabled**.
     <%= image_tag('form_tcp_routes_enabled_1_new.png') %>
     <%= image_tag('form_tcp_routes_enabled_2_new.png') %>
-  <p class="note"><strong>Note:</strong> Fine-grained control is available by protocol. If you choose <strong>"Not Allowed"</strong>, a TCP Route will never be created for this protocol, even if requested at service creation time. If you choose <strong>"Disabled by default"</strong>, at service creation time, a TCP Route will not be created for this protocol unless a user-provided parameter overrides it with a "true" setting. If you choose <strong>"Enabled by default"</strong>, a TCP Route will be created for this protocol at service creation time, unless a user-provided parameter overrides it with "false" setting.</p>
+    <p class="note"><strong>Note:</strong> Fine-grained control is available by protocol. If you choose <strong>Not Allowed</strong>, a TCP route will never be created for this protocol, even if requested at service creation time. If you choose <strong>Disabled by default</strong>, at service creation time, a TCP route will not be created for this protocol unless a user-provided parameter overrides it with a <code>true</code> setting. If you choose <strong>Enabled by default</strong>, a TCP route will be created for this protocol at service creation time, unless a user-provided parameter overrides it with <code>false</code> setting.</p>
 
-A solace\_router UAA agent is required to use the TCP Routes feature. If using a new version of the Elastic Runtime (v1.11, v1.10.11, v1.9.24, v1.8.46), the solace\_router UAA client may be present already, and there is no need to provide Cloud Foundry credentials. Check your installation for the presence of the solace\_router UAA client, which can be found under <strong>Pivotal Elastic Runtime > Credentials > UAA</strong>. If a solace\_router is not found, you will need to create one. To create a solace\_router, do the following:
+A solace\_router UAA agent is required to use the TCP Routes feature. If using a new version of the Elastic Runtime (v1.11, v1.10.11, v1.9.24, v1.8.46), the solace\_router UAA client may be present already, and there is no need to provide Cloud Foundry credentials. Check your installation for the presence of the solace\_router UAA client, which can be found under <strong>Pivotal Elastic Runtime > Credentials > UAA</strong>. If a solace\_router is not found, you must to create one. To create a solace\_router, do the following:
 
 1. Look up the UAA 'Admin Client Credentials', which will be needed to create the solace\_router.</p>
 
@@ -464,12 +463,12 @@ A solace\_router UAA agent is required to use the TCP Routes feature. If using a
   $ -s "A\_GOOD\_SECRET\_PASSWORD"
   </pre>
 
-1. Ensure that you have a 'tcp' domain.
+1. Ensure that you have a `tcp` domain.
   <pre class="terminal">
   $ cf create-shared-domain tcp.YOUR-DOMAIN --router-group default-tcp
   </pre>
 
-1. Consider PCF quotas, networking, and firewalls when using TCP Routes. For example, consider removing the limits on reserved route ports.
+1. Consider PCF quotas, networking, and firewalls when using TCP routes. For example, consider removing the limits on reserved route ports.
   <pre class="terminal">
   $ cf update-quota default --reserved-route-ports -1
   </pre>
@@ -509,7 +508,7 @@ The messaging service for an application will experience an outage that lasts no
 
 Upgrades are non-service-affecting for high-availability plans `Enterprise Large-HA`, `Enterprise Medium-HA` and `Standard Medium-HA`, so there will always be a service available during upgrades. Upgrades will affect each VM providing the HA service one at a time.
 
-An application using an HA service will experience at least one switch-over during an upgrade, and at most two switch-overs.
+An application using an HA service experiences at least one switch-over during an upgrade, and at most two switch-overs.
 
 See our [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java) for some examples of how HA connections are used, as well as [Configuring-Client-Connections](https://docs.solace.com/Solace-Messaging-APIs/Developer-Guide/Configuring-Connection-T.htm) for additional information on client connection setup to allow for switch-overs during upgrades.
 
@@ -522,6 +521,6 @@ The following pre-conditions must be met before an upgrade can proceed, or the u
 * The version of the tile being upgraded must be v2.0 or higher.
 * The redundancy state of HA services must be healthy.
 
-If any failure occurs during an upgrade, services will remain available. 
+If any failure occurs during an upgrade, services remain available. 
 
 For more information, see the [Troubleshooting Guide](troubleshooting.html#upgrade_errors).
