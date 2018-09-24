@@ -5,31 +5,30 @@ owner: Partners
 
 This topic describes how developers can bind an app to instances of the Solace PubSub+ service.
 
-##<a id='about-bindings'></a>About Bindings
 
-For an app deployed in Pivotal Cloud Foundry (PCF) to obtain credentials for a Solace PubSub+ service instance,
-a developer needs to bind the app to the service instance.
+## <a id='about-bindings'></a> About Bindings
 
-Binding the app to a service instance produces [Solace PubSub+ Credentials](credentials.html),
-which become available in the `VCAP_SERVICES` environment variable for the app as deployed in PCF.
+For an app deployed in Pivotal Cloud Foundry (PCF) to obtain credentials for a Solace PubSub+ service instance, a developer needs to bind the app to the service instance.
+
+Binding the app to a service instance produces [Solace PubSub+ Credentials](credentials.html), which become available in the `VCAP_SERVICES` environment variable for the app as deployed in PCF.
 
 Unbinding the app from the service instance revokes the credentials.
 
-The following procedures assume you have created a Solace PubSub+ service called `solace-pubsub-instance`
-as discussed in [Service Instances](service-instances.html) and that you have a deployed app called `web-backend`.
+The following procedures assume you have created a Solace PubSub+ service called `solace-pubsub-instance` as discussed in [Service Instances](service-instances.html) and that you have a deployed app called `web-backend`.
 
 The procedures show you how to bind this service instance to the app named `web-backend`. 
 
-## <a id='service-specific-configuration'></a>Binding with Service Specific Parameters
+
+## <a id='service-specific-configuration'></a> Binding with Service Specific Parameters
 
 A binding may be customized at creation time with service-specific parameters.
 
 1. `username`: When this key is provided, the binding will its value as the client-username in the Message VPN backing the service instance. This will allow a new application to bind to an existing service and access the resources that are already owned by the given `username` in the service instance.
 
 
-##<a id='bind-cf-cli'></a>Bind a Service Instance with the cf CLI
+## <a id='bind-cf-cli'></a> Bind a Service Instance with the cf CLI
 
-To bind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool, perform the following steps:
+To bind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
@@ -47,7 +46,6 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
   Email> user<span>@</span>example.com
   Password>
   </pre>
-
 
 1. Locate the previously created service.
 	<pre class="terminal">
@@ -72,9 +70,10 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
   $ cf restage web-backend
   </pre>
 
-##<a id='bind-cf-cli-specific-params'></a>Bind a Service Instance with the cf CLI with service-specific parameters
 
-To bind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool with added service-specific parameter to choose a `username`, perform the following steps:
+## <a id='bind-cf-cli-specific-params'></a> Bind a Service Instance with the cf CLI with Service-Specific Parameters
+
+To bind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool with an added service-specific parameter to choose a `username`, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
@@ -92,7 +91,6 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
   Email> user<span>@</span>example.com
   Password>
   </pre>
-
 
 1. Locate the previously created service.
 	<pre class="terminal">
@@ -117,24 +115,30 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
   $ cf restage web-backend
   </pre>
 
-##<a id='apps-man'></a>Bind a Service Instance in Apps Manager
 
-To bind an instance of the Solace PubSub+ service in Apps Manager, perform the following steps:
+## <a id='apps-man'></a> Bind a Service Instance in Apps Manager
+
+To bind an instance of the Solace PubSub+ service in Apps Manager, do the following:
 
 1. Navigate to `apps.YOUR-SYSTEM-DOMAIN` in a browser and log in.
+
 1. Select the org and space in which you wish to create the Solace PubSub+ service.
+
 1. Click **Apps**, click the app name **web-backend**, click **Services**, then click **Bind a Service**.
   <%= image_tag('appsmanager_solace_messaging_service_list_empty_new.png') %>
+
 1. Select a service instance to bind to the app and click **Bind**.
   <%= image_tag('appsmanager_solace_messaging_bind_service_selected_new.png') %>
+
 1. After the service is bound, you can find it listed under **Services**.
   <%= image_tag('appsmanager_solace_messaging_service_list_has_service_new.png') %>
 
-##<a id='unbind-cf-cli'></a>Unbind a Service Instance with the cf CLI
+
+## <a id='unbind-cf-cli'></a> Unbind a Service Instance with the cf CLI
 
 Unbindng an app from a service instance revokes previously allocated credentials, the app will no longer have access to service. A [Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy) or [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy) is checked and applied at unbinding time when the binding linked credentials are being removed.
 
-To unbind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool, perform the following steps:
+To unbind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
@@ -153,7 +157,6 @@ To unbind an instance of the Solace PubSub+ service with the cf Command Line Int
   Password>
   </pre>
 
-
 1. Locate the previously created service.
 	<pre class="terminal">
 	$ cf services
@@ -164,7 +167,7 @@ To unbind an instance of the Solace PubSub+ service with the cf Command Line Int
 	solace-pubsub-instance      solace-pubsub      enterprise-large-ha  web-backend  create succeeded
 	</pre>
 
-1. unbind the instance from the app called `web-backend`.
+1. Unbind the instance from the app called `web-backend`.
   <pre class="terminal">
   $ cf unbind-service web-backend solace-pubsub-instance
   Unbinding service solace-pubsub-instance from app web-backend in org example / space development as user<span>@</span>example.com...
