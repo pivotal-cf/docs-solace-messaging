@@ -37,7 +37,7 @@ A service instance can be customized at creation time and updated as well using 
  * ldapGroupAdminReadOnly: Admin ReadOnly permissions are granted to the provided value for that parameter.
  * ldapGroupAdminReadWrite: Admin ReadWrite permissions are granted to the provided value for that parameter.
 
-1. When TCP Routes are enabled, and unless the configuration per procotol is "Not Allowed", you may use these parameters with valid values: `true`, `false` to control TCP Routes per service instance.
+1. When TCP routes are enabled, and unless the configuration per procotol is "Not Allowed", you may use these parameters with valid values: `true`, `false` to control TCP Routes per service instance.
  * `tcp_route_enabled`
  * `smf_tcp_route_enabled`
  * `smf_tls_tcp_route_enabled`
@@ -53,13 +53,10 @@ A service instance can be customized at creation time and updated as well using 
  * `amqp_tcp_route_enabled`
  * `amqp_tls_tcp_route_enabled`
 
-1. <a id='service_orphaned_resource_policy'></a>A service scoped Orphaned Resource Policy may be set at service creation or update time. This service scoped policy will take precendence over the operator set [Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy).
-   The Orphaned Resource Policy is applied during [unbind operations](bindings.html#unbind-cf-cli) to ensure any orphaned resources such as `Queues` and `Topic Endpoints` are handled according to this policy. 
-   The policy can be set using parameter key `orphanedResourcePolicy` with one of these values:
+1. <a id='service_orphaned_resource_policy'></a> A service-scoped Orphaned Resource Policy may be set at service creation or update time. This service-scoped policy will take precendence over the operator set [Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy). The Orphaned Resource Policy is applied during [unbind operations](bindings.html#unbind-cf-cli) to ensure any orphaned resources such as `Queues` and `Topic Endpoints` are handled according to this policy. The policy can be set using parameter key `orphanedResourcePolicy` with one of these values:
    * `Abort`: The unbind operation is aborted with an [error](troubleshooting.html#abort_orphaned_resource_policy_error) if there are any resources owned by the binding linked credentials that would be orphaned once the credentials are removed.
-   * `Delete`: Any orphaned resources owned by the current binding linked credentials are deleted from the service instance. All Data held in the orphaned resources is LOST.
-   * `MakeServiceOwned`: The ownership of orphaned resource is set to be service level scoped, this resource can be accessed by any current and future client credentials sharing the service instance.
-
+   * `Delete`: Any orphaned resources owned by the current binding linked credentials are deleted from the service instance. All data held in the orphaned resources is lost.
+   * `MakeServiceOwned`: The ownership of orphaned resource is set to be service-level-scoped. This resource can be accessed by any current and future client credentials sharing the service instance.
 
 Service specific configuration parameters are a JSON object that is provided either in-line or in a file. For more information, see [Arbitrary Parameters](https://docs.pivotal.io/pivotalcf/1-12/devguide/services/managing-services.html#arbitrary-params-create).
 
@@ -109,7 +106,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI, do the foll
 
 ## <a id='cf-cli-create2'></a> Create a Service Instance with the cf CLI Having Service-Specific Parameters
 
-To create an instance of the Solace PubSub+ service with the cf CLI with service-specific parameters, perform the following steps:
+To create an instance of the Solace PubSub+ service with the cf CLI with service-specific parameters, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
@@ -140,7 +137,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
 
 1. Create an instance of the Solace PubSub+ service and select the appropriate service plan for your app. For how the service plans differ, see [PCF Marketplace Plans](index.html#marketplace-plans).
 
-1. Add applicable service-specific parameters. The following example uses the `enterprise-shared` service plan with service-specific parameters for TCP Routes that enable opening an MQTT TLS port to support IoT devices and setting the Orphaned Resource Policy to make any orphaned resources service instance owned.
+1. Add applicable service-specific parameters. The following example uses the `enterprise-shared` service plan with service-specific parameters for TCP routes that enable opening an MQTT TLS port to support IoT devices and setting the Orphaned Resource Policy to make any orphaned resources service instance owned.
   <pre class="terminal">
   $ cf create-service solace-pubsub enterprise-shared solace-pubsub-instance-IoT -c '{ "mqtt_tls_tcp_route_enabled" : "true" , "orphanedResourcePolicy": "MakeServiceOwned" }'
   Creating service instance solace-pubsub-instance-IoT in org example / space development as user@example.com...
@@ -173,7 +170,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
 
 ## <a id='cf-cli-update'></a> Update a Service Instance with the cf CLI
 
-Sometimes, you may want to update an existing service instance to enable or disable a special feature. For example, you may want to close some TCP Routes port for a given protocol, due to security concerns. Or you may want adjust LDAP Admin access.
+Sometimes, you may want to update an existing service instance to enable or disable a special feature. For example, you may want to close some TCP routes port for a given protocol, due to security concerns. Or you may want adjust LDAP Admin access.
 
 To update an instance of the Solace PubSub+ service with the cf CLI, do the following:
 
@@ -204,7 +201,7 @@ To update an instance of the Solace PubSub+ service with the cf CLI, do the foll
 	solace-pubsub-instance      solace-pubsub      enterprise-large-ha              create succeeded
 	</pre>
 
-1. Update the service instance of the Solace PubSub+ service assuming both LDAP and TCP Routes are enabled. This disables external access to the MQTT Plain Text messaging protocol, grants Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups, and sets the Orphaned Resource Policy to Delete.
+1. Update the service instance of the Solace PubSub+ service assuming both LDAP and TCP routes are enabled. This disables external access to the MQTT Plain Text messaging protocol, grants Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups, and sets the Orphaned Resource Policy to Delete.
 	<pre class="terminal">
         $ cf update-service solace-pubsub-instance -c '{ "orphanedResourcePolicy": "Delete", "mqtt_tcp_route_enabled" : "false", "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com", "ldapGroupAdminReadWrite" : "cn=username2,ou=groups,dc=solace,dc=com" }'
 	Updating service instance solace-pubsub-instance user...
@@ -278,6 +275,7 @@ To delete an instance of the Solace PubSub+ service with the cf CLI, do the foll
 
 	No services found
 	</pre>
+
 
 ## <a id='apps-man-create'></a> Create a Service Instance in Apps Manager
 
