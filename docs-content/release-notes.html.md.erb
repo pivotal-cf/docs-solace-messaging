@@ -5,6 +5,18 @@ owner: Partners
 
 Release Notes for Solace PubSub+ for Pivotal Cloud Foundry (PCF).
 
+### v2.1.1
+
+**Release Date: October 31, 2018**
+
+This maintenance release contains the following fixes:
+
+* Service creation fails if LDAP is enabled for Application access but not for Management access. [SOL-10802]
+* If the admin password contains special characters (such as  : # ? / \ %), it may be exposed in the test-errand logs. [SOL-10907]
+* Recover access to management route of existing HA Service if not present. [SOL-11411]
+* Avoid 'out-of-sync' HA Service during stemcell upgrades if VM network interface is changed.
+* Detection of upgrade in progress when there is no change in Message Broker version between Solace PubSub+ for PCF enterprise evaluation tile upgrade to the enterprise tile.
+
 ### v2.1.0
 
 **Release Date: September 14, 2018**
