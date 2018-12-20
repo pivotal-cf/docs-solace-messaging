@@ -15,7 +15,7 @@ Solace PubSub+ for PCF provides plans for both shared message broker instances f
 
 One of the key strengths of Solace PubSub+ is its [support for many different open transports and protocols](http://dev.solace.com/tech/#multi-service), making Solace PubSub+ message brokers ideal data distribution platforms to connect to any app.
 
-<%= image_tag('solace-overview_new.png') %>
+<%= image_tag('new_solace-overview_new.png') %>
 
 
 ## <a id='getting-started'></a> Getting Started
@@ -48,14 +48,16 @@ There is also simple sample code which shows you how to easily connect to a Sola
 
 Solace offers two PubSub+ for PCF tiles: the Enterprise Evaluation tile and the Enterprise tile.
 
-The Enterprise Evaluation tile is comprised of two message brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise Evaluation Edition. PubSub+ Standard is a forever free enterprise-grade message broker that supports publish/subscribe, queueing, request/reply, and streaming, along with integrated high availability (HA) and disaster recovery (DR). The PubSub+ Enterprise Evaluation Edition is a free 90-day evaluation version of the PubSub+ Enterprise edition, which supports all the features of PubSub+ Standard, but with increased performance and scaling. You can download an Enterprise Evaluation tile [here](https://network.pivotal.io/products/solace-pubsub/). Also, if you are interested in a support plan for Solace PubSub+ for PCF, contact [Solace Support](https://solace.com/support) or your local [Solace sales representative}(mailto:info@solace.com?Subject=Enterprise version of Solace PubSub+ For PCF).
+The Enterprise Evaluation tile is comprised of two message brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise Evaluation Edition. PubSub+ Standard is a forever free enterprise-grade message broker that supports publish/subscribe, queueing, request/reply, and streaming, along with integrated high availability (HA) and disaster recovery (DR). The PubSub+ Enterprise Evaluation Edition is a free 90-day evaluation version of the PubSub+ Enterprise edition, which supports all the features of PubSub+ Standard, but with increased performance and scaling. You can download an Enterprise Evaluation tile [here](https://network.pivotal.io/products/solace-pubsub/). Also, if you are interested in a support plan for Solace PubSub+ for PCF, contact [Solace Support](https://solace.com/support) or your local [Solace sales representative](mailto:info@solace.com?Subject=Enterprise version of Solace PubSub+ For PCF).
  
 The Enterprise tile is also comprised of two message brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise. Contact [Solace Support](https://solace.com/support) for information on how to obtain this tile and associated support plans.
 
 
 ## <a id='marketplace-plans'></a> PCF Marketplace Plans
 
-Solace PubSub+ for PCF currently offers the following service plans for both the Enterprise Evaluation and Enterprise tiles:
+Solace PubSub+ for PCF offers operator configurable service plans. As of release 2.2.0 the [Preconfigured Service Plans](service-plans.html#preconfigured_service_plans) are now editable by the operator.  There are also additional [Unconfigured Service Plans](service-plans.html#unconfigred_service_plans) that can also be customized by the operator.  
+
+These are the plans for both the Enterprise Evaluation and Enterprise tiles:
 
 <table border="1" class="nice">
 	<tr>
@@ -65,7 +67,7 @@ Solace PubSub+ for PCF currently offers the following service plans for both the
 
   <tr>
     <td><a href='service-plans.html#plan_enterprise_shared'>Enterprise Shared</a></td>
-    <td>A single Message VPN in a shared Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker. Useful for light traffic and development.</td>
+    <td>A single message VPN in a shared Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker. Useful for light traffic and development.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_large'>Enterprise Large</a></td>
@@ -80,12 +82,28 @@ Solace PubSub+ for PCF currently offers the following service plans for both the
     <td>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to high values.</td>
   </tr>
   <tr>
+    <td><a href='service-plans.html#plan_enterprise_5'>Enterprise Plan 5</a></td>
+    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker.</td>
+  </tr>
+  <tr>
+    <td><a href='service-plans.html#plan_enterprise_6'>Enterprise Plan 6</a></td>
+    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker.</td>
+  </tr>
+  <tr>
     <td><a href='service-plans.html#plan_standard_medium'>Standard Medium</a></td>
     <td>A single message VPN on a dedicated Solace PubSub+ Standard message broker with associated properties set to moderate values.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_standard_medium_ha'>Standard Medium-HA</a></td>
     <td>A single message VPN spanning 3 Solace PubSub+ Standard message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
+  </tr>
+  <tr>
+    <td><a href='service-plans.html#plan_standard_3'>Standard Plan 3</a></td>
+    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Standard message broker.</td>
+  </tr>
+  <tr>
+    <td><a href='service-plans.html#plan_standard_4'>Standard Plan 4</a></td>
+    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Standard message broker.</td>
   </tr>
 </table>
 
@@ -152,7 +170,7 @@ The following table provides version and version-support information about Solac
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>v2.1.1</td>
+        <td>v2.2.0</td>
     </tr>
     <tr>
         <td>Editions</td>
@@ -160,19 +178,19 @@ The following table provides version and version-support information about Solac
     </tr>
     <tr>
         <td>Release date</td>
-        <td>October 31, 2018</td>
+        <td>December 21, 2018</td>
     </tr>
     <tr>
         <td>Solace PubSub+ message broker version</td>
-        <td>v8.12.0.x</td>
+        <td>v8.13.1.30</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>
-        <td>v2.0.x, v2.1.x, v2.2.x, and v2.3.x</td>
+        <td>v2.1.x, v2.2.x, and v2.3.x</td>
     </tr>
     <tr>
         <td>Compatible Pivotal Application Service version(s)</td>
-        <td>v2.0.x, v2.1.x, v2.2.x, and v2.3.x</td>
+        <td>v2.1.x, v2.2.x, and v2.3.x</td>
     </tr>
     <tr>
         <td>IaaS support</td>
@@ -189,9 +207,8 @@ The following table provides version and version-support information about Solac
 
 This version of Solace PubSub+ for PCF currently has the following limitations:
 
-* No support for client certificate-based authentication.
 * No support for RADIUS-based authentication.
-
+* Dynamic Message Routing mode on upgraded 8.12.x instances must be enabled by the operator.
 
 ## <a id='feedback'></a> Feedback
 
