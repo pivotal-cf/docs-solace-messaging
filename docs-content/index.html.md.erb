@@ -64,6 +64,22 @@ These are the plans for both the Enterprise Evaluation and Enterprise tiles:
 		<th>Service Plan</th>
 		<th>Description</th>
 	</tr>
+  <tr>
+    <td><a href='service-plans.html#plan_standard_medium'>Standard Medium</a></td>
+    <td>A single message VPN on a dedicated Solace PubSub+ Standard message broker with associated properties set to moderate values.</td>
+  </tr>
+  <tr>
+    <td><a href='service-plans.html#plan_standard_medium_ha'>Standard Medium-HA</a></td>
+    <td>A single message VPN spanning 3 Solace PubSub+ Standard message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
+  </tr>
+  <tr>
+    <td><a href='service-plans.html#plan_standard_3'>Standard Plan 3</a></td>
+    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Standard message broker.</td>
+  </tr>
+  <tr>
+    <td><a href='service-plans.html#plan_standard_4'>Standard Plan 4</a></td>
+    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Standard message broker.</td>
+  </tr>
 
   <tr>
     <td><a href='service-plans.html#plan_enterprise_shared'>Enterprise Shared</a></td>
@@ -88,22 +104,6 @@ These are the plans for both the Enterprise Evaluation and Enterprise tiles:
   <tr>
     <td><a href='service-plans.html#plan_enterprise_6'>Enterprise Plan 6</a></td>
     <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker.</td>
-  </tr>
-  <tr>
-    <td><a href='service-plans.html#plan_standard_medium'>Standard Medium</a></td>
-    <td>A single message VPN on a dedicated Solace PubSub+ Standard message broker with associated properties set to moderate values.</td>
-  </tr>
-  <tr>
-    <td><a href='service-plans.html#plan_standard_medium_ha'>Standard Medium-HA</a></td>
-    <td>A single message VPN spanning 3 Solace PubSub+ Standard message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
-  </tr>
-  <tr>
-    <td><a href='service-plans.html#plan_standard_3'>Standard Plan 3</a></td>
-    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Standard message broker.</td>
-  </tr>
-  <tr>
-    <td><a href='service-plans.html#plan_standard_4'>Standard Plan 4</a></td>
-    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Standard message broker.</td>
   </tr>
 </table>
 
@@ -208,7 +208,7 @@ The following table provides version and version-support information about Solac
 This version of Solace PubSub+ for PCF currently has the following limitations:
 
 * No support for RADIUS-based authentication.
-* Dynamic Message Routing mode on upgraded 8.12.x instances must be enabled by the operator.
+* Dynamic Message Routing mode on service instances upgraded from 8.12.x must be enabled by the operator.
 
 ## <a id='feedback'></a> Feedback
 

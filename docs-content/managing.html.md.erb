@@ -34,23 +34,26 @@ The Solace PubSub+ Service Dashboard offers a link to the [Solace PubSub+ Manage
 
 1. Use the provided URL in a browser.
 
+  <%= image_tag('sample_service_dashboard2.png') %>
+
+## <a id='solace_pubsub_manager'></a> Solace PubSub+ Manager
+
+The Solace PubSub+ message broker includes a browser based management interface for the Solace PubSub+ services. The Solace PubSub+ Manager is accessible when a service is created from a link in the [Solace PubSub+ Service Dashboard](#solace_pubsub_service_dashboard)
+
+### <a id='sample_pubsub_manager'></a> Sample PubSub+ Manager
+
+  <%= image_tag('sample_pubsub_manager_new.png') %>
+
 
 ## <a id='solace_pubsub_configuration_backup_and_restore'></a> Solace PubSub+ Configuration Backup and Restore.
 
 **Configuration Backup and Restore** is a **Beta** feature.
 
-It offers the ability to capture a backup of service configuration and to restore it to the same or alternate service.
+It provides the ability to capture a backup of service **configuration only** and to restore to a newly created service.
 
-**A user is cautioned that the restore function can remove non matching contents on the restore target.**
+At this point it is not intended to do a full backup and restore on the same service. It should only be used to transfer limited configuration to a new service when data retention is not needed.
 
-
-## <a id='solace_pubsub_manager'></a> Solace PubSub+ Manager
-
-The Solace PubSub+ message broker contains an early access version of the Solace PubSub+ Manager that offers a limited but growing set of Solace PubSub+ message broker management capabilities for the Solace PubSub+ services. This early access version is being released to provide customers with a view of our direction and to obtain early feedback on the look and feel of the Solace PubSub+ Manager. The Solace PubSub+ Manager does not yet have full management feature support for this GA version of the message broker, full support for the management of the message broker is available via SolAdmin and CLI. The Solace PubSub+ Manager is accessible when a service is created on a link in the [Solace PubSub+ Service Dashboard](#solace_pubsub_service_dashboard)
-
-### <a id='sample_pubsub_manager'></a> Sample PubSub+ Manager
-
-  <%= image_tag('sample_pubsub_manager.png') %>
+**Note that performing a restore will delete all persisted messages and will leave the VPN with only the objects that existed when the backup was performed.**
 
 ## <a id='manage_with_semp'></a> Managing with SolAdmin 
 

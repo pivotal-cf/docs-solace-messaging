@@ -183,11 +183,11 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
 
 <p id="tableNote1" class="note"><strong><sup>1</sup> Note:</strong> The management VM is required to support Solace PubSub+ for PCF. <strong>Two</strong> instances are required for a production setup and must be combined with <strong>One</strong> arbitrator VM.</p>
 
-<p id="tableNote2" class="note"><strong><sup>2</sup> Note:</strong> <strong>One</strong> arbitrator VM is required for a production setup. Otherwise set this to zero.</p>
+<p id="tableNote2" class="note"><strong><sup>2</sup> Note:</strong> <strong>One</strong> arbitrator VM is required for a production setup and must be combined with <strong>Two</strong> management VM instances. Otherwise set this to zero.</p>
 
 <p id="tableNote3" class="note"><strong><sup>3</sup> Note:</strong> You can modify the number of <strong>operator allocated</strong> instances and persistent disk size when configuring the tile for the Solace PubSub+ message broker jobs. For more information, see the <a href="#configure">Configure Solace PubSub+ for PCF</a> tile below.</p> 
 
-<p id="tableNote4" class="note"><strong><sup>4</sup> Note:</strong> A high availability Solace PubSub+ service instance requires three (3) HA Solace PubSub+ message broker job instances to be used. As such, the number of HA Solace PubSub+ message broker job instances specified for the HA Solace PubSub+ message broker instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
+<p id="tableNote4" class="note"><strong><sup>4</sup> Note:</strong> A high availability Solace PubSub+ service instance requires three (3) HA Solace PubSub+ message broker job instances to be used. As such, the <strong>operator allocated</strong> number of HA Solace PubSub+ message broker job instances specified for the HA Solace PubSub+ message broker instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
 
 
 ## <a id='prereqs'></a> Prerequisites
@@ -420,28 +420,15 @@ The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans 
 #### <a id='optional_credhub'></a>(Optional) Security
 
 1. Click **Security**.
-TODO 
     <%= image_tag('select_1_security.png') %>
 
 1. Check the **Secure service instance credentials** option.
-    <%= image_tag('form_secure_service_instance_credentials_new2.png') %>
+    <%= image_tag('form_secure_service_instance_credentials.png') %>
     <p class="note"><strong>Note:</strong> This enables credentials storage on CredHub capable deployments.</p>
 
 1. Check the **Automatic application security group management** option.
     <%= image_tag('form_security_asg.png') %>
     <p class="note"><strong>Note:</strong> This allows for application security groups to be created for each service binding and deleted on unbind. The created application security groups will grant an application's space access to the Solace PubSub+ Service Instance IP and service ports only.</p>
-
-1. Click **Save**.
-
-#### <a id='optional_asg'></a>(Optional) Automatic application security group management
-
-1. Click **Security**.
-TODO 
-    <%= image_tag('select_1_secure_service_instance_credentials.png') %>
-TODO
-1. Check the **Automatic application security group management** option.
-    <%= image_tag('form_secure_service_instance_credentials_new.png') %>
-    <p class="note"><strong>Note:</strong> Allows an application to communicate with the Solace PubSub+ Message Broker for a Service Instance by creating an application security group when binding to a Solace PubSub+ service instance. The generated application security group is enabled in the space of the requesting application, and only grants access to the service ports of the Solace PubSub+ Message Broker. The application security group will be removed when an application unbinds.</p>
 
 1. Click **Save**.
 

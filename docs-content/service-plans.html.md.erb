@@ -81,7 +81,7 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>High Availability</th>
-  <td>If checked, deployment of Message Brokers on this plan will be done in triplets accross all availability zones providing a High Availability deployment. The sizing of the Message Brokers will be based on the selected <strong>VM Type</strong> and <strong>Disk Type</strong> in this plan. The Sizing of the Monitor node which requires smaller <strong>VM Type</strong> and <strong>Disk Type</strong> is based on the [General Settings](installing.html#general_settings)</td>
+  <td>If checked, deployment of Message Brokers on this plan will be done in triplets accross all availability zones providing a High Availability deployment. The sizing of the Message Brokers will be based on the selected <strong>VM Type</strong> and <strong>Disk Type</strong> in this plan. The Sizing of the Monitor node which requires smaller <strong>VM Type</strong> and <strong>Disk Type</strong> is based on the <a href='installing.html#general_settings'>General Settings</a></td>
   <td>&#10004;</td>
   <td>&#10004;</td>
   </tr>
@@ -172,6 +172,129 @@ Each plan is supported by **VM Type** intended to match the plan name and descri
 An operator is cautioned not to make these plans inactive or alter these plans without considering the effects on existing service instances.
 
 If there are existing service instances on these plans, the operator should use the [Additional Configurable Service Plans](#unconfigred_service_plans) to create customized plans.
+
+### <a id='plan_standard_medium'></a> Standard Medium Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single message VPN on a dedicated Solace PubSub+ Standard message broker with associated properties set to moderate values.</td>
+  </tr>
+
+  <tr>
+  <th colspan>VM Pool</th>
+  <td colspan=2>Standard Medium</td>
+  </tr>
+
+  <tr>
+  <th colspan>Service Instances per VM</th>
+  <td colspan=2>1</td>
+  </tr>
+
+  <tr>
+  <th>Property</th>
+  <th colspan=2>Max # per Service Instance</th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td colspan=2>500</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td colspan=2>1,000</td>
+  </tr>
+
+  <tr>
+  <th>Subscriptions</th>
+  <td colspan=2>500,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td colspan=2>1,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td colspan=2>5,000</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td colspan=2>1,000</td>
+  </tr>
+
+</table>
+
+
+### <a id='plan_standard_medium_ha'></a> Standard Medium HA Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Standard message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
+  </tr>
+
+  <tr>
+  <th colspan>VM Pool</th>
+  <td colspan=2>Standard Medium-HA</td>
+  </tr>
+
+  <tr>
+  <th colspan>Service Instances per VM</th>
+  <td colspan=2>1</td>
+  </tr>
+
+  <tr>
+  <th>Property</th>
+  <th colspan=2>Max # per Service Instance</th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td colspan=2>500</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td colspan=2>1,000</td>
+  </tr>
+
+  <tr>
+  <th>Subscriptions</th>
+  <td colspan=2>500,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td colspan=2>1,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td colspan=2>5,000</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td colspan=2>1,000</td>
+  </tr>
+
+</table>
+
+<br>
 
 ### <a id='plan_enterprise_shared'></a> Enterprise Shared Plan
 
@@ -420,126 +543,14 @@ If there are existing service instances on these plans, the operator should use 
 </table>
 
 
-### <a id='plan_standard_medium'></a> Standard Medium Plan
 
-<table border="1" class="nice">
-  <tr>
-  <th colspan=3>Description</th>
-  </tr>
+## <a id='sample_standard_plan_configuration'></a> Sample Standard Plan Configuration
 
-  <tr>
-  <td colspan=3>A single message VPN on a dedicated Solace PubSub+ Standard message broker with associated properties set to moderate values.</td>
-  </tr>
+<%= image_tag('sample_on_demand_standard.png') %>
 
-  <tr>
-  <th colspan>VM Pool</th>
-  <td colspan=2>Standard Medium</td>
-  </tr>
+## <a id='sample_enterprise_plan_configuration'></a> Sample Enterprise Plan Configuration
 
-  <tr>
-  <th colspan>Service Instances per VM</th>
-  <td colspan=2>1</td>
-  </tr>
-
-  <tr>
-  <th>Property</th>
-  <th colspan=2>Max # per Service Instance</th>
-  </tr>
-
-  <tr>
-  <th>Bindings</th>
-  <td colspan=2>500</td>
-  </tr>
-
-  <tr>
-  <th>Connections</th>
-  <td colspan=2>1,000</td>
-  </tr>
-
-  <tr>
-  <th>Subscriptions</th>
-  <td colspan=2>500,000</td>
-  </tr>
+<%= image_tag('sample_on_demand_enterprise.png') %>
 
 
-  <tr>
-  <th>Transacted Sessions</th>
-  <td colspan=2>1,000</td>
-  </tr>
-
-
-  <tr>
-  <th>Transactions</th>
-  <td colspan=2>5,000</td>
-  </tr>
-
-  <tr>
-  <th>Endpoints</th>
-  <td colspan=2>1,000</td>
-  </tr>
-
-</table>
-
-
-### <a id='plan_standard_medium_ha'></a> Standard Medium HA Plan
-
-<table border="1" class="nice">
-  <tr>
-  <th colspan=3>Description</th>
-  </tr>
-
-  <tr>
-  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Standard message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
-  </tr>
-
-  <tr>
-  <th colspan>VM Pool</th>
-  <td colspan=2>Standard Medium-HA</td>
-  </tr>
-
-  <tr>
-  <th colspan>Service Instances per VM</th>
-  <td colspan=2>1</td>
-  </tr>
-
-  <tr>
-  <th>Property</th>
-  <th colspan=2>Max # per Service Instance</th>
-  </tr>
-
-  <tr>
-  <th>Bindings</th>
-  <td colspan=2>500</td>
-  </tr>
-
-  <tr>
-  <th>Connections</th>
-  <td colspan=2>1,000</td>
-  </tr>
-
-  <tr>
-  <th>Subscriptions</th>
-  <td colspan=2>500,000</td>
-  </tr>
-
-
-  <tr>
-  <th>Transacted Sessions</th>
-  <td colspan=2>1,000</td>
-  </tr>
-
-
-  <tr>
-  <th>Transactions</th>
-  <td colspan=2>5,000</td>
-  </tr>
-
-  <tr>
-  <th>Endpoints</th>
-  <td colspan=2>1,000</td>
-  </tr>
-
-</table>
-
-<br>
 
