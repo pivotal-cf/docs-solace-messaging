@@ -374,7 +374,13 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
     <%= image_tag('form_general_settings_webhook.png') %>
 Web Hook enables an operator to receive POST requests to an endpoint of their choosing to get informed about Service create,delete,and update events.
 
-The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans with **High Availability** enabled.  A Monitor node requires 1 CPU and 1 GB of RAM, adjust the **VM Type** to match this requirement.
+1. <a id='sb_settings'></a> Adjust service broker related settings.
+    <%= image_tag('form_general_settings_sb.png') %>
+An operator has a chance to confirm the buildpack and the amount of memory used for the Service Broker installation in CF.
+
+1. <a id='monitor_settings'></a> Adjust Monitor VM Type and Disk Type
+    <%= image_tag('form_general_monitor.png') %>
+The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans with **High Availability** enabled.  A Monitor node requires 1 CPU and 1 GB of RAM.
 
 1. Click **Save**.
 
@@ -586,7 +592,7 @@ A solace\_router UAA agent is required to use the TCP Routes feature. If using a
 
 In order to apply changes, all the settings for the Solace tile must be marked with green checkmarks.
 
-<%= image_tag('select_all_done_new2.png') %>
+<%= image_tag('select_all_done.png') %>
 
 1. Click **Installation Dashboard** at the top left corner of the screen to leave the tile configuration and go back to dashboard.
     <%= image_tag('link_installation_dashboard_new.png') %>
