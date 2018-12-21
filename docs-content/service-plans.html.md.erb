@@ -3,287 +3,177 @@ title: Solace PubSub+ Service Plans
 owner: Partners
 ---
 
-Solace PubSub+ for PCF offers multiple service plans to support a variety of use cases. Each service plan configures the Solace PubSub+ message broker for a given capacity, and pools of VMs are dedicated for each plan by **VM Type**, which is seen in [Resource Config](installing.html#required_resource_config) during installation.
+Solace PubSub+ for PCF offers multiple operator configurable service plans to support a variety of use cases.  Each service plan configures the Solace PubSub+ message broker for a given scaling capacity.
 
-For a description of each PubSub+ for PCF tile refer to [Solace PubSub+ for PCF Tiles](index.html#tiles).
+As of release 2.2.0 the [Preconfigured Service Plans](#preconfigured_service_plans) are now editable by the operator.  There are also [additional Configurable Service Plans](#unconfigred_service_plans) that can also be customized the operator.
 
+Service instances for any given Servcice Plan are hosted on VMs which can be created in two ways:
 
-## <a id='plan_enterprise_shared'></a> Enterprise Shared Plan
+* <strong>Operator Allocated</strong> which are controlled in [Resource Config](installing.html#required_resource_config) during tile installation.
+* <strong>On Demand</strong> which are triggered by service creation request, and controlled by the operator to set a quota per plan in [Service Plan Configuration](#service_plan_configuration).
+
+The combination of the <strong>operator allocated</strong> instances in [Resource Config](installing.html#required_resource_config), and the <strong>On Demand</strong> quota per plan [Service Plan Configuration](#service_plan_configuration) is how an operator can control the maximum number of service instances for each plan.
+
+## <a id='service_plan_configuration'></a> Service Plan Configuration
+
+Service Plans can be customized by the operator allowing to adjust the plans for both types of Solace PubSub+ message brokers:
+
+* Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker
+* Solace PubSub+ Standard message broker
 
 <table border="1" class="nice">
-  <tr>
-  <th colspan=3>Description</th>
-  </tr>
 
   <tr>
-  <td colspan=3>A single Message VPN in a shared Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker. Useful for light traffic and development.</td>
-  </tr>
-
-  <tr>
-  <th>VM Pool</th>
-  <td colspan=2>Enterprise Shared</td>
-  </tr>
-
-  <tr>
-  <th colspan>Service Instances per VM</th>
-  <td colspan=2>5</td>
+  <th colspan=2>Configurable Properties</th>
+  <th colspan=2>Applicability</th>
   </tr>
 
   <tr>
   <th>Property</th>
-  <th>Max # per Service Instance for Enterprise Evaluation tile</th>
-  <th>Max # per Service Instance for Enterprise tile</th>
+  <th>Description</th>
+  <th>On Demand</th>
+  <th>Operator Allocated</th>
   </tr>
 
   <tr>
-  <th>Bindings</th>
-  <td>100</td>
-  <td>190</td>
+  <th>Active/Inactive</th>
+  <td>
+    <ul>
+    <li>An active plan will show up in the marketplace.
+      <ul>
+        <li>New service instances for this plan can be created.</li>
+      </ul>
+    </li>
+    <li>An inactive plan will not show up in the marketplace.
+      <ul>
+        <li>New service instances for this plan cannot be created.</li>
+        <li>A plan can be made inactive only when there are existing <strong>operator allocated</strong> service instances.  The plan will remain displayed in the marketplace in orgs and spaces if it has associated existing service instances, however, tile configurations changes will no longer be applied to these existing service instances.</li>
+        <li><strong>A plan should not be made inactive when there are existing on-demand service instances, as tile deployment will fail.</strong></li>
+      </ul>
+    </li>
+    <ul>
+  </td>
+  <td>&#10004;</td>
+  <td>&#10004;</td>
   </tr>
 
   <tr>
-  <th>Connections</th>
-  <td>200</td>
-  <td>200</td>
+  <th>Plan Name</th>
+  <td>The name that appears in the PCF marketplace for this plan.</td>
+  <td>&#10004;</td>
+  <td>&#10004;</td>
+  </tr>
+
+  <tr>
+  <th>Plan Description</th>
+  <td>The plan description that will appear in the CF marketplace.</td>
+  <td>&#10004;</td>
+  <td>&#10004;</td>
+  </tr>
+
+  <tr>
+  <th>Detailed Plan Description</th>
+  <td>The description that will appear in Apps Manager.</td>
+  <td>&#10004;</td>
+  <td>&#10004;</td>
   </tr>
 
 
   <tr>
-  <th>Subscriptions</th>
-  <td>100,000</td>
-  <td>100,000</td>
-  </tr>
-
-
-  <tr>
-  <th>Transacted Sessions</th>
-  <td>200</td>
-  <td>200</td>
-  </tr>
-
-
-  <tr>
-  <th>Transactions</th>
-  <td>1,000</td>
-  <td>1,000</td>
+  <th>High Availability</th>
+  <td>If checked, deployment of Message Brokers on this plan will be done in triplets accross all availability zones providing a High Availability deployment. The sizing of the Message Brokers will be based on the selected <strong>VM Type</strong> and <strong>Disk Type</strong> in this plan. The Sizing of the Monitor node which requires smaller <strong>VM Type</strong> and <strong>Disk Type</strong> is based on the <a href='installing.html#general_settings'>General Settings</a></td>
+  <td>&#10004;</td>
+  <td>&#10004;</td>
   </tr>
 
   <tr>
-  <th>Endpoints</th>
-  <td>200</td>
-  <td>200</td>
+  <th>Service instances</th>
+  <td>A <a href='service-instances.html#about_solace_service_instance'>Solace PubSub+ Service Instance</a> represents a Message VPN on a Solace PubSub+ message broker. The ability to host multiple service instances a single Solace PubSub+ message broker for sharing the underlying resources is applicable on Enterprise and Enterprise Evaluation edition message brokers and is limited to a maximum of <strong>five</strong> service instances. The Standard message broker can only host <strong>one</strong> service instance. <strong>This choice is not dynamic and should not be adjusted after initial tile deployment when there are existing service instances.</strong></td>
+  <td>&#10004;</td>
+  <td>&#10004;</td>
+  </tr>
+
+  <tr>
+  <th>Quota</th>
+  <td>Sets the limit on the maximum number of Solace PubSub+ Message Broker deployments that may be created for this service plan accross all orgs and spaces. Keeping in mind that this deployment is used to host one or more service instances as defined in the plan by <strong>Service instances</strong>.
+  <ul>
+  <li>This quota is only consulted at the time a service creation request is done.</li>
+  <li>Decreasing the quota will not have an effect on existing service instances if the quota was already exceeded.</li>
+  <ul>
+  </td>
+  <td>&#10004;</td>
+  <td></td>
+  </tr>
+
+  <tr>
+  <th>VM Type</th>
+  <td>The VM Type on which a service is created. Please see <a href='#service_plan_sizing'>Service Plan Sizing</a> to guide in this selection. 
+  <strong>The operator is cautioned not to adjust the VM Type without considering the effects on existing on-demand service instances.</strong>
+  <ul>
+  <li>Increasing the VM Type capacity in CPUs or RAM: New on-demand service instances will benefit. Existing on-demand service instances will not upscale.</li>
+  <li>Reducing the VM Type capacity in CPUs or RAM: Existing on-demand service instances may become inoperable.</li>
+  </ul>
+  </td>
+  <td>&#10004;</td>
+  <td> <a href="#tableNote1"><sup>1</sup></a> </td>
+  </tr>
+
+  <tr>
+  <th>Disk Type</th>
+  <td>The persistent disk size used by the Message Broker. The size of the persistent disk can be changed both before and after deployment. Increasing the size of the persistent disks will impact the service of already bound apps. However, messages will not be lost. Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable Solace PubSub+ message broker, and/or undefined behaviors. </td>
+  <td>&#10004;</td>
+  <td> <a href="#tableNote1"><sup>1</sup></a> </td>
+  </tr>
+
+  <tr>
+  <th>Availability Zones</th>
+  <td>Select the availability zones in which deployment instances of this plan will be located. For high availability plans, consider using multiple availability zones for maximum fault tolerance.</td>
+  <td>&#10004;</td>
+  <td> <a href="#tableNote2"><sup>2</sup></a> </td>
   </tr>
 
 </table>
 
 
-## <a id='plan_enterprise_large'></a> Enterprise Large Plan
+<p id='tableNote1' class="note"><strong><sup>1</sup> Note</strong>: Please set the same matching <strong>VM Type</strong> and <strong>Disk Type</strong> if you have <strong>Operator Allocated</strong> instances in <a href='installing.html#required_resource_config'>Resource Config</a>.</p>
+<p id='tableNote2' class="note"><strong><sup>2</sup> Note</strong>: Please consider if using the same Network and AZs used in <a href='installing.html#required_azs_and_network'>Assign AZs and Networks</a> for Operator Allocated instances.</p>
 
-<table border="1" class="nice">
-  <tr>
-  <th colspan=3>Description</th>
-  </tr>
+## <a id='general_plan_settings'></a> General Settings
 
-  <tr>
-  <td colspan=3>A single message VPN on a dedicated Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker with associated properties set to high values.</td>
-  </tr>
+The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans with **High Availability** enabled.  A Monitor node requires 1 CPU and 1 GB of RAM, [adjust](installing.html#general_settings) the **VM Type** to match this requirement.
 
-  <tr>
-  <th colspan>VM Pool</th>
-  <td colspan=2>Enterprise Large</td>
-  </tr>
+## <a id='service_plan_sizing'></a> Service Plan Sizing
 
-  <tr>
-  <th colspan>Service Instances per VM</th>
-  <td colspan=2>1</td>
-  </tr>
+A deployment of Solace PubSub+ Message Broker will attempt to maximize the use of the underlying resources on any given **VM Type**.
 
-  <tr>
-  <th>Property</th>
-  <th>Max # per Service Instance for Enterprise Evaluation tile</th>
-  <th>Max # per Service Instance for Enterprise tile</th>
-  </tr>
+The deployment will auto select a [Scaling Tier](https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/Scaling-Tier-Resources.htm) based on detected number of CPUs and RAM. This configuration is done <strong>only once</strong> at service creation time.
 
-  <tr>
-  <th>Bindings</th>
-  <td>500</td>
-  <td>9,990</td>
-  </tr>
+All other plan limits will be auto calculated based on the scaling tier and the Solace PubSub+ message broker type.
 
-  <tr>
-  <th>Connections</th>
-  <td>1,000</td>
-  <td>10,000 - ( REST Connections 6000 )</td>
-  </tr>
+## <a id='unconfigred_service_plans'></a> Additional Configurable Service Plans
+
+The Solace PubSub+ for PCF tile contains two additional unconfigured plans for both types of Solace PubSub+ message brokers:
+
+* Solace PubSub+ Standard message broker
+ * <a id='plan_standard_3'></a> Standard Plan 3
+ * <a id='plan_standard_4'></a> Standard Plan 4
+
+* Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker
+ * <a id='plan_enterprise_5'></a> Enterprise Plan 5
+ * <a id='plan_enterprise_6'></a> Enterprise Plan 6
 
 
-  <tr>
-  <th>Subscriptions</th>
-  <td>500,000</td>
-  <td>500,000</td>
-  </tr>
+## <a id='preconfigured_service_plans'></a> Preconfigured Service Plans
 
+Solace PubSub+ for PCF version 2.1.x and earlier contained these preconfigured service plans which were not operator configurable.
 
-  <tr>
-  <th>Transacted Sessions</th>
-  <td>1,000</td>
-  <td>10,000</td>
-  </tr>
+Each plan is supported by **VM Type** intended to match the plan name and descriptions.  Without any modifications, the default settings of these plans will match the same settings for Solace PubSub+ for PCF version 2.1.x to ensure backwards compatibilities for deployments with existing service instances.
 
+An operator is cautioned not to make these plans inactive or alter these plans without considering the effects on existing service instances.
 
-  <tr>
-  <th>Transactions</th>
-  <td>5,000</td>
-  <td>50,000</td>
-  </tr>
+If there are existing service instances on these plans, the operator should use the [Additional Configurable Service Plans](#unconfigred_service_plans) to create customized plans.
 
-  <tr>
-  <th>Endpoints</th>
-  <td>1,000</td>
-  <td>10,000</td>
-  </tr>
-
-</table>
-
-
-## <a id='plan_enterprise_medium_ha'></a> Enterprise Medium HA Plan
-
-<table border="1" class="nice">
-  <tr>
-  <th colspan=3>Description</th>
-  </tr>
-
-  <tr>
-  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
-  </tr>
-
-  <tr>
-  <th colspan>VM Pool</th>
-  <td colspan=2>Enterprise Medium-HA</td>
-  </tr>
-
-  <tr>
-  <th colspan>Service Instances per VM</th>
-  <td colspan=2>1</td>
-  </tr>
-
-  <tr>
-  <th>Property</th>
-  <th>Max # per Service Instance for Enterprise Evaluation tile</th>
-  <th>Max # per Service Instance for Enterprise tile</th>
-  </tr>
-
-  <tr>
-  <th>Bindings</th>
-  <td>500</td>
-  <td>990</td>
-  </tr>
-
-  <tr>
-  <th>Connections</th>
-  <td>1,000</td>
-  <td>1,000</td>
-  </tr>
-
-  <tr>
-  <th>Subscriptions</th>
-  <td>500,000</td>
-  <td>500,000</td>
-  </tr>
-
-
-  <tr>
-  <th>Transacted Sessions</th>
-  <td>1,000</td>
-  <td>1,000</td>
-  </tr>
-
-
-  <tr>
-  <th>Transactions</th>
-  <td>5,000</td>
-  <td>5,000</td>
-  </tr>
-
-  <tr>
-  <th>Endpoints</th>
-  <td>1,000</td>
-  <td>1,000</td>
-  </tr>
-
-</table>
-
-
-## <a id='plan_enterprise_large_ha'></a> Enterprise Large HA Plan
-
-<table border="1" class="nice">
-  <tr>
-  <th colspan=3>Description</th>
-  </tr>
-
-  <tr>
-  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to high values.</td>
-  </tr>
-
-  <tr>
-  <th colspan>VM Pool</th>
-  <td colspan=2>Enterprise Large-HA</td>
-  </tr>
-
-  <tr>
-  <th colspan>Service Instances per VM</th>
-  <td colspan=2>1</td>
-  </tr>
-
-  <tr>
-  <th>Property</th>
-  <th>Max # per Service Instance for Enterprise Evaluation tile</th>
-  <th>Max # per Service Instance for Enterprise tile</th>
-  </tr>
-
-  <tr>
-  <th>Bindings</th>
-  <td>500</td>
-  <td>9,990</td>
-  </tr>
-
-  <tr>
-  <th>Connections</th>
-  <td>1,000</td>
-  <td>1,0000 - ( REST Connections 6000 )</td>
-  </tr>
-
-
-  <tr>
-  <th>Subscriptions</th>
-  <td>500,000</td>
-  <td>500,000</td>
-  </tr>
-
-
-  <tr>
-  <th>Transacted Sessions</th>
-  <td>1,000</td>
-  <td>10,000</td>
-  </tr>
-
-
-  <tr>
-  <th>Transactions</th>
-  <td>5,000</td>
-  <td>50,000</td>
-  </tr>
-
-  <tr>
-  <th>Endpoints</th>
-  <td>1,000</td>
-  <td>10,000</td>
-  </tr>
-
-</table>
-
-
-## <a id='plan_standard_medium'></a> Standard Medium Plan
+### <a id='plan_standard_medium'></a> Standard Medium Plan
 
 <table border="1" class="nice">
   <tr>
@@ -306,52 +196,45 @@ For a description of each PubSub+ for PCF tile refer to [Solace PubSub+ for PCF 
 
   <tr>
   <th>Property</th>
-  <th>Max # per Service Instance for Enterprise Evaluation tile</th>
-  <th>Max # per Service Instance for Enterprise tile</th>
+  <th colspan=2>Max # per Service Instance</th>
   </tr>
 
   <tr>
   <th>Bindings</th>
-  <td>500</td>
-  <td>500</td>
+  <td colspan=2>500</td>
   </tr>
 
   <tr>
   <th>Connections</th>
-  <td>1,000</td>
-  <td>1,000</td>
+  <td colspan=2>1,000</td>
   </tr>
 
   <tr>
   <th>Subscriptions</th>
-  <td>500,000</td>
-  <td>500,000</td>
+  <td colspan=2>500,000</td>
   </tr>
 
 
   <tr>
   <th>Transacted Sessions</th>
-  <td>1,000</td>
-  <td>1,000</td>
+  <td colspan=2>1,000</td>
   </tr>
 
 
   <tr>
   <th>Transactions</th>
-  <td>5,000</td>
-  <td>5,000</td>
+  <td colspan=2>5,000</td>
   </tr>
 
   <tr>
   <th>Endpoints</th>
-  <td>1,000</td>
-  <td>1,000</td>
+  <td colspan=2>1,000</td>
   </tr>
 
 </table>
 
 
-## <a id='plan_standard_medium_ha'></a> Standard Medium HA Plan
+### <a id='plan_standard_medium_ha'></a> Standard Medium HA Plan
 
 <table border="1" class="nice">
   <tr>
@@ -374,48 +257,300 @@ For a description of each PubSub+ for PCF tile refer to [Solace PubSub+ for PCF 
 
   <tr>
   <th>Property</th>
-  <th>Max # per Service Instance for Enterprise Evaluation tile</th>
-  <th>Max # per Service Instance for Enterprise tile</th>
+  <th colspan=2>Max # per Service Instance</th>
   </tr>
 
   <tr>
   <th>Bindings</th>
-  <td>500</td>
-  <td>500</td>
+  <td colspan=2>500</td>
   </tr>
 
   <tr>
   <th>Connections</th>
-  <td>1,000</td>
-  <td>1,000</td>
+  <td colspan=2>1,000</td>
   </tr>
 
   <tr>
   <th>Subscriptions</th>
-  <td>500,000</td>
-  <td>500,000</td>
+  <td colspan=2>500,000</td>
   </tr>
 
 
   <tr>
   <th>Transacted Sessions</th>
-  <td>1,000</td>
-  <td>1,000</td>
+  <td colspan=2>1,000</td>
   </tr>
 
 
   <tr>
   <th>Transactions</th>
-  <td>5,000</td>
-  <td>5,000</td>
+  <td colspan=2>5,000</td>
   </tr>
 
   <tr>
   <th>Endpoints</th>
-  <td>1,000</td>
-  <td>1,000</td>
+  <td colspan=2>1,000</td>
   </tr>
 
 </table>
 
 <br>
+
+### <a id='plan_enterprise_shared'></a> Enterprise Shared Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single Message VPN in a shared Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker. Useful for light traffic and development.</td>
+  </tr>
+
+  <tr>
+  <th>VM Pool</th>
+  <td colspan=2>Enterprise Shared</td>
+  </tr>
+
+  <tr>
+  <th colspan>Service Instances per VM</th>
+  <td colspan=2>5</td>
+  </tr>
+
+  <tr>
+  <th>Property</th>
+  <th colspan=2>Max # per Service Instance</th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td colspan=2>190</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td colspan=2>200</td>
+  </tr>
+
+
+  <tr>
+  <th>Subscriptions</th>
+  <td colspan=2>100,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td colspan=2>200</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td colspan=2>1,000</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td colspan=2>200</td>
+  </tr>
+
+</table>
+
+
+### <a id='plan_enterprise_large'></a> Enterprise Large Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single message VPN on a dedicated Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker with associated properties set to high values.</td>
+  </tr>
+
+  <tr>
+  <th colspan>VM Pool</th>
+  <td colspan=2>Enterprise Large</td>
+  </tr>
+
+  <tr>
+  <th colspan>Service Instances per VM</th>
+  <td colspan=2>1</td>
+  </tr>
+
+  <tr>
+  <th>Property</th>
+  <th colspan=2>Max # per Service Instance</th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td colspan=2>9,990</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td colspan=2>10,000 - ( REST Connections 6000 )</td>
+  </tr>
+
+
+  <tr>
+  <th>Subscriptions</th>
+  <td colspan=2>500,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td colspan=2>10,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td colspan=2>50,000</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td colspan=2>10,000</td>
+  </tr>
+
+</table>
+
+
+### <a id='plan_enterprise_medium_ha'></a> Enterprise Medium HA Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
+  </tr>
+
+  <tr>
+  <th colspan>VM Pool</th>
+  <td colspan=2>Enterprise Medium-HA</td>
+  </tr>
+
+  <tr>
+  <th colspan>Service Instances per VM</th>
+  <td colspan=2>1</td>
+  </tr>
+
+  <tr>
+  <th>Property</th>
+  <th colspan=2>Max # per Service Instance</th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td colspan=2>990</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td colspan=2>1,000</td>
+  </tr>
+
+  <tr>
+  <th>Subscriptions</th>
+  <td colspan=2>500,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td colspan=2>1,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td colspan=2>5,000</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td colspan=2>1,000</td>
+  </tr>
+
+</table>
+
+
+### <a id='plan_enterprise_large_ha'></a> Enterprise Large HA Plan
+
+<table border="1" class="nice">
+  <tr>
+  <th colspan=3>Description</th>
+  </tr>
+
+  <tr>
+  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to high values.</td>
+  </tr>
+
+  <tr>
+  <th colspan>VM Pool</th>
+  <td colspan=2>Enterprise Large-HA</td>
+  </tr>
+
+  <tr>
+  <th colspan>Service Instances per VM</th>
+  <td colspan=2>1</td>
+  </tr>
+
+  <tr>
+  <th>Property</th>
+  <th colspan=2>Max # per Service Instance for Enterprise tile</th>
+  </tr>
+
+  <tr>
+  <th>Bindings</th>
+  <td colspan=2>9,990</td>
+  </tr>
+
+  <tr>
+  <th>Connections</th>
+  <td colspan=2>1,0000 - ( REST Connections 6000 )</td>
+  </tr>
+
+
+  <tr>
+  <th>Subscriptions</th>
+  <td colspan=2>500,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transacted Sessions</th>
+  <td colspan=2>10,000</td>
+  </tr>
+
+
+  <tr>
+  <th>Transactions</th>
+  <td colspan=2>50,000</td>
+  </tr>
+
+  <tr>
+  <th>Endpoints</th>
+  <td colspan=2>10,000</td>
+  </tr>
+
+</table>
+
+
+
+## <a id='sample_standard_plan_configuration'></a> Sample Standard Plan Configuration
+
+<%= image_tag('sample_on_demand_standard.png') %>
+
+## <a id='sample_enterprise_plan_configuration'></a> Sample Enterprise Plan Configuration
+
+<%= image_tag('sample_on_demand_enterprise.png') %>
+
+
+

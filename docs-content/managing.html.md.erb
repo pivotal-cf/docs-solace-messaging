@@ -3,12 +3,61 @@ title: Managing the Message VPN
 owner: Partners
 ---
 
-Developers can manage the Message VPN associated with a service instance by using the Dashboard URL of the service and by connecting to the Solace PubSub+ message broker with the SolAdmin administration tool.
+Developers can manage the Message VPN associated with a service instance by using the Dashboard URL of the service and by connecting to the Solace PubSub+ message broker via the PubSub+ Manager web browser based interface.
 
+
+## <a id='solace_pubsub_service_dashboard'></a> Solace PubSub+ Service Dashboard
+
+The Solace PubSub+ Service Dashboard offers a link to the [Solace PubSub+ Manager](#solace_pubsub_manager) and the ability to capture a backup of basic service configuration and restore it.
+
+### <a id='retrieve_dashboard'></a> Retrieve Dashboard Information
+
+1. Look for the 'Dashboard' by getting details about the created service.
+	<pre class="terminal">
+	$ cf service solace-pubsub-instance-IoT
+
+	Service instance: solace-pubsub-instance-IoT
+	Service: solace-pubsub
+	Bound apps:
+	Tags:
+	Plan: enterprise-shared
+	Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
+	Documentation url: http://docs.solace.com
+        Dashboard: https://solace-service-dashboard.YOUR-SYSTEM-DOMAIN/service-dashboard/ALKSJDLAKSJDLKAJSLDKJA/auth/YLLKJJ)(UASJldKAJSD*ALSKFALSGHLAKSJDlAJSLDJASLKJDALSKJDL.eHl6S
+
+	Last Operation
+	Status: create succeeded
+	Message:
+	Started: 2020-01-01T00:00:00Z
+	Started: 2020-01-01T00:00:00Z
+	</pre>
+
+1. Use the provided URL in a browser.
+
+  <%= image_tag('sample_service_dashboard2.png') %>
+
+## <a id='solace_pubsub_manager'></a> Solace PubSub+ Manager
+
+The Solace PubSub+ message broker includes a browser based management interface for the Solace PubSub+ services. The Solace PubSub+ Manager is accessible when a service is created from a link in the [Solace PubSub+ Service Dashboard](#solace_pubsub_service_dashboard)
+
+### <a id='sample_pubsub_manager'></a> Sample PubSub+ Manager
+
+  <%= image_tag('sample_pubsub_manager_new.png') %>
+
+
+## <a id='solace_pubsub_configuration_backup_and_restore'></a> Solace PubSub+ Configuration Backup and Restore.
+
+**Configuration Backup and Restore** is a **Beta** feature.
+
+It provides the ability to capture a backup of service **configuration only** and to restore to a newly created service.
+
+At this point it is not intended to do a full backup and restore on the same service. It should only be used to transfer limited configuration to a new service when data retention is not needed.
+
+**Note that performing a restore will delete all persisted messages and will leave the VPN with only the objects that existed when the backup was performed.**
 
 ## <a id='manage_with_semp'></a> Managing with SolAdmin 
 
-This section describes how to manage the Message VPN associated with a service instance by connecting to the Solace PubSub+ message broker with the SolAdmin administration tool.
+This section describes how to connect to the Solace PubSub+ message broker with the SolAdmin legacy administration tool to manage the Message VPN associated with a service instance.
 
 ### <a id='retrieve_bound_app'></a> Retrieve Information From a Bound App
 
@@ -76,36 +125,3 @@ The `managementHostnames` and `activeManagementHostname` are externally accessib
 	<%= image_tag('soladmin_router_list.png') %>
 
 1. To learn how to use SolAdmin to manage your Message VPN, see the included context specific tool help within the SolAdmin tool itself.
-
-
-## <a id='solace_pubsub_manager'></a> Solace PubSub+ Manager
-
-The Solace PubSub+ message broker contains an early access version of the Solace PubSub+ Manager that offers a limited but growing set of Solace PubSub+ message broker management capabilities for the Solace PubSub+ services. This early access version is being released to provide customers with a view of our direction and to obtain early feedback on the look and feel of the Solace PubSub+ Manager. The Solace PubSub+ Manager does not yet have full management feature support for this GA version of the message broker, full support for the management of the message broker is available via SolAdmin and CLI. The Solace PubSub+ Manager is accessible when a service is created. 
-
-### <a id='retrieve_dashboard'></a> Retrieve WebUI Information
-
-1. Look for the 'Dashboard' by getting details about the created service.
-	<pre class="terminal">
-	$ cf service solace-pubsub-instance-IoT
-
-	Service instance: solace-pubsub-instance-IoT
-	Service: solace-pubsub
-	Bound apps:
-	Tags:
-	Plan: enterprise-shared
-	Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
-	Documentation url: http://docs.solace.com
-	Dashboard: https://enterprise-shared-0.YOUR-SYSTEM-DOMAIN/#/msg-vpns/djAwMQ==?token=YWJj.jsalkdj01041024laqksdjalsdh8ayulaksfnaosfr0817u04ualknaglnzs0v8u0qusflasknrflknifQ%3D%3D.eHl6
-
-	Last Operation
-	Status: create succeeded
-	Message:
-	Started: 2020-01-01T00:00:00Z
-	Started: 2020-01-01T00:00:00Z
-	</pre>
-
-1. Use the provided URL in a browser.
-
-### <a id='sample_pubsub_manager'></a> Sample PubSub+ Manager
-
-  <%= image_tag('sample_pubsub_manager.png') %>
