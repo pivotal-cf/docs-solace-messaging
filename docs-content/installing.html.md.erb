@@ -263,6 +263,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
 #### <a id='required_mysql_configuration'></a> MySQL Configuration
 
 1. Click **MySQL Configuration**.
+
     <%= image_tag('select_1_mysql.png') %> 
 
 1. Select one of the supported MySQL configuration for the service broker's database.
@@ -290,9 +291,11 @@ From the **Settings** tab of the Solace PubSub+ tile:
 #### <a id='required_management_access'></a> Management Access
 
 1. Click **Management Access**.
+
     <%= image_tag('select_1_management_access.png') %> 
 
 1. Under **Admin user password**, pick a password for the message brokers `admin` user.
+
     <%= image_tag('form_management_access_admin_user_password_new.png') %>
 
 1. [(Optional) if you want to use LDAP](#optional_management_access).
@@ -304,10 +307,12 @@ From the **Settings** tab of the Solace PubSub+ tile:
 Open this pane and click **Save** even if using the default setting. If you want to enable TCP routes, follow the procedure in [(Optional) TCP Routes](#optional_tcp_routes).
 
 1. Click **TCP Routes**.
+
     <%= image_tag('select_1_tcp_routes.png') %>
 
 1. Default: **TCP Routes Disabled**.
-    <%= image_tag('form_tcp_routes_new.png') %>
+
+     <%= image_tag('form_tcp_routes_new.png') %>
 
 1. Click **Save**.
 
@@ -318,7 +323,8 @@ Open this pane and click **Save** even if using the default setting. If you want
 Open this pane even if using the default setting. You need to select all the Availability Zones before this can be saved. If you want to customize an plans please see [Service Plan Configuration](#service_plan_configuration).
 
 1. Click **Standard Plans**.
-    <%= image_tag('select_1_standard_plans.png') %>
+
+     <%= image_tag('select_1_standard_plans.png') %>
 
 1. Click **Save**.
 
@@ -327,6 +333,7 @@ Open this pane even if using the default setting. You need to select all the Ava
 Open this pane even if using the default setting. You need to select all the Availability Zones before this can be saved. If you want to customize an plans please see [Service Plan Configuration](#service_plan_configuration).
 
 1. Click **Enterprise Plans**.
+
     <%= image_tag('select_1_enterprise_plans.png') %>
 
 1. Click **Save**.
@@ -336,7 +343,8 @@ Open this pane even if using the default setting. You need to select all the Ava
 You might need to import a stemcell import if the minimum stemcell required for Solace PubSub+ for PCF is not found.
 
 1. Click **Stemcell**.
-    <%= image_tag('select_1_stemcell.png') %>
+
+     <%= image_tag('select_1_stemcell.png') %>
 
 1. Click **Import Stemcell** to import the required stemcell for your installation of PCF.
   * [Download Stemcells for PCF](https://network.pivotal.io/products/stemcells)
@@ -344,6 +352,7 @@ You might need to import a stemcell import if the minimum stemcell required for 
 #### <a id='required_resource_config'></a> Resource Config
 
 1. Click **Resource Config**.
+
     <%= image_tag('select_1_resource_config.png') %>
 
 1. Use the drop-down menus to configure the number of Solace PubSub+ message broker job instances that are available in each of the service plans mentioned above. These job instances are statically created when the tile is deployed. Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances.<br/><br/>
@@ -361,47 +370,67 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 #### <a id='general_settings'></a> (Optional) General Settings
 
 1. Click **General Settings**.
-    <%= image_tag('select_1_general_settings.png') %> 
+
+     <%= image_tag('select_1_general_settings.png') %> 
 
 1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ message brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example).
     <p class="note"><strong>Note:</strong> The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
     <%= image_tag('form_general_settings_starting_port.png') %>
 
 1. <a id='default_orphaned_resource_policy'></a> Under **Default Orphaned Resource Policy**, choose a default policy for your deployment. This default policy is used when a service does not have its own policy. See [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy) for more details about the options.
+
     <%= image_tag('form_general_settings_default_orphaned_resource_policy.png') %>
 
 1. <a id='webhook'></a> Under **Web Hook**, you can choose to Enable or Disable.
+
     <%= image_tag('form_general_settings_webhook.png') %>
-Web Hook enables an operator to receive POST requests to an endpoint of their choosing to get informed about Service create,delete,and update events.
+
+    Web Hook enables an operator to receive POST requests to an endpoint of their choosing
+    to get informed about Service create, delete, and update events.
 
 1. <a id='sb_settings'></a> Adjust service broker related settings.
+
     <%= image_tag('form_general_settings_sb.png') %>
-An operator has a chance to confirm the buildpack and the amount of memory used for the Service Broker installation in CF.
+
+    An operator has a chance to confirm the buildpack and the amount of memory used for the Service Broker installation in CF.
 
 1. <a id='monitor_settings'></a> Adjust Monitor VM Type and Disk Type
+
     <%= image_tag('form_general_monitor.png') %>
-The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans with **High Availability** enabled.  A Monitor node requires 1 CPU and 1 GB of RAM.
+
+    The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans with **High Availability** enabled.
+    A Monitor node requires 1 CPU and 1 GB of RAM.
 
 1. Click **Save**.
 
 #### <a id='optional_tls_config'></a> (Optional) TLS Config
 
 1. Click **TLS Config**.
+
     <%= image_tag('select_1_tls_config.png') %> 
+
     TLS is disabled by default.
+
     <%= image_tag('form_tls_config_new.png') %> 
 
 1. Click **TLS Enabled**.
+
     <%= image_tag('form_tls_config_enabled_new.png') %> 
+
     By enabling and configuring TLS, you allow messaging between apps and the Solace PubSub+ message broker to be encrypted. Apps requiring encryption would then need to use the TLS-specific URLs passed in the `VCAP_SERVICES` environment variable. For more information about the `VCAP_SERVICES` environment variable, see [Example Environment Variable](credentials.html#example). If TLS is not configured, the TLS specific URLs continue to be passed in the `VCAP_SERVICES` environment variable but fail to connect to a PubSub+ Message Broker if used.
 
 1. Configure **Message Broker's RSA certificate (Server Certificate)** either by pasting in a certificate and private key in PEM format or asking one to be generated by clicking **Generate RSA Certificate**. Generated certificates are equivalent to self-signed certificates.
+
     <%= image_tag('form_tls_config_server_certificate_new.png') %>
+
     <p class="note"><strong>Note:</strong> The server certificate configured will be used by all Solace PubSub+ message brokers deployed. As such, all Solace PubSub+ message brokers deployed in a PCF instances will have the same identification.</p>
+
     <%= image_tag('form_tls_config_disable_sb_cert_validation.png') %>
+
     <p class="note"><strong>Note:</strong> Communication between the Solace PubSub+ Service Broker and Solace PubSub+ message broker is also encrypted if a TLS certificate is configured. The Service Broker uses the Container Certificate Trust Store Framework to validate the server certificate returned by Solace PubSub+ message brokers. So if the framework is not operational when the tile is deployed, the Service Broker will be unable to validate server certificates sent by the Solace PubSub+ message brokers and the tile will fail to deploy. In development environments, it may be acceptable to not require server certificate validation, in which case the <strong>Disable RSA Server Certificate validation on the Service Broker (For development only)</strong> checkbox can be selected. This checkbox should never be selected in production deployments. Instead, the framework should be made operational.</p>
 
 1. (Optional) Configure **Message Broker's Trusted Root Certificates**. These certificates will be stored in the trust store on the Solace PubSub+ message brokers. They are required if you choose to use LDAP with TLS.
+
     <%= image_tag('form_tls_config_trusted_root_certificates_new.png') %>
 
 1. Click **Save**.
@@ -409,10 +438,13 @@ The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans 
 #### <a id='optional_service_access'></a>(Optional) Service Access
 
 1. Click **Service Access**.
+
     <%= image_tag('select_1_service_access.png') %>
 
 1. Check the **Enable global access to plans of service solace_pubsub** option.
+
     <%= image_tag('form_service_access_new.png') %>
+
     <p class="note"><strong>Note:</strong> To control access to Solace PubSub+ service plans on a case-by-case basis, do not enable this option. Once this is enabled, it cannot be disabled from this form. It must be revoked by the operator manually.</p>
 
 1. Click **Save**.
@@ -420,14 +452,19 @@ The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans 
 #### <a id='optional_credhub'></a>(Optional) Security
 
 1. Click **Security**.
+
     <%= image_tag('select_1_security.png') %>
 
 1. Check the **Secure service instance credentials** option.
+
     <%= image_tag('form_secure_service_instance_credentials.png') %>
+
     <p class="note"><strong>Note:</strong> This enables credentials storage on CredHub capable deployments.</p>
 
 1. Check the **Automatic application security group management** option.
+
     <%= image_tag('form_security_asg.png') %>
+
     <p class="note"><strong>Note:</strong> This allows for application security groups to be created for each service binding and deleted on unbind. The created application security groups will grant an application's space access to the Solace PubSub+ Service Instance IP and service ports only.</p>
 
 1. Click **Save**.
@@ -435,19 +472,25 @@ The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans 
 #### <a id='optional_management_access'></a> (Optional) Management Access
 
 1. Click **Management Access**.
+
     <%= image_tag('select_1_management_access.png') %> 
 
 1. If you configured [LDAP](#optional_ldap_settings), you may choose to have the LDAP Server provide the authentication and authorization for the management roles on a Solace service instance.
+
     <%= image_tag('form_management_access_ldap_new.png') %>
 
 1. (Optional) Configure Groups with Solace PubSub+ message brokers administration read-only privilege.
+
     <%= image_tag('form_management_access_ldap_readonly_new.png') %>
 
 1. (Optional) Configure Groups with Solace PubSub+ message brokers administration read-write privileges.
+
     <%= image_tag('form_management_access_ldap_readwrite_new.png') %>
 
 1. (Optional) Configure Groups with Solace PubSub+ message brokers administration administrator privileges.
+
     <%= image_tag('form_management_access_ldap_admin_new.png') %>
+
     <p class="note"><strong>Note:</strong> Cloud Operators need to have global access to the Solace PubSub+ message brokers deployed by the tile. This will allow them to administer the Solace PubSub+ message brokers with SolAdmin, CLI, or SEMP-based tools. Cloud operators might have different roles. Each role requires one of the three types of access-level: administrator, read-write, and read-only. When using "Message Broker Internal", the cloud operators access to a single administrator level role using the admin password. With "LDAP Server", users can be assigned to groups in LDAP mapping to their respective roles.</p>
 
 1. Click **Save**.
@@ -455,9 +498,11 @@ The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans 
 #### <a id='optional_application_access'></a> (Optional) Application Access
 
 1. Click **Application Access**.
+
     <%= image_tag('select_1_application_access.png') %>
 
 1. Using the defaults, the Solace PubSub+ message broker will use its internal database for user credentials per service instance. If you configured LDAP, you may request the Solace PubSub+ message broker to use the LDAP Server for authentication and authorization of when a client attempts to access a Solace PubSub+ service instance.
+
     <%= image_tag('form_application_access_new.png') %>
 
 1. Click **Save**.
@@ -465,31 +510,43 @@ The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans 
 #### <a id='optional_ldap_settings'> </a>(Optional) LDAP Settings
 
 1. Click **LDAP Settings**.
+
     <%= image_tag('select_1_ldap_settings.png') %>
+
     LDAP is disabled by default. 
-  <%= image_tag('form_ldap_settings_new.png') %>
-<p class="note"><strong>Note:</strong> Using the default <strong>LDAP Disabled</strong>, the Solace PubSub+ message broker will use its internal database for management and user credentials per service instance. To use an LDAP store, you must select <strong>LDAP Enabled</strong> and provide all the required settings for your LDAP server.</p>
+
+    <%= image_tag('form_ldap_settings_new.png') %>
+
+    <p class="note"><strong>Note:</strong> Using the default <strong>LDAP Disabled</strong>, the Solace PubSub+ message broker will use its internal database for management and user credentials per service instance. To use an LDAP store, you must select <strong>LDAP Enabled</strong> and provide all the required settings for your LDAP server.</p>
 
 1. Click **LDAP Enabled**.
+
     <%= image_tag('form_ldap_settings_enabled_new.png') %>
 
 1. Set LDAP Server URL.
+
     <%= image_tag('form_ldap_settings_server_url.png') %>
-<p class="note"><strong>Note:</strong> Consider the network accessibility of the provided LDAP server. You may need to check the <strong>Internet Connected</strong> option in <a href="#required_resource_config">Resource Config</a>.</p>
+
+    <p class="note"><strong>Note:</strong> Consider the network accessibility of the provided LDAP server. You may need to check the <strong>Internet Connected</strong> option in <a href="#required_resource_config">Resource Config</a>.</p>
 
 1. Set LDAP TLS Preference.
+
     <%= image_tag('form_ldap_settings_starttls_new.png') %>
 
 1. Set LDAP Credentials to use with the LDAP Server.
+
     <%= image_tag('form_ldap_settings_credentials.png') %>
 
 1. Set User Search Base.
+
     <%= image_tag('form_ldap_settings_user_search_base.png') %>
 
 1. Set User Search Filter.
+
     <%= image_tag('form_ldap_settings_user_search_filter.png') %>
 
 1. Set User Group Membership Attribute Name.
+
     <%= image_tag('form_ldap_settings_user_group_membership_attribute_name.png') %>
 
 1. Click **Save**.
@@ -500,27 +557,39 @@ and [Application Access](#optional_application_access). **If neither [Management
 #### <a id='optional_system_logging'></a> (Optional) System Logging
 
 1. Click **System Logging**.
+
     <%= image_tag('select_1_system_logging.png') %>
+
     System logging is disabled by default.
+
     <%= image_tag('form_system_logging.png') %>
 
 1. Click **System Logging Enabled**.
+
     <%= image_tag('form_system_logging_enabled_new.png') %>
 
 1. Set the external syslog hostname.
+
     <%= image_tag('form_system_logging_server.png') %>
+
     <p class="note"><strong>Note:</strong> Consider the network accessibility of the provided syslog server. You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config).</p>
 
 1. Set the external syslog port.
+
     <%= image_tag('form_system_logging_port.png') %>
 
 1. Set the external syslog network protocol.
+
     <%= image_tag('form_system_logging_protocol.png') %>
 
 1. Select what logs to send to the external syslog server.
+
     <%= image_tag('form_system_logging_mb_commands.png') %>
+
     <%= image_tag('form_system_logging_mb_events.png') %>
+
     <%= image_tag('form_system_logging_mb_system.png') %>
+
     <%= image_tag('form_system_logging_sb_agent.png') %>
 
 1. Click **Save**.
@@ -528,16 +597,22 @@ and [Application Access](#optional_application_access). **If neither [Management
 #### <a id='optional_tcp_routes'></a> (Optional) Enable TCP Routes
 
 1. Click **TCP Routes**.
+
     <%= image_tag('select_1_tcp_routes.png') %>
+
     TCP routes are disabled by default.
+
     <%= image_tag('form_tcp_routes_new.png') %>
 
 1. Click **TCP Routes Enabled**.
+
     <%= image_tag('form_tcp_routes_enabled_1_new.png') %>
+
     <%= image_tag('form_tcp_routes_enabled_2_new.png') %>
+
     <p class="note"><strong>Note:</strong> Fine-grained control is available by protocol. If you choose <strong>Not Allowed</strong>, a TCP route will never be created for this protocol, even if requested at service creation time. If you choose <strong>Disabled by default</strong>, at service creation time, a TCP route will not be created for this protocol unless a user-provided parameter overrides it with a <code>true</code> setting. If you choose <strong>Enabled by default</strong>, a TCP route will be created for this protocol at service creation time, unless a user-provided parameter overrides it with <code>false</code> setting.</p>
 
-A solace\_router UAA agent is required to use the TCP Routes feature. If using a new version of the Elastic Runtime (v1.11, v1.10.11, v1.9.24, v1.8.46), the solace\_router UAA client may be present already, and there is no need to provide Cloud Foundry credentials. Check your installation for the presence of the solace\_router UAA client, which can be found under <strong>Pivotal Elastic Runtime > Credentials > UAA</strong>. If a solace\_router is not found, you must to create one. To create a solace\_router, do the following:
+    A solace\_router UAA agent is required to use the TCP Routes feature. If using a new version of the Elastic Runtime (v1.11, v1.10.11, v1.9.24, v1.8.46), the solace\_router UAA client may be present already, and there is no need to provide Cloud Foundry credentials. Check your installation for the presence of the solace\_router UAA client, which can be found under <strong>Pivotal Elastic Runtime > Credentials > UAA</strong>. If a solace\_router is not found, you must to create one. To create a solace\_router, do the following:
 
 1. Look up the UAA 'Admin Client Credentials', which will be needed to create the solace\_router.</p>
 
@@ -582,9 +657,11 @@ In order to apply changes, all the settings for the Solace tile must be marked w
 <%= image_tag('select_all_done.png') %>
 
 1. Click **Installation Dashboard** at the top left corner of the screen to leave the tile configuration and go back to dashboard.
+
     <%= image_tag('link_installation_dashboard_new.png') %>
 
 1. Click **Apply Changes** to deploy the tile.
+
     <%= image_tag('apply_changes_new.png') %>
 
 1. After the tile has deployed, see [Creating and Binding Solace PubSub+ Service Instances](service-instances.html) for information about creating instances of the Solace PubSub+ service and binding them to apps.
