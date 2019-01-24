@@ -202,6 +202,7 @@ Solace PubSub+ for PCF requires the following:
      * [Internal MySQL (Highly Available)](#required_mysql_internal_ha)
   * As service from a deployment of [MySQL for Pivotal Cloud Foundry](http://docs.pivotal.io/p-mysql/index.html). Please ensure to configure for a High Availability setup and with service plans offering a minimum of 100&nbsp;MB. See [MySQL for PCF](#required_mysql_for_pcf).
   * External when MySQL is already deployed outside PCF, it may be offered as a user provided service instance to Solace PubSub+ for PCF, see [External MySQL](#required_mysql_external).
+* If using TCP Routes: [TCP Routes Requirements](#tcp_routes_requirements)
 
 
 ## <a id='install'></a> Install Solace PubSub+ for PCF 
@@ -612,43 +613,8 @@ and [Application Access](#optional_application_access). **If neither [Management
 
     <p class="note"><strong>Note:</strong> Fine-grained control is available by protocol. If you choose <strong>Not Allowed</strong>, a TCP route will never be created for this protocol, even if requested at service creation time. If you choose <strong>Disabled by default</strong>, at service creation time, a TCP route will not be created for this protocol unless a user-provided parameter overrides it with a <code>true</code> setting. If you choose <strong>Enabled by default</strong>, a TCP route will be created for this protocol at service creation time, unless a user-provided parameter overrides it with <code>false</code> setting.</p>
 
-    A solace\_router UAA agent is required to use the TCP Routes feature. If using a new version of the Elastic Runtime (v1.11, v1.10.11, v1.9.24, v1.8.46), the solace\_router UAA client may be present already, and there is no need to provide Cloud Foundry credentials. Check your installation for the presence of the solace\_router UAA client, which can be found under <strong>Pivotal Elastic Runtime > Credentials > UAA</strong>. If a solace\_router is not found, you must to create one. To create a solace\_router, do the following:
+1. Check the [TCP Routes Requirements](#tcp_routes_requirements) and Click **Save**.
 
-1. Look up the UAA 'Admin Client Credentials', which will be needed to create the solace\_router.</p>
-
-1. Install uaac if you do not already have it.
-  <pre class="terminal">
-  $ gem install cf-uaac
-  </pre>
-
-1. Log in to CF, target the UAA API, and log in with uaac using the 'Admin Client Credentials'.
-  <pre class="terminal">
-  $ cf api api.YOUR-SYSTEM-DOMAIN
-  $ cf login 
-  $ uaac target uaa.sys.YOUR-SYSTEM-DOMAIN
-  $ uaac token client get admin
-  </pre>
-
-1. Create the solace\_router uaa client with the necessary permissions and assign it a password.
-  <pre class="terminal">
-  $ uaac client add solace_router --name solace\_router --scope uaa.none --authorized\_grant\_types "refresh\_token,client\_credentials" \
-  $ --authorities "routing.routes.read,routing.routes.write,routing.router\_groups.read,cloud\_controller.read,cloud\_controller.write,cloud\_controller.admin" \
-  $ -s "A\_GOOD\_SECRET\_PASSWORD"
-  </pre>
-
-1. Ensure that you have a `tcp` domain.
-  <pre class="terminal">
-  $ cf create-shared-domain tcp.YOUR-DOMAIN --router-group default-tcp
-  </pre>
-
-1. Consider PCF quotas, networking, and firewalls when using TCP routes. For example, consider removing the limits on reserved route ports.
-  <pre class="terminal">
-  $ cf update-quota default --reserved-route-ports -1
-  </pre>
-
-1. Use solace\_router and the <strong>A\_GOOD\_SECRET\_PASSWORD</strong> as the CF credentials for TCP Routes.</p>
-
-1. Click **Save**.
 
 ### <a id='apply_changes'></a> Apply Changes
 
@@ -699,3 +665,67 @@ The following pre-conditions must be met before an upgrade can proceed, or the u
 If any failure occurs during an upgrade, services remain available. 
 
 For more information, see the [Troubleshooting Guide](troubleshooting.html#upgrade_errors).
+
+
+## <a id='tcp_routes_requirements'></a> TCP Routes Requirements
+
+<table class="note">
+
+<tr><th>Enabled TCP Routing in Pivotal Cloud Foundry</th>
+<td>In order to use TCP Routes it needs be enabled in your Pivotal Cloud Foundry, please see follow the steps for <a href='https://docs.pivotal.io/pivotalcf/2-3/adminguide/enabling-tcp-routing.html'>Enabling TCP Routing</a></td></tr>
+
+<tr><th>A solace_router UAA agent</th>
+
+<td>A solace_router UAA agent is required to use the TCP Routes feature. If using a new version of the Pivotal Application Service (v2.1+), the solace_router UAA client may be present already, and there is no need to provide Cloud Foundry credentials. Check your installation for the presence of the solace_router UAA client, which can be found under <strong>Pivotal Application Service > Credentials > UAA</strong>. If a solace_router is not found, you must to create one. To create a solace_router, do the following:
+<p>
+
+<ol>
+<li>Look up the UAA 'Admin Client Credentials', which will be needed to create the solace_router.</li>
+
+<li>Install uaac if you do not already have it.
+  <pre class="terminal">
+  $ gem install cf-uaac
+  </pre>
+</li>
+
+<li>Log in to CF, target the UAA API, and log in with uaac using the 'Admin Client Credentials'.
+  <pre class="terminal">
+  $ cf api api.YOUR-SYSTEM-DOMAIN
+  $ cf login 
+  $ uaac target uaa.sys.YOUR-SYSTEM-DOMAIN
+  $ uaac token client get admin
+  </pre>
+</li>
+
+<li>Create the solace_router uaa client with the necessary permissions and assign it a password.
+  <pre class="terminal">
+  $ uaac client add solace_router --name solace_router --scope uaa.none --authorized_grant_types "refresh_token,client_credentials" \
+  $ --authorities "routing.routes.read,routing.routes.write,routing.router_groups.read,cloud_controller.read,cloud_controller.write,cloud_controller.admin" \
+  $ -s "A_GOOD_SECRET_PASSWORD"
+  </pre>
+</li>
+
+<li>Use solace_router and the <strong>A_GOOD_SECRET_PASSWORD</strong> as the CF credentials for TCP Routes.</p>
+</li>
+</ol>
+</td></tr>
+
+<tr><th>A TCP Domain</th>
+<td>
+
+<ol>
+<li>Ensure that you have a `tcp` domain.
+  <pre class="terminal">
+  $ cf create-shared-domain tcp.YOUR-DOMAIN --router-group default-tcp
+  </pre>
+</li>
+<li>Consider PCF quotas, networking, and firewalls when using TCP routes. For example, consider removing the limits on reserved route ports.
+  <pre class="terminal">
+  $ cf update-quota default --reserved-route-ports -1
+  </pre>
+</li>
+</ol>
+</td></tr>
+
+
+</table>
