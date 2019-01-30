@@ -263,9 +263,28 @@ From the **Settings** tab of the Solace PubSub+ tile:
 
 #### <a id='required_mysql_configuration'></a> MySQL Configuration
 
+
 1. Click **MySQL Configuration**.
 
     <%= image_tag('select_1_mysql.png') %> 
+
+1. Enter an encryption key in the DB Encryption Key field, if desired.
+    <%= image_tag('form_mysql_encryption_keys.png') %>
+    <p></p>
+    It is possible to encrypt some columns (those containing passwords) in the database. If you wish to do this, enter some text in the DB Encryption Key field. There are no restrictions on the length or the characters chosen - any 6-12 character word would be fine. A malicious third party would not be able to decrypt the database just knowing this key, they would need to know the details of how we use the key. Be careful to not forget the key, because you will have to enter it if you wish to change the key or decrypt the database.
+
+    <br></br>
+
+    If you redeploy and do not want to change the encryption, just leave the DB Encryption key field with its current value and ensure that the Previous DB Encryption Key field is blank.
+
+    <br></br>
+
+    If you wish to change the encryption key, enter the new key into the DB Encryption Key field and enter the old key in the Previous DB Encryption Key field. The service broker will then use the old key to decrypt the database and then encrypt it with the new key.
+
+    <br></br>
+
+    If you wish to decrypt the database, enter the last used key in the Previous DB Encryption Key field and clear the DB Encryption Key field.
+
 
 1. Select one of the supported MySQL configuration for the service broker's database.
     <p></p>
@@ -285,7 +304,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
     **External MySQL**: When MySQL is available as an external service, it may be provided as a user-provided-service to Solace PubSub+ for PCF. Ensure you have a highly available deployment with a minimum of 100&nbsp;MB database size.
     <%= image_tag('form_mysql_external_new.png') %>
     <p></p>
-    <p class="note"><strong>Note:</strong> The choices you make for the MySQL configurations are not modifiable once the deployment has completed. Be sure to select the most appropriate option for your deployment.</p>
+    <p class="note"><strong>Note:</strong> The choices you make for the MySQL configurations are not modifiable once the deployment has completed (except the encryption keys). Be sure to select the most appropriate option for your deployment.</p>
 
 1. Click **Save**.
 
@@ -374,6 +393,13 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
      <%= image_tag('select_1_general_settings.png') %> 
 
+1. In the **Service Name** field, enter the name you would like to see as the service name in the marketplace.
+
+    <%= image_tag('form_general_settings_service_name.png') %>
+
+    <p class="note"><strong>Note:</strong> If you change the name to something other than 'solace-pubsub', any applications you have that use the [Solace PubSub+ Spring Cloud Connectors](https://github.com/SolaceProducts/sl-spring-cloud-connectors) will not work.
+
+
 1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ message brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example).
     <p class="note"><strong>Note:</strong> The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
     <%= image_tag('form_general_settings_starting_port.png') %>
@@ -382,12 +408,50 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
     <%= image_tag('form_general_settings_default_orphaned_resource_policy.png') %>
 
+1. Under **User Controlled Upgrades** you can configure whether users can have some control over when their services are upgraded.
+
+    <%= image_tag('form_general_settings_upgrade_1.png') %>
+
+    To enable user-controlled upgrades, select 'true' in the drop-down field.
+    <br></br>
+
+    Users of on-demand services can indicate, through their service dashboard, which services they wish to upgrade. A task will run periodically which checks to see if there are any pending requests for an upgrade, and perform them as required.
+    <br></br>
+
+    To set how often the task will run, either select one of the preconfigured intervals in the On Demand Upgrade Task Timer drop-down list, or select the Custom Time button and enter the interval in Cron format:
+
+    <%= image_tag('form_general_settings_upgrade_2.png') %>
+
+
 1. <a id='webhook'></a> Under **Web Hook**, you can choose to Enable or Disable.
 
     <%= image_tag('form_general_settings_webhook.png') %>
 
     Web Hook enables an operator to receive POST requests to an endpoint of their choosing
     to get informed about Service create, delete, and update events.
+    <br></br>
+
+    Here is an example of a service create message. The messages for delete and update are identical except that they have the words 'delete' or 'update' in the operation field. Many lines in the services section of this example have been removed for brevity:
+
+    ```json
+{
+  "timestamp" : "2019-01-29T14:39Z",
+  "nodes" : [ {
+    "role" : "primary",
+    "ip" : "192.168.16.19"
+  } ],
+  "operation" : "create",
+  "planId" : "68bc18fa-3b06-41a1-bd66-bc6ff2281b75",
+  "planName" : "enterprise_shared",
+  "services" : {
+  "webMessagingUris" : [ "http://192.168.16.19:7005" ],
+  "publicWebMessagingUris" : [ "http://tcp.pie-ci-2-2.cfplatformeng.com:49551" ],
+  "managementHostnames" : [ "enterprise-shared-0.sys.pie-ci-2-2.cfplatformeng.com" ],
+  "smfHosts" : [ "tcp://192.168.16.19:7001" ]
+  },
+  "serviceId" : "1fcdef72-58a4-4e48-a8fc-29a290c0fde9"
+}	
+    ```
 
 1. <a id='sb_settings'></a> Adjust service broker related settings.
 
@@ -435,6 +499,8 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
     <%= image_tag('form_tls_config_trusted_root_certificates_new.png') %>
 
 1. Click **Save**.
+
+   <p class="note"><strong>Note:</strong> Client Certificate Authorization is enabled on the message routers. That means that clients can use certificates to authenticate. Please see [Client Authentication](https://docs.solace.com/Features/Client-Authentication.htm#Client-Certificate) for details.</p>
 
 #### <a id='optional_service_access'></a>(Optional) Service Access
 
