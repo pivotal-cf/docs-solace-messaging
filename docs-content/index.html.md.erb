@@ -55,7 +55,7 @@ The Enterprise tile is also comprised of two message brokers: Solace PubSub+ Sta
 
 ## <a id='marketplace-plans'></a> PCF Marketplace Plans
 
-Solace PubSub+ for PCF offers operator configurable service plans. As of release 2.2.0 the [Preconfigured Service Plans](service-plans.html#preconfigured_service_plans) are now editable by the operator.  There are also additional [Unconfigured Service Plans](service-plans.html#unconfigred_service_plans) that can also be customized by the operator.  
+Solace PubSub+ for PCF offers operator configurable service plans. As of release 2.2.0 the [Preconfigured Service Plans](service-plans.html#preconfigured_service_plans) are now editable by the operator.  There are also additional [Unconfigured Service Plans](service-plans.html#unconfigured_service_plans) that can also be customized by the operator.  
 
 These are the plans for both the Enterprise Evaluation and Enterprise tiles:
 
@@ -155,6 +155,36 @@ In addition to easy and natural APIs for your apps, Solace PubSub+ supports the 
 Solace PubSub+ is a managed service. The tile deploys the PubSub+ message brokers onto PCF's IaaS. The Solace PubSub+ tile registers a service broker with PCF and exposes its service plans in the PCF Marketplace. The diagram below provides an overview of the product architecture of Solace PubSub+ for PCF.
 
 <%= image_tag('Deployment-overview_new.png') %>
+
+
+## <a id='networking'></a> Networking
+
+This section describes networking requirements. This section only needs to be referenced if your firewall rules affect network communication within your installation.
+
+
+1. Applications deployed in PCF that consume PubSub+ services must be able to connect to the virtual machines hosting the PubSub+ instances. They can connect via the IP address that is provided to the application through the VCAP_SERVICES enviromnent variables. Alternately, the operator can enable [TCP Routing](installing.html#required_tcp_routes) which enables applications (within or without PCF) to communicate with the PubSub+ instance through a DNS name. PubSub+ services are consumed starting at port 7000 and do not exceed 7099.
+
+1. The service broker must be able to communicate with any virtual machines that host PubSub+ instances, whether they are on the same network or a different one (the service broker is deployed in the Pivotal Application Service.)
+
+1. The service broker also needs to communicate with the management and arbitrator vms.
+
+1. The service broker needs to communicate with cf through its REST interface.
+
+1. The service broker and the PubSub+ VMS need to communicate with the Credhub service if the [Secure Service Instance](installing.html#optional_credhub) option is enabled.
+
+1. Solace PubSub+ instances need to commucate with cf and the cf nats service when [Tcp Routing](installing.html#required_tcp_routes) is enabled.
+
+1. When using [On-Demand Services](service-plans.html#unconfigured_service_plans), the service broker needs to be able to communicate with virtual machines running in the network to which on-demand services are assigned.
+
+1. The ports that are required for internal communication between our components are:
+ - 443
+ - 943
+ - 3022
+ - 3943
+ - 8080
+ - 9090
+ - 18080
+ - 38080
 
 
 ## <a id='snapshot'></a> Product Snapshot

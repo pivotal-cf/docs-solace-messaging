@@ -5,7 +5,7 @@ owner: Partners
 
 Solace PubSub+ for PCF offers multiple operator configurable service plans to support a variety of use cases.  Each service plan configures the Solace PubSub+ message broker for a given scaling capacity.
 
-As of release 2.2.0 the [Preconfigured Service Plans](#preconfigured_service_plans) are now editable by the operator.  There are also [additional Configurable Service Plans](#unconfigred_service_plans) that can also be customized by the operator.
+As of release 2.2.0 the [Preconfigured Service Plans](#preconfigured_service_plans) are now editable by the operator.  There are also [additional Configurable Service Plans](#unconfigured_service_plans) that can also be customized by the operator.
 
 Service instances for any given Service Plan are hosted on VMs which can be created in two ways:
 
@@ -151,7 +151,7 @@ This configuration is done at service creation time.
 
 All other plan limits will be auto calculated based on the scaling tier and the Solace PubSub+ message broker type.
 
-## <a id='unconfigred_service_plans'></a> Additional Configurable Service Plans
+## <a id='unconfigured_service_plans'></a> Additional Configurable Service Plans
 
 The Solace PubSub+ for PCF tile contains two additional unconfigured plans for both types of Solace PubSub+ message brokers:
 
@@ -172,7 +172,7 @@ Each plan is supported by **VM Type** intended to match the plan name and descri
 
 An operator is cautioned not to make these plans inactive or alter these plans without considering the effects on existing service instances.
 
-If there are existing service instances on these plans, the operator should use the [Additional Configurable Service Plans](#unconfigred_service_plans) to create customized plans.
+If there are existing service instances on these plans, the operator should use the [Additional Configurable Service Plans](#unconfigured_service_plans) to create customized plans.
 
 ### <a id='plan_standard_medium'></a> Standard Medium Plan
 
