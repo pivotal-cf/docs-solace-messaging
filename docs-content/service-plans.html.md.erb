@@ -148,7 +148,6 @@ A deployment of Solace PubSub+ Message Broker will attempt to maximize the use o
 
 The deployment will auto select a [Scaling Tier](https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/Scaling-Tier-Resources.htm) based on detected number of CPUs and RAM.
 This configuration is done at service creation time.
-If the operator increases the resources avaliable to a plan, the scaling tier will be recalculated and the message brokers will be reconfigured. This will cause an interruption of existing services running on the effected brokers.
 
 All other plan limits will be auto calculated based on the scaling tier and the Solace PubSub+ message broker type.
 
