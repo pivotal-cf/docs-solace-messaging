@@ -774,43 +774,46 @@ When using [On-Demand Services](service-plans.html#unconfigured_service_plans), 
 
 ## <a id='tcp_routes_requirements'></a> TCP Routes Requirements
 
-<table class="note">
+<table class="nice">
 
 <tr><th>Enabled TCP Routing in Pivotal Cloud Foundry</th>
-<td>In order to use TCP Routes it needs be enabled in your Pivotal Cloud Foundry, please see follow the steps for <a href='https://docs.pivotal.io/pivotalcf/2-3/adminguide/enabling-tcp-routing.html'>Enabling TCP Routing</a></td></tr>
+<td>To use TCP Routes, TCP routing needs to be enabled in PCF.
+    To do this, see <a href='https://docs.pivotal.io/pivotalcf/adminguide/enabling-tcp-routing.html'>Enabling TCP Routing</a>.
+</td></tr>
 
 <tr><th>A solace_router UAA agent</th>
 
-<td>A solace_router UAA agent is required to use the TCP Routes feature. If using a new version of the Pivotal Application Service (v2.1+), the solace_router UAA client may be present already, and there is no need to provide Cloud Foundry credentials. Check your installation for the presence of the solace_router UAA client, which can be found under <strong>Pivotal Application Service > Credentials > UAA</strong>. If a solace_router is not found, you must to create one. To create a solace_router, do the following:
-<p>
+<td>A solace_router UAA agent is required to use the TCP Routes feature.  If
+    using a new version of the Pivotal Application Service (v2.1+), the
+    solace_router UAA client may be present already, and there is no need to
+    provide Cloud Foundry credentials. Check your installation for the presence of
+    the solace_router UAA client, which can be found under <strong>Pivotal
+    Application Service > Credentials > UAA</strong>. If a solace_router is not
+    found, you must to create one. To create a solace_router, do the following: <p>
 
 <ol>
-<li>Look up the UAA 'Admin Client Credentials', which will be needed to create the solace_router.</li>
+<li>Look up the UAA <strong>Admin Client Credentials</strong>, which is needed to create the solace_router.</li>
 
 <li>Install uaac if you do not already have it.
-  <pre class="terminal">
-  $ gem install cf-uaac
-  </pre>
+  <pre class="terminal"> $ gem install cf-uaac </pre>
 </li>
 
-<li>Log in to CF, target the UAA API, and log in with uaac using the 'Admin Client Credentials'.
+<li>Log in to CF, target the UAA API, and log in with uaac using the <strong>Admin Client Credentials</strong>.
   <pre class="terminal">
   $ cf api api.YOUR-SYSTEM-DOMAIN
   $ cf login 
   $ uaac target uaa.sys.YOUR-SYSTEM-DOMAIN
-  $ uaac token client get admin
-  </pre>
+  $ uaac token client get admin </pre>
 </li>
 
 <li>Create the solace_router uaa client with the necessary permissions and assign it a password.
   <pre class="terminal">
   $ uaac client add solace_router --name solace_router --scope uaa.none --authorized_grant_types "refresh_token,client_credentials" \
   $ --authorities "routing.routes.read,routing.routes.write,routing.router_groups.read,cloud_controller.read,cloud_controller.write,cloud_controller.admin" \
-  $ -s "A_GOOD_SECRET_PASSWORD"
-  </pre>
+  $ -s "A_GOOD_SECRET_PASSWORD" </pre>
 </li>
 
-<li>Use solace_router and the <strong>A_GOOD_SECRET_PASSWORD</strong> as the CF credentials for TCP Routes.</p>
+<li>Use solace_router and the <code>A_GOOD_SECRET_PASSWORD</code> as the CF credentials for TCP Routes.</p>
 </li>
 </ol>
 </td></tr>
@@ -819,15 +822,13 @@ When using [On-Demand Services](service-plans.html#unconfigured_service_plans), 
 <td>
 
 <ol>
-<li>Ensure that you have a `tcp` domain.
+<li>Ensure that you have a <code>tcp</code> domain.
   <pre class="terminal">
-  $ cf create-shared-domain tcp.YOUR-DOMAIN --router-group default-tcp
-  </pre>
+  $ cf create-shared-domain tcp.YOUR-DOMAIN --router-group default-tcp </pre>
 </li>
 <li>Consider PCF quotas, networking, and firewalls when using TCP routes. For example, consider removing the limits on reserved route ports.
   <pre class="terminal">
-  $ cf update-quota default --reserved-route-ports -1
-  </pre>
+  $ cf update-quota default --reserved-route-ports -1 </pre>
 </li>
 </ol>
 </td></tr>
