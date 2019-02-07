@@ -271,7 +271,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
 1. Enter an encryption key in the DB Encryption Key field, if desired.
     <%= image_tag('form_mysql_encryption_keys.png') %>
     <p></p>
-    Database columns holding credentials can be encryted. To do so enter some text into the encryption key field. There are no restrictions on the length or the characters chosen for the key. There is no possibility of recovery from the loss of an encryption key. The operator must safeguard against the loss of encryption keys.
+    Database columns holding credentials can be encrypted. To do so enter some text into the encryption key field. There are no restrictions on the length or the characters chosen for the key. There is no possibility of recovery from the loss of an encryption key. The operator must safeguard against the loss of encryption keys.
 
     <br></br>
 
@@ -279,7 +279,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
 
     <br></br>
 
-    If you wish to change the encryption key, enter the new key into the DB Encryption Key field and enter the old key in the Previous DB Encryption Key field. The previously encrypted data will be decrypted using the old key and re-encrytped using the new key.
+    If you wish to change the encryption key, enter the new key into the DB Encryption Key field and enter the old key in the Previous DB Encryption Key field. The previously encrypted data will be decrypted using the old key and re-encrypted using the new key.
 
     <br></br>
 
@@ -427,7 +427,7 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
     <%= image_tag('service_dashboard_with_upgrade_new.png') %>
 
-    If the user clicks "Mark for Upgrade", then the service will be upgraded at the next scheduled time as set by the oeprator.
+    If the user clicks "Mark for Upgrade", then the service will be upgraded at the next scheduled time as set by the operator.
 
 
 1. <a id='webhook'></a> Under **Web Hook**, you can choose to Enable or Disable.
@@ -744,7 +744,7 @@ For more information, see the [Troubleshooting Guide](troubleshooting.html#upgra
 This section describes networking requirements. This section only needs to be referenced if your firewall rules affect network communication within your installation.
 
 
-1. Applications deployed in PCF that consume PubSub+ services must be able to connect to the virtual machines hosting the PubSub+ instances. They can connect via the IP address that is provided to the application through the VCAP_SERVICES enviromnent variables. Alternatively, the operator can enable [TCP Routing](installing.html#required_tcp_routes) which enables applications (inside or outside PCF) to communicate with the PubSub+ instance through a DNS name. 
+1. Applications deployed in PCF that consume PubSub+ services must be able to connect to the virtual machines hosting the PubSub+ instances. They can connect via the IP address that is provided to the application through the VCAP_SERVICES environment variables. Alternatively, the operator can enable [TCP Routing](installing.html#required_tcp_routes) which enables applications (inside or outside PCF) to communicate with the PubSub+ instance through a DNS name. 
 
 By default PubSub+ services are consumed starting at port 7000, however that is configurable. In order to see which ports have been allocated for a service, use the [Web Hook](installing.html#webhook) feature.
 

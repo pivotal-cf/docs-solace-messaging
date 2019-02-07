@@ -61,7 +61,7 @@ To access service broker logs, do the following:
 1. Discover the Solace PubSub+ Service Broker App name.
 	<pre class="terminal">
 	$ cf apps
-	Gettings apps in org solace /space solace-broker as user@example.com...
+	Getting apps in org solace /space solace-broker as user@example.com...
 	OK
 
 	name                              requested state   instances   memory   disk   urls
@@ -80,9 +80,9 @@ To access service broker logs, do the following:
 
 ### <a id='operator_diag'></a> Additional Diagnostics
 
-In addition to regular logging, Solace PubSub+ message brokers tools can help gather diagnotics logs on demand.
+In addition to regular logging, Solace PubSub+ message brokers tools can help gather diagnostics logs on demand.
 
-For example, having identified a problem with a given Solace service instance, the operator can access the backing Solace PubSub+ message brokers to examine logs and gather diagnositics.
+For example, having identified a problem with a given Solace service instance, the operator can access the backing Solace PubSub+ message brokers to examine logs and gather diagnostics.
 
 The backing Solace PubSub+ message brokers for a given service instance can be identified from the IPs used in the bindings or service keys, or mentioned in the service broker logs or message when an exception occurs.
 
@@ -147,7 +147,7 @@ While this list it not complete, it provides representative samples with explana
 <tr><th colspan=2>Deployment limits reached for a given plan</th></th>
 <tr><th>Operation</th><td>
 <pre class="terminal">
-cf create-service solace-pubsub enteprise-large
+cf create-service solace-pubsub enterprise-large
 </pre>
 </td></tr>
 <tr><th>Error</th><td>
@@ -156,7 +156,7 @@ Server error, status code: 502, error code: 10001, message: Service broker error
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>The service broker does not find any Solace Message VPNs in its inventory for the requested service plan.</td></tr>
-  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated Solace PubSub+ message brokers that support the given plan, in this case a enteprise-large.</td></tr>
+  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated Solace PubSub+ message brokers that support the given plan, in this case a enterprise-large.</td></tr>
 </table>
 
   <br>
