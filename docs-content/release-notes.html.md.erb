@@ -5,6 +5,21 @@ owner: Partners
 
 Release Notes for Solace PubSub+ for Pivotal Cloud Foundry (PCF).
 
+### v2.3.0
+
+**Release Date: February 8, 2019**
+
+This minor release contains Solace PubSub+ message broker v9.0.1.7 and has the following new features:
+
+* User controlled upgrades.
+* Support for the message broker's 100 connection scaling tier.
+* The credentials stored in the MySQL database can be encrypted and support key rotation.
+* The name of the service that appears in the marketplace can be configured.
+* Adds support for PCF v2.4.x.
+* Various bug fixes.
+* Deployments to PCF 2.3 and PCF 2.4 need enabled internet connection on the management nodes to support required communications with the CF PAS on its public domain, the tile does not communicate with anything on the internet.
+* Using TCP Routes on PCF 2.3 and PCF 2.4 also requires the enabled internet connection on operator allocated message brokers.
+
 ### v2.2.1
 
 **Release Date: January 24, 2019**

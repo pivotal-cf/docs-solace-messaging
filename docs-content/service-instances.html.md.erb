@@ -37,7 +37,7 @@ A service instance can be customized at creation time and updated as well using 
  * ldapGroupAdminReadOnly: Admin ReadOnly permissions are granted to the provided value for that parameter.
  * ldapGroupAdminReadWrite: Admin ReadWrite permissions are granted to the provided value for that parameter.
 
-1. When TCP routes are enabled, and unless the configuration per procotol is "Not Allowed", you may use these parameters with valid values: `true`, `false` to control TCP Routes per service instance.
+1. When TCP routes are enabled, and unless the configuration per protocol is "Not Allowed", you may use these parameters with valid values: `true`, `false` to control TCP Routes per service instance.
  * `tcp_route_enabled`
  * `smf_tcp_route_enabled`
  * `smf_tls_tcp_route_enabled`
@@ -53,7 +53,7 @@ A service instance can be customized at creation time and updated as well using 
  * `amqp_tcp_route_enabled`
  * `amqp_tls_tcp_route_enabled`
 
-1. <a id='service_orphaned_resource_policy'></a> A service-scoped Orphaned Resource Policy may be set at service creation or update time. This service-scoped policy will take precendence over the operator set [Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy). The Orphaned Resource Policy is applied during [unbind operations](bindings.html#unbind-cf-cli) to ensure any orphaned resources such as `Queues` and `Topic Endpoints` are handled according to this policy. The policy can be set using parameter key `orphanedResourcePolicy` with one of these values:
+1. <a id='service_orphaned_resource_policy'></a> A service-scoped Orphaned Resource Policy may be set at service creation or update time. This service-scoped policy will take precedence over the operator set [Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy). The Orphaned Resource Policy is applied during [unbind operations](bindings.html#unbind-cf-cli) to ensure any orphaned resources such as `Queues` and `Topic Endpoints` are handled according to this policy. The policy can be set using parameter key `orphanedResourcePolicy` with one of these values:
    * `Abort`: The unbind operation is aborted with an [error](troubleshooting.html#abort_orphaned_resource_policy_error) if there are any resources owned by the binding linked credentials that would be orphaned once the credentials are removed.
    * `Delete`: Any orphaned resources owned by the current binding linked credentials are deleted from the service instance. All data held in the orphaned resources is lost.
    * `MakeServiceOwned`: The ownership of orphaned resource is set to be service-level-scoped. This resource can be accessed by any current and future client credentials sharing the service instance.

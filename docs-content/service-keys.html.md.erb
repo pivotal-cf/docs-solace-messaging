@@ -77,7 +77,6 @@ Assuming you have created a service key `external-mobile-app` for `solace-pubsub
   <pre class="terminal">
   $ cf service-key solace-pubsub-instance external-mobile-app
   Getting key external-mobile-app for service instance solace-pubsub-instance as user<span>@</span>example.com...
-
   {
   "clientPassword": "848e5357-2185-4c6c-bd98-8afc2da26492",
   "clientUsername": "v002.cu000006",
@@ -123,8 +122,7 @@ Assuming you have created a service key `external-mobile-app` for `solace-pubsub
 1. Delete the service key for the service instance.
   <pre class="terminal">
   $ cf delete-service-key solace-pubsub-instance external-mobile-app
-
-  Really delete the service key external-mobile-app?> yes
+  Really delete the service key external-mobile-app? yes
   Deleting key external-mobile-app for service instance solace-pubsub-instance as user<span>@</span>example.com...
   OK
   </pre>

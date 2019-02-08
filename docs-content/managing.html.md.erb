@@ -45,6 +45,16 @@ The Solace PubSub+ Manager is accessible when a service is created from a link i
 
   <%= image_tag('sample_pubsub_manager_new.png') %>
 
+### Restrictions on the use of the PubSub+ Manager
+
+There are some actions that you must not perform in the PubSub+ Manager:
+
+1. Do not change anything on the Message VPN/Connectivity page. Settings such as TLS configuration must be managed through the Tile.
+1. On the Message VPN/Replication page, do not change the Replication Role. This will cause the deployment to fail.
+1. Do not change anything on the Access Control/Authentication page. Settings such as Authentication type must be managed through the Tile. Likewise, client usernames should be created by binding services through PCF.
+
+
+
 
 ## <a id='solace_pubsub_configuration_backup_and_restore'></a> Solace PubSub+ Configuration Backup and Restore
 
