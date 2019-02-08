@@ -751,13 +751,13 @@ By default PubSub+ services are consumed starting at port 7000, however that is 
 1. The service broker must be able to communicate with any virtual machines that host PubSub+ instances, whether they are on the same network or a different one (the service broker is deployed in the Pivotal Application Service.)
 When using [On-Demand Services](service-plans.html#unconfigured_service_plans), the service broker needs to be able to communicate with virtual machines running in the Services network.
 
-1. The service broker also needs to communicate with the management and arbitrator vms.
+1. The service broker also needs to communicate with the management and arbitrator VMs.
 
 1. The service broker needs to communicate with cf.
 
-1. The service broker and the PubSub+ VMS need to communicate with the Credhub service if the [Secure Service Instance](installing.html#optional_credhub) option is enabled.
+1. The service broker and the VMs hosting the PubSub+ message broker need to communicate with the Credhub service if the [Secure Service Instance](installing.html#optional_credhub) option is enabled.
 
-1. Solace PubSub+ instances need to communicate with cf and the cf nats service when [Tcp Routing](installing.html#required_tcp_routes) is enabled.
+1. Solace PubSub+ instances need to communicate with cf and the cf nats service when [TCP Routing](installing.html#required_tcp_routes) is enabled.
 
 
 1. The ports that are required for internal communication between our components are:
