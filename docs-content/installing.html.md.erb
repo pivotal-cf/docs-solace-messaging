@@ -185,7 +185,7 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
 
 <p id="tableNote2" class="note"><strong><sup>2</sup> Note:</strong> <strong>One</strong> arbitrator VM is required for a production setup and must be combined with <strong>Two</strong> management VM instances. Otherwise set this to zero.</p>
 
-<p id="tableNote3" class="note"><strong><sup>3</sup> Note:</strong> You can modify the number of <strong>operator allocated</strong> instances and persistent disk size when configuring the tile for the Solace PubSub+ message broker jobs. For more information, see the <a href="#configure">Configure Solace PubSub+ for PCF</a> tile below.</p> 
+<p id="tableNote3" class="note"><strong><sup>3</sup> Note:</strong> You can modify the number of <strong>operator allocated</strong> instances and persistent disk size when configuring the tile for the Solace PubSub+ message broker jobs. For more information, see the <a href="#configure">Configure Solace PubSub+ for PCF</a> tile below.</p>
 
 <p id="tableNote4" class="note"><strong><sup>4</sup> Note:</strong> A high availability Solace PubSub+ service instance requires three (3) HA Solace PubSub+ message broker job instances to be used. As such, the <strong>operator allocated</strong> number of HA Solace PubSub+ message broker job instances specified for the HA Solace PubSub+ message broker instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
 
@@ -205,7 +205,7 @@ Solace PubSub+ for PCF requires the following:
 * If using TCP Routes: [TCP Routes Requirements](#tcp_routes_requirements)
 
 
-## <a id='install'></a> Install Solace PubSub+ for PCF 
+## <a id='install'></a> Install Solace PubSub+ for PCF
 
 To install Solace PubSub+ for PCF, do the following:
 
@@ -266,24 +266,23 @@ From the **Settings** tab of the Solace PubSub+ tile:
 
 1. Click **MySQL Configuration**.
 
-    <%= image_tag('select_1_mysql.png') %> 
+    <%= image_tag('select_1_mysql.png') %>
 
-1. Enter an encryption key in the DB Encryption Key field, if desired.
+1. (Optional) Enter an encryption key in the **DB Encryption Key**.
     <%= image_tag('form_mysql_encryption_keys.png') %>
     <p></p>
-    Database columns holding credentials can be encrypted. To do so enter some text into the encryption key field. There are no restrictions on the length or the characters chosen for the key. There is no possibility of recovery from the loss of an encryption key. The operator must safeguard against the loss of encryption keys.
-
-    <br></br>
-
-    If you redeploy and do not want to change the encryption, just leave the DB Encryption key field with its current value.
-
-    <br></br>
-
-    If you wish to change the encryption key, enter the new key into the DB Encryption Key field and enter the old key in the Previous DB Encryption Key field. The previously encrypted data will be decrypted using the old key and re-encrypted using the new key.
-
-    <br></br>
-
-    If you wish to decrypt the database, enter the last used key in the Previous DB Encryption Key field and clear the DB Encryption Key field.
+    Database columns holding credentials can be encrypted. If you want to encrypt your credentials
+		enter text into the **DB Encryption Key**. There are no restrictions on the length
+		or the characters for the key.
+		<p class="note warning"><strong>WARNING:</strong> You cannot recover a loss
+			encryption key. You must safeguard against the loss of encryption keys.</p>
+	+ If you redeploy and do not want to change the encryption, leave the
+	**DB Encryption Key** with its current value.
+	+ If you want to change the encryption key, enter the new key into **DB
+	Encryption Key** and enter the old key in **Previous DB Encryption Key**.
+	The previously encrypted data is decrypted using the old key and re-encrypted using the new key.
+	+ If you want to decrypt the database, enter the last used key in **Previous
+	DB Encryption Key** and clear **DB Encryption Key**.
 
 
 1. Select one of the supported MySQL configuration for the service broker's database.
@@ -304,7 +303,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
     **External MySQL**: When MySQL is available as an external service, it may be provided as a user-provided-service to Solace PubSub+ for PCF. Ensure you have a highly available deployment with a minimum of 100&nbsp;MB database size.
     <%= image_tag('form_mysql_external_new2.png') %>
     <p></p>
-    <p class="note"><strong>Note:</strong> The choices you make for the MySQL configurations are not modifiable once the deployment has completed (except the encryption keys). Be sure to select the most appropriate option for your deployment.</p>
+    <p class="note"><strong>Note:</strong> Except for the encryption keys, you cannot modify your MySQL configurations after the deployment has completed. Be sure to select the most appropriate option for your deployment.</p>
 
 1. Click **Save**.
 
@@ -312,7 +311,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
 
 1. Click **Management Access**.
 
-    <%= image_tag('select_1_management_access.png') %> 
+    <%= image_tag('select_1_management_access.png') %>
 
 1. Under **Admin user password**, pick a password for the message brokers `admin` user.
 
@@ -391,13 +390,13 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
 1. Click **General Settings**.
 
-     <%= image_tag('select_1_general_settings.png') %> 
+     <%= image_tag('select_1_general_settings.png') %>
 
-1. In the **Service Name** field, enter the name you would like to see as the service name in the marketplace.
+1. In the **Service Name**, enter the name you want as the service name in the Marketplace.
 
     <%= image_tag('form_general_settings_service_name.png') %>
 
-    <p class="note"><strong>Note:</strong> If you change the name to something other than 'solace-pubsub', any applications you have that use the [Solace PubSub+ Spring Cloud Connectors](https://github.com/SolaceProducts/sl-spring-cloud-connectors) will have to be changed. Clone the project and change any instances of the string "solace-pubsub" to the service name you selected.
+    <p class="note"><strong>Note:</strong> If you change the name to something other than <code>solace-pubsub</code>, any applications that use the <a href="https://github.com/SolaceProducts/sl-spring-cloud-connectors">Solace PubSub+ Spring Cloud Connectors</a> have to be changed. Clone the project and change any instances of the string <code>solace-pubsub</code> to the service name you selected.</p>
 
 
 1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ message brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example).
@@ -408,56 +407,63 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
     <%= image_tag('form_general_settings_default_orphaned_resource_policy.png') %>
 
-1. Under **User Controlled Upgrades** for services from dedicated plans, you can configure whether users can have control over when their services are upgraded.
+1. Under **User Controlled Upgrades for On Demand Instances**, configure whether users can have control over when their services are upgraded.
 
     <%= image_tag('form_general_settings_upgrade_1.png') %>
 
-    To enable user-controlled upgrades, select 'true' in the drop-down field.
+    To enable user-controlled upgrades, select **true** from the dropdown.
     <br></br>
 
-    When eligible, users of on-demand services can indicate through their service dashboard if they wish to upgrade. A task will run periodically which checks to see if there are any pending requests for an upgrade, and perform them as required.
+    When eligible, on-demand services users can indicate through their service dashboard if they want to upgrade. A task runs periodically to check for pending upgrade requests and perform them as required.
     <br></br>
 
-    To set how often the task will run, either select one of the preconfigured intervals in the On Demand Upgrade Task Timer drop-down list, or select the Custom Time option and enter the interval in Cron format:
+    To set how often the task runs, do one of the following:
+	  + Select a preconfigured interval in **On Demand Upgrade Task Timer**.
+	  + Select **Custom Time** and enter an interval in Cron format.
 
     <%= image_tag('form_general_settings_upgrade_2.png') %>
 
-    When an upgrade is available, the service dashboard will look like this:
+    When an upgrade is available, the service dashboard looks like this:
 
 
     <%= image_tag('service_dashboard_with_upgrade_new.png') %>
 
-    If the user clicks "Mark for Upgrade", then the service will be upgraded at the next scheduled time as set by the operator.
+    If the user clicks **Mark for Upgrade**, then the service is upgraded at the next scheduled time.
 
 
 1. <a id='webhook'></a> Under **Web Hook**, you can choose to Enable or Disable.
 
     <%= image_tag('form_general_settings_webhook.png') %>
 
-    Web Hook enables an endpoint to receive POST requests to be informed about Service create, delete, and update events.
+    Web Hook enables an endpoint to receive POST requests for service create, delete, and update events.
     <br></br>
 
-    The following sample message is for a service create event. The operation field describes the service event, the possible values are 'create','update' or 'delete'. The message has service identifying information with network information for all messaging services. Many lines in the services section of this sample have been removed for brevity:
+    The `operation` field describes the service event. The possible values are `create`,`update`, or `delete`.
+	  The message has service identifying information with network information for all
+	  messaging services. <br><br>
+		The following sample message is for a service create event.
+		Many lines in the services section of this sample have been
+	  removed for brevity:
 
-    ```json
-{
-  "timestamp" : "2019-01-29T14:39Z",
-  "nodes" : [ {
-    "role" : "primary",
-    "ip" : "192.168.16.19"
-  } ],
-  "operation" : "create",
-  "planId" : "68bc18fa-3b06-41a1-bd66-bc6ff2281b75",
-  "planName" : "enterprise_shared",
-  "services" : {
-  "webMessagingUris" : [ "http://192.168.16.19:7005" ],
-  "publicWebMessagingUris" : [ "http://tcp.YOUR-DOMAIN:49551" ],
-  "managementHostnames" : [ "enterprise-shared-0.sys.YOUR-DOMAIN" ],
-  "smfHosts" : [ "tcp://192.168.16.19:7001" ]
-  },
-  "serviceId" : "1fcdef72-58a4-4e48-a8fc-29a290c0fde9"
-}	
-    ```
+	```json
+	{
+	  "timestamp" : "2019-01-29T14:39Z",
+	  "nodes" : [ {
+	    "role" : "primary",
+	    "ip" : "192.168.16.19"
+	  } ],
+	  "operation" : "create",
+	  "planId" : "68bc18fa-3b06-41a1-bd66-bc6ff2281b75",
+	  "planName" : "enterprise_shared",
+	  "services" : {
+	  "webMessagingUris" : [ "http://192.168.16.19:7005" ],
+	  "publicWebMessagingUris" : [ "http://tcp.YOUR-DOMAIN:49551" ],
+	  "managementHostnames" : [ "enterprise-shared-0.sys.YOUR-DOMAIN" ],
+	  "smfHosts" : [ "tcp://192.168.16.19:7001" ]
+	  },
+	  "serviceId" : "1fcdef72-58a4-4e48-a8fc-29a290c0fde9"
+	}
+	```
 
 1. <a id='sb_settings'></a> Adjust service broker related settings.
 
@@ -478,15 +484,15 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
 1. Click **TLS Config**.
 
-    <%= image_tag('select_1_tls_config.png') %> 
+    <%= image_tag('select_1_tls_config.png') %>
 
     TLS is disabled by default.
 
-    <%= image_tag('form_tls_config_new.png') %> 
+    <%= image_tag('form_tls_config_new.png') %>
 
 1. Click **TLS Enabled**.
 
-    <%= image_tag('form_tls_config_enabled_new.png') %> 
+    <%= image_tag('form_tls_config_enabled_new.png') %>
 
     By enabling and configuring TLS, you allow messaging between apps and the Solace PubSub+ message broker to be encrypted. Apps requiring encryption would then need to use the TLS-specific URLs passed in the `VCAP_SERVICES` environment variable. For more information about the `VCAP_SERVICES` environment variable, see [Example Environment Variable](credentials.html#example). If TLS is not configured, the TLS specific URLs continue to be passed in the `VCAP_SERVICES` environment variable but fail to connect to a PubSub+ Message Broker if used.
 
@@ -501,7 +507,10 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
     <p class="note"><strong>Note:</strong> Communication between the Solace PubSub+ Service Broker and Solace PubSub+ message broker is also encrypted if a TLS certificate is configured. The Service Broker uses the Container Certificate Trust Store Framework to validate the server certificate returned by Solace PubSub+ message brokers. So if the framework is not operational when the tile is deployed, the Service Broker will be unable to validate server certificates sent by the Solace PubSub+ message brokers and the tile will fail to deploy. In development environments, it may be acceptable to not require server certificate validation, in which case the <strong>Disable RSA Server Certificate validation on the Service Broker (For development only)</strong> checkbox can be selected. This checkbox should never be selected in production deployments. Instead, the framework should be made operational.</p>
 
-1. (Optional) Configure **Message Broker's Trusted Root Certificates**. These certificates will be stored in the trust store on the Solace PubSub+ message brokers. They are required if you choose to use LDAP with TLS. If you wish you can use [Client Certificate Authentication](https://docs.solace.com/Features/Client-Authentication.htm#Client-Certificate)
+1. (Optional) Configure **Message Broker's Trusted Root Certificates**.
+These certificates are stored in the trust store on the Solace PubSub+ message brokers.
+They are required if you choose to use LDAP with TLS. If you want, use
+[Client Certificate Authentication](https://docs.solace.com/Features/Client-Authentication.htm#Client-Certificate).
 
     <%= image_tag('form_tls_config_trusted_root_certificates_new.png') %>
 
@@ -546,7 +555,7 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
 1. Click **Management Access**.
 
-    <%= image_tag('select_1_management_access.png') %> 
+    <%= image_tag('select_1_management_access.png') %>
 
 1. If you configured [LDAP](#optional_ldap_settings), you may choose to have the LDAP Server provide the authentication and authorization for the management roles on a Solace service instance.
 
@@ -586,7 +595,7 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
     <%= image_tag('select_1_ldap_settings.png') %>
 
-    LDAP is disabled by default. 
+    LDAP is disabled by default.
 
     <%= image_tag('form_ldap_settings_new.png') %>
 
@@ -709,7 +718,7 @@ In order to apply changes, all the settings for the Solace tile must be marked w
 
 Solace PubSub+ for PCF supports upgrades starting with PCF v2.0. Future releases can upgrade a deployment if the deployment is v2.0 or higher. In-Service-Upgrades are supported from PCF v2.0 for high-availability service plans.
 
-If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not supported. The v1.x.x tile should be uninstalled before a v2.0.0 tile is installed. 
+If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not supported. The v1.x.x tile should be uninstalled before a v2.0.0 tile is installed.
 
 ### <a id='upgrades_non_ha'></a> Non-High Availability Upgrades
 
@@ -725,7 +734,7 @@ An application using an HA service experiences at least one switch-over during a
 
 See our [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java) for some examples of how HA connections are used, as well as [Configuring-Client-Connections](https://docs.solace.com/Solace-Messaging-APIs/Developer-Guide/Configuring-Connection-T.htm) for additional information on client connection setup to allow for switch-overs during upgrades.
 
-The upgrade process is designed to keep services available. 
+The upgrade process is designed to keep services available.
 
 Failures in upgrades are due to either pre-conditions or post-conditions, and are intended to keep services available in case of any failure.
 
@@ -734,33 +743,45 @@ The following pre-conditions must be met before an upgrade can proceed, or the u
 * The version of the tile being upgraded must be v2.0 or higher.
 * The redundancy state of HA services must be healthy.
 
-If any failure occurs during an upgrade, services remain available. 
+If any failure occurs during an upgrade, services remain available.
 
 For more information, see the [Troubleshooting Guide](troubleshooting.html#upgrade_errors).
 
 
 ## <a id='networking'></a> Networking
 
-This section describes networking requirements. This section only needs to be referenced if your firewall rules affect network communication within your installation.
+This section describes networking requirements. Read this section if your firewall
+rules affect network communication within your installation.
 
 
-1. Applications deployed in PCF that consume PubSub+ services must be able to connect to the virtual machines hosting the PubSub+ instances. They can connect via the IP address that is provided to the application through the VCAP_SERVICES environment variables. Alternatively, the operator can enable [TCP Routing](installing.html#required_tcp_routes) which enables applications (inside or outside PCF) to communicate with the PubSub+ instance through a DNS name. 
++  Applications deployed in PCF that consume PubSub+ services must be able to
+connect to the VMs hosting the PubSub+ instances. They can connect
+via the IP address that is provided to the application through the <code>VCAP_SERVICES</code>
+environment variables. Alternatively, the operator can enable [TCP Routing](installing.html#required_tcp_routes)
+to allow internal and external applications to communicate with the PubSub+ instance through a DNS name.
 
-By default PubSub+ services are consumed starting at port 7000, however that is configurable. In order to see which ports have been allocated for a service, use the [Web Hook](installing.html#webhook) feature.
+    By default PubSub+ services are consumed starting at port 7000. You can configure this value.
+		To see which ports have been allocated for a service, use the [Web Hook](installing.html#webhook) feature.
 
-1. The service broker must be able to communicate with any virtual machines that host PubSub+ instances, whether they are on the same network or a different one (the service broker is deployed in the Pivotal Application Service.)
-When using [On-Demand Services](service-plans.html#unconfigured_service_plans), the service broker needs to be able to communicate with virtual machines running in the Services network.
++ The service broker must communicate with any VMs that
+host PubSub+ instances, whether they are on the same network or a different one.
+When using [On-Demand Services](service-plans.html#unconfigured_service_plans),
+the service broker must communicate with VMs running
+in the Services network.
 
-1. The service broker also needs to communicate with the management and arbitrator VMs.
++ The service broker must communicate with the management and arbitrator VMs.
 
-1. The service broker needs to communicate with cf.
++ The service broker must communicate with cf.
 
-1. The service broker and the VMs hosting the PubSub+ message broker need to communicate with the Credhub service if the [Secure Service Instance](installing.html#optional_credhub) option is enabled.
++ The service broker and the VMs hosting the PubSub+ message broker must
+communicate with the CredHub service if the
+[Secure Service Instance](installing.html#optional_credhub) is enabled.
 
-1. Solace PubSub+ instances need to communicate with cf and the cf nats service when [TCP Routing](installing.html#required_tcp_routes) is enabled.
++ Solace PubSub+ instances must communicate with cf and the cf nats service
+when [TCP Routing](installing.html#required_tcp_routes) is enabled.
 
 
-1. The ports that are required for internal communication between our components are:
++ The ports that are required for internal communication between our components are:
  - 443
  - 943
  - 2222
@@ -771,7 +792,9 @@ When using [On-Demand Services](service-plans.html#unconfigured_service_plans), 
  - 38080
  - 39090
 
-1. The service broker is provided with a PubSub+ service for its internal use. You can determine which ports it requires by looking at the service broker's VCAP_SERVICES environment variable.
++ The service broker is provided with a PubSub+ service for its internal use.
+Determine which ports are required by looking at the service broker's <code>VCAP_SERVICES</code>
+environment variable.
 
 ## <a id='tcp_routes_requirements'></a> TCP Routes Requirements
 
@@ -802,7 +825,7 @@ When using [On-Demand Services](service-plans.html#unconfigured_service_plans), 
 <li>Log in to CF, target the UAA API, and log in with uaac using the <strong>Admin Client Credentials</strong>.
   <pre class="terminal">
   $ cf api api.YOUR-SYSTEM-DOMAIN
-  $ cf login 
+  $ cf login
   $ uaac target uaa.sys.YOUR-SYSTEM-DOMAIN
   $ uaac token client get admin </pre>
 </li>
