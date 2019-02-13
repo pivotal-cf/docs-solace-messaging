@@ -159,7 +159,6 @@ Solace PubSub+ is a managed service. The tile deploys the PubSub+ message broker
 
 ## <a id='snapshot'></a> Product Snapshot
 
-<p class='note'><strong>Note:</strong> As of PCF v2.0, Elastic Runtime is renamed Pivotal Application Service (PAS).</p>
 
 <p class='note'><strong>Note:</strong> As a major and renamed release, upgrades from the older named product solace-messaging (v1.4.0 and below) to solace-pubsub are not possible. However, it will be possible going forward to upgrade from Solace PubSub+ for PCF v2.0 to subsequent releases.</p>
 
@@ -193,6 +192,10 @@ The following table provides version and version-support information about Solac
         <td>v2.1.x, v2.2.x, v2.3.x, and v2.4.x</td>
     </tr>
     <tr>
+        <td>BOSH stemcell version</td>
+        <td>Ubuntu Xenial</td>
+    </tr>
+    <tr>
         <td>IaaS support</td>
         <td>AWS, Azure, GCP, OpenStack, and vSphere</td>
     </tr>
@@ -201,6 +204,12 @@ The following table provides version and version-support information about Solac
         <td>Yes</td>
     </tr>
 </table>
+
+<p class="note warning"><strong> WARNING:</strong>
+Solace PubSub+ for PCF v2.1.1
+and earlier require a Ubuntu Trusty stemcell.
+The end-of-life date for Ubuntu Trusty is April 2019.
+If a security vulnerability is found on this stemcell after April, it will not be fixed.</p>
 
 
 ## <a id='limitations'></a> Current Limitations
