@@ -246,6 +246,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
    * [**LDAP Settings**](#optional_ldap_settings)
    * [**System Logging**](#optional_system_logging)
    * [**TCP Routes**](#optional_tcp_routes)
+   * [**Errands**](#optional_errands)
 
 1. [Apply Changes](#apply_changes).
 
@@ -696,6 +697,11 @@ and [Application Access](#optional_application_access). **If neither [Management
 
 1. Check the [TCP Routes Requirements](#tcp_routes_requirements) and Click **Save**.
 
+#### <a id='optional_errands'></a> (Optional) Configure Errands
+
+Errands are scripts that are run when a tile is installed, updated or removed. The errands page lists them and lets you choose whether to run them.
+
+You should not modify these settings, otherwise the tile will not get installed properly. The only time you would change them would be if you were trying to remove a tile and one of the errands was preventing you to do this because the errand itself was failing.
 
 ### <a id='apply_changes'></a> Apply Changes
 
@@ -778,23 +784,116 @@ communicate with the CredHub service if the
 [Secure Service Instance](installing.html#optional_credhub) is enabled.
 
 + Solace PubSub+ instances must communicate with cf and the cf nats service
-when [TCP Routing](installing.html#required_tcp_routes) is enabled.
+when [TCP Routing](installing.html#required_tcp_routes) is enabled. The instances
+use the route registrar which internally uses nats.
 
 
-+ The ports that are required for internal communication between our components are:
- - 443
- - 943
- - 2222
- - 3943
- - 8080
- - 9090
- - 18080
- - 38080
- - 39090
++ Here is a table showing the ports that are required for internal communication between our components. All use TCP.
+
+
+<table border="1" class="nice">
+	<tr>
+		<th>Source</th>
+		<th>Destination</th>
+		<th>Destination Port</th>
+		<th>Protocol</th>
+		<th>Purpose</th>
+	</tr>
+
+  <tr>
+    <td>Solace Service Broker</td>
+    <td>Internal Message Broker</td>
+    <td>443</td>
+    <td>HTTPS</td>
+    <td>Used configure the internal message broker through the gorouter.</td>
+  </tr>
+
+  <tr>
+    <td>Solace Service Broker</td>
+    <td>Message Broker (Service instance)</td>
+    <td>943</td>
+    <td>HTTPS</td>
+    <td>Used to configure the message brokers used as service instances.</td>
+  </tr>
+
+  <tr>
+    <td>Solace Service Broker</td>
+    <td>Message Broker (Service instance)</td>
+    <td>2222</td>
+    <td>SSH</td>
+    <td>Used to ssh into the message brokers used as service instances.</td>
+  </tr>
+
+  <tr>
+    <td>Solace Service Broker</td>
+    <td>Internal MySql instance</td>
+    <td>3306</td>
+    <td>JDBC</td>
+    <td>Used to connect with the internal MySql instance, unless an external database is used.</td>
+  </tr>
+
+  <tr>
+    <td>Solace Service Broker</td>
+    <td>Internal Message Broker</td>
+    <td>3943</td>
+    <td>HTTPS</td>
+    <td>Used to configure the internal message broker.</td>
+  </tr>
+
+  <tr>
+    <td>Solace Service Broker</td>
+    <td>Message Broker (Service instance)</td>
+    <td>8080</td>
+    <td>HTTP</td>
+    <td>Used to configure the message brokers used as service instances.</td>
+  </tr>
+
+  <tr>
+    <td>Solace Service Broker</td>
+    <td>Message Broker (Service instance)</td>
+    <td>9090</td>
+    <td>HTTP</td>
+    <td>Used to connect to the health endpoint on the message brokers.</td>
+  </tr>
+
+  <tr>
+    <td>Solace Service Broker</td>
+    <td>Internal Message Broker</td>
+    <td>18080</td>
+    <td>HTTP</td>
+    <td>Used to configure the internal message broker.</td>
+  </tr>
+
+  <tr>
+    <td>Solace Service Broker</td>
+    <td>Internal Message Broker</td>
+    <td>38080</td>
+    <td>HTTP</td>
+    <td>Used to configure the internal message broker.</td>
+  </tr>
+
+  <tr>
+    <td>Solace Service Broker</td>
+    <td>Internal Message Broker</td>
+    <td>39090</td>
+    <td>HTTP</td>
+    <td>Used to connect to the health endpoint on the internal message broker.</td>
+  </tr>
+
+  <tr>
+    <td>Message Brokers</td>
+    <td>nats</td>
+    <td>(configured nats port)</td>
+    <td>HTTP</td>
+    <td>Used to send TCP route requests to the tcp router via the route registrar.</td>
+  </tr>
+
+</table>
 
 + The service broker is provided with a PubSub+ service for its internal use.
 Determine which ports are required by looking at the service broker's <code>VCAP_SERVICES</code>
-environment variable.
+environment variable for the service named 'internal-service-broker'.
+
 
 ## <a id='tcp_routes_requirements'></a> TCP Routes Requirements
 
