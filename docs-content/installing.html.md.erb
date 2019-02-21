@@ -703,6 +703,8 @@ Errands are scripts that are run when a tile is installed, updated or removed. T
 
 You should not modify these settings, otherwise the tile will not get installed properly. The only time you would change them would be if you were trying to remove a tile and one of the errands was preventing you to do this because the errand itself was failing.
 
+<%= image_tag('form_errands.png') %>
+
 ### <a id='apply_changes'></a> Apply Changes
 
 In order to apply changes, all the settings for the Solace tile must be marked with green checkmarks.
@@ -788,7 +790,11 @@ when [TCP Routing](installing.html#required_tcp_routes) is enabled. The instance
 use the route registrar which internally uses nats.
 
 
-+ Here is a table showing the ports that are required for internal communication between our components. All use TCP.
++ The service broker is provided with a PubSub+ service for its internal use.
+Determine which ports are required by looking at the service broker's <code>VCAP_SERVICES</code>
+environment variable for the service named 'internal-service-broker'.
+
+Here is a table showing the ports that are required for internal communication between our components. All use TCP.
 
 
 <table border="1" class="nice">
@@ -801,7 +807,7 @@ use the route registrar which internally uses nats.
 	</tr>
 
   <tr>
-    <td>Solace Service Broker</td>
+    <td>Service Broker</td>
     <td>Internal Message Broker</td>
     <td>443</td>
     <td>HTTPS</td>
@@ -809,7 +815,7 @@ use the route registrar which internally uses nats.
   </tr>
 
   <tr>
-    <td>Solace Service Broker</td>
+    <td>Service Broker</td>
     <td>Message Broker (Service instance)</td>
     <td>943</td>
     <td>HTTPS</td>
@@ -817,7 +823,7 @@ use the route registrar which internally uses nats.
   </tr>
 
   <tr>
-    <td>Solace Service Broker</td>
+    <td>Service Broker</td>
     <td>Message Broker (Service instance)</td>
     <td>2222</td>
     <td>SSH</td>
@@ -825,7 +831,7 @@ use the route registrar which internally uses nats.
   </tr>
 
   <tr>
-    <td>Solace Service Broker</td>
+    <td>Service Broker</td>
     <td>Internal MySql instance</td>
     <td>3306</td>
     <td>JDBC</td>
@@ -833,7 +839,7 @@ use the route registrar which internally uses nats.
   </tr>
 
   <tr>
-    <td>Solace Service Broker</td>
+    <td>Service Broker</td>
     <td>Internal Message Broker</td>
     <td>3943</td>
     <td>HTTPS</td>
@@ -841,7 +847,7 @@ use the route registrar which internally uses nats.
   </tr>
 
   <tr>
-    <td>Solace Service Broker</td>
+    <td>Service Broker</td>
     <td>Message Broker (Service instance)</td>
     <td>8080</td>
     <td>HTTP</td>
@@ -849,7 +855,7 @@ use the route registrar which internally uses nats.
   </tr>
 
   <tr>
-    <td>Solace Service Broker</td>
+    <td>Service Broker</td>
     <td>Message Broker (Service instance)</td>
     <td>9090</td>
     <td>HTTP</td>
@@ -857,7 +863,7 @@ use the route registrar which internally uses nats.
   </tr>
 
   <tr>
-    <td>Solace Service Broker</td>
+    <td>Service Broker</td>
     <td>Internal Message Broker</td>
     <td>18080</td>
     <td>HTTP</td>
@@ -865,7 +871,7 @@ use the route registrar which internally uses nats.
   </tr>
 
   <tr>
-    <td>Solace Service Broker</td>
+    <td>Service Broker</td>
     <td>Internal Message Broker</td>
     <td>38080</td>
     <td>HTTP</td>
@@ -873,7 +879,7 @@ use the route registrar which internally uses nats.
   </tr>
 
   <tr>
-    <td>Solace Service Broker</td>
+    <td>Service Broker</td>
     <td>Internal Message Broker</td>
     <td>39090</td>
     <td>HTTP</td>
@@ -890,9 +896,6 @@ use the route registrar which internally uses nats.
 
 </table>
 
-+ The service broker is provided with a PubSub+ service for its internal use.
-Determine which ports are required by looking at the service broker's <code>VCAP_SERVICES</code>
-environment variable for the service named 'internal-service-broker'.
 
 
 ## <a id='tcp_routes_requirements'></a> TCP Routes Requirements
