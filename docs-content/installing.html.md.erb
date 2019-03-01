@@ -318,6 +318,13 @@ From the **Settings** tab of the Solace PubSub+ tile:
 
     <%= image_tag('form_management_access_admin_user_password_new.png') %>
 
+<p class="note"><strong>Note:</strong> The password can only contain alphanumeric characters and any of  .!@#$%^-_+={}[]/?
+<br/>
+<br/>
+It cannot contain any of the characters ():";'<>,`\*&|
+</p>
+
+
 1. [(Optional) if you want to use LDAP](#optional_management_access).
 
 1. Click **Save**.
@@ -789,10 +796,13 @@ communicate with the CredHub service if the
 when [TCP Routing](installing.html#required_tcp_routes) is enabled. The instances
 use the route registrar which internally uses nats.
 
-
 + The service broker is provided with a PubSub+ service for its internal use.
 Determine which ports are required by looking at the service broker's <code>VCAP_SERVICES</code>
 environment variable for the service named 'internal-service-broker'.
+
++ PubSub+ for PCF uses bosh dns to communicate with PCF services such as Credhub.
+
++ PubSub+ for PCF uses nats to configure tcp routes (via the route registrar) when the tcp routing feature is enabled.
 
 Here is a table showing the ports that are required for internal communication between our components. All use TCP.
 
@@ -808,7 +818,7 @@ Here is a table showing the ports that are required for internal communication b
 
   <tr>
     <td>Service Broker</td>
-    <td>Internal Message Broker</td>
+    <td>Message Broker (Internal)</td>
     <td>443</td>
     <td>HTTPS</td>
     <td>Used configure the internal message broker through the gorouter.</td>
@@ -864,24 +874,24 @@ Here is a table showing the ports that are required for internal communication b
   </tr>
 
   <tr>
-    <td>Service Broker</td>
+    <td></td>
     <td>Message Broker (Service instance)</td>
     <td>9090</td>
     <td>HTTP</td>
-    <td>Used to connect to the health endpoint on the message brokers.</td>
+    <td>PubSub+ health check</td>
   </tr>
 
   <tr>
     <td>Service Broker</td>
-    <td>Internal Message Broker</td>
+    <td>Broker Agent</td>
     <td>18080</td>
     <td>HTTP</td>
-    <td>Used to configure the internal message broker.</td>
+    <td>Used to communicate with the broker agents running on the service instance VMs.</td>
   </tr>
 
   <tr>
     <td>Service Broker</td>
-    <td>Internal Message Broker</td>
+    <td>Message Broker (Internal)</td>
     <td>38080</td>
     <td>HTTP</td>
     <td>Used to configure the internal message broker.</td>
@@ -889,18 +899,10 @@ Here is a table showing the ports that are required for internal communication b
 
   <tr>
     <td>Service Broker</td>
-    <td>Internal Message Broker</td>
+    <td>Message Broker (Internal)</td>
     <td>39090</td>
     <td>HTTP</td>
     <td>Used to connect to the health endpoint on the internal message broker.</td>
-  </tr>
-
-  <tr>
-    <td>Message Brokers</td>
-    <td>nats</td>
-    <td>(configured nats port)</td>
-    <td>HTTP</td>
-    <td>Used to send TCP route requests to the tcp router via the route registrar.</td>
   </tr>
 
 </table>
