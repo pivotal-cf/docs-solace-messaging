@@ -708,7 +708,7 @@ and [Application Access](#optional_application_access). **If neither [Management
 
 Errands are scripts that are run when a tile is installed, updated or removed. The errands page lists them and lets you choose whether to run them.
 
-You should not modify these settings, otherwise the tile will not get installed properly. The only time you would change them would be if you were trying to remove a tile and one of the errands was preventing you to do this because the errand itself was failing.
+Unless otherwise stated in this documentation you should not modify these settings, otherwise the tile may not get installed properly. The only time you would change them would be if you were trying to remove a tile and one of the errands was preventing you to do this because the errand itself was failing.
 
 <%= image_tag('form_errands.png') %>
 
@@ -790,7 +790,7 @@ in the Services network.
 
 + The service broker and the VMs hosting the PubSub+ message broker must
 communicate with the CredHub service if the
-[Secure Service Instance](installing.html#optional_credhub) is enabled.
+[Secure Service Instance](installing.html#optional_credhub) feature is enabled.
 
 + Solace PubSub+ instances must communicate with cf and the cf nats service
 when [TCP Routing](installing.html#required_tcp_routes) is enabled. The instances
@@ -802,16 +802,14 @@ environment variable for the service named 'internal-service-broker'.
 
 + PubSub+ for PCF uses bosh dns to communicate with PCF services such as Credhub.
 
-+ PubSub+ for PCF uses nats to configure tcp routes (via the route registrar) when the tcp routing feature is enabled.
-
-Here is a table showing the ports that are required for internal communication between our components. All use TCP.
-
+Here is a table showing the ports that are required for internal communication between our components. All use TCP (none uses UDP.)
 
 <table border="1" class="nice">
 	<tr>
 		<th>Source</th>
 		<th>Destination</th>
-		<th>Destination Port</th>
+		<th>Port</th>
+		<th>Secure Port</th>
 		<th>Protocol</th>
 		<th>Purpose</th>
 	</tr>
@@ -819,6 +817,7 @@ Here is a table showing the ports that are required for internal communication b
   <tr>
     <td>Service Broker</td>
     <td>Message Broker (Internal)</td>
+    <td></td>
     <td>443</td>
     <td>HTTPS</td>
     <td>Used configure the internal message broker through the gorouter.</td>
@@ -827,14 +826,7 @@ Here is a table showing the ports that are required for internal communication b
   <tr>
     <td>Service Broker</td>
     <td>Message Broker (Service instance)</td>
-    <td>943</td>
-    <td>HTTPS</td>
-    <td>Used to configure the message brokers used as service instances.</td>
-  </tr>
-
-  <tr>
-    <td>Service Broker</td>
-    <td>Message Broker (Service instance)</td>
+    <td></td>
     <td>2222</td>
     <td>SSH</td>
     <td>Used to ssh into the message brokers used as service instances.</td>
@@ -844,47 +836,25 @@ Here is a table showing the ports that are required for internal communication b
     <td>Service Broker</td>
     <td>Internal MySql instance</td>
     <td>3306</td>
+    <td></td>
     <td>JDBC</td>
     <td>Used to connect with the internal MySql instance, unless an external database is used.</td>
   </tr>
 
   <tr>
     <td>Service Broker</td>
-    <td>Internal Message Broker</td>
-    <td>3943</td>
-    <td>HTTPS</td>
-    <td>Used to configure the internal message broker.</td>
-  </tr>
-
-  <tr>
-    <td>Cloud Foundry</td>
-    <td>On-Demand Service Broker</td>
-    <td>7979</td>
-    <td>HTTP</td>
-    <td>Used by cf to send commands to the on-demand service broker (Management vm).</td>
-  </tr>
-
-  <tr>
-  <tr>
-    <td>Service Broker</td>
     <td>Message Broker (Service instance)</td>
     <td>8080</td>
-    <td>HTTP</td>
+    <td>943</td>
+    <td>HTTP/S</td>
     <td>Used to configure the message brokers used as service instances.</td>
-  </tr>
-
-  <tr>
-    <td></td>
-    <td>Message Broker (Service instance)</td>
-    <td>9090</td>
-    <td>HTTP</td>
-    <td>PubSub+ health check</td>
   </tr>
 
   <tr>
     <td>Service Broker</td>
     <td>Broker Agent</td>
     <td>18080</td>
+    <td></td>
     <td>HTTP</td>
     <td>Used to communicate with the broker agents running on the service instance VMs.</td>
   </tr>
@@ -893,20 +863,39 @@ Here is a table showing the ports that are required for internal communication b
     <td>Service Broker</td>
     <td>Message Broker (Internal)</td>
     <td>38080</td>
-    <td>HTTP</td>
-    <td>Used to configure the internal message broker.</td>
+    <td>3943</td>
+    <td>HTTP/S</td>
+    <td>Used configure the internal message broker through the gorouter.</td>
   </tr>
 
   <tr>
     <td>Service Broker</td>
     <td>Message Broker (Internal)</td>
     <td>39090</td>
+    <td></td>
     <td>HTTP</td>
     <td>Used to connect to the health endpoint on the internal message broker.</td>
   </tr>
 
-</table>
+  <tr>
+    <td>Cloud Foundry</td>
+    <td>On-Demand Service Broker</td>
+    <td>7979</td>
+    <td></td>
+    <td>HTTP</td>
+    <td>Used by cf to send commands to the on-demand service broker (Management vm).</td>
+  </tr>
 
+  <tr>
+    <td></td>
+    <td>Message Broker (Service instance)</td>
+    <td>9090</td>
+    <td></td>
+    <td>HTTP</td>
+    <td>PubSub+ health check</td>
+  </tr>
+
+</table>
 
 
 ## <a id='tcp_routes_requirements'></a> TCP Routes Requirements
