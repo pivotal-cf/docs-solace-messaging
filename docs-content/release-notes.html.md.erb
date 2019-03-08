@@ -9,16 +9,20 @@ Release Notes for Solace PubSub+ for Pivotal Cloud Foundry (PCF).
 
 **Release Date: February 8, 2019**
 
-This minor release contains Solace PubSub+ message broker v9.0.1.7 and has the following new features:
+This minor release contains Solace PubSub+ message broker v9.0.1.7 and has the
+following new features:
 
 * User controlled upgrades.
 * Support for the message broker's 100 connection scaling tier.
 * The credentials stored in the MySQL database can be encrypted and support key rotation.
 * The name of the service that appears in the marketplace can be configured.
-* Adds support for PCF v2.4.x.
+* Adds support for PCF v2.4.
 * Various bug fixes.
-* Deployments to PCF 2.3 and PCF 2.4 need enabled internet connection on the management nodes to support required communications with the CF PAS on its public domain, the tile does not communicate with anything on the internet.
-* Using TCP Routes on PCF 2.3 and PCF 2.4 also requires the enabled internet connection on operator allocated message brokers.
+* Deployments to PCF 2.3 and PCF 2.4 need enabled internet connection on the
+management nodes to support required communications with the Pivotal Application Service (PAS)
+on its public domain. The tile does not communicate with anything on the internet.
+* Using TCP Routes on PCF v2.3 and PCF v2.4 also requires the enabled internet
+connection on operator allocated message brokers.
 
 ### v2.2.1
 
@@ -125,7 +129,7 @@ This release contains VMR v8.7.0.1030 and the following fixes:
 
 **Release Date: Feb 23, 2018**
 
-Security Patch for SOL-2011: 
+Security Patch for SOL-2011:
 
 * vmr-agent log password masking.
 * Secured Service Broker info endpoint.
@@ -199,9 +203,9 @@ Features included in the release:
 Features included in the release:
 
 * Second open beta.
-* The tile allows a TLS server certificate to be configured for the deployed VMRs. 
+* The tile allows a TLS server certificate to be configured for the deployed VMRs.
   This allows encrypted TLS data connections between Virtual Message Routers (VMRs) and apps as well as the Solace service broker.
-* <code>community</code> service plan is introduced. This plan uses the Community Edition VMR to host PCF service instances. 
+* <code>community</code> service plan is introduced. This plan uses the Community Edition VMR to host PCF service instances.
   It is a feature-limited version of the VMR with a perpetual license.
 * Contains VMR release v7.2pcf2.1.6.
 * Requires BOSH stemcell v3263 ubuntu-trusty.

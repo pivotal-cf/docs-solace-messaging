@@ -49,13 +49,13 @@ There is also simple sample code which shows you how to easily connect to a Sola
 Solace offers two PubSub+ for PCF tiles: the Enterprise Evaluation tile and the Enterprise tile.
 
 The Enterprise Evaluation tile is comprised of two message brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise Evaluation Edition. PubSub+ Standard is a forever free enterprise-grade message broker that supports publish/subscribe, queueing, request/reply, and streaming, along with integrated high availability (HA) and disaster recovery (DR). The PubSub+ Enterprise Evaluation Edition is a free 90-day evaluation version of the PubSub+ Enterprise edition, which supports all the features of PubSub+ Standard, but with increased performance and scaling. You can download an Enterprise Evaluation tile [here](https://network.pivotal.io/products/solace-pubsub/). Also, if you are interested in a support plan for Solace PubSub+ for PCF, contact [Solace Support](https://solace.com/support) or your local [Solace sales representative](mailto:info@solace.com?Subject=Enterprise version of Solace PubSub+ For PCF).
- 
+
 The Enterprise tile is also comprised of two message brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise. Contact [Solace Support](https://solace.com/support) for information on how to obtain this tile and associated support plans.
 
 
 ## <a id='marketplace-plans'></a> PCF Marketplace Plans
 
-Solace PubSub+ for PCF offers operator configurable service plans. As of release 2.2.0 the [Preconfigured Service Plans](service-plans.html#preconfigured_service_plans) are now editable by the operator.  There are also additional [Unconfigured Service Plans](service-plans.html#unconfigured_service_plans) that can also be customized by the operator.  
+Solace PubSub+ for PCF offers operator configurable service plans. As of release 2.2.0 the [Preconfigured Service Plans](service-plans.html#preconfigured_service_plans) are now editable by the operator.  There are also additional [Unconfigured Service Plans](service-plans.html#unconfigured_service_plans) that can also be customized by the operator.
 
 These are the plans for both the Enterprise Evaluation and Enterprise tiles:
 
@@ -108,7 +108,7 @@ These are the plans for both the Enterprise Evaluation and Enterprise tiles:
 </table>
 
 
-## <a id='cloud-integration'></a> Cloud Integration 
+## <a id='cloud-integration'></a> Cloud Integration
 
 A Solace PubSub+ deployment under PCF can be configured to support integration with existing cloud services and hybrid cloud deployments.
 
@@ -120,7 +120,7 @@ TCP routes allow access to Solace messaging services hosted inside your PCF doma
 
 Having TCP routes enables many use cases:
 
- * **Hybrid cloud:** Other Solace PubSub+ message brokers deployed outside PCF can establish [Bridge](https://docs.solace.com/Features/Working-With-Message-VPN-Bridges.htm) connections to Solace PubSub+ services inside your PCF cloud. 
+ * **Hybrid cloud:** Other Solace PubSub+ message brokers deployed outside PCF can establish [Bridge](https://docs.solace.com/Features/Working-With-Message-VPN-Bridges.htm) connections to Solace PubSub+ services inside your PCF cloud.
  * **External client app:** Apps deployed outside PCF can communicate via messaging with apps deployed inside PCF by connecting to a Solace PubSub+ service deployed in PCF.
  * **IoT:** Devices using MQTT or REST can connect to Solace PubSub+ services from outside PCF to communicate with your apps deployed inside PCF, look for the *TCP Routes for IoT---MQTT Java Application Tutorial* [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java/tcp-routes-mqtt/).
  * **Mobile apps:** Mobile and web apps can use [web messaging](https://docs.solace.com/Features/Web-Messaging-Concepts/Web-Messaging-Concepts.htm) to connect to Solace PubSub+ services from outside PCF to communicate with your apps deployed inside PCF.
@@ -169,7 +169,7 @@ The following table provides version and version-support information about Solac
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>v2.3.0</td>
+        <td>2.3.0</td>
     </tr>
     <tr>
         <td>Editions</td>
@@ -181,15 +181,15 @@ The following table provides version and version-support information about Solac
     </tr>
     <tr>
         <td>Solace PubSub+ message broker version</td>
-        <td>v9.0.1.7</td>
+        <td>9.0.1.7</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>
-        <td>v2.1.x, v2.2.x, v2.3.x, and v2.4.x</td>
+        <td>2.1, 2.2, 2.3, and 2.4</td>
     </tr>
     <tr>
         <td>Compatible Pivotal Application Service version(s)</td>
-        <td>v2.1.x, v2.2.x, v2.3.x, and v2.4.x</td>
+        <td>2.1, 2.2, 2.3, and 2.4</td>
     </tr>
     <tr>
         <td>BOSH stemcell version</td>
