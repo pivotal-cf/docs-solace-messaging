@@ -107,7 +107,7 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>VM Type</th>
-  <td>The VM Type on which a service is created. Please see <a href='#service_plan_sizing'>Service Plan Sizing</a> to guide in this selection. 
+  <td>The VM Type on which a service is created. Please see <a href='#service_plan_sizing'>Service Plan Sizing</a> to guide in this selection.
   <strong>The operator is cautioned not to adjust the VM Type without considering the effects on existing on-demand service instances.</strong>
   <ul>
   <li>Increasing the VM Type capacity in CPUs or RAM: New on-demand service instances will benefit. Existing on-demand service instances will not upscale.</li>
@@ -552,6 +552,3 @@ If there are existing service instances on these plans, the operator should use 
 ## <a id='sample_enterprise_plan_configuration'></a> Sample Enterprise Plan Configuration
 
 <%= image_tag('sample_on_demand_enterprise.png') %>
-
-
-

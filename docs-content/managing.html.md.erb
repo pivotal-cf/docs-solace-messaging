@@ -45,13 +45,17 @@ The Solace PubSub+ Manager is accessible when a service is created from a link i
 
   <%= image_tag('sample_pubsub_manager_new.png') %>
 
-### Restrictions on the use of the PubSub+ Manager
+### Restrictions on the Use of the PubSub+ Manager
 
 There are some actions that you must not perform in the PubSub+ Manager:
 
-1. Do not change anything on the Message VPN/Connectivity page. Settings such as TLS configuration must be managed through the Tile.
-1. On the Message VPN/Replication page, do not change the Replication Role. This will cause the deployment to fail.
-1. Do not change anything on the Access Control/Authentication page. Settings such as Authentication type must be managed through the Tile. Likewise, client usernames should be created by binding services through PCF.
+1. Do not change anything on the **Message VPN/Connectivity** page. Settings such as
+TLS configuration must be managed through the tile.
+1. On the **Message VPN/Replication** page, do not change the Replication Role.
+This causes the deployment to fail.
+1. Do not change anything on the **Access Control/Authentication** page.
+Settings such as Authentication type must be managed through the tile. Likewise,
+client usernames should be created by binding services through PCF.
 
 
 
@@ -66,7 +70,7 @@ At this point it is not intended to do a full backup and restore on the same ser
 
 **Note that performing a restore will delete all persisted messages and will leave the VPN with only the objects that existed when the backup was performed.**
 
-## <a id='manage_with_semp'></a> Managing with SolAdmin 
+## <a id='manage_with_semp'></a> Managing with SolAdmin
 
 This section describes how to connect to the Solace PubSub+ message broker with the SolAdmin legacy administration tool to manage the Message VPN associated with a service instance.
 

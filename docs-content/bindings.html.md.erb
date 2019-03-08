@@ -16,7 +16,7 @@ Unbinding the app from the service instance revokes the credentials.
 
 The following procedures assume you have created a Solace PubSub+ service called `solace-pubsub-instance` as discussed in [Service Instances](service-instances.html) and that you have a deployed app called `web-backend`.
 
-The procedures show you how to bind this service instance to the app named `web-backend`. 
+The procedures show you how to bind this service instance to the app named `web-backend`.
 
 
 ## <a id='service-specific-configuration'></a> Binding with Service Specific Parameters
@@ -136,9 +136,16 @@ To bind an instance of the Solace PubSub+ service in Apps Manager, do the follow
 
 ## <a id='unbind-cf-cli'></a> Unbind a Service Instance with the cf CLI
 
-Unbinding an app from a service instance revokes previously allocated credentials, the app will no longer have access to service. A [Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy) or [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy) is checked and applied at unbinding time when the binding linked credentials are being removed.
+Unbinding an app from a service instance revokes previously allocated credentials.
+Then the app no longer has access to this service.
+When the binding-linked credentials are being removed, an orphaned resource policy
+is checked and applied. For more information about orphaned resource policies, see
+[Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy)
+  and
+[Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy).
 
-To unbind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool, do the following:
+To unbind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool,
+do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
