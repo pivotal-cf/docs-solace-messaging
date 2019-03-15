@@ -11,11 +11,10 @@ Release Notes for Solace PubSub+ for Pivotal Cloud Foundry (PCF).
 
 This maintenance release contains Solace PubSub+ message broker v9.0.1.7 and the following fixes:
 
-* Customizable service name can now accept white spaces 
-* Improved scaling tier determination 
-* User controlled upgrades may trigger before the user marks a service for upgrade
-* Service broker failing to start while some components are unreachable 
-* Solace logo to be stored internally and to be accessed by apps manager using https
+* Customizable service name can now accept white spaces. [SOL-16355]
+* Improved scaling tier determination. In previous releases a failure to determine supported scaling tiers may block upgrades. [SOL-15795]
+* Solace logo stored internally and accessed by apps manager via https instead of http. [SOL-15826]
+* Service broker fails to start while some components are unreachable. [SOL-16103]
 
 ### v2.3.0
 
