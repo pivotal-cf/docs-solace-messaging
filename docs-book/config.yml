@@ -18,7 +18,7 @@ sections:
       name: docs-content
       ref: staging
     directory: solace-pubsub
-    subnav_template: pivotal_solace_pubsub.erb       
+    subnav_template: solace-pubsub_subnav.erb
 
 template_variables:                             # optional
 
