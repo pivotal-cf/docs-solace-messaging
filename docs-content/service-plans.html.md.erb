@@ -47,7 +47,7 @@ Service Plans can be customized by the operator allowing to adjust the plans for
     <li>An inactive plan will not show up in the marketplace.
       <ul>
         <li>New service instances for this plan cannot be created.</li>
-        <li>A plan can be made inactive only when there are existing <strong>operator allocated</strong> service instances.  The plan will remain displayed in the marketplace in orgs and spaces if it has associated existing service instances, however, tile configurations changes will no longer be applied to these existing service instances.</li>
+        <li>A plan can be made inactive only when there are either no service instances, or only <strong>operator allocated</strong> service instances.  The plan will remain displayed in the marketplace in orgs and spaces if it has associated existing service instances, however, tile configurations changes will no longer be applied to these existing service instances.</li>
         <li><strong>A plan should not be made inactive when there are existing on-demand service instances, as tile deployment will fail.</strong></li>
       </ul>
     </li>
