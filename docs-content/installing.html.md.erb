@@ -219,6 +219,26 @@ To install Solace PubSub+ for PCF, do the following:
 
 1. Follow the steps in the section below to configure the tile.
 
+  <p class="note warning"><strong>Warning:</strong>If you have a tile already installed and you remove it and install a different file, rather than upgrading it, then you must log into your server and execute the following commands:
+
+1. bosh login (provide your credentials)
+  <pre class="terminal">
+  $ bosh login
+  </pre>
+
+1. Delete the three Solace bosh releases
+
+  <pre class="terminal">
+  $ bosh delete-release solace-pubsub
+  $ bosh delete-release solace-pubsub-broker
+  $ bosh delete-release solace-service-adapter
+  </pre>
+
+1. Confirm there are no Solace bosh releases left.
+
+  <pre class="terminal">
+  $ bosh releases
+  </pre>
 
 ## <a id='configure'></a> Configure Solace PubSub+ for PCF
 
