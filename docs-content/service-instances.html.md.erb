@@ -229,6 +229,28 @@ To update an instance of the Solace PubSub+ service with the cf CLI, do the foll
 1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
 
 
+## <a id='cf-cli-update-sp'></a> Changing the Service Plan of an existing Service Instance with the cf CLI
+
+An on-demand service instance may be upgraded to a different service plan.
+
+Assuming you have a service named 'solace-pubsub-instance' as in the previous section, you can update it to a new service plan by running
+
+  <pre class="terminal">
+  $cf update-service solace-pubsub-instance -p &lt;new-service-plan&gt; 
+  </pre>
+
+Several restrictions apply:
+
+1. The service instance must be an on-demand service
+1. The upgrade must be from standalone to HA.
+1. The current and new service plans must have a maximum of 1 message VPN
+1. The current service plan must have AZs as a subset of the AZs of the new service plan
+1. The new service plan must have sufficient available quota
+1. No support to go from HA service plan to non-HA service plan
+1. No support to go from standard to enterprise
+1. No support to change the VM_TYPE
+
+
 ## <a id='cf-cli-delete'></a> Deleting a Service Instance with the cf CLI
 
 A service instance may be deleted once it has no bindings and no service keys.
