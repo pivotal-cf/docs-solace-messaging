@@ -431,6 +431,12 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 			have to be changed. Clone the project and change any instances of the string
 			<code>solace-pubsub</code> to the service name you selected.</p>
 
+1. Check the **Enable Service Instance Sharing** checkbox to allow service instances to be shared across different Cloud Foundry spaces.
+
+    <%= image_tag('form_general_settings_service_sharing.png') %>
+
+For more information about this feature in Pivotal's [documentation site](https://docs.cloudfoundry.org/services/enable-sharing.html).
+
 
 1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ message brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example).
     <p class="note"><strong>Note:</strong> The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>

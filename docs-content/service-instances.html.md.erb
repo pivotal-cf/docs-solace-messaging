@@ -16,6 +16,8 @@ By [binding](bindings.html) an app to the instance or [creating a service key](s
 
 Creating a service instance also gives the developer permissions to manage the Message VPN through a Web UI on the Solace PubSub+ message broker or the SolAdmin administration tool. For more information, see [Managing the Message VPN](managing.html).
 
+Service instances may be shared across Cloud Foundry spaces if you enable that feature when installing the tile. See the [installation page](installing.html#general_settings) to see how to enable it, and you can find more information about this feature in Pivotal's [documentation site](https://docs.cloudfoundry.org/services/enable-sharing.html).
+
 The following procedures show you:
 
  * Using the cf CLI:
@@ -27,6 +29,7 @@ The following procedures show you:
    * How to create a service instance.
 
 While the provided procedures are relevant to Solace PubSub+, they do not provide a complete set of examples of how to manage service instances in PCF. For more information, see [Managing Service Instances with the cf CLI](http://docs.pivotal.io/pivotalcf/1-12/devguide/services/managing-services.html).
+
 
 
 ## <a id='service-specific-configuration'></a> Service Specific Parameters
