@@ -572,6 +572,11 @@ They are required if you choose to use LDAP with TLS. If you want, use
 
     <%= image_tag('form_tls_config_trusted_root_certificates_new.png') %>
 
+1. Enable **Client Certificate Authentication**. Enabled by default, this will configure the router to enable client authentication by certificate. It may be desirable
+to disable this when using a Javascript client running in a browser.
+
+    <%= image_tag('form_tls_config_enable_client_certificate_auth.png') %>
+
 1. Click **Save**.
 
 
