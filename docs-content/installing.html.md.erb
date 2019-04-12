@@ -1066,3 +1066,37 @@ Here is a table showing the ports that are required for internal communication b
 
 
 </table>
+
+## <a id='dns-aliases'></a> DNS Aliases
+
+This feature allows you to configure the tile so that DNS addresses are included in binding credentials rather than IP addresses.
+This allows client applications to perform certificate hostname validation.
+
+You have three options in terms of address types to include in binding credentials. This is configurable from the General Settings tab in Ops Manager.
+
+<%= image_tag('dns_aliases.png') %>
+
+**Option 1: Include IP Addresses**
+
+Binding credentials look exactly as before. IP addresses are included.
+
+With this option, performing certificate hostname validation is problematic because it is hard to generate certificates with IPs.
+
+**Option 2: Include internal domain name**
+
+Binding credentials include internal domain name which have the following format <code>&lt;instance_uuid&gt;.solace.service.internal</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker. 
+
+You can use this option combined with an internal CA to perform certificate hostname validation.
+
+**Option 3: Include custom domain name**
+
+Binding credentials include the domain name configured by the operator. The address format is <code>&lt;instance_uuid&gt;.&lt;domain_name&gt;</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker and domain_name is the domain name configured by the operator. 
+
+You can use this option combined with a public CA to perform certificate hostname validation.
+
+**Notes:**
+
++ Upon selecting option 2 or option 3 for the first time, the PAS tile must be redeployed. This is because our tile creates a runtime config which runs an addon on some of the VMs of the PAS tile.
++ Upon enabling this feature with option 2 or option 3 described above, old bindings containing IPs will remain valid but won't be automatically updated to include the new address type. New bindings will have have new address type.
++ Note that this feature does not invalidate IP addresses and does not change how the Solace Pubsub brokers are configured. IP addresses are still a valid way to access the Solace Pubsub brokers. This feature only creates DNS aliases and those aliases are only used in binding credentials.
+
