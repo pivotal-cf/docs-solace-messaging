@@ -16,7 +16,7 @@ By [binding](bindings.html) an app to the instance or [creating a service key](s
 
 Creating a service instance also gives the developer permissions to manage the Message VPN through a Web UI on the Solace PubSub+ message broker or the SolAdmin administration tool. For more information, see [Managing the Message VPN](managing.html).
 
-Service instances may be shared across Cloud Foundry spaces if you enable that feature when installing the tile. See the [installation page](installing.html#general_settings) to see how to enable it, and you can find more information about this feature in Pivotal's [documentation site](https://docs.cloudfoundry.org/services/enable-sharing.html).
+Service instances may be shared across Cloud Foundry orgs and spaces if you enable that feature when installing the tile. See the [installation page](installing.html#general_settings) to see how to enable it. For more information see [Enabling Service Instance Sharing](https://docs.cloudfoundry.org/services/enable-sharing.html).
 
 The following procedures show you:
 
@@ -232,7 +232,7 @@ To update an instance of the Solace PubSub+ service with the cf CLI, do the foll
 1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
 
 
-## <a id='cf-cli-update-sp'></a> Changing the Service Plan of an existing Service Instance with the cf CLI
+## <a id='cf-cli-update-sp'></a>Update a Service Instance to a new Service Plan
 
 An on-demand service instance may be upgraded to a different service plan.
 
@@ -245,13 +245,12 @@ Assuming you have a service named 'solace-pubsub-instance' as in the previous se
 Several restrictions apply:
 
 1. The service instance must be an on-demand service
-1. The upgrade must be from standalone to HA.
-1. The current and new service plans must have a maximum of 1 message VPN
+1. The upgrade must be from standalone to HA
+1. The current and new service plans must have a maximum of one message VPN
 1. The current service plan must have AZs as a subset of the AZs of the new service plan
 1. The new service plan must have sufficient available quota
-1. No support to go from HA service plan to non-HA service plan
-1. No support to go from standard to enterprise
-1. No support to change the VM_TYPE
+1. The new service plan must have the same VM type
+1. Ugrading from standard to enterprise is not supported
 
 
 ## <a id='cf-cli-delete'></a> Deleting a Service Instance with the cf CLI

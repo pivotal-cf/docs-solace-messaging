@@ -411,12 +411,11 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 			have to be changed. Clone the project and change any instances of the string
 			<code>solace-pubsub</code> to the service name you selected.</p>
 
-1. Check the **Enable Service Instance Sharing** checkbox to allow service instances to be shared across different Cloud Foundry spaces.
+1. Check the **Enable Service Instance Sharing** checkbox to allow service instances to be shared across different Cloud Foundry orgs and spaces.
 
     <%= image_tag('form_general_settings_service_sharing.png') %>
 
-For more information about this feature in Pivotal's [documentation site](https://docs.cloudfoundry.org/services/enable-sharing.html).
-
+    For more information about this feature see [Enabling Service Instance Sharing](https://docs.cloudfoundry.org/services/enable-sharing.html).
 
 1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ message brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example).
     <p class="note"><strong>Note:</strong> The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
@@ -452,6 +451,8 @@ users can control when their services are upgraded.
 
     The Mark for Upgrade button will appear if the service broker detects that there has been a change in configuration, including
 
+  + PubSub+ for PCF Version
+  + A change to the configuration of the Service Plan associated with the service instance
   + Application access authentication scheme
   + Management access authentication scheme
   + PubSub+ Admin password
@@ -558,13 +559,12 @@ Generated certificates are equivalent to self-signed certificates.
 
 1. (Optional) Configure **Message Broker's Trusted Root Certificates**.
 These certificates are stored in the trust store on the Solace PubSub+ message brokers.
-They are required if you choose to use LDAP with TLS. If you want, use
+They are required if you choose to use LDAP with TLS or if you want to use
 [Client Certificate Authentication](https://docs.solace.com/Features/Client-Authentication.htm#Client-Certificate).
 
     <%= image_tag('form_tls_config_trusted_root_certificates_new.png') %>
 
-1. Enable **Client Certificate Authentication**. Enabled by default, this will configure the router to enable client authentication by certificate. It may be desirable
-to disable this when using a Javascript client running in a browser.
+1. Enable **Client Certificate Authentication**. Enabled by default, this will configure the router to enable client authentication by certificate.
 
     <%= image_tag('form_tls_config_enable_client_certificate_auth.png') %>
 
@@ -644,7 +644,7 @@ to disable this when using a Javascript client running in a browser.
 
     <%= image_tag('form_management_access_monitor_user.png') %>
 
-    You can create a CLI user with read-only access both to the global configuration and the VPN-level configuration. Please see [CLI User Access Levels](https://docs.solace.com/Configuring-and-Managing/CLI-User-Access-Levels.htm) for details about the access levels.
+    You can create a management interface user with read-only access both to the global configuration and the VPN-level configuration. Please see [CLI User Access Levels](https://docs.solace.com/Configuring-and-Managing/CLI-User-Access-Levels.htm) for details about the access levels.
 
 
 1. Click **Save**.
@@ -1069,8 +1069,6 @@ You have three options in terms of address types to include in binding credentia
 
 Binding credentials look exactly as before. IP addresses are included.
 
-With this option, performing certificate hostname validation is problematic because it is hard to generate certificates with IPs.
-
 **Option 2: Include internal domain name**
 
 Binding credentials include internal domain name which have the following format <code>&lt;instance_uuid&gt;.solace.service.internal</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker. 
@@ -1085,7 +1083,6 @@ You can use this option combined with a public CA to perform certificate hostnam
 
 **Notes:**
 
-+ Upon selecting option 2 or option 3 for the first time, the PAS tile must be redeployed. This is because our tile creates a runtime config which runs an addon on some of the VMs of the PAS tile.
++ If you select option 3 the PAS tile must be redeployed so that the settings get propogated to the PAS.
 + Upon enabling this feature with option 2 or option 3 described above, old bindings containing IPs will remain valid but won't be automatically updated to include the new address type. New bindings will have have new address type.
-+ Note that this feature does not invalidate IP addresses and does not change how the Solace Pubsub brokers are configured. IP addresses are still a valid way to access the Solace Pubsub brokers. This feature only creates DNS aliases and those aliases are only used in binding credentials.
 
