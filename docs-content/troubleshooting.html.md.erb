@@ -98,6 +98,23 @@ Get additional diagnostics from "EnterpriseLarge/0" VM.
 
 In the event that a process fails and creates a core dump, the core file can be found under /var/vcap/store/cores. Core files are compressed using gzip.
 
+### <a id='install_errors'></a> Installation Issues
+
+If you get the error
+
+<pre class="terminal">
+Colocated job 'solace-bosh-dns-aliases' is already added to the instance group 'compute'
+</pre>
+
+then do the following:
+
+- Log into your bosh environment
+- Execute the command 'bosh configs'
+- Look for runtime-configs with 'solace' in their name.
+- Delete the solace runtime-configs using the bosh 'delete-config' command
+- Redeploy.
+
+
 ### <a id='upgrade_errors'></a> Upgrade Issues
 
 The following issues may arise while upgrading a tile:
