@@ -445,14 +445,15 @@ users can control when their services are upgraded.
     When an upgrade is available, the service dashboard looks like this:
 
 
-    <%= image_tag('service_dashboard_with_upgrade_new.png') %>
 
-    If the user clicks **Mark for Upgrade**, then the service is upgraded at the next scheduled time.
+    <%= image_tag('service_dashboard_with_update.png') %>
 
-    The Mark for Upgrade button will appear if the service broker detects that there has been a change in configuration, including
+    If the user clicks **Mark for Update**, then the service is updated at the next scheduled time.
+
+    The Mark for Update button will appear if the service broker detects that there has been a change in configuration, including
 
   + PubSub+ for PCF Version
-  + A change to the configuration of the Service Plan associated with the service instance
+  + A change to the the disk size or availability zone attributes of the Service Plan associated with the service instance
   + Application access authentication scheme
   + Management access authentication scheme
   + PubSub+ Admin password
