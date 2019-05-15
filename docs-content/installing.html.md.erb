@@ -1084,6 +1084,10 @@ You can use this option combined with a public CA to perform certificate hostnam
 
 **Notes:**
 
-+ If you select option 3 the PAS tile must be redeployed so that the settings get propogated to the PAS.
-+ Upon enabling this feature with option 2 or option 3 described above, old bindings containing IPs will remain valid but won't be automatically updated to include the new address type. New bindings will have have new address type.
++ If you select option 2 or 3 the PAS tile must be redeployed so that the settings get propogated to the PAS.
++ Upon enabling this feature with option 2 or option 3 described above, old bindings containing IPs will remain valid but won't be automatically updated to include the new address type. New bindings will have the new address type.
++ Before reconfiguring the tile with a new option, note that:
+  - Moving from option 1 to another option is OK. Bindings created with option 1 will remain valid.
+  - Moving from option 2 to another option is OK. Bindings created with option 2 will remain valid. 
+  - Moving from option 3 to another option is possible but breaks existing bindings. Bindings created with option 3 will stop working. 
 
