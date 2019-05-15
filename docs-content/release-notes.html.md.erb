@@ -5,6 +5,30 @@ owner: Partners
 
 Release Notes for Solace PubSub+ for Pivotal Cloud Foundry (PCF).
 
+### v2.4.0
+
+**Release Date: May 15, 2019**
+
+This release of Solace PubSub+ for PCF tile contains Solace PubSub+ message broker v9.1.0.77 and introduces the following new features:
+
+* Support for BOSH DNS Aliases. Operators now have three options for the type of addresses to include in service binding credentials:
+  * Include IP addresses (previously supported)
+  * Include internal domain name (using *.solace.service.internal)
+  * Include custom domain name (operator configurable, E.g. *.my-business.com)
+  * Operators can use the third option combined with a public certificate authority to perform client certificate authentication.
+* Support an option for the operator to configure a read-only PubSub+ management user which is automatically created on new service deployments. This user can be used by systems that monitor the health of the PubSub+ brokers.
+* Support upgrading service instances from standalone to high availability services.
+* Adds support for Shared Services, which means that one PubSub+ service instance can be accessed and shared across multiple PCF orgs and spaces, so that the applications in different orgs/spaces can share the same messaging service.
+* Adds support for PCF v2.5.x
+
+In addition to the above features, this release resolves the following issues:
+
+* A minimum disk size of 32768 for the standard-medium-ha plan ephemeral disk was incorrectly imposed (reference # SOL-18512.)
+* Client-certificate authentication is enabled by default and is now globally configurable by operators (reference # SOL-17923.)
+* A Solace PubSub+ service instance may still display the "Mark for upgrade" button after it has been upgraded (reference # SOL-17636.)
+
+
+
 ### v2.3.1
 
 **Release Date: March 15, 2019**
