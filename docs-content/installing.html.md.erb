@@ -451,17 +451,20 @@ users can control when their services are upgraded.
     If the user clicks **Mark for Update**, then the service is updated at the next scheduled time.
 
     The Mark for Update button will appear if the service broker detects that there has been a change in configuration, including
+    <br></br>
 
-  + PubSub+ for PCF Version
-  + A change to the the disk size or availability zone attributes of the Service Plan associated with the service instance
-  + Application access authentication scheme
-  + Management access authentication scheme
-  + PubSub+ Admin password
-  + Starting port
-  + TLS configuration
-  + LDAP configuration
-  + Syslog configuration
-  + TCP Routes configuration.
+    <ul>
+    <li>PubSub+ for PCF Version</li>
+    <li>A change to the the disk size or availability zone attributes of the Service Plan associated with the service instance</li>
+    <li>Application access authentication scheme</li>
+    <li>Management access authentication scheme</li>
+    <li>PubSub+ Admin password</li>
+    <li>Starting port</li>
+    <li>TLS configuration</li>
+    <li>LDAP configuration</li>
+    <li>Syslog configuration</li>
+    <li>TCP Routes configuration.</li>
+    </ul>
 
 
 1. <a id='webhook'></a> Under **Web Hook**, you can choose to Enable or Disable.
@@ -498,6 +501,15 @@ users can control when their services are upgraded.
 	  "serviceId" : "1fcdef72-58a4-4e48-a8fc-29a290c0fde9"
 	}
 	```
+    The REST endpoint must return the HTTP status code 200 otherwise the message
+    will remain on a queue and delivery will be reattempted repeatedly. Please see
+    [REST Consumers](https://docs.solace.com/Features/REST-Messaging-Concepts/REST-Consumers.htm) and
+    [Solace REST Status Codes](https://docs.solace.com/RESTMessagingPrtl/Solace-REST-Status-Codes.htm)
+    for requirements regarding the REST endpoint.
+    <br></br>
+
+    Also see [Managing REST Messaging](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Messaging.htm) for
+    more information about Solace REST Delivery Points.
 
 1. <a id='sb_settings'></a> Adjust service broker related settings.
 
