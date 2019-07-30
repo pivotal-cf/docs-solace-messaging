@@ -244,6 +244,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
    * [**Service Access**](#optional_service_access)
    * [**Application Access**](#optional_application_access)
    * [**LDAP Settings**](#optional_ldap_settings)
+   * [**OAuth Settings**](#optional_oauth_settings)
    * [**System Logging**](#optional_system_logging)
    * [**TCP Routes**](#optional_tcp_routes)
    * [**Errands**](#optional_errands)
@@ -348,7 +349,7 @@ Open this pane and click **Save** even if using the default setting. If you want
 
 #### <a id='required_standard_plans'></a> Standard Plans (Save Required)
 
-Open this pane even if using the default setting. You need to select all the Availability Zones before this can be saved. If you want to customize an plans please see [Service Plan Configuration](#service_plan_configuration).
+Open this pane even if using the default setting. You need to select all the Availability Zones before this can be saved. If you want to customize an plans please see [Service Plan Configuration](service-plans.html#service_plan_configuration).
 
 1. Click **Standard Plans**.
 
@@ -358,7 +359,7 @@ Open this pane even if using the default setting. You need to select all the Ava
 
 #### <a id='required_enterprise_plans'></a> Enterprise Plans (Save Required)
 
-Open this pane even if using the default setting. You need to select all the Availability Zones before this can be saved. If you want to customize an plans please see [Service Plan Configuration](#service_plan_configuration).
+Open this pane even if using the default setting. You need to select all the Availability Zones before this can be saved. If you want to customize an plans please see [Service Plan Configuration](service-plans.html#service_plan_configuration).
 
 1. Click **Enterprise Plans**.
 
@@ -442,7 +443,7 @@ users can control when their services are upgraded.
 
     <%= image_tag('form_general_settings_upgrade_2.png') %>
 
-    When an upgrade is available, the service dashboard looks like this:
+    When an update is available, the service dashboard looks like this:
 
 
 
@@ -465,6 +466,26 @@ users can control when their services are upgraded.
     <li>Syslog configuration</li>
     <li>TCP Routes configuration.</li>
     </ul>
+
+
+1. <a id='inflight'></a> Maximum In-Flight Canaries and Updates
+
+    <%= image_tag('form_general_settings_inflight.png') %>
+
+    These fields control how many on-demand services can be updated at once. 
+    <br></br>
+
+    The Maximum On-Demand Update Canaries field specifies how many services will initially be updated.
+    If those updates are successful, then the rest of the services will be updated.
+    It is recommended to leave that setting with the value 1.
+    <br></br>
+
+    The Maximum On-Demand In-Flight Upgrades field specifies how many services can be updated
+    in parallel after the canaries have been updated.
+    <br></br>
+
+    Note that within each HA service, each node will still be updated one at a time to avoid service disruption.
+
 
 
 1. <a id='webhook'></a> Under **Web Hook**, you can choose to Enable or Disable.
@@ -674,7 +695,10 @@ If you configured LDAP, you may request the Solace PubSub+ message broker to
 use the LDAP Server for authentication and authorization of when a client attempts
 to access a Solace PubSub+ service instance.
 
-    <%= image_tag('form_application_access_new.png') %>
+    <%= image_tag('form_application_access.png') %>
+
+
+1. You can also enable OAuth Authentication for new service instances. Changing this setting does not update pre-existing service instances.  If you select to generate client usernames, our service broker will create a client username at bind time and return it in VCAP services. Client applications can optionally use the client username in OAuth tokens.  Please see the section on OAuth Configuration below to see how to configure a default OAuth provider.
 
 1. Click **Save**.
 
@@ -732,6 +756,32 @@ and [Application Access](#optional_application_access).
 [Application Access](#optional_application_access) are configured for LDAP,
 the Solace PubSub+ message broker continues to use its internal database
 for management and user credentials.**
+
+#### <a id='optional_oauth_settings'> </a>(Optional) OAuth Settings
+
+1. Click **OAuth Settings**.
+
+    <%= image_tag('select_1_oauth.png') %>
+
+    OAuth is disabled by default. You can enable OAuth on the [Application Access](#optional_application_access) page.
+
+    This page allows you to configure the Provider. Click on OAuth Provider Settings and you will see this form:
+
+    <%= image_tag('form_oauth.png') %>
+
+    Please refer to the [Client Authentication Overview](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm) 
+    page for field documentation.
+
+    <br></br>
+
+    You have the ability to:
+
+    1. Enable/disable OAuth for new message VPNs
+    1. Configure a default OAuth provider for new message VPNs
+
+    When a tile is updated, OAuth settings will not affect existing VPNs. They will only affect VPNs created after the update.
+
+
 
 #### <a id='optional_system_logging'></a> (Optional) System Logging
 
@@ -1010,8 +1060,8 @@ Here is a table showing the ports that are required for internal communication b
 For operator allocated instances, IP addresses are assigned to VMs during deployment and remain 
 static throughout the life of the deployment.
 
-For on-demand services, IP addresses are dynamically allocated from the network during service creation, but once allocated 
-they remain static throughout the life of the service.
+For on-demand services, IP addresses are dynamically allocated from the network during the on-demand deployment creation, but once allocated 
+they remain static throughout the life of the on-demand deployment.
 
 ## <a id='tcp_routes_requirements'></a> TCP Routes Requirements
 

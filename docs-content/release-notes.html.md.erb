@@ -5,6 +5,26 @@ owner: Partners
 
 Release Notes for Solace PubSub+ for Pivotal Cloud Foundry (PCF).
 
+### v2.5.0
+
+**Release Date: July 30, 2019**
+
+This release of Solace PubSub+ for PCF tile contains Solace PubSub+ message broker v9.2.0.14 and introduces the following new features:
+
+* Authentication using OAuth is now provided (ref # SOL-20012)
+
+* The number of on-demand service instances that can be upgraded at once is now configurable. This allows several services to be upgraded in parallel (reference # SOL-19582.)
+
+* The Service Plan configuration forms now have fields for Cost, Currency and Pricing Unit (reference # SOL-20467.)
+
+* The Service Instance Dashboard now provides more information about the service including the deployment provider, service creation parameters, plan name, VPN name, and IP address(es) (reference # 18553.)
+
+In addition to the above features, this release resolves the following issue:
+
+* LDAP configuration failed when the search filter was surrounded by single quotes (reference # SOL-19869.)
+
+* The Service Dashboard showed an error after deleting service instances (reference # SOL-21989.)
+
 ### v2.4.1
 
 **Release Date: June 28, 2019**
@@ -12,8 +32,8 @@ Release Notes for Solace PubSub+ for Pivotal Cloud Foundry (PCF).
 This maintenance release of Solace PubSub+ for PCF tile contains Solace PubSub+ message broker v9.1.0.77 and resolves
 the following issues:
 
-* Fixed placement rules so that the solace-bosh-dns-aliases addon is deployed on the diego_cell instance groups (reference # SOL-20997).
-* The Cloud Foundry CLI has been upgraded to version 6.45.0 to fix a security vulnerability identified by Pivotal (reference # SOL-21267)
+* Fixed placement rules so that the solace-bosh-dns-aliases addon is deployed on the diego_cell instance groups (reference # SOL-20997.)
+* The Cloud Foundry CLI has been upgraded to version 6.45.0 to fix a security vulnerability identified by Pivotal (reference # SOL-21267.)
 * More detail was added to the Web Hook section on the Installation page of this documentation to highlight the requirements of REST endpoint status codes.
 
 ### v2.4.0
