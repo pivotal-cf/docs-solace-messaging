@@ -757,30 +757,24 @@ and [Application Access](#optional_application_access).
 the Solace PubSub+ message broker continues to use its internal database
 for management and user credentials.**
 
-#### <a id='optional_oauth_settings'> </a>(Optional) OAuth Settings
+#### <a id='optional_oauth_settings'> </a>(Optional) OAuth Provider Settings
 
-1. Click **OAuth Settings**.
+1. Click **OAuth Provider Settings**.
 
     <%= image_tag('select_1_oauth.png') %>
 
-    OAuth is disabled by default. You can enable OAuth on the [Application Access](#optional_application_access) page.
-
-    This page allows you to configure the Provider. Click on OAuth Provider Settings and you will see this form:
+    This page allows you to configure a default OAuth Provider that is configured on new message VPNs.
 
     <%= image_tag('form_oauth.png') %>
 
     Please refer to the [Client Authentication Overview](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm) 
     page for field documentation.
-
     <br></br>
-
-    You have the ability to:
-
-    1. Enable/disable OAuth for new message VPNs
-    1. Configure a default OAuth provider for new message VPNs
-
-    When a tile is updated, OAuth settings will not affect existing VPNs. They will only affect VPNs created after the update.
-
+    Changing the above configuration does not update pre-existing message VPNs. The default OAuth provider is only created on new message VPNs. 
+    <br></br>
+    A user is free to modify any OAuth configuration manually by logging into the PubSub+ broker and using the command line interface. User customizations won't be lost. 
+    <br></br>
+    <p class="note"><strong>Note:</strong> OAuth Authentication is disabled on message VPNs by default and can be enabled on the Application Access page.
 
 
 #### <a id='optional_system_logging'></a> (Optional) System Logging
