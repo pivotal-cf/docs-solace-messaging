@@ -209,7 +209,7 @@ Solace PubSub+ for PCF requires the following:
 
 To install Solace PubSub+ for PCF, do the following:
 
-1. Download the product file from Pivotal Network.
+1. Download the product file from the [Solace Downloads page](https://products.solace.com/download/PUBSUB_PCF_STAND)
 
 1. Upload the product file on the Ops Manager **Installation Dashboard**.
 
@@ -244,6 +244,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
    * [**Service Access**](#optional_service_access)
    * [**Application Access**](#optional_application_access)
    * [**LDAP Settings**](#optional_ldap_settings)
+   * [**OAuth Settings**](#optional_oauth_settings)
    * [**System Logging**](#optional_system_logging)
    * [**TCP Routes**](#optional_tcp_routes)
    * [**Errands**](#optional_errands)
@@ -348,7 +349,7 @@ Open this pane and click **Save** even if using the default setting. If you want
 
 #### <a id='required_standard_plans'></a> Standard Plans (Save Required)
 
-Open this pane even if using the default setting. You need to select all the Availability Zones before this can be saved. If you want to customize an plans please see [Service Plan Configuration](#service_plan_configuration).
+Open this pane even if using the default setting. You need to select all the Availability Zones before this can be saved. If you want to customize an plans please see [Service Plan Configuration](service-plans.html#service_plan_configuration).
 
 1. Click **Standard Plans**.
 
@@ -358,7 +359,7 @@ Open this pane even if using the default setting. You need to select all the Ava
 
 #### <a id='required_enterprise_plans'></a> Enterprise Plans (Save Required)
 
-Open this pane even if using the default setting. You need to select all the Availability Zones before this can be saved. If you want to customize an plans please see [Service Plan Configuration](#service_plan_configuration).
+Open this pane even if using the default setting. You need to select all the Availability Zones before this can be saved. If you want to customize an plans please see [Service Plan Configuration](service-plans.html#service_plan_configuration).
 
 1. Click **Enterprise Plans**.
 
@@ -411,6 +412,11 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 			have to be changed. Clone the project and change any instances of the string
 			<code>solace-pubsub</code> to the service name you selected.</p>
 
+1. Check the **Enable Service Instance Sharing** checkbox to allow service instances to be shared across different Cloud Foundry orgs and spaces.
+
+    <%= image_tag('form_general_settings_service_sharing.png') %>
+
+    For more information about this feature see [Enabling Service Instance Sharing](https://docs.cloudfoundry.org/services/enable-sharing.html).
 
 1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ message brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example).
     <p class="note"><strong>Note:</strong> The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
@@ -437,12 +443,49 @@ users can control when their services are upgraded.
 
     <%= image_tag('form_general_settings_upgrade_2.png') %>
 
-    When an upgrade is available, the service dashboard looks like this:
+    When an update is available, the service dashboard looks like this:
 
 
-    <%= image_tag('service_dashboard_with_upgrade_new.png') %>
 
-    If the user clicks **Mark for Upgrade**, then the service is upgraded at the next scheduled time.
+    <%= image_tag('service_dashboard_with_update.png') %>
+
+    If the user clicks **Mark for Update**, then the service is updated at the next scheduled time.
+
+    The Mark for Update button will appear if the service broker detects that there has been a change in configuration, including
+    <br></br>
+
+    <ul>
+    <li>PubSub+ for PCF Version</li>
+    <li>A change to the the disk size or availability zone attributes of the Service Plan associated with the service instance</li>
+    <li>Application access authentication scheme</li>
+    <li>Management access authentication scheme</li>
+    <li>PubSub+ Admin password</li>
+    <li>Starting port</li>
+    <li>TLS configuration</li>
+    <li>LDAP configuration</li>
+    <li>Syslog configuration</li>
+    <li>TCP Routes configuration.</li>
+    </ul>
+
+
+1. <a id='inflight'></a> Maximum In-Flight Canaries and Updates
+
+    <%= image_tag('form_general_settings_inflight.png') %>
+
+    These fields control how many on-demand services can be updated at once. 
+    <br></br>
+
+    The Maximum On-Demand Update Canaries field specifies how many services will initially be updated.
+    If those updates are successful, then the rest of the services will be updated.
+    It is recommended to leave that setting with the value 1.
+    <br></br>
+
+    The Maximum On-Demand In-Flight Upgrades field specifies how many services can be updated
+    in parallel after the canaries have been updated.
+    <br></br>
+
+    Note that within each HA service, each node will still be updated one at a time to avoid service disruption.
+
 
 
 1. <a id='webhook'></a> Under **Web Hook**, you can choose to Enable or Disable.
@@ -479,6 +522,15 @@ users can control when their services are upgraded.
 	  "serviceId" : "1fcdef72-58a4-4e48-a8fc-29a290c0fde9"
 	}
 	```
+    The REST endpoint must return the HTTP status code 200 otherwise the message
+    will remain on a queue and delivery will be reattempted repeatedly. Please see
+    [REST Consumers](https://docs.solace.com/Features/REST-Messaging-Concepts/REST-Consumers.htm) and
+    [Solace REST Status Codes](https://docs.solace.com/RESTMessagingPrtl/Solace-REST-Status-Codes.htm)
+    for requirements regarding the REST endpoint.
+    <br></br>
+
+    Also see [Managing REST Messaging](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Messaging.htm) for
+    more information about Solace REST Delivery Points.
 
 1. <a id='sb_settings'></a> Adjust service broker related settings.
 
@@ -541,10 +593,14 @@ Generated certificates are equivalent to self-signed certificates.
 
 1. (Optional) Configure **Message Broker's Trusted Root Certificates**.
 These certificates are stored in the trust store on the Solace PubSub+ message brokers.
-They are required if you choose to use LDAP with TLS. If you want, use
+They are required if you choose to use LDAP with TLS or if you want to use
 [Client Certificate Authentication](https://docs.solace.com/Features/Client-Authentication.htm#Client-Certificate).
 
     <%= image_tag('form_tls_config_trusted_root_certificates_new.png') %>
+
+1. Enable **Client Certificate Authentication**. Enabled by default, this will configure the router to enable client authentication by certificate.
+
+    <%= image_tag('form_tls_config_enable_client_certificate_auth.png') %>
 
 1. Click **Save**.
 
@@ -618,6 +674,13 @@ They are required if you choose to use LDAP with TLS. If you want, use
 			 password. With "LDAP Server", users can be assigned to groups in LDAP mapping to
 			 their respective roles.</p>
 
+1. (Optional) Configure a Monitor User.
+
+    <%= image_tag('form_management_access_monitor_user.png') %>
+
+    You can create a management interface user with read-only access both to the global configuration and the VPN-level configuration. Please see [CLI User Access Levels](https://docs.solace.com/Configuring-and-Managing/CLI-User-Access-Levels.htm) for details about the access levels.
+
+
 1. Click **Save**.
 
 #### <a id='optional_application_access'></a> (Optional) Application Access
@@ -632,7 +695,10 @@ If you configured LDAP, you may request the Solace PubSub+ message broker to
 use the LDAP Server for authentication and authorization of when a client attempts
 to access a Solace PubSub+ service instance.
 
-    <%= image_tag('form_application_access_new.png') %>
+    <%= image_tag('form_application_access.png') %>
+
+
+1. You can also enable OAuth Authentication for new service instances. Changing this setting does not update pre-existing service instances.  If you select to generate client usernames, our service broker will create a client username at bind time and return it in VCAP services. Client applications can optionally use the client username in OAuth tokens.  Please see the section on OAuth Configuration below to see how to configure a default OAuth provider.
 
 1. Click **Save**.
 
@@ -690,6 +756,26 @@ and [Application Access](#optional_application_access).
 [Application Access](#optional_application_access) are configured for LDAP,
 the Solace PubSub+ message broker continues to use its internal database
 for management and user credentials.**
+
+#### <a id='optional_oauth_settings'> </a>(Optional) OAuth Provider Settings
+
+1. Click **OAuth Provider Settings**.
+
+    <%= image_tag('select_1_oauth.png') %>
+
+    This page allows you to configure a default OAuth Provider that is configured on new message VPNs.
+
+    <%= image_tag('form_oauth.png') %>
+
+    Please refer to the [Client Authentication Overview](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm) 
+    page for field documentation.
+    <br></br>
+    Changing the above configuration does not update pre-existing message VPNs. The default OAuth provider is only created on new message VPNs. 
+    <br></br>
+    A user is free to modify any OAuth configuration manually by logging into the PubSub+ broker and using the command line interface. User customizations won't be lost. 
+    <br></br>
+    <p class="note"><strong>Note:</strong> OAuth Authentication is disabled on message VPNs by default and can be enabled on the Application Access page.
+
 
 #### <a id='optional_system_logging'></a> (Optional) System Logging
 
@@ -789,6 +875,15 @@ In order to apply changes, all the settings for the Solace tile must be marked w
 Solace PubSub+ for PCF supports upgrades starting with PCF v2.0. Future releases can upgrade a deployment if the deployment is v2.0 or higher. In-Service-Upgrades are supported from PCF v2.0 for high-availability service plans.
 
 If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not supported. The v1.x.x tile should be uninstalled before a v2.0.0 tile is installed.
+
+<p class="note warning"><strong>Warning:</strong> If you removed an Evaluation version and intend to install an Enterprise version with the same version number, then you must remove the bosh releases for that version first. Log into bosh and execute
+
+<pre class="terminal">
+  $ bosh delete-release solace-pubsub/&lt;version&gt;
+  $ bosh delete-release solace-pubsub-broker/&lt;version&gt;
+  $ bosh delete-release solace-service-adapter/&lt;version&gt;
+</pre>
+</p>
 
 ### <a id='upgrades_non_ha'></a> Non-High Availability Upgrades
 
@@ -954,6 +1049,14 @@ Here is a table showing the ports that are required for internal communication b
 </table>
 
 
+## <a id='ip_assignment'></a> IP Address Assignment
+
+For operator allocated instances, IP addresses are assigned to VMs during deployment and remain 
+static throughout the life of the deployment.
+
+For on-demand services, IP addresses are dynamically allocated from the network during the on-demand deployment creation, but once allocated 
+they remain static throughout the life of the on-demand deployment.
+
 ## <a id='tcp_routes_requirements'></a> TCP Routes Requirements
 
 <table class="nice">
@@ -1017,3 +1120,38 @@ Here is a table showing the ports that are required for internal communication b
 
 
 </table>
+
+## <a id='dns-aliases'></a> DNS Aliases
+
+This feature allows you to configure the tile so that DNS addresses are included in binding credentials rather than IP addresses.
+This allows client applications to perform certificate hostname validation.
+
+You have three options in terms of address types to include in binding credentials. This is configurable from the General Settings tab in Ops Manager.
+
+<%= image_tag('dns_aliases.png') %>
+
+**Option 1: Include IP Addresses**
+
+Binding credentials look exactly as before. IP addresses are included.
+
+**Option 2: Include internal domain name**
+
+Binding credentials include internal domain name which have the following format <code>&lt;instance_uuid&gt;.solace.service.internal</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker. 
+
+You can use this option combined with an internal CA to perform certificate hostname validation.
+
+**Option 3: Include custom domain name**
+
+Binding credentials include the domain name configured by the operator. The address format is <code>&lt;instance_uuid&gt;.&lt;domain_name&gt;</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker and domain_name is the domain name configured by the operator. 
+
+You can use this option combined with a public CA to perform certificate hostname validation.
+
+**Notes:**
+
++ If you select option 2 or 3 the PAS tile must be redeployed so that the settings get propogated to the PAS.
++ Upon enabling this feature with option 2 or option 3 described above, old bindings containing IPs will remain valid but won't be automatically updated to include the new address type. New bindings will have the new address type.
++ Before reconfiguring the tile with a new option, note that:
+  - Moving from option 1 to another option is OK. Bindings created with option 1 will remain valid.
+  - Moving from option 2 to another option is OK. Bindings created with option 2 will remain valid. 
+  - Moving from option 3 to another option is possible but breaks existing bindings. Bindings created with option 3 will stop working. 
+

@@ -88,13 +88,32 @@ The backing Solace PubSub+ message brokers for a given service instance can be i
 
 The operator should look for the VM in the Solace PubSub+ bosh deployment with the matching IP.
 
-1. Get additional diagnostics from "EnterpriseLarge/0" VM.
+Get additional diagnostics from "EnterpriseLarge/0" VM.
   <pre class="terminal">
   $ bosh ssh EnterpriseLarge/0
   # sudo -i
   # /var/vcap/jobs/broker\_agent/bin/gather\_diagnostics.sh
   </pre>
   Then you can look at the gathered logs under `/var/vcap/store/diag`.
+
+In the event that a process fails and creates a core dump, the core file can be found under /var/vcap/store/cores. Core files are compressed using gzip.
+
+### <a id='install_errors'></a> Installation Issues
+
+If you get the error
+
+<pre class="terminal">
+Colocated job 'solace-bosh-dns-aliases' is already added to the instance group 'compute'
+</pre>
+
+then do the following:
+
+- Log into your bosh environment
+- Execute the command 'bosh configs'
+- Look for runtime-configs with 'solace' in their name
+- Delete the solace runtime-configs using the bosh 'delete-config' command
+- Redeploy
+
 
 ### <a id='upgrade_errors'></a> Upgrade Issues
 

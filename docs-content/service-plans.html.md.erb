@@ -78,6 +78,26 @@ Service Plans can be customized by the operator allowing to adjust the plans for
   <td>&#10004;</td>
   </tr>
 
+  <tr>
+  <th>Cost</th>
+  <td>The cost of the service. This causes the marketplace to display the plan as a paid service.</td>
+  <td>&#10004;</td>
+  <td>&#10004;</td>
+  </tr>
+
+  <tr>
+  <th>Currency</th>
+  <td>The currency of the cost value.</td>
+  <td>&#10004;</td>
+  <td>&#10004;</td>
+  </tr>
+
+  <tr>
+  <th>Unit</th>
+  <td>The unit the cost is based on, such as hourly, monthly, disk size, etc.</td>
+  <td>&#10004;</td>
+  <td>&#10004;</td>
+  </tr>
 
   <tr>
   <th>High Availability</th>
@@ -88,7 +108,13 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>Service instances</th>
-  <td>A <a href='service-instances.html#about_solace_service_instance'>Solace PubSub+ Service Instance</a> represents a Message VPN on a Solace PubSub+ message broker. The ability to host multiple service instances a single Solace PubSub+ message broker for sharing the underlying resources is applicable on Enterprise and Enterprise Evaluation edition message brokers and is limited to a maximum of <strong>five</strong> service instances. The Standard message broker can only host <strong>one</strong> service instance. <strong>This choice is not dynamic and should not be adjusted after initial tile deployment when there are existing service instances.</strong></td>
+  <td>A <a href='service-instances.html#about_solace_service_instance'>Solace PubSub+ Service Instance</a> represents a Message VPN on a Solace PubSub+ message broker. The ability to host multiple service instances a single Solace PubSub+ message broker for sharing the underlying resources is applicable on Enterprise and Enterprise Evaluation edition message brokers and is limited to a maximum of <strong>five</strong> service instances. 
+  
+  <br></br>
+  <strong>Note that this choice is not dynamic and should not be adjusted after initial tile deployment when there are existing service instances.</strong> If there is a need to adjust or increase the value after tile deployment, please delete all existing service instances on the service plan before making any changes.
+  <br></br>
+  As for the Standard message broker, it can only host <strong>one</strong> service instance.
+  </td>
   <td>&#10004;</td>
   <td>&#10004;</td>
   </tr>
