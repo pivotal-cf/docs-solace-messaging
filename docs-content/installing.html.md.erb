@@ -247,6 +247,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
    * [**OAuth Settings**](#optional_oauth_settings)
    * [**System Logging**](#optional_system_logging)
    * [**TCP Routes**](#optional_tcp_routes)
+   * [**Static IPs**](#optional_static_ips)
    * [**Errands**](#optional_errands)
 
 1. [Apply Changes](#apply_changes).
@@ -844,6 +845,25 @@ for management and user credentials.**
 			unless a user-provided parameter overrides it with <code>false</code> setting.</p>
 
 1. Check the [TCP Routes Requirements](#tcp_routes_requirements) and Click **Save**.
+
+#### <a id='optional_static_ips'></a> (Optional) Configure Static IPs
+
+It is possible to allocate ranges of IP addresses to some or all of the pre-provisioned plans.
+Each plan can be assigned one range, or several ranges separated by commas.
+
+For example you can specify that all Enterprise Large instances are within the range 10.0.4.20-10.0.4.29, and that Enterprise Shared instances are within the ranges 10.0.4.30-39,10.0.4.90-10.0.4.99.
+
+The IPs must belong to the network assigned to your deployment and must not be in the reserved IP range. To see what IPs belong to your network, go to the BOSH Director tile and look at the Create Networks tab, and select the network corresponding to the one you selected in the Assign AZs and Networks page in the Solace tile.
+
+1. Click **Static IPs**.
+
+    <%= image_tag('select_1_static_ips.png') %>
+
+1. Enter the range, or comma-separated ranges, for any plans for which you want to specify IP ranges:
+
+    <%= image_tag('static_ips_form.png') %>
+
+1. Click **Save**.
 
 #### <a id='optional_errands'></a> (Optional) Configure Errands
 
