@@ -468,6 +468,10 @@ users can control when their services are upgraded.
     <li>TCP Routes configuration.</li>
     </ul>
 
+    <p class="note"><strong>Note:</strong> 
+    For Shared service plans, every service on a broker must be marked for upgrade before the upgrade can happen.
+    This prevents one tenant from upgrading a router before the other tenants are ready.</p>
+
 
 1. <a id='inflight'></a> Maximum In-Flight Canaries and Updates
 
