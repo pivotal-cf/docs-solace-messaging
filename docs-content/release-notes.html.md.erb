@@ -3,13 +3,13 @@ title: Release Notes
 owner: Partners
 ---
 
-Release Notes for Solace PubSub+ for Pivotal Cloud Foundry (PCF).
+Release Notes for Solace PubSub+ for Pivotal Platform.
 
 ### v2.5.1
 
 **Release Date: August 16, 2019**
 
-This release of Solace PubSub+ for PCF tile contains Solace PubSub+ message broker v9.2.0.14 and introduces the following new features:
+This release of Solace PubSub+ for Pivotal Platform tile contains Solace PubSub+ message broker v9.2.0.14 and introduces the following new features:
 
 * Authentication using OAuth is now provided (ref # SOL-20012)
 * The number of on-demand service instances that can be upgraded at once is now configurable. This allows several services to be upgraded in parallel (reference # SOL-19582.)
@@ -22,8 +22,8 @@ This release of Solace PubSub+ for PCF tile contains Solace PubSub+ message brok
   * Operators can use the third option combined with a public certificate authority to perform client certificate authentication.
 * Support an option for the operator to configure a read-only PubSub+ management user which is automatically created on new service deployments. This user can be used by systems that monitor the health of the PubSub+ brokers.
 * Support upgrading service instances from standalone to high availability services.
-* Adds support for Shared Services, which means that one PubSub+ service instance can be accessed and shared across multiple PCF orgs and spaces, so that the applications in different orgs/spaces can share the same messaging service.
-* Adds support for PCF v2.5.x and v2.6.x
+* Adds support for Shared Services, which means that one PubSub+ service instance can be accessed and shared across multiple Pivotal Platform orgs and spaces, so that the applications in different orgs/spaces can share the same messaging service.
+* Adds support for Pivotal Platform v2.5.x and v2.6.x
 
 In addition to the above features, this release resolves the following issues:
 
@@ -67,12 +67,12 @@ following new features:
 * Support for the message broker's 100 connection scaling tier.
 * The credentials stored in the MySQL database can be encrypted and support key rotation.
 * The name of the service that appears in the marketplace can be configured.
-* Adds support for PCF v2.4.
+* Adds support for Pivotal Platform v2.4.
 * Various bug fixes.
-* Deployments to PCF 2.3 and PCF 2.4 need enabled internet connection on the
+* Deployments to Pivotal Platform 2.3 and Pivotal Platform 2.4 need enabled internet connection on the
 management nodes to support required communications with the Pivotal Application Service (PAS)
 on its public domain. The tile does not communicate with anything on the internet.
-* Using TCP Routes on PCF v2.3 and PCF v2.4 also requires the enabled internet
+* Using TCP Routes on Pivotal Platform v2.3 and Pivotal Platform v2.4 also requires the enabled internet
 connection on operator allocated message brokers.
 
 ### v2.2.1
@@ -111,7 +111,7 @@ This maintenance release contains the following fixes:
 * If the admin password contains special characters (such as  : # ? / \ %), it may be exposed in the test-errand logs. [SOL-10907]
 * Recover access to management route of existing HA Service if not present. [SOL-11411]
 * Avoid 'out-of-sync' HA Service during stemcell upgrades if VM network interface is changed.
-* Detection of upgrade in progress when there is no change in Message Broker version between Solace PubSub+ for PCF enterprise evaluation tile upgrade to the enterprise tile.
+* Detection of upgrade in progress when there is no change in Message Broker version between Solace PubSub+ for Pivotal Platform enterprise evaluation tile upgrade to the enterprise tile.
 
 ### v2.1.0
 
@@ -120,13 +120,13 @@ This maintenance release contains the following fixes:
 This minor release contains an upgrade to Solace PubSub+ message broker v8.12.0.1007 and the following:
 
 * Adds free Solace PubSub+ Standard edition message broker with new plans.
-* Adds CredHub support which is available from PCF v2.x.x.
+* Adds CredHub support which is available from Pivotal Platform v2.x.x.
 * Adds a new orphaned resource policy.
 * Supports optional username parameter at bind time.
-* Removes support for PCF v1.12.x.
-* Adds support for PCF v2.3.x.
-* Supports upgrades from Solace PubSub+ for PCF release v2.0.x.
-* Supports upgrades from Solace PubSub+ for PCF enterprise evaluation tile to the enterprise tile.
+* Removes support for Pivotal Platform v1.12.x.
+* Adds support for Pivotal Platform v2.3.x.
+* Supports upgrades from Solace PubSub+ for Pivotal Platform release v2.0.x.
+* Supports upgrades from Solace PubSub+ for Pivotal Platform enterprise evaluation tile to the enterprise tile.
 
 ### v2.0.2
 
@@ -147,11 +147,11 @@ This minor release contains an upgrade to Solace PubSub+ message broker v8.11.0.
 
 This major release contains Solace PubSub+ message broker v8.11.0.1029 and the following:
 
-* As a major and renamed release, upgrades from older named product solace-messaging to solace-pubsub are not possible. It will be possible to upgrade from Solace PubSub+ for PCF v2.0.0 to subsequent releases.
+* As a major and renamed release, upgrades from older named product solace-messaging to solace-pubsub are not possible. It will be possible to upgrade from Solace PubSub+ for Pivotal Platform v2.0.0 to subsequent releases.
 * Product rebranding from solace-messaging to solace-pubsub+ along with renamed plans.
 * Addition of configurable options for MySQL (internal, as a marketplace service, external).
 * Test errand accepts self-signed certs.
-* Removing support for PCF v1.11.x.
+* Removing support for Pivotal Platform v1.11.x.
 * Removal of support for the “Community Plan” service plan.
 
 ### v1.4.0
@@ -160,8 +160,8 @@ This major release contains Solace PubSub+ message broker v8.11.0.1029 and the f
 
 This release contains VMR v8.9.0.1008 and the following:
 
-* Support of deployment to PCF v2.0.x and v2.1.x.
-* No longer supported on PCF v1.9 and v1.10.
+* Support of deployment to Pivotal Platform v2.0.x and v2.1.x.
+* No longer supported on Pivotal Platform v1.9 and v1.10.
 * Adds a test errand that confirms the deployment is completed as expected.
 * Bridging to be enabled by default [SOL-2684].
 * Orphaned Endpoint handling: Unbind is aborted when there are client-username owned endpoints [SOL-2516, RT-28431].
@@ -202,7 +202,7 @@ Features included in the release:
 
 * Updated VMR release v8.6.0.1010.
 * TCP Routes bug fix.
-* Removed PCF v1.8 support.
+* Removed Pivotal Platform v1.8 support.
 
 ### v1.2.0
 
@@ -212,7 +212,7 @@ Features included in the release:
 
 * AMQP v1.0 support: With release v8.6.0 of the VMR, the tile now provides direct access to AMQP/AMQPS and via public TCP Routes ports if configured. Solace's implementation of Advanced Message Queuing Protocol (AMQP) v1.0 support is compatible with a variety of open source AMQP APIs.
 * Web UI: Provides access to the Alpha version of WebUI for management of a solace-messaging service instance.
-* Enterprise Edition of the Tile is available from Solace. Please contact [Solace Support](https://solace.com/support) or your local [Solace sales representative](mailto:info@solace.com?Subject=Enterprise Edition of Solace Messaging For PCF).
+* Enterprise Edition of the Tile is available from Solace. Please contact [Solace Support](https://solace.com/support) or your local [Solace sales representative](mailto:info@solace.com?Subject=Enterprise Edition of Solace Messaging For Pivotal Platform).
 * Contains VMR release v8.6.0.x.
 
 ### v1.1.0
@@ -242,8 +242,8 @@ Features included in the release:
 
 * Evaluation GA.
 * Highly available service plans for redundancy introduced: `medium-ha`, and `large-ha`.
-* VMRs externally accessible via FQDNs allowing SolAdmin and other management apps to access the VMRs hosting PCF service instances.
-* Tile supports deployment in IPsec enabled PCF instances.
+* VMRs externally accessible via FQDNs allowing SolAdmin and other management apps to access the VMRs hosting Pivotal Platform service instances.
+* Tile supports deployment in IPsec enabled Pivotal Platform instances.
 * Contains VMR release v8.2.0.x.
 * Requires Java buildpack v3.7.1 or later.
 
@@ -256,7 +256,7 @@ Features included in the release:
 * Second open beta.
 * The tile allows a TLS server certificate to be configured for the deployed VMRs.
   This allows encrypted TLS data connections between Virtual Message Routers (VMRs) and apps as well as the Solace service broker.
-* <code>community</code> service plan is introduced. This plan uses the Community Edition VMR to host PCF service instances.
+* <code>community</code> service plan is introduced. This plan uses the Community Edition VMR to host Pivotal Platform service instances.
   It is a feature-limited version of the VMR with a perpetual license.
 * Contains VMR release v7.2pcf2.1.6.
 * Requires BOSH stemcell v3263 ubuntu-trusty.
