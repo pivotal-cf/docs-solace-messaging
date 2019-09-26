@@ -971,6 +971,8 @@ communicate with the CredHub service if the
 when [TCP Routing](installing.html#required_tcp_routes) is enabled. The instances
 use the route registrar which internally uses nats.
 
++ Solace PubSub+ instances in HA groups must communicate with each other.
+
 + The service broker is provided with a PubSub+ service for its internal use.
 Determine which ports are required by looking at the service broker's <code>VCAP_SERVICES</code>
 environment variable for the service named 'internal-service-broker'.
