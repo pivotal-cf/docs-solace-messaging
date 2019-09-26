@@ -489,7 +489,17 @@ users can control when their services are upgraded.
     in parallel after the canaries have been updated.
     <br></br>
 
-    Note that within each HA service, each node will still be updated one at a time to avoid service disruption.
+    <p class="note"><strong>Note:</strong> within each HA service, each node will still be updated one at a time to avoid service disruption.</p>
+    <br></br>
+
+    <p class="note"><strong>Note:</strong> The number of upgrades that can run at once is also constrained by
+    the number of Director Workers configured in the Bosh Director tile on the Director Config page.
+    Bosh reserves one worker for status related tasks, and so no more than that number of workers minus one, 
+    will be available to perform upgrades simultaneously. For example, if there are 3 Director Workers,
+    no more than 2 upgrades will be performed at once regardless of what you enter in the
+    Maximum On-Demand fields in the Solace tile.
+
+    See [Configuring Bosh Director](https://docs.pivotal.io/pivotalcf/2-6/om/gcp/config-manual.html) for details on how to set the number of Director Workers.
 
 
 
