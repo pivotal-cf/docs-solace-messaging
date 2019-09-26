@@ -909,6 +909,14 @@ If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not 
 </pre>
 </p>
 
+
+<p class="note"><strong>Note:</strong> If some PubSub+ message brokers have been upgraded and others have not,
+it is not possible to create new bindings or service keys with the non-upgraded services.
+This is because features such as authentication schemes might have changed with the upgrade, and 
+would not be compatible with the services created before the upgrade.
+</p>
+
+
 ### <a id='upgrades_non_ha'></a> Non-High Availability Upgrades
 
 Upgrades are service-affecting for non-HA service plans `Enterprise Shared`, `Enterprise Large`, and `Standard Medium`.
