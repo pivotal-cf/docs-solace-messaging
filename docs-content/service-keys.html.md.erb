@@ -16,9 +16,9 @@ Creating a service key for a service instance produces [Solace PubSub+ Credentia
 
 Deleting a service key of a service instance revokes the associated credentials.
 
-Obtaining credential using service keys can be used for apps that are not hosted in Pivotal Cloud Foundry (PCF). A typical use case is when you have TCP Routes enabled and you have apps running outside PCF that need access to Solace PubSub+ Services running inside PCF.
+Obtaining credential using service keys can be used for apps that are not hosted in Pivotal Platform. A typical use case is when you have TCP Routes enabled and you have apps running outside Pivotal Platform that need access to Solace PubSub+ Services running inside Pivotal Platform.
 
-The following procedures assume you have created a Solace PubSub+ service called `solace-pubsub-instance` as discussed in [Service Instances](service-instances.html) and that you have some app running outside of PCF.
+The following procedures assume you have created a Solace PubSub+ service called `solace-pubsub-instance` as discussed in [Service Instances](service-instances.html) and that you have some app running outside of Pivotal Platform.
 
 For more information about managing service keys, see [Managing Service Keys](https://docs.pivotal.io/pivotalcf/devguide/services/service-keys.html).
 
@@ -98,7 +98,7 @@ Assuming you have created a service key `external-mobile-app` for `solace-pubsub
   (...)
   }
   </pre>
-  <p class="note"><strong>Note:</strong> With TCP routes enabled, the apps hosted outside PCF should use all the <em>public</em> ports for messaging.</p>
+  <p class="note"><strong>Note:</strong> With TCP routes enabled, the apps hosted outside Pivotal Platform should use all the <em>public</em> ports for messaging.</p>
 
 
 ## <a id='saving-service-key-cf-cli'></a> Save Service Key Credentials

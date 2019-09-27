@@ -1,14 +1,14 @@
 ---
-title: Installing and Configuring Solace PubSub+ for Pivotal Cloud Foundry
+title: Installing and Configuring Solace PubSub+ for Pivotal Platform
 owner: Partners
 ---
 
-This topic describes how to install and configure Solace PubSub+ for Pivotal Cloud Foundry (PCF). Before installing Solace PubSub+ for PCF, you must complete the [prerequisites](#prereqs).
+This topic describes how to install and configure Solace PubSub+ for Pivotal Platform. Before installing Solace PubSub+ for Pivotal Platform, you must complete the [prerequisites](#prereqs).
 
 
 ## <a id='resource-reqs'></a> Review Resource Requirements
 
-Review the resource and IP requirements for installing the Solace PubSub+ for PCF tile.
+Review the resource and IP requirements for installing the Solace PubSub+ for Pivotal Platform tile.
 
 <table border="1" class="nice">
 	<tr>
@@ -181,35 +181,35 @@ Review the resource and IP requirements for installing the Solace PubSub+ for PC
 
 </table>
 
-<p id="tableNote1" class="note"><strong><sup>1</sup> Note:</strong> The management VM is required to support Solace PubSub+ for PCF. <strong>Two</strong> instances are required for a production setup and must be combined with <strong>One</strong> arbitrator VM.</p>
+<p id="tableNote1" class="note"><strong><sup>1</sup> Note:</strong> The management VM is required to support Solace PubSub+ for Pivotal Platform. <strong>Two</strong> instances are required for a production setup and must be combined with <strong>One</strong> arbitrator VM.</p>
 
 <p id="tableNote2" class="note"><strong><sup>2</sup> Note:</strong> <strong>One</strong> arbitrator VM is required for a production setup and must be combined with <strong>Two</strong> management VM instances. Otherwise set this to zero.</p>
 
-<p id="tableNote3" class="note"><strong><sup>3</sup> Note:</strong> You can modify the number of <strong>operator allocated</strong> instances and persistent disk size when configuring the tile for the Solace PubSub+ message broker jobs. For more information, see the <a href="#configure">Configure Solace PubSub+ for PCF</a> tile below.</p>
+<p id="tableNote3" class="note"><strong><sup>3</sup> Note:</strong> You can modify the number of <strong>operator allocated</strong> instances and persistent disk size when configuring the tile for the Solace PubSub+ message broker jobs. For more information, see the <a href="#configure">Configure Solace PubSub+ for Pivotal Platform</a> tile below.</p>
 
 <p id="tableNote4" class="note"><strong><sup>4</sup> Note:</strong> A high availability Solace PubSub+ service instance requires three (3) HA Solace PubSub+ message broker job instances to be used. As such, the <strong>operator allocated</strong> number of HA Solace PubSub+ message broker job instances specified for the HA Solace PubSub+ message broker instances should be a multiple of 3. If it is not, the remaining job instances go unused.</p>
 
 
 ## <a id='prereqs'></a> Prerequisites
 
-Solace PubSub+ for PCF requires the following:
+Solace PubSub+ for Pivotal Platform requires the following:
 
-* PCF version 2.1.x. or later.
+* Pivotal Platform version 2.1.x. or later.
 * Java buildpack v4.x.x or later.
 * MySQL database, which can be made available in one of these methods:
-  * Internal deployment as part of the Solace PubSub+ for PCF on a management VM
+  * Internal deployment as part of the Solace PubSub+ for Pivotal Platform on a management VM
      * [Internal MySQL](#required_mysql_internal)
      * [Internal MySQL (Highly Available)](#required_mysql_internal_ha)
-  * As service from a deployment of [MySQL for Pivotal Cloud Foundry](http://docs.pivotal.io/p-mysql/index.html). Please ensure to configure for a High Availability setup and with service plans offering a minimum of 100&nbsp;MB. See [MySQL for PCF](#required_mysql_for_pcf).
-  * External when MySQL is already deployed outside PCF, it may be offered as a user provided service instance to Solace PubSub+ for PCF, see [External MySQL](#required_mysql_external).
+  * As service from a deployment of [MySQL for Pivotal Platform](http://docs.pivotal.io/p-mysql/index.html). Please ensure to configure for a High Availability setup and with service plans offering a minimum of 100&nbsp;MB. See [MySQL for Pivotal Platform](#required_mysql_for_pcf).
+  * External when MySQL is already deployed outside Pivotal Platform, it may be offered as a user provided service instance to Solace PubSub+ for Pivotal Platform, see [External MySQL](#required_mysql_external).
 * If using TCP Routes: [TCP Routes Requirements](#tcp_routes_requirements)
 
 
-## <a id='install'></a> Install Solace PubSub+ for PCF
+## <a id='install'></a> Install Solace PubSub+ for Pivotal Platform
 
-To install Solace PubSub+ for PCF, do the following:
+To install Solace PubSub+ for Pivotal Platform, do the following:
 
-1. Download the product file from the [Solace Downloads page](https://products.solace.com/download/PUBSUB_PCF_STAND)
+1. Download the product file from the [Solace Downloads page](https://products.solace.com/download/PUBSUB_Pivotal Platform_STAND)
 
 1. Upload the product file on the Ops Manager **Installation Dashboard**.
 
@@ -220,9 +220,9 @@ To install Solace PubSub+ for PCF, do the following:
 1. Follow the steps in the section below to configure the tile.
 
 
-## <a id='configure'></a> Configure Solace PubSub+ for PCF
+## <a id='configure'></a> Configure Solace PubSub+ for Pivotal Platform
 
-To configure Solace PubSub+ for PCF, do the following:
+To configure Solace PubSub+ for Pivotal Platform, do the following:
 
 From the **Settings** tab of the Solace PubSub+ tile:
   <%= image_tag('select_tile_settings_new.png') %>
@@ -300,11 +300,11 @@ From the **Settings** tab of the Solace PubSub+ tile:
     <%= image_tag('form_mysql_internal_ha_new3.png') %>
     <p></p>
     <a id='required_mysql_for_pcf'></a>
-    **MySQL for PCF**: When MySQL for PCF tile is available, select a highly available service plan with a minimum of 100&nbsp;MB database size.
+    **MySQL for Pivotal Platform**: When MySQL for Pivotal Platform tile is available, select a highly available service plan with a minimum of 100&nbsp;MB database size.
     <%= image_tag('form_mysql_for_pcf_new2.png') %>
     <p></p>
     <a id='required_mysql_external'></a>
-    **External MySQL**: When MySQL is available as an external service, it may be provided as a user-provided-service to Solace PubSub+ for PCF. Ensure you have a highly available deployment with a minimum of 100&nbsp;MB database size.
+    **External MySQL**: When MySQL is available as an external service, it may be provided as a user-provided-service to Solace PubSub+ for Pivotal Platform. Ensure you have a highly available deployment with a minimum of 100&nbsp;MB database size.
     <%= image_tag('form_mysql_external_new2.png') %>
     <p></p>
     <p class="note"><strong>Note:</strong> Except for the encryption keys, you cannot modify your MySQL configurations after the deployment has completed. Be sure to select the most appropriate option for your deployment.</p>
@@ -370,14 +370,14 @@ Open this pane even if using the default setting. You need to select all the Ava
 
 #### <a id='required_stemcell'></a> Stemcell
 
-You might need to import a stemcell import if the minimum stemcell required for Solace PubSub+ for PCF is not found.
+You might need to import a stemcell import if the minimum stemcell required for Solace PubSub+ for Pivotal Platform is not found.
 
 1. Click **Stemcell**.
 
      <%= image_tag('select_1_stemcell.png') %>
 
-1. Click **Import Stemcell** to import the required stemcell for your installation of PCF.
-  * [Download Stemcells for PCF](https://network.pivotal.io/products/stemcells)
+1. Click **Import Stemcell** to import the required stemcell for your installation of Pivotal Platform.
+  * [Download Stemcells for Pivotal Platform](https://network.pivotal.io/products/stemcells)
 
 #### <a id='required_resource_config'></a> Resource Config
 
@@ -456,7 +456,7 @@ users can control when their services are upgraded.
     <br></br>
 
     <ul>
-    <li>PubSub+ for PCF Version</li>
+    <li>PubSub+ for Pivotal Platform Version</li>
     <li>A change to the the disk size or availability zone attributes of the Service Plan associated with the service instance</li>
     <li>Application access authentication scheme</li>
     <li>Management access authentication scheme</li>
@@ -587,7 +587,7 @@ Generated certificates are equivalent to self-signed certificates.
 
     <p class="note"><strong>Note:</strong> The server certificate configured
 		is used by all Solace PubSub+ message brokers deployed.
-			As such, all Solace PubSub+ message brokers deployed in a PCF instances
+			As such, all Solace PubSub+ message brokers deployed in a Pivotal Platform instances
 			 have the same identification.</p>
 
     <%= image_tag('form_tls_config_disable_sb_cert_validation.png') %>
@@ -906,7 +906,7 @@ In order to apply changes, all the settings for the Solace tile must be marked w
 
 ## <a id='upgrades'></a> Upgrades
 
-Solace PubSub+ for PCF supports upgrades starting with PCF v2.0. Future releases can upgrade a deployment if the deployment is v2.0 or higher. In-Service-Upgrades are supported from PCF v2.0 for high-availability service plans.
+Solace PubSub+ for Pivotal Platform supports upgrades starting with Pivotal Platform v2.0. Future releases can upgrade a deployment if the deployment is v2.0 or higher. In-Service-Upgrades are supported from Pivotal Platform v2.0 for high-availability service plans.
 
 If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not supported. The v1.x.x tile should be uninstalled before a v2.0.0 tile is installed.
 
@@ -962,7 +962,7 @@ This section describes networking requirements. Read this section if your firewa
 rules affect network communication within your installation.
 
 
-+  Applications deployed in PCF that consume PubSub+ services must be able to
++  Applications deployed in Pivotal Platform that consume PubSub+ services must be able to
 connect to the VMs hosting the PubSub+ instances. They can connect
 using the IP address that is provided to the application through the <code>VCAP_SERVICES</code>
 environment variables. Alternatively, the operator can enable [TCP Routing](installing.html#required_tcp_routes)
@@ -995,7 +995,7 @@ use the route registrar which internally uses nats.
 Determine which ports are required by looking at the service broker's <code>VCAP_SERVICES</code>
 environment variable for the service named 'internal-service-broker'.
 
-+ PubSub+ for PCF uses bosh dns to communicate with PCF services such as Credhub.
++ PubSub+ for Pivotal Platform uses bosh dns to communicate with Pivotal Platform services such as Credhub.
 
 Here is a table showing the ports that are required for internal communication between our components. All use TCP (none uses UDP.)
 
@@ -1142,8 +1142,8 @@ they remain static throughout the life of the on-demand deployment.
 
 <table class="nice">
 
-<tr><th>Enabled TCP Routing in Pivotal Cloud Foundry</th>
-<td>To use TCP Routes, TCP routing needs to be enabled in PCF.
+<tr><th>Enabled TCP Routing in Pivotal Platform</th>
+<td>To use TCP Routes, TCP routing needs to be enabled in Pivotal Platform.
     To do this, see <a href='https://docs.pivotal.io/pivotalcf/adminguide/enabling-tcp-routing.html'>Enabling TCP Routing</a>.
 </td></tr>
 
@@ -1192,7 +1192,7 @@ they remain static throughout the life of the on-demand deployment.
   <pre class="terminal">
   $ cf create-shared-domain tcp.YOUR-DOMAIN --router-group default-tcp </pre>
 </li>
-<li>Consider PCF quotas, networking, and firewalls when using TCP routes. For example, consider removing the limits on reserved route ports.
+<li>Consider Pivotal Platform quotas, networking, and firewalls when using TCP routes. For example, consider removing the limits on reserved route ports.
   <pre class="terminal">
   $ cf update-quota default --reserved-route-ports -1 </pre>
 </li>
