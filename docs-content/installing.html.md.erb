@@ -848,6 +848,11 @@ for management and user credentials.**
 
     <%= image_tag('form_tcp_routes_enabled_2_new.png') %>
 
+1. (Optional) Enter a domain into the Custom TCP Domain Name field. If a domain is entered here,
+it will be the domain used in the router, otherwise the first tcp domain configured in Cloud Foundry will be used.
+
+1. Select which protocols will have tcp routes.
+
     <p class="note"><strong>Note:</strong> Fine-grained control is available by protocol.
 			If you choose <strong>Not Allowed</strong>, a TCP route is never created for this protocol,
 			even if requested at service creation time.
