@@ -11,9 +11,12 @@ Release Notes for Solace PubSub+ for Pivotal Platform.
 
 This release of Solace PubSub+ for PCF tile contains Solace PubSub+ message broker v9.2.0.14 and introduces the following new features:
 
-* Operators can now allocate ranges of IP addresses to pre-provisioned plans (ref # SOL-21624)
-
-* Content was added to the Installation and Troubleshooting pages to document that all services in a Shared broker must be marked for upgrade before the upgrade can happen (ref # SOL-25053)
+* Operators can now allocate ranges of IP addresses to pre-provisioned plans (reference # SOL-21624)
+* Content was added to the Installation and Troubleshooting pages to document that all services in a Shared broker must be marked for upgrade before the upgrade can happen (reference # SOL-25053)
+* Ports required for configuration synchronization are now documented in the Networking section on the Installation page (reference # SOL-19234)
+* Content was added to the Installation and Troubleshooting pages to document that when some on-demand service instances have been upgraded, 
+it is not permitted to create new bindings or service keys on the instances that have not yet been upgraded (reference # 24824)
+* Content was added to the Installation page to document the relation between on-demand parallel upgrades and the maximum number of tasks configured in the Bosh director (reference # 24015)
 
 
 ### v2.5.1
