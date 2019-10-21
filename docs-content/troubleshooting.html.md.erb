@@ -29,7 +29,13 @@ The following locations in Solace PubSub+ BOSH VMs will hold logs of interest th
 * All Solace PubSub+ message broker Logs
  * /var/vcap/store/containers/pubsub/volumes/jail/logs
 
-To access service broker logs, do the following:
+The service broker logs are collected in the management VM under /var/vcap/sys/log/broker-logs.
+
+When the Management app is deployed in High Availability mode, the service broker logs are captured on both the primary and backup VMS so it does not matter from which you get the logs.
+
+This means that you can use the **bosh logs** command to download the service broker logs along with the other logs from the management VM.
+
+You can also watch service broker logs as follows:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
