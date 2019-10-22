@@ -7,20 +7,23 @@ Release Notes for Solace PubSub+ for Pivotal Platform.
 
 ### v2.6.0
 
-**Release Date: August 31, 2019**
+**Release Date: October 28, 2019**
 
-This release of Solace PubSub+ for PCF tile contains Solace PubSub+ message broker v9.2.0.14 and introduces the following new features:
+This release of Solace PubSub+ for Pivotal Plagform tile contains Solace PubSub+ message broker v9.3.0.4 and introduces the following new features:
 
 * Operators can now allocate ranges of IP addresses to pre-provisioned plans (reference # SOL-21624)
-* Content was added to the Installation and Troubleshooting pages to document that all services in a Shared broker must be marked for upgrade before the upgrade can happen (reference # SOL-25053)
-* Ports required for configuration synchronization are now documented in the Networking section on the Installation page (reference # SOL-19234)
-* Content was added to the Installation and Troubleshooting pages to document that when some on-demand service instances have been upgraded, 
-it is not permitted to create new bindings or service keys on the instances that have not yet been upgraded (reference # 24824)
-* Content was added to the Installation page to document the relation between on-demand parallel upgrades and the maximum number of tasks configured in the Bosh director (reference # 24015)
 * The TCP Routes domain is now configurable (reference # SOL-19913)
 * There can be as many as 25 Message VPNs on Enterprise edition instances if a product key is provided (reference # SOL-18249)
 * New fields have been added to the OAuth configuration (reference # SOL-23465)
 * The Service Broker logs are now collected on the Management VM (reference # SOL-22733)
+
+The following changes have been made to this documentation:
+
+* Content was added to the Installation and Troubleshooting pages to document that all services in a Shared broker must be marked for upgrade before the upgrade can happen (reference # SOL-25053)
+* Content was added to the Installation and Troubleshooting pages to document that when some on-demand service instances have been upgraded, 
+it is not permitted to create new bindings or service keys on the instances that have not yet been upgraded (reference # SOL-24814)
+* Content was added to the Installation page to document the relation between on-demand parallel upgrades and the maximum number of tasks configured in the Bosh director (reference # S0L-24015)
+* Ports required for configuration synchronization are now documented in the Networking section on the Installation page (reference # SOL-19234)
 
 ### v2.5.1
 
