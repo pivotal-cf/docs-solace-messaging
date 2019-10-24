@@ -470,7 +470,8 @@ users can control when their services are upgraded.
 
     <p class="note"><strong>Note:</strong> 
     For Shared service plans, every service on a broker must be marked for upgrade before the upgrade can happen.
-    This prevents one tenant from upgrading a router before the other tenants are ready.</p>
+    This prevents one tenant from upgrading a router before the other tenants are ready. The operator can
+    mark the services for upgrade on behalf of the tenants.</p>
 
 
 1. <a id='inflight'></a> Maximum In-Flight Canaries and Updates
@@ -850,9 +851,9 @@ for management and user credentials.**
     <%= image_tag('form_tcp_routes_enabled_2_new.png') %>
 
 1. (Optional) Enter a domain into the Custom TCP Domain Name field. If a domain is entered here,
-it will be the domain used in the router, otherwise the first tcp domain configured in Pivotal Platform will be used.
+it will be the domain used for TCP routes, otherwise the first discovered TCP domain will be used.
 
-1. Select which protocols will have tcp routes.
+1. Select which protocols will have TCP routes.
 
     <p class="note"><strong>Note:</strong> Fine-grained control is available by protocol.
 			If you choose <strong>Not Allowed</strong>, a TCP route is never created for this protocol,
@@ -871,15 +872,15 @@ it will be the domain used in the router, otherwise the first tcp domain configu
 It is possible to allocate ranges of IP addresses to some or all of the pre-provisioned plans.
 Each plan can be assigned one range, or several ranges separated by commas.
 
-For example you can specify that all Enterprise Large instances are within the range 10.0.4.20-10.0.4.29, and that Enterprise Shared instances are within the ranges 10.0.4.30-39,10.0.4.90-10.0.4.99.
+For example, you can specify that all Enterprise Large instances are within the range 10.0.4.20-10.0.4.29, and that Enterprise Shared instances are within the ranges 10.0.4.30-39,10.0.4.90-10.0.4.99.
 
-The IPs must belong to the network assigned to your deployment and must not be in the reserved IP range. To see what IPs belong to your network, go to the BOSH Director tile and look at the Create Networks tab, and select the network corresponding to the one you selected in the Assign AZs and Networks page in the Solace tile.
+The IPs must belong to the network assigned to your deployment and must not be in the reserved IP range. To see what IPs belong to your network, go to the Bosh Director tile and look at the Create Networks tab, and select the network corresponding to the one you selected in the Assign AZs and Networks page in the Solace tile.
 
 1. Click **Static IPs**.
 
     <%= image_tag('select_1_static_ips.png') %>
 
-1. Enter the range, or comma-separated ranges, for any plans for which you want to specify IP ranges:
+1. Enter the range, or comma-separated ranges, or IP addresses, for any plans for which you want to specify IP ranges:
 
     <%= image_tag('static_ips_form.png') %>
 
