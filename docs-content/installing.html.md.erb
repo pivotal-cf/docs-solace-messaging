@@ -563,6 +563,63 @@ users can control when their services are upgraded.
 
 1. Click **Save**.
 
+#### <a id='optional_bosh_dns_aliases'></a> (Optional) Bosh DNS Aliases
+
+1. Click **Bosh DNS Aliases**
+
+    <%= image_tag('select_bosh_dns.png') %>
+
+
+    <%= image_tag('form_bosh_dns.png') %>
+
+    This feature allows you to configure the tile so that DNS addresses are included in binding credentials rather than IP addresses.
+    This allows client applications to perform certificate hostname validation.
+
+    You have three options in terms of address types to include in binding credentials. This is configurable from the General Settings tab in Ops Manager.
+
+
+    **Option 1: Include IP Addresses**
+
+    Binding credentials look exactly as before. IP addresses are included.
+
+    **Option 2: Include internal domain name**
+
+    Binding credentials include internal domain name which have the following format <code>&lt;instance_uuid&gt;.solace.service.internal</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker. 
+
+    You can use this option combined with an internal CA to perform certificate hostname validation.
+
+    **Option 3: Include custom domain name**
+
+    Binding credentials include the domain name configured by the operator. The address format is <code>&lt;instance_uuid&gt;.&lt;domain_name&gt;</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker and domain_name is the domain name configured by the operator. 
+
+    You can use this option combined with a public CA to perform certificate hostname validation.
+
+    **Notes:**
+
+  + If you select option 2 or 3 the PAS tile must be redeployed so that the settings get propogated to the PAS.
+  + Upon enabling this feature with option 2 or option 3 described above, old bindings containing IPs will remain valid but won't be automatically updated to include the new address type. New bindings will have the new address type.
+  + Before reconfiguring the tile with a new option, note that:
+    - Moving from option 1 to another option is OK. Bindings created with option 1 will remain valid.
+    - Moving from option 2 to another option is OK. Bindings created with option 2 will remain valid. 
+    - Moving from option 3 to another option is possible but breaks existing bindings. Bindings created with option 3 will stop working. 
+
+    The solace-bosh-dns-aliases addon needs to be applied using a runtime-configuration. 
+    The operator can control to which deployment the runtime-configuration will be applied,
+    including the selection of instance groups within the deployment.
+
+    <br></br>
+
+    By default the runtime-configuration will be applied to the CF deployment.
+    An operator is free to adjust the deployment and selection of instance groups.
+    By entering a deployment name that does not exist,
+    you can prevent Bosh from DNS-resolving your custom domain name.
+
+
+
+    
+
+
+
 #### <a id='optional_tls_config'></a> (Optional) TLS Config
 
 1. Click **TLS Config**.
@@ -1208,38 +1265,4 @@ they remain static throughout the life of the on-demand deployment.
 
 
 </table>
-
-## <a id='dns-aliases'></a> DNS Aliases
-
-This feature allows you to configure the tile so that DNS addresses are included in binding credentials rather than IP addresses.
-This allows client applications to perform certificate hostname validation.
-
-You have three options in terms of address types to include in binding credentials. This is configurable from the General Settings tab in Ops Manager.
-
-<%= image_tag('dns_aliases.png') %>
-
-**Option 1: Include IP Addresses**
-
-Binding credentials look exactly as before. IP addresses are included.
-
-**Option 2: Include internal domain name**
-
-Binding credentials include internal domain name which have the following format <code>&lt;instance_uuid&gt;.solace.service.internal</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker. 
-
-You can use this option combined with an internal CA to perform certificate hostname validation.
-
-**Option 3: Include custom domain name**
-
-Binding credentials include the domain name configured by the operator. The address format is <code>&lt;instance_uuid&gt;.&lt;domain_name&gt;</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker and domain_name is the domain name configured by the operator. 
-
-You can use this option combined with a public CA to perform certificate hostname validation.
-
-**Notes:**
-
-+ If you select option 2 or 3 the PAS tile must be redeployed so that the settings get propogated to the PAS.
-+ Upon enabling this feature with option 2 or option 3 described above, old bindings containing IPs will remain valid but won't be automatically updated to include the new address type. New bindings will have the new address type.
-+ Before reconfiguring the tile with a new option, note that:
-  - Moving from option 1 to another option is OK. Bindings created with option 1 will remain valid.
-  - Moving from option 2 to another option is OK. Bindings created with option 2 will remain valid. 
-  - Moving from option 3 to another option is possible but breaks existing bindings. Bindings created with option 3 will stop working. 
 
