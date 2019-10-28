@@ -11,22 +11,25 @@ Release Notes for Solace PubSub+ for Pivotal Platform.
 
 This release of Solace PubSub+ for Pivotal Platform tile contains Solace PubSub+ message broker v9.3.0.22 and introduces the following new features and fixes:
 
-* Operators can now allocate ranges of IP addresses to pre-provisioned plans (reference # SOL-21624)
-* The TCP Routes domain is now configurable (reference # SOL-19913)
-* There can be as many as 25 Message VPNs on Enterprise edition instances if a product key is provided (reference # SOL-18249)
-* New fields have been added to the OAuth configuration (reference # SOL-23465)
-* The Service Broker logs are now collected on the Management VM (reference # SOL-22733)
-* The runtime configuration for Bosh DNS Aliases can now be modified (reference # SOL-24425)
+* Operators can now allocate ranges of IP addresses to pre-provisioned plans
+* The TCP Routes domain is now configurable
+* There can be as many as 25 Message VPNs on Enterprise edition instances if a product key is provided
+* New fields have been added to the OAuth configuration
+* The Service Broker logs are now collected on the Management VM
+* The runtime configuration for Bosh DNS Aliases can now be modified
+
+In addition to the above features, this release resolves the following issues:
+
 * A field validation has been added to the Admin Password field to disallow invalid characters (reference # SOL-9410)
 * When there were a large number of service instances, some instance names did not appear on the Service Dashboard (reference # SOL-26147)
 
 The following changes have been made to this documentation:
 
-* Installation and Troubleshooting pages: All services in a Shared broker must be marked for upgrade before the upgrade can happen (reference # SOL-25053)
+* Installation and Troubleshooting pages: All services in a Shared broker must be marked for upgrade before the upgrade can happen
 * Installation and Troubleshooting pages: When some on-demand service instances have been upgraded, 
-it is not permitted to create new bindings or service keys on the instances that have not yet been upgraded (reference # SOL-24814)
-* Installation page: The relation between on-demand parallel upgrades and the maximum number of tasks configured in the Bosh director (reference # S0L-24015)
-* Installation page: Ports required for configuration synchronization are now listed in the Networking section (reference # SOL-19234)
+it is not permitted to create new bindings or service keys on the instances that have not yet been upgraded
+* Installation page: The relation between on-demand parallel upgrades and the maximum number of tasks configured in the Bosh director
+* Installation page: Ports required for configuration synchronization are now listed in the Networking section
 
 ### v2.5.1
 
@@ -34,10 +37,10 @@ it is not permitted to create new bindings or service keys on the instances that
 
 This release of Solace PubSub+ for Pivotal Platform tile contains Solace PubSub+ message broker v9.2.0.14 and introduces the following new features:
 
-* Authentication using OAuth is now provided (ref # SOL-20012)
-* The number of on-demand service instances that can be upgraded at once is now configurable. This allows several services to be upgraded in parallel (reference # SOL-19582.)
-* The Service Plan configuration forms now have fields for Cost, Currency and Pricing Unit (reference # SOL-20467.)
-* The Service Instance Dashboard now provides more information about the service including the deployment provider, service creation parameters, plan name, VPN name, and IP address(es) (reference # 18553.)
+* Authentication using OAuth is now provided
+* The number of on-demand service instances that can be upgraded at once is now configurable. This allows several services to be upgraded in parallel
+* The Service Plan configuration forms now have fields for Cost, Currency and Pricing Unit
+* The Service Instance Dashboard now provides more information about the service including the deployment provider, service creation parameters, plan name, VPN name, and IP address(es)
 * Support for BOSH DNS Aliases. Operators now have three options for the type of addresses to include in service binding credentials:
   * Include IP addresses (previously supported)
   * Include internal domain name (using *.solace.service.internal)
