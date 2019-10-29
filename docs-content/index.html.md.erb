@@ -7,7 +7,7 @@ Solace PubSub+ for Pivotal Platform enables you to take advantage of the leading
 
 Solace PubSub+ was designed to be deployed across all your IT environments including your non-cloud datacenter, all leading public clouds ([AWS](http://dev.solace.com/clouds/amazon-web-services/), [Azure](http://dev.solace.com/clouds/azure/), and [Google Cloud Platform](http://dev.solace.com/clouds/google-cloud/)) and the popular Platform as a Service, Pivotal Platform, in order to provide a uniform messaging fabric for all your apps and connect them no matter where they are deployed.
 
-<%= image_tag('solace-environments_new.png') %>
+<%= image_tag('solace-environments_newbranding.png') %>
 
 Solace PubSub+ supports all kinds of messaging APIs, QoS, and data streaming as part of one platform across all clouds in a high-performance, WAN-optimized, easy-to-manage solution. It is easily deployed in your public and private cloud environments and forms the perfect backbone for single or multi-cloud messaging support of your cloud-native microservices, IoT, big data capture, and next-generation digital apps.
 
@@ -116,7 +116,7 @@ A Solace PubSub+ deployment under Pivotal Platform can be configured to support 
 
 TCP routes allow access to Solace messaging services hosted inside your Pivotal Platform domain from external networks. By default, a Pivotal Platform-hosted service is not accessible to external networks.
 
-<%= image_tag('arch_tcp_routes_new.png') %>
+<%= image_tag('arch_tcp_routes_newbranding.png') %>
 
 Having TCP routes enables many use cases:
 
@@ -140,21 +140,17 @@ You can enable the use of an LDAP server for the Solace PubSub+ message broker's
 
 In addition to easy and natural APIs for your apps, Solace PubSub+ supports the following key features:
 
-* [Easy integration with third-party products](http://dev.solace.com/integration-guides/) such as big data, ESBs, JEE, DataPower, and more.
-* [Comprehensive authentication, authorization, and encryption](http://dev.solace.com/tech/#security) features to ensure that your infrastructure and information are protected at all times.
-* [The most robust data movement infrastructure available today](http://dev.solace.com/tech/#robustness), offering fault tolerance and disaster recovery.
-* [Integrated federation and distribution](http://dev.solace.com/tech/#federation) for connectivity between Solace message brokers.
-* [High-performance](http://dev.solace.com/tech/#high-performance) messaging middleware which can cost-effectively meet the needs of any app.
-* [Fast, efficient WAN distribution](http://dev.solace.com/tech/#wan-distribution).
-* [Simplified operations](http://dev.solace.com/tech/#management-monitoring) with multiple management administration interfaces.
-* [Virtualize application groups on a single Solace message broker](http://dev.solace.com/tech/#virtualization) with complete message isolation through Solace Message VPNs.
-
+* [Easy integration with third-party products](https://docs.solace.com/Developer-Tools/Integration-Guides/Integration-Guides.htm) such as big data, ESBs, JEE, DataPower, and more.
+* [Comprehensive authentication, authorization, and encryption](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm) features to ensure that your infrastructure and information are protected at all times.
+* High-performance messaging middleware which can cost-effectively meet the needs of any app.
+* [Simplified operations](https://docs.solace.com/Management-Tools.htm) with multiple management administration interfaces.
+* [Virtualize application groups on a single Solace message broker](https://docs.solace.com/Configuring-and-Managing/Managing-Message-VPNs.htm) with complete message isolation through Solace Message VPNs.
 
 ## <a id='architecture'></a> Architecture
 
 Solace PubSub+ is a managed service. The tile deploys the PubSub+ message brokers onto Pivotal Platform's IaaS. The Solace PubSub+ tile registers a service broker with Pivotal Platform and exposes its service plans in the Pivotal Platform Marketplace. The diagram below provides an overview of the product architecture of Solace PubSub+ for Pivotal Platform.
 
-<%= image_tag('Deployment-overview_new.png') %>
+<%= image_tag('Deployment-overview_newbranding.png') %>
 
 
 ## <a id='snapshot'></a> Product Snapshot
@@ -169,7 +165,7 @@ The following table provides version and version-support information about Solac
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>v2.3.2</td>
+        <td>v2.6.0</td>
     </tr>
     <tr>
         <td>Editions</td>
@@ -177,19 +173,19 @@ The following table provides version and version-support information about Solac
     </tr>
     <tr>
         <td>Release date</td>
-        <td>August 16, 2019</td>
+        <td>October 29, 2019</td>
     </tr>
     <tr>
         <td>Solace PubSub+ message broker version</td>
-        <td>9.0.1.7</td>
+        <td>9.4.0.4</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>
-        <td>2.3, 2.4, 2.5, and 2.6</td>
+        <td>2.4, 2.5, 2.6 and 2.7</td>
     </tr>
     <tr>
         <td>Compatible Pivotal Application Service version(s)</td>
-        <td>2.3, 2.4, 2.5, and 2.6</td>
+        <td>2.4, 2.5, 2.6 and 2.7</td>
     </tr>
     <tr>
         <td>BOSH stemcell version</td>

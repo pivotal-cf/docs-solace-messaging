@@ -247,6 +247,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
    * [**OAuth Settings**](#optional_oauth_settings)
    * [**System Logging**](#optional_system_logging)
    * [**TCP Routes**](#optional_tcp_routes)
+   * [**Static IPs**](#optional_static_ips)
    * [**Errands**](#optional_errands)
 
 1. [Apply Changes](#apply_changes).
@@ -467,6 +468,11 @@ users can control when their services are upgraded.
     <li>TCP Routes configuration.</li>
     </ul>
 
+    <p class="note"><strong>Note:</strong> 
+    For Shared service plans, every service on a broker must be marked for upgrade before the upgrade can happen.
+    This prevents one tenant from upgrading a router before the other tenants are ready. The operator can
+    mark the services for upgrade on behalf of the tenants.</p>
+
 
 1. <a id='inflight'></a> Maximum In-Flight Canaries and Updates
 
@@ -484,7 +490,17 @@ users can control when their services are upgraded.
     in parallel after the canaries have been updated.
     <br></br>
 
-    Note that within each HA service, each node will still be updated one at a time to avoid service disruption.
+    <p class="note"><strong>Note:</strong> within each HA service, each node will still be updated one at a time to avoid service disruption.</p>
+    <br></br>
+
+    <p class="note"><strong>Note:</strong> The number of upgrades that can run at once is also constrained by
+    the number of Director Workers configured in the Bosh Director tile on the Director Config page.
+    Bosh reserves one worker for status related tasks, and so no more than that number of workers minus one, 
+    will be available to perform upgrades simultaneously. For example, if there are 3 Director Workers,
+    no more than 2 upgrades will be performed at once regardless of what you enter in the
+    Maximum On-Demand fields in the Solace tile.
+
+    See [Configuring Bosh Director](https://docs.pivotal.io/pivotalcf/2-6/om/gcp/config-manual.html) for details on how to set the number of Director Workers.
 
 
 
@@ -546,6 +562,63 @@ users can control when their services are upgraded.
     A Monitor node requires 1 CPU and 1 GB of RAM.
 
 1. Click **Save**.
+
+#### <a id='optional_bosh_dns_aliases'></a> (Optional) Bosh DNS Aliases
+
+1. Click **Bosh DNS Aliases**
+
+    <%= image_tag('select_bosh_dns.png') %>
+
+
+    <%= image_tag('form_bosh_dns.png') %>
+
+    This feature allows you to configure the tile so that DNS addresses are included in binding credentials rather than IP addresses.
+    This allows client applications to perform certificate hostname validation.
+
+    You have three options in terms of address types to include in binding credentials. This is configurable from the General Settings tab in Ops Manager.
+
+
+    **Option 1: Include IP Addresses**
+
+    Binding credentials look exactly as before. IP addresses are included.
+
+    **Option 2: Include internal domain name**
+
+    Binding credentials include internal domain name which have the following format <code>&lt;instance_uuid&gt;.solace.service.internal</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker. 
+
+    You can use this option combined with an internal CA to perform certificate hostname validation.
+
+    **Option 3: Include custom domain name**
+
+    Binding credentials include the domain name configured by the operator. The address format is <code>&lt;instance_uuid&gt;.&lt;domain_name&gt;</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker and domain_name is the domain name configured by the operator. 
+
+    You can use this option combined with a public CA to perform certificate hostname validation.
+
+    **Notes:**
+
+  + If you select option 2 or 3 the PAS tile must be redeployed so that the settings get propogated to the PAS.
+  + Upon enabling this feature with option 2 or option 3 described above, old bindings containing IPs will remain valid but won't be automatically updated to include the new address type. New bindings will have the new address type.
+  + Before reconfiguring the tile with a new option, note that:
+    - Moving from option 1 to another option is OK. Bindings created with option 1 will remain valid.
+    - Moving from option 2 to another option is OK. Bindings created with option 2 will remain valid. 
+    - Moving from option 3 to another option is possible but breaks existing bindings. Bindings created with option 3 will stop working. 
+
+    The solace-bosh-dns-aliases addon needs to be applied using a runtime-configuration. 
+    The operator can control to which deployment the runtime-configuration will be applied,
+    including the selection of instance groups within the deployment.
+
+    <br></br>
+
+    By default the runtime-configuration will be applied to the CF deployment.
+    An operator is free to adjust the deployment and selection of instance groups.
+    By entering a deployment name that does not exist,
+    you can prevent Bosh from DNS-resolving your custom domain name.
+
+
+
+    
+
+
 
 #### <a id='optional_tls_config'></a> (Optional) TLS Config
 
@@ -765,7 +838,8 @@ for management and user credentials.**
 
     This page allows you to configure a default OAuth Provider that is configured on new message VPNs.
 
-    <%= image_tag('form_oauth.png') %>
+    <%= image_tag('form_oauth_1.png') %>
+    <%= image_tag('form_oauth_2.png') %>
 
     Please refer to the [Client Authentication Overview](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm) 
     page for field documentation.
@@ -833,6 +907,11 @@ for management and user credentials.**
 
     <%= image_tag('form_tcp_routes_enabled_2_new.png') %>
 
+1. (Optional) Enter a domain into the Custom TCP Domain Name field. If a domain is entered here,
+it will be the domain used for TCP routes, otherwise the first discovered TCP domain will be used.
+
+1. Select which protocols will have TCP routes.
+
     <p class="note"><strong>Note:</strong> Fine-grained control is available by protocol.
 			If you choose <strong>Not Allowed</strong>, a TCP route is never created for this protocol,
 			even if requested at service creation time.
@@ -844,6 +923,25 @@ for management and user credentials.**
 			unless a user-provided parameter overrides it with <code>false</code> setting.</p>
 
 1. Check the [TCP Routes Requirements](#tcp_routes_requirements) and Click **Save**.
+
+#### <a id='optional_static_ips'></a> (Optional) Configure Static IPs
+
+It is possible to allocate ranges of IP addresses to some or all of the pre-provisioned plans.
+Each plan can be assigned one range, or several ranges separated by commas.
+
+For example, you can specify that all Enterprise Large instances are within the range 10.0.4.20-10.0.4.29, and that Enterprise Shared instances are within the ranges 10.0.4.30-39,10.0.4.90-10.0.4.99.
+
+The IPs must belong to the network assigned to your deployment and must not be in the reserved IP range. To see what IPs belong to your network, go to the Bosh Director tile and look at the Create Networks tab, and select the network corresponding to the one you selected in the Assign AZs and Networks page in the Solace tile.
+
+1. Click **Static IPs**.
+
+    <%= image_tag('select_1_static_ips.png') %>
+
+1. Enter the range, or comma-separated ranges, or IP addresses, for any plans for which you want to specify IP ranges:
+
+    <%= image_tag('static_ips_form.png') %>
+
+1. Click **Save**.
 
 #### <a id='optional_errands'></a> (Optional) Configure Errands
 
@@ -884,6 +982,14 @@ If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not 
   $ bosh delete-release solace-service-adapter/&lt;version&gt;
 </pre>
 </p>
+
+
+<p class="note"><strong>Note:</strong> If some PubSub+ message brokers have been upgraded and others have not,
+it is not possible to create new bindings or service keys with the non-upgraded services.
+This is because features such as authentication schemes might have changed with the upgrade, and 
+would not be compatible with the services created before the upgrade.
+</p>
+
 
 ### <a id='upgrades_non_ha'></a> Non-High Availability Upgrades
 
@@ -947,6 +1053,8 @@ communicate with the CredHub service if the
 when [TCP Routing](installing.html#required_tcp_routes) is enabled. The instances
 use the route registrar which internally uses nats.
 
++ Solace PubSub+ instances in HA groups must communicate with each other.
+
 + The service broker is provided with a PubSub+ service for its internal use.
 Determine which ports are required by looking at the service broker's <code>VCAP_SERVICES</code>
 environment variable for the service named 'internal-service-broker'.
@@ -971,7 +1079,7 @@ Here is a table showing the ports that are required for internal communication b
     <td></td>
     <td>443</td>
     <td>HTTPS</td>
-    <td>Used configure the internal message broker through the gorouter.</td>
+    <td>Used to configure the internal message broker through the gorouter.</td>
   </tr>
 
   <tr>
@@ -993,6 +1101,15 @@ Here is a table showing the ports that are required for internal communication b
   </tr>
 
   <tr>
+    <td>Cloud Foundry</td>
+    <td>On-Demand Service Broker</td>
+    <td>7979</td>
+    <td></td>
+    <td>HTTP</td>
+    <td>Used by cf to send commands to the on-demand service broker (Management vm).</td>
+  </tr>
+
+  <tr>
     <td>Service Broker</td>
     <td>Message Broker (Service instance)</td>
     <td>8080</td>
@@ -1001,6 +1118,50 @@ Here is a table showing the ports that are required for internal communication b
     <td>Used to configure the message brokers used as service instances.</td>
   </tr>
 
+  <tr>
+    <td>Message Broker (In any HA group)</td>
+    <td>Message Broker (In any HA group)</td>
+    <td></td>
+    <td>8300</td>
+    <td>TCP</td>
+    <td>Used for configuration synchronization.</td>
+  </tr>
+
+  <tr>
+    <td>Message Broker (In any HA group)</td>
+    <td>Message Broker (In any HA group)</td>
+    <td></td>
+    <td>8301</td>
+    <td>TCP, UDP</td>
+    <td>Used for configuration synchronization.</td>
+  </tr>
+
+  <tr>
+    <td>Message Broker (In any HA group)</td>
+    <td>Message Broker (In any HA group)</td>
+    <td></td>
+    <td>8302</td>
+    <td>TCP, UDP</td>
+    <td>Used for configuration synchronization.</td>
+  </tr>
+
+  <tr>
+    <td>Message Broker (In any HA group)</td>
+    <td>Message Broker (In any HA group)</td>
+    <td></td>
+    <td>8471</td>
+    <td>TCP</td>
+    <td>Used for the HA mate link.</td>
+  </tr>
+
+  <tr>
+    <td></td>
+    <td>Message Broker (Service instance)</td>
+    <td>9090</td>
+    <td></td>
+    <td>HTTP</td>
+    <td>PubSub+ health check</td>
+  </tr>
   <tr>
     <td>Service Broker</td>
     <td>Broker Agent</td>
@@ -1016,7 +1177,7 @@ Here is a table showing the ports that are required for internal communication b
     <td>38080</td>
     <td>3943</td>
     <td>HTTP/S</td>
-    <td>Used configure the internal message broker through the gorouter.</td>
+    <td>Used to configure the internal message broker through the gorouter.</td>
   </tr>
 
   <tr>
@@ -1028,23 +1189,6 @@ Here is a table showing the ports that are required for internal communication b
     <td>Used to connect to the health endpoint on the internal message broker.</td>
   </tr>
 
-  <tr>
-    <td>Cloud Foundry</td>
-    <td>On-Demand Service Broker</td>
-    <td>7979</td>
-    <td></td>
-    <td>HTTP</td>
-    <td>Used by cf to send commands to the on-demand service broker (Management vm).</td>
-  </tr>
-
-  <tr>
-    <td></td>
-    <td>Message Broker (Service instance)</td>
-    <td>9090</td>
-    <td></td>
-    <td>HTTP</td>
-    <td>PubSub+ health check</td>
-  </tr>
 
 </table>
 
@@ -1052,7 +1196,8 @@ Here is a table showing the ports that are required for internal communication b
 ## <a id='ip_assignment'></a> IP Address Assignment
 
 For operator allocated instances, IP addresses are assigned to VMs during deployment and remain 
-static throughout the life of the deployment.
+static throughout the life of the deployment. <strong>Note:</strong> you can specify the range of IPs for operated plans, see
+ [Static IPs](#optional_static_ips)
 
 For on-demand services, IP addresses are dynamically allocated from the network during the on-demand deployment creation, but once allocated 
 they remain static throughout the life of the on-demand deployment.
@@ -1120,38 +1265,4 @@ they remain static throughout the life of the on-demand deployment.
 
 
 </table>
-
-## <a id='dns-aliases'></a> DNS Aliases
-
-This feature allows you to configure the tile so that DNS addresses are included in binding credentials rather than IP addresses.
-This allows client applications to perform certificate hostname validation.
-
-You have three options in terms of address types to include in binding credentials. This is configurable from the General Settings tab in Ops Manager.
-
-<%= image_tag('dns_aliases.png') %>
-
-**Option 1: Include IP Addresses**
-
-Binding credentials look exactly as before. IP addresses are included.
-
-**Option 2: Include internal domain name**
-
-Binding credentials include internal domain name which have the following format <code>&lt;instance_uuid&gt;.solace.service.internal</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker. 
-
-You can use this option combined with an internal CA to perform certificate hostname validation.
-
-**Option 3: Include custom domain name**
-
-Binding credentials include the domain name configured by the operator. The address format is <code>&lt;instance_uuid&gt;.&lt;domain_name&gt;</code> where instance_uuid is the instance id of the vm running the Solace PubSub broker and domain_name is the domain name configured by the operator. 
-
-You can use this option combined with a public CA to perform certificate hostname validation.
-
-**Notes:**
-
-+ If you select option 2 or 3 the PAS tile must be redeployed so that the settings get propogated to the PAS.
-+ Upon enabling this feature with option 2 or option 3 described above, old bindings containing IPs will remain valid but won't be automatically updated to include the new address type. New bindings will have the new address type.
-+ Before reconfiguring the tile with a new option, note that:
-  - Moving from option 1 to another option is OK. Bindings created with option 1 will remain valid.
-  - Moving from option 2 to another option is OK. Bindings created with option 2 will remain valid. 
-  - Moving from option 3 to another option is possible but breaks existing bindings. Bindings created with option 3 will stop working. 
 

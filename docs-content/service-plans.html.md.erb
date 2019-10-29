@@ -108,10 +108,11 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>Service instances</th>
-  <td>A <a href='service-instances.html#about_solace_service_instance'>Solace PubSub+ Service Instance</a> represents a Message VPN on a Solace PubSub+ message broker. The ability to host multiple service instances a single Solace PubSub+ message broker for sharing the underlying resources is applicable on Enterprise and Enterprise Evaluation edition message brokers and is limited to a maximum of <strong>five</strong> service instances. 
+  <td>A <a href='service-instances.html#about_solace_service_instance'>Solace PubSub+ Service Instance</a> represents a Message VPN on a Solace PubSub+ message broker. The ability to host multiple service instances on a single Solace PubSub+ message broker for sharing the underlying resources is applicable on Enterprise and Enterprise Evaluation edition message brokers and is limited to a maximum of <strong>five</strong> service instances. 
   
   <br></br>
-  <strong>Note that this choice is not dynamic and should not be adjusted after initial tile deployment when there are existing service instances.</strong> If there is a need to adjust or increase the value after tile deployment, please delete all existing service instances on the service plan before making any changes.
+  You will be able to configure an Enterprise edition broker with up to twenty-five service instances
+  if you provide a 25 Message VPN Product Key.
   <br></br>
   As for the Standard message broker, it can only host <strong>one</strong> service instance.
   </td>
@@ -158,11 +159,21 @@ Service Plans can be customized by the operator allowing to adjust the plans for
   <td> <a href="#tableNote2"><sup>2</sup></a> </td>
   </tr>
 
+  <tr>
+  <th>Product Key</th>
+  <td>Users of Enterprise editions can configure instances to host up to 25 VPNs if they provide a product key in this field. 
+  <a href="#tableNote3"><sup>3</sup></a> </td>
+  <td>&#10004;</td>
+  <td>&#10004;</td>
+  </tr>
+
 </table>
 
 
 <p id='tableNote1' class="note"><strong><sup>1</sup> Note</strong>: Please set the same matching <strong>VM Type</strong> and <strong>Disk Type</strong> if you have <strong>Operator Allocated</strong> instances in <a href='installing.html#required_resource_config'>Resource Config</a>.</p>
 <p id='tableNote2' class="note"><strong><sup>2</sup> Note</strong>: Please consider if using the same Network and AZs used in <a href='installing.html#required_azs_and_network'>Assign AZs and Networks</a> for Operator Allocated instances.</p>
+<p id='tableNote3' class="note"><strong><sup>3</sup> Note</strong>: See [Product Keys](https://docs.solace.com/Configuring-and-Managing/Product-Key.htm).
+
 
 ## <a id='general_plan_settings'></a> General Settings
 
@@ -577,4 +588,5 @@ If there are existing service instances on these plans, the operator should use 
 
 ## <a id='sample_enterprise_plan_configuration'></a> Sample Enterprise Plan Configuration
 
-<%= image_tag('sample_on_demand_enterprise.png') %>
+<%= image_tag('sample_on_demand_enterprise_1.png') %>
+<%= image_tag('sample_on_demand_enterprise_2.png') %>

@@ -29,7 +29,13 @@ The following locations in Solace PubSub+ BOSH VMs will hold logs of interest th
 * All Solace PubSub+ message broker Logs
  * /var/vcap/store/containers/pubsub/volumes/jail/logs
 
-To access service broker logs, do the following:
+The service broker logs are collected in the management VM under /var/vcap/sys/log/broker-logs.
+
+When the Management app is deployed in High Availability mode, the service broker logs are captured on both the primary and backup VMS so it does not matter from which you get the logs.
+
+This means that you can use the **bosh logs** command to download the service broker logs along with the other logs from the management VM.
+
+You can also watch service broker logs as follows:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
   <pre class="terminal">
@@ -149,6 +155,15 @@ The upgrade was stopped due to a detected failure to ensure services remain avai
 <tr><th>Possible Action</th><td>The user should log into the failing VM and look at the log file located at /var/vcap/sys/log/containers/post-start.stdout.log to determine the underlying cause. Once the issue is fixed, an upgrade can be retried.</td></tr>
 </table>
 
+<p class="note"><strong>Note:</strong> For Shared service plans, every service on a broker must be marked for upgrade before the upgrade
+ can happen. This prevents one tenant from upgrading a router before the other tenants are ready.
+</p>
+
+<p class="note"><strong>Note:</strong> If some PubSub+ message brokers have been upgraded and others have not,
+it is not possible to create new bindings or service keys with the non-upgraded services.
+This is because features such as authentication schemes might have changed with the upgrade, and 
+would not be compatible with the services created before the upgrade.
+</p>
 
 ## <a id='developer'></a> Developer Troubleshooting
 
