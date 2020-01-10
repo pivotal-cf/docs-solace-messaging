@@ -57,7 +57,17 @@ This causes the deployment to fail.
 Settings such as Authentication type must be managed through the tile. Likewise,
 client usernames should be created by binding services through Pivotal Platform.
 
+## <a id='client_profile_management'></a> Client Profile Management
 
+Client profiles are assigned to client usernames so that a common configuration can be applied to groups of clients.
+
+The Client Profile Management section displays existing client profiles and offers the ability to create, update, and delete client profiles on the message VPN. While creating and updating client profiles, select the client profile capabilities to turn ON/OFF. For more information about client profiles, please consult Solace's documentation: [Client Profile](https://docs.solace.com/PubSub-Basics/Core-Concepts-Solace-Event-Broker-Concepts.htm#client-profile) and [Client Profile Configuration](https://docs.solace.com/Configuring-and-Managing/Configuring-Client-Profiles.htm)
+
+The client profile highlighted in light green is the selected default client profile. New client usernames are automatically assigned this client profile. To select a different default client profile, use the dropdown menu that can be found at the bottom of the client profile table. Changing the default client profile does not modify existing client usernames, the change only applies to new client usernames.  
+
+Note that updating a client profile affects all clients using the client profile.
+
+Also note that the client profile named 'default' as well as the selected default client profile (the highlighted client profile) can't be deleted. 
 
 ## <a id='solace_pubsub_configuration_backup_and_restore'></a> Solace PubSub+ Configuration Backup and Restore
 
