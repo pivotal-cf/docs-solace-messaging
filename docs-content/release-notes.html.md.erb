@@ -13,16 +13,17 @@ This release of Solace PubSub+ for Pivotal Platform tile contains Solace PubSub+
 * The Service Instance Dashboard now provides management of client and ACL profiles.
 * The Tile now uses the syslog release to support configuration of syslog.
 * Specific TCP ports can now be requested when creating and updating a service when TCP routing is enabled.
-* The Service Instance Dashboard now provides an option to automatically opt-in to all future updates and upgrades when user controlled upgrades are enabled.
+* The Service Instance Dashboard now provides an option to automatically opt-in to all future updates and upgrades when user-controlled upgrades are enabled.
 * Application Security Groups now include the message broker health check port.
 * When upgrading an HA group, switchovers are now minimized as the inactive is upgraded first.
 * Adds operator access to the MySQL Bootstrap errand through bosh.
-* Adds support for Pivotal Platform v2.8.x
+* Adds support for Pivotal Platform v2.8.x.
 
 In addition to the above features, this release resolves the following issues:
 
 * Interrupted or failed upgrades on HA groups can now be recovered with a subsequent upgrade.
 * Fixed an issue where TCP routes cannot be enabled on a service that initially had all routes disabled.
+* Service specific parameters for TCP routes are now reapplied on an update service if they are not overwritten.
 
 ### v2.6.1
 
