@@ -427,7 +427,7 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
     <%= image_tag('form_general_settings_default_orphaned_resource_policy.png') %>
 
-1. Under **User Controlled Upgrades for On Demand Instances**, configure whether or not
+1. <a id='user-controlled-upgrades'></a>Under **User Controlled Upgrades for On Demand Instances**, configure whether or not
 users can control when their services are upgraded.
 
     <%= image_tag('form_general_settings_upgrade_1.png') %>
@@ -438,7 +438,15 @@ users can control when their services are upgraded.
     When eligible, on-demand services users can indicate through their service dashboard if they want to upgrade. A task runs periodically to check for pending upgrade requests and perform them as required.
     <br></br>
 
-    To set how often the task runs, do one of the following:
+    In addition, the default value for 'opt-in to automatic upgrades' with newly created services can be changed. When a service opts-in to automatic upgrades,
+    the service will be automatically enrolled into upgrades when they become available instead of awaiting an indication from the user to enroll. The service owner
+    can opt-in or opt-out on the [Service Dashboard](managing.html#solace_pubsub_service_dashboard).
+    <p class="note">
+    <strong>Note:</strong> When upgrading to 2.7.0 from a previous version, existing services will be migrated with a value of false for the automatic opt-in to
+    upgrades option, ignoring the default value specified in the tile's form.
+    </p>
+
+    To set how often the upgrade task runs, do one of the following:
 	  + Select a preconfigured interval in **On Demand Upgrade Task Timer**.
 	  + Select **Custom Time** and enter an interval in Cron format.
 
@@ -446,11 +454,10 @@ users can control when their services are upgraded.
 
     When an update is available, the service dashboard looks like this:
 
-
-
     <%= image_tag('service_dashboard_with_update.png') %>
 
-    If the user clicks **Mark for Update**, then the service is updated at the next scheduled time.
+    If the user clicks **Mark for Update**, then the service is updated at the next scheduled time. Alternatively, the **automatically opt-in to updates** option
+    can be toggled at any point. When on, the user does not need to click **Mark for Update** when an update is available as it will automatically opt in.
 
     The Mark for Update button will appear if the service broker detects that there has been a change in configuration, including
     <br></br>
