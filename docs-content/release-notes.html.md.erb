@@ -24,6 +24,7 @@ In addition to the above features, this release resolves the following issues:
 * Interrupted or failed upgrades on HA groups can now be recovered with a subsequent upgrade.
 * Fixed an issue where TCP routes cannot be enabled on a service that initially had all routes disabled.
 * Service specific parameters for TCP routes are now reapplied on an update service if they are not overwritten.
+* TCP route request parameters are no longer reverted to default when they are not supplied.
 
 ### v2.6.1
 

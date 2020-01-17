@@ -35,14 +35,16 @@ While the provided procedures are relevant to Solace PubSub+, they do not provid
 ## <a id='service-specific-configuration'></a> Service Specific Parameters
 
 A service instance can be customized at creation time and updated as well using parameters when certain features are enabled.
+The parameters applied can be viewed in the service instance dashboard. 
 
 1. When LDAP is enabled, these parameters can be used to control management access to a service instance.
  * ldapGroupAdminReadOnly: Admin ReadOnly permissions are granted to the provided value for that parameter.
  * ldapGroupAdminReadWrite: Admin ReadWrite permissions are granted to the provided value for that parameter.
 
-1. If TCP routes are enabled and the configuration per protocol is "Allowed", then
+1. If TCP routes are enabled and the configuration per protocol is either "Enabled by default" or "Disabled by default", then
    you can use these parameters with valid values: `true`, `false` to control
-   TCP Routes per service instance.
+   TCP Routes per service instance. Only specified routes will be updated.
+   
  * `tcp_route_enabled`
  * `smf_tcp_route_enabled`
  * `smf_tls_tcp_route_enabled`
