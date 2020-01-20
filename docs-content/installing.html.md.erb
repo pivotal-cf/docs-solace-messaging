@@ -888,13 +888,20 @@ for management and user credentials.**
 
 1. Select what logs to send to the external syslog server.
 
-    <%= image_tag('form_system_logging_mb_commands.png') %>
+    <%= image_tag('form_system_logging_selection.png') %>
 
-    <%= image_tag('form_system_logging_mb_events.png') %>
+1. Set custom rules to control which jobs is to forward its logs. 
+    
+    <%= image_tag('form_system_logging_rules.png') %>
 
-    <%= image_tag('form_system_logging_mb_system.png') %>
+    <p class="note">Some rule examples:</p>
+    <p>if ($app-name != "solace-broker-logs") then stop</p>
+    <p>if ($app-name == "broker_agent") then stop</p>
+    <p>Note that if your custom rule is invalid, it will be ignored and won't fail the deployment.</p>
+ 
+1. Set TLS encryption.
 
-    <%= image_tag('form_system_logging_sb_agent.png') %>
+    <%= image_tag('form_system_logging_tls.png') %>
 
 1. Click **Save**.
 
