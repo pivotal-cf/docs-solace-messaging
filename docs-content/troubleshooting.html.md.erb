@@ -165,7 +165,7 @@ Process 'mariadb_ctrl' Execution failed
 </pre>
 </td></tr>
 <tr><th>Explanation</th><td>Monit reports that MariaDB failed to start. This happens when using high availability management and 2 or more MariaDB processes are shutdown at the same time. The cluster has lost quorum and MariaDB processes can't restart automatically.</td></tr>
-<tr><th>Possible Action</th><td>The MariaDB cluster needs to be bootstrapped. This is done by running the bootstrap errand with the command: bosh -d <solace_deployment> run-errand bootstrap. The bootstrap errand is always safe to run as it is a noop when it is not required. If the bootstrap errand does not fix the MariaDB process, the user should look at logs under /var/vcap/sys/log/mysql/.
+<tr><th>Possible Action</th><td>The MariaDB cluster needs to be bootstrapped. This is done by running the bootstrap errand with the command: bosh -d solace_deployment run-errand bootstrap. The bootstrap errand is always safe to run as it is a noop when it is not required. If the bootstrap errand does not fix the MariaDB process, the user should look at logs under /var/vcap/sys/log/mysql/.
 </td></tr>
 </table>
 
