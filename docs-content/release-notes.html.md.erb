@@ -8,9 +8,9 @@ Release Notes for Solace PubSub+ for Pivotal Platform.
 ### v2.7.0
 **Release Date: January 31, 2019**
 
-This release of Solace PubSub+ for Pivotal Platform tile contains Solace PubSub+ message broker v9.4.0.37 and the following new features and fixes:
+This release of Solace PubSub+ for Pivotal Platform tile contains Solace PubSub+ message broker v9.4.0.XXX and the following new features and fixes:
 
-* The Service Instance Dashboard now provides management of client and ACL profiles.
+* The Service Instance Dashboard now provides management of client profiles.
 * The Tile now uses the syslog release to support configuration of syslog.
 * Specific TCP ports can now be requested when creating and updating a service when TCP routing is enabled.
 * The Service Instance Dashboard now provides an option to automatically opt-in to all future updates and upgrades when user-controlled upgrades are enabled.
@@ -21,10 +21,13 @@ This release of Solace PubSub+ for Pivotal Platform tile contains Solace PubSub+
 
 In addition to the above features, this release resolves the following issues:
 
-* Interrupted or failed upgrades on HA groups can now be recovered with a subsequent upgrade.
-* Fixed an issue where TCP routes cannot be enabled on a service that initially had all routes disabled.
+* Interrupted or failed upgrades on HA groups can now be recovered with a subsequent upgrade (reference # SOL-28539)
+* Fixed an issue where TCP routes cannot be enabled on a service that initially had all routes disabled (reference # SOL-28209)
 * Service specific parameters for TCP routes are now reapplied on an update service if they are not overwritten.
 * TCP route request parameters are no longer reverted to default when they are not supplied.
+* A constraint on the monitor VM type field was added so that uncompatible VM types are not selectable (reference # SOL-29008)
+* Fixed an issue where CF clients used in internal components would sometime fail to connect to CF (reference # SOL-28328) 
+* Service broker and broker-agent logs no longer contain line breaks (reference # SOL-2367)
 
 ### v2.6.1
 
