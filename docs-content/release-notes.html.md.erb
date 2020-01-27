@@ -23,7 +23,6 @@ In addition to the above features, this release resolves the following issues:
 
 * Interrupted or failed upgrades on HA groups can now be recovered with a subsequent upgrade (reference # SOL-28539)
 * Fixed an issue where TCP routes cannot be enabled on a service that initially had all routes disabled (reference # SOL-28209)
-* Service specific parameters for TCP routes are now reapplied on an update service if they are not overwritten.
 * TCP route request parameters are no longer reverted to default when they are not supplied.
 * A constraint on the monitor VM type field was added so that uncompatible VM types are not selectable (reference # SOL-29008)
 * Fixed an issue where CF clients used in internal components would sometime fail to connect to CF (reference # SOL-28328) 
