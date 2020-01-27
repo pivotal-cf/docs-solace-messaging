@@ -440,7 +440,7 @@ users can control when their services are upgraded.
 
     In addition, the default value for 'opt-in to automatic upgrades' with newly created services can be changed. When a service opts-in to automatic upgrades,
     the service will be automatically enrolled into upgrades when they become available instead of awaiting an indication from the user to enroll. The service owner
-    can opt-in or opt-out on the [Service Dashboard](managing.html#solace_pubsub_service_dashboard). This option defaults to false on unconfigured tiles.
+    can opt-in or opt-out on the [Service Dashboard](managing.html#solace_pubsub_service_dashboard).
     <p class="note">
     <strong>Note:</strong> When upgrading to 2.7.0 from a previous version, existing services will be migrated with a value of false for the automatic opt-in to
     upgrades option, ignoring the default value specified in the tile's form.
@@ -890,13 +890,14 @@ for management and user credentials.**
 
     <%= image_tag('form_system_logging_selection.png') %>
 
-1. Set custom rules to control which jobs is to forward its logs. 
+1. Set custom rules to control log forwarding per job. 
     
     <%= image_tag('form_system_logging_rules.png') %>
 
-    <p class="note">Some rule examples:</p>
-    <p>if ($app-name != "solace-broker-logs") then stop</p>
-    <p>if ($app-name == "broker_agent") then stop</p>
+    <p>When no rules are provided, all jobs forward their logs.</p>
+    <p>Some rule examples:</p>
+    <code>if ($app-name != "solace-broker-logs") then stop <br>
+    if ($app-name == "broker_agent") then stop</code>
     <p>Note that if your custom rule is invalid, it will be ignored and won't fail the deployment.</p>
  
 1. Set TLS encryption.

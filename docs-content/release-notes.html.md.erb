@@ -11,24 +11,23 @@ Release Notes for Solace PubSub+ for Pivotal Platform.
 This release of Solace PubSub+ for Pivotal Platform tile contains Solace PubSub+ message broker v9.4.0.XXX and the following new features and fixes:
 
 * The Service Instance Dashboard now provides management of client profiles.
-* The Tile now uses the syslog release to support configuration of syslog.
+* Bosh VM logs can now be forwarded to a syslog server.
 * Specific TCP ports can now be requested when creating and updating a service when TCP routing is enabled.
 * The Service Instance Dashboard now provides an option to automatically opt-in to all future updates and upgrades when user-controlled upgrades are enabled.
 * Application Security Groups now include the message broker health check port.
-* When upgrading an HA group, switchovers are now minimized as the inactive is upgraded first.
+* HA group in-service upgrades are optimized so that a connected application has a single switchover.
 * Adds operator access to the MySQL Bootstrap errand through bosh.
+* TCP route request parameters are no longer reverted to default when they are not supplied. 
 * Adds support for Pivotal Platform v2.8.x.
+* Removes support for Pivotal Platform v2.4.x.
 
 In addition to the above features, this release resolves the following issues:
 
 * Interrupted or failed upgrades on HA groups can now be recovered with a subsequent upgrade (reference # SOL-28539)
 * Fixed an issue where TCP routes cannot be enabled on a service that initially had all routes disabled (reference # SOL-28209)
-* TCP route request parameters are no longer reverted to default when they are not supplied.
 * A constraint on the monitor VM type field was added so that uncompatible VM types are not selectable (reference # SOL-29008)
 * Fixed an issue where CF clients used in internal components would sometime fail to connect to CF (reference # SOL-28328) 
 * Service broker and broker-agent logs no longer contain line breaks (reference # SOL-2367)
-* Fixed an issue where changes that only affect Monitor nodes are never seen as completed (reference # SOL-29017)
-* Fixed an issue where upgrades that do not complete successfully cannot be retried from the service dashboard (reference # SOL-28517)
 * Fixed an issue causing TCP routes to become orphaned (reference # SOL-28116)
 
 ### v2.6.1
