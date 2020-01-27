@@ -27,6 +27,9 @@ In addition to the above features, this release resolves the following issues:
 * A constraint on the monitor VM type field was added so that uncompatible VM types are not selectable (reference # SOL-29008)
 * Fixed an issue where CF clients used in internal components would sometime fail to connect to CF (reference # SOL-28328) 
 * Service broker and broker-agent logs no longer contain line breaks (reference # SOL-2367)
+* Fixed an issue where changes that only affect Monitor nodes are never seen as completed (reference # SOL-29017)
+* Fixed an issue where upgrades that do not complete successfully cannot be retried from the service dashboard (reference # SOL-28517)
+* Fixed an issue causing TCP routes to become orphaned (reference # SOL-28116)
 
 ### v2.6.1
 
