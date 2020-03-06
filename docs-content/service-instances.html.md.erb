@@ -10,7 +10,7 @@ This topic describes how developers can manage instances of Solace PubSub+ servi
 
 A Solace Service Instance represents a Message VPN on a Solace PubSub+ message broker. A Message VPN allows for many separate apps to share a single message broker while still remaining independent and separated. For more information about Message VPNs, see [Core Concepts](https://docs.solace.com/Features/Core-Concepts.htm).
 
-After deploying the Solace PubSub+ for Pivotal Platform tile, the Solace PubSub+ service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service which they can make available to apps that need to exchange messages.
+After deploying the Solace PubSub+ for VMware Tanzu tile, the Solace PubSub+ service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service which they can make available to apps that need to exchange messages.
 
 By [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance, developers give the app permission to access this Message VPN through a client username or LDAP. For more information about how developers can use the credentials provided by the binding or service keys, see [Understanding Solace PubSub+ Credentials](credentials.html).
 
@@ -28,7 +28,7 @@ The following procedures show you:
  * Using Apps Manager
    * How to create a service instance.
 
-While the provided procedures are relevant to Solace PubSub+, they do not provide a complete set of examples of how to manage service instances in Pivotal Platform. For more information, see [Managing Service Instances with the cf CLI](http://docs.pivotal.io/pivotalcf/1-12/devguide/services/managing-services.html).
+While the provided procedures are relevant to Solace PubSub+, they do not provide a complete set of examples of how to manage service instances in VMware Tanzu. For more information, see [Managing Service Instances with the cf CLI](http://docs.pivotal.io/pivotalcf/1-12/devguide/services/managing-services.html).
 
 
 
@@ -133,7 +133,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI, do the foll
   solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ message broker for real-time, multi-protocol data distribution
   </pre>
 1. Create an instance of the Solace PubSub+ service. Select the appropriate service plan for your app.
-   For how the service plans differ, see [Pivotal Platform Marketplace Plans](index.html#marketplace-plans).
+   For how the service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
    The following example uses the `enterprise-large-ha` service plan and no service-specific parameters.
   <pre class="terminal">
   $ cf create-service solace-pubsub enterprise-large-ha solace-pubsub-instance
@@ -176,7 +176,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
   solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ message broker for real-time, multi-protocol data distribution
   </pre>
 
-1. Create an instance of the Solace PubSub+ service and select the appropriate service plan for your app. For how the service plans differ, see [Pivotal Platform Marketplace Plans](index.html#marketplace-plans).
+1. Create an instance of the Solace PubSub+ service and select the appropriate service plan for your app. For how the service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
 
 1. Add applicable service-specific parameters. The following example uses the `enterprise-shared` service plan with service-specific parameters for TCP routes that enable opening an MQTT TLS port to support IoT devices and setting the Orphaned Resource Policy to make any orphaned resources service instance owned.
   <pre class="terminal">
@@ -351,7 +351,7 @@ To create an instance of the Solace PubSub+ service in Apps Manager, do the foll
 
 1. Click **Solace PubSub+**.
 
-1. Select the appropriate service plan for your app. For information on how service plans differ, see [Pivotal Platform Marketplace Plans](index.html#marketplace-plans).
+1. Select the appropriate service plan for your app. For information on how service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
   <%= image_tag('appsmanager_select_solace_pubsub_plan_short_form.png') %>
 
 1. Enter an **Instance Name** and select a space under **Add to Space**. Then click **Add**.
