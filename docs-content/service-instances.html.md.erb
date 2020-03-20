@@ -10,7 +10,7 @@ This topic describes how developers can manage instances of Solace PubSub+ servi
 
 A Solace Service Instance represents a Message VPN on a Solace PubSub+ message broker. A Message VPN allows for many separate apps to share a single message broker while still remaining independent and separated. For more information about Message VPNs, see [Core Concepts](https://docs.solace.com/Features/Core-Concepts.htm).
 
-After deploying the Solace PubSub+ for Pivotal Platform tile, the Solace PubSub+ service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service which they can make available to apps that need to exchange messages.
+After deploying the Solace PubSub+ for VMware Tanzu tile, the Solace PubSub+ service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service which they can make available to apps that need to exchange messages.
 
 By [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance, developers give the app permission to access this Message VPN through a client username or LDAP. For more information about how developers can use the credentials provided by the binding or service keys, see [Understanding Solace PubSub+ Credentials](credentials.html).
 
@@ -28,21 +28,22 @@ The following procedures show you:
  * Using Apps Manager
    * How to create a service instance.
 
-While the provided procedures are relevant to Solace PubSub+, they do not provide a complete set of examples of how to manage service instances in Pivotal Platform. For more information, see [Managing Service Instances with the cf CLI](http://docs.pivotal.io/pivotalcf/1-12/devguide/services/managing-services.html).
+While the provided procedures are relevant to Solace PubSub+, they do not provide a complete set of examples of how to manage service instances in VMware Tanzu. For more information, see [Managing Service Instances with the cf CLI](http://docs.pivotal.io/pivotalcf/1-12/devguide/services/managing-services.html).
 
 
 
 ## <a id='service-specific-configuration'></a> Service Specific Parameters
 
 A service instance can be customized at creation time and updated as well using parameters when certain features are enabled.
+The parameters applied can be viewed in the service instance dashboard. 
 
 1. When LDAP is enabled, these parameters can be used to control management access to a service instance.
  * ldapGroupAdminReadOnly: Admin ReadOnly permissions are granted to the provided value for that parameter.
  * ldapGroupAdminReadWrite: Admin ReadWrite permissions are granted to the provided value for that parameter.
 
-1. If TCP routes are enabled and the configuration per protocol is "Allowed", then
+1. If TCP routes are enabled and the configuration per protocol is either "Enabled by default" or "Disabled by default", then
    you can use these parameters with valid values: `true`, `false` to control
-   TCP Routes per service instance.
+   TCP Routes per service instance. Only specified routes will be updated.
  * `tcp_route_enabled`
  * `smf_tcp_route_enabled`
  * `smf_tls_tcp_route_enabled`
@@ -57,6 +58,26 @@ A service instance can be customized at creation time and updated as well using 
  * `rest_tls_tcp_route_enabled`
  * `amqp_tcp_route_enabled`
  * `amqp_tls_tcp_route_enabled`
+
+1. The following parameters can be used to request a specific port for TCP routes on any of the
+   above protocols if and only if they are enabled. These can subsequently be provided in an update-service request. 
+   If provided on an update service request, the original route will be deleted, and the new route will be bound to the
+   requested port. This port should not be in use and should be within the range configured on the TCP router.
+   When using a standalone plan, the primary variant of the request parameter should be used
+   If the service is provisioned under a high availability plan, the backup variant can be used as well.
+ * `smf_tcp_route_primary_port`, `smf_tcp_route_backup_port`
+ * `smf_tls_tcp_route_primary_port`, `smf_tls_tcp_route_backup_port`
+ * `smf_zip_tcp_route_primary_port`, `smf_zip_tcp_route_backup_port`
+ * `web_messaging_tcp_route_primary_port`, `web_messaging_tcp_route_backup_port`
+ * `web_messaging_tls_tcp_route_primary_port`, `web_messaging_tls_tcp_route_backup_port`
+ * `mqtt_tcp_route_primary_port`, `mqtt_tcp_route_backup_port`
+ * `mqtt_tls_tcp_route_primary_port`, `mqtt_tls_tcp_route_backup_port`
+ * `mqtt_ws_tcp_route_primary_port`, `mqtt_ws_tcp_route_backup_port`
+ * `mqtt_wss_tcp_route_primary_port`, `mqtt_wss_tcp_route_backup_port`
+ * `rest_tcp_route_primary_port`, `rest_tcp_route_backup_port`
+ * `rest_tls_tcp_route_primary_port`, `rest_tls_tcp_route_backup_port`
+ * `amqp_tcp_route_primary_port`, `amqp_tcp_route_backup_port`
+ * `amqp_tls_tcp_route_primary_port`, `amqp_tls_tcp_route_backup_port`
 
 1. <a id='service_orphaned_resource_policy'></a> A service orphaned resource
 policy can be set at service creation or update time. This service policy
@@ -112,7 +133,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI, do the foll
   solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ message broker for real-time, multi-protocol data distribution
   </pre>
 1. Create an instance of the Solace PubSub+ service. Select the appropriate service plan for your app.
-   For how the service plans differ, see [Pivotal Platform Marketplace Plans](index.html#marketplace-plans).
+   For how the service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
    The following example uses the `enterprise-large-ha` service plan and no service-specific parameters.
   <pre class="terminal">
   $ cf create-service solace-pubsub enterprise-large-ha solace-pubsub-instance
@@ -155,19 +176,18 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
   solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ message broker for real-time, multi-protocol data distribution
   </pre>
 
-1. Create an instance of the Solace PubSub+ service and select the appropriate service plan for your app. For how the service plans differ, see [Pivotal Platform Marketplace Plans](index.html#marketplace-plans).
+1. Create an instance of the Solace PubSub+ service and select the appropriate service plan for your app. For how the service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
 
 1. Add applicable service-specific parameters. The following example uses the `enterprise-shared` service plan with service-specific parameters for TCP routes that enable opening an MQTT TLS port to support IoT devices and setting the Orphaned Resource Policy to make any orphaned resources service instance owned.
   <pre class="terminal">
-  $ cf create-service solace-pubsub enterprise-shared solace-pubsub-instance-IoT -c '{ "mqtt_tls_tcp_route_enabled" : "true" , "orphanedResourcePolicy": "MakeServiceOwned" }'
+  $ cf create-service solace-pubsub enterprise-shared solace-pubsub-instance-IoT -c '{ "mqtt\_tls\_tcp\_route\_enabled" : "true" , "mqtt\_tls\_tcp\_route\_primary\_port": 1024 , "orphanedResourcePolicy": "MakeServiceOwned" }'
   Creating service instance solace-pubsub-instance-IoT in org example / space development as user@example.com...
   OK
   </pre>
 
 1. Getting details about the created service.
   <pre class="terminal">
-  $ cf service solace-pubsub-instance-IoT
-
+  $ cf service solace-pubsub-instance-IoT<br>
   Service instance: solace-pubsub-instance-IoT
   Service: solace-pubsub
   Bound apps:
@@ -175,8 +195,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
   Plan: enterprise-shared
   Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
   Documentation url: http://docs.solace.com
-  Dashboard: https://enterprise-shared-0.YOUR-SYSTEM-DOMAIN/#/msg-vpns/djAwMQ==?token=YWJj.jsalkdj01041024laqksdjalsdh8ayulaksfnaosfr0817u04ualknaglnzs0v8u0qusflasknrflknifQ%3D%3D.eHl6
-
+  Dashboard: https://enterprise-shared-0.YOUR-SYSTEM-DOMAIN/#/msg-vpns/djAwMQ==?token=YWJj.jsalkdj01041024laqksdjalsdh8ayulaksfnaosfr0817u04ualknaglnzs0v8u0qusflasknrflknifQ%3D%3D.eHl6<br>
   Last Operation
   Status: create succeeded
   Message:
@@ -223,7 +242,7 @@ To update an instance of the Solace PubSub+ service with the cf CLI, do the foll
 
 1. Update the service instance of the Solace PubSub+ service assuming both LDAP and TCP routes are enabled. This disables external access to the MQTT Plain Text messaging protocol, grants Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups, and sets the Orphaned Resource Policy to Delete.
 	<pre class="terminal">
-        $ cf update-service solace-pubsub-instance -c '{ "orphanedResourcePolicy": "Delete", "mqtt_tcp_route_enabled" : "false", "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com", "ldapGroupAdminReadWrite" : "cn=username2,ou=groups,dc=solace,dc=com" }'
+        $ cf update-service solace-pubsub-instance -c '{ "orphanedResourcePolicy": "Delete", "mqtt\_tcp\_route\_enabled" : "false", "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com", "ldapGroupAdminReadWrite" : "cn=username2,ou=groups,dc=solace,dc=com" }'
 	Updating service instance solace-pubsub-instance user...
 	OK
 	</pre>
@@ -332,7 +351,7 @@ To create an instance of the Solace PubSub+ service in Apps Manager, do the foll
 
 1. Click **Solace PubSub+**.
 
-1. Select the appropriate service plan for your app. For information on how service plans differ, see [Pivotal Platform Marketplace Plans](index.html#marketplace-plans).
+1. Select the appropriate service plan for your app. For information on how service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
   <%= image_tag('appsmanager_select_solace_pubsub_plan_short_form.png') %>
 
 1. Enter an **Instance Name** and select a space under **Add to Space**. Then click **Add**.
