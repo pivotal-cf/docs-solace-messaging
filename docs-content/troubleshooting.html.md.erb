@@ -334,3 +334,24 @@ Endpoints owned by v002.cu000001 must first be deleted:
 </table>
 
   <br>
+
+
+## <a id='dashboard'></a> Dashboard Troubleshooting
+
+<table border="1" class="nice">
+<tr><th colspan=2><a id='dashboard_permission_error'></a>Dashboard 403 Error using VMWare Tanzu SSO</th></th>
+<tr><th>Operation</th><td>
+Accessing the service dashboard with Single Sign On
+</td></tr>
+<tr><th>Error</th><td>
+On the dashboard's webpage, <pre class="terminal">403: Forbidden</pre> is shown.
+</td></tr>
+<tr><th>Explanation</th><td>The user's permissions are determined through a call to the CF API controller with the given service and user's access token. CF then
+tells the dashboard whether the user has <a href='https://docs.cloudfoundry.org/concepts/roles.html#permissions'>read and manage permissions</a>.</td></tr>
+<tr><th>Possible Action(s)</th><td>Verify that the account used to access the dashboard has permission to read/manage the service instance by verifying their 
+organization and space roles in CloudFoundry. If Single Sign
+On access for Solace PubSub+ was revoked through the Third Party Access pane on the VMWare Tanzu User Management page,
+logout of the dashboard by clicking the user icon in the top right corner and clicking logout and retry accessing the dashboard through the dashboard url.</td></tr>
+</table>
+
+  <br>

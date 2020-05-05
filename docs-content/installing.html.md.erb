@@ -682,6 +682,13 @@ They are required if you choose to use LDAP with TLS or if you want to use
 
     <%= image_tag('form_tls_config_enable_client_certificate_auth.png') %>
 
+1. Set the **Default REST SSL Server Certificate Max Chain Depth** for newly created service instances.
+Set to 3 by default and can be any number between 0 and 8. The 
+[REST SSL Server Certificate Max Chain Depth](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Service.htm#Set-Max-Chain) 
+can be changed by the service owner through the Solace PubSub+ Manager or CLI. Changes to this property do not impact existing service instances.
+
+    <%= image_tag('form_tls_config_rest_server_cert_max_chain_depth.png') %>
+
 1. Click **Save**.
 
 
