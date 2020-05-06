@@ -79,6 +79,10 @@ The parameters applied can be viewed in the service instance dashboard.
  * `amqp_tcp_route_primary_port`, `amqp_tcp_route_backup_port`
  * `amqp_tls_tcp_route_primary_port`, `amqp_tls_tcp_route_backup_port`
 
+1. <a id='service_rest_mode'></a>[Service REST Mode](https://docs.solace.com/Open-APIs-Protocols/REST-get-start.htm#When) can be set
+to either messaging or gateway. The mode can be set with the `service_rest_mode` json property with valid values `gateway` or `messaging`. 
+This property defaults to messaging.
+
 1. <a id='service_orphaned_resource_policy'></a> A service orphaned resource
 policy can be set at service creation or update time. This service policy
 takes precedence over the operator set
