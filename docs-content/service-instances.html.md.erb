@@ -79,6 +79,11 @@ The parameters applied can be viewed in the service instance dashboard.
  * `amqp_tcp_route_primary_port`, `amqp_tcp_route_backup_port`
  * `amqp_tls_tcp_route_primary_port`, `amqp_tls_tcp_route_backup_port`
 
+1. <a id='vpn_options'></a> The top level configuration option `vpnOptions` can be provided to configure various properties on the VPN.
+  1. [Service REST Mode](https://docs.solace.com/Open-APIs-Protocols/REST-get-start.htm#When) can be set
+to either messaging or gateway. The mode can be set with the `vpnOptions.serviceRestMode` json property with valid values `gateway` or `messaging`. 
+This property defaults to messaging.
+
 1. <a id='service_orphaned_resource_policy'></a> A service orphaned resource
 policy can be set at service creation or update time. This service policy
 takes precedence over the operator set
@@ -178,9 +183,10 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
 
 1. Create an instance of the Solace PubSub+ service and select the appropriate service plan for your app. For how the service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
 
-1. Add applicable service-specific parameters. The following example uses the `enterprise-shared` service plan with service-specific parameters for TCP routes that enable opening an MQTT TLS port to support IoT devices and setting the Orphaned Resource Policy to make any orphaned resources service instance owned.
+1. Add applicable service-specific parameters. The following example uses the `enterprise-shared` service plan with service-specific parameters for TCP routes that enable opening an MQTT TLS port to support IoT devices, setting the Orphaned Resource Policy to make any orphaned resources service instance owned
+  and setting the VPN's REST mode to gateway.
   <pre class="terminal">
-  $ cf create-service solace-pubsub enterprise-shared solace-pubsub-instance-IoT -c '{ "mqtt\_tls\_tcp\_route\_enabled" : "true" , "mqtt\_tls\_tcp\_route\_primary\_port": 1024 , "orphanedResourcePolicy": "MakeServiceOwned" }'
+  $ cf create-service solace-pubsub enterprise-shared solace-pubsub-instance-IoT -c '{ "mqtt\_tls\_tcp\_route\_enabled" : "true" , "mqtt\_tls\_tcp\_route\_primary\_port": 1024 , "orphanedResourcePolicy": "MakeServiceOwned", "vpnOptions":{"serviceRestMode":"gateway"} }'
   Creating service instance solace-pubsub-instance-IoT in org example / space development as user@example.com...
   OK
   </pre>
@@ -195,7 +201,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
   Plan: enterprise-shared
   Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
   Documentation url: http://docs.solace.com
-  Dashboard: https://enterprise-shared-0.YOUR-SYSTEM-DOMAIN/#/msg-vpns/djAwMQ==?token=YWJj.jsalkdj01041024laqksdjalsdh8ayulaksfnaosfr0817u04ualknaglnzs0v8u0qusflasknrflknifQ%3D%3D.eHl6<br>
+  Dashboard: https<span>:</span>//solace-service-dashboard.YOUR-SYSTEM-DOMAIN/service-dashboard/f5d6bf5b-e84f-416b-8c08-4a0e782a51d2/
   Last Operation
   Status: create succeeded
   Message:
@@ -354,7 +360,7 @@ To create an instance of the Solace PubSub+ service in Apps Manager, do the foll
 1. Select the appropriate service plan for your app. For information on how service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
   <%= image_tag('appsmanager_select_solace_pubsub_plan_short_form.png') %>
 
-1. Enter an **Instance Name** and select a space under **Add to Space**. Then click **Add**.
+1. Enter an **Instance Name**, select a space under **Add to Space** and configure any optional parameters if desired. Then click **Add**.
   <%= image_tag('appsmanager_solace_messaging_create_service_do_not_bind_short_form_new.png') %>
 
 1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
