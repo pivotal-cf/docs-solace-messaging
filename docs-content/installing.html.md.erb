@@ -573,10 +573,10 @@ users can control when their services are upgraded.
     <%= image_tag('external_rest_routes.png') %>
 
     Check the *Enable REST Messaging HTTP Routes* box to enable HTTP routes registered under the
-    Tanzu Application Service system domain for all services for REST messaging capabilities and accessible with the externalRestUris
-    VCAP entry. This route maps the ports from restUris to externally accessible and secured HTTPs ports on the system domain.
-    The server certificate used on these routes will be that of the TAS tile's configuration and not that of the Solace PubSub TLS
-    configuration and is always secured (ie. no http-only access). See [Solace PubSub+ Credentials](credentials.html#vcap-example) for more information.
+    Tanzu Application Service (TAS) system domain for all services for REST messaging capabilities and accessible with the externalRestUris and externalRestTlsUris
+    VCAP entry. This route maps the ports from restUris to externally accessible HTTP/HTTPS ports on a route registered under the TAS system domain.
+    When using HTTPS, the server certificate used will be that of the TAS tile's configuration and not that of the Solace PubSub TLS
+    configuration. See [Solace PubSub+ Credentials](credentials.html#vcap-example) for more information.
 
 1. Click **Save**.
 
