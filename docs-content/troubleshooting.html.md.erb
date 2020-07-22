@@ -200,7 +200,8 @@ cf create-service solace-pubsub enterprise-large
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service broker error: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: No matching Solace Message VPNs available.
+Server error, status code: 502, error code: 10001, message: Service broker error: 
+com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: No matching Solace Message VPNs available.
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>The service broker does not find any Solace Message VPNs in its inventory for the requested service plan.</td></tr>
@@ -236,7 +237,8 @@ cf update-service my-large-instance -c '{ "mqtt_tcp_route_enabled" : "false" }'
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service broker error: The parameter mqtt_tcp_route_enabled is invalid given the current configuration. It requires [ TCP Routes Enabled ]
+Server error, status code: 502, error code: 10001, message: Service broker error: The parameter 
+mqtt_tcp_route_enabled is invalid given the current configuration. It requires [ TCP Routes Enabled ]
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>As indicated in the error, the given parameter is only valid when TCP Routes is enabled.</td></tr>
@@ -254,7 +256,8 @@ cf update-service my-large-instance -c '{ "ldapGroupAdminReadOnly" : "cn=usernam
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service broker error: The parameter ldapGroupAdminReadOnly is invalid given the current configuration. It requires [ LDAP Enabled, Management Access set to LDAP ]
+Server error, status code: 502, error code: 10001, message: Service broker error: The parameter ldapGroupAdminReadOnly 
+is invalid given the current configuration. It requires [ LDAP Enabled, Management Access set to LDAP ]
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>As indicated in the error, the given parameter is only valid when LDAP is enabled and Management Access is set to LDAP.</td></tr>
@@ -281,11 +284,13 @@ Tags:
 Plan: enterprise-large
 Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
 Documentation url: http://docs.solace.com
-Dashboard: https://enterprise-large-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
+Dashboard: https://enterprise-large-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=
+YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
 
 Last Operation
 Status: delete failed
-Message: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: Unable to delete Service, the associated Message VPN v001 on 10.244.0.3 is not currently available
+Message: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: 
+Unable to delete Service, the associated Message VPN v001 on 10.244.0.3 is not currently available
 Started: 2020-01-00T00:00:00Z
 Updated: 2020-01-00T00:00:00Z
 </pre>
@@ -323,7 +328,8 @@ cf unbind-service my-app my-service-instance
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service instance test-shared: Service broker error: Operation canceled. Orphaned Endpoints Policy was violated.
+Server error, status code: 502, error code: 10001, message: Service instance test-shared: Service broker error: 
+Operation canceled. Orphaned Endpoints Policy was violated.
 Endpoints owned by v002.cu000001 must first be deleted:
         Queues: [ someQ ]
         Topics Endpoints: [ someTPE ]
@@ -347,7 +353,8 @@ Client Profile management in the Solace Service Dashboard
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-The operation [...] is not supported on message-vpn v001 with given configuration: replication admin-state [enabled] and config-state [standby]. Management operations may only be run on the 'active' replication group
+The operation [...] is not supported on message-vpn v001 with its current configuration: replication admin-state [enabled] 
+and config-state [standby]. Management operations may only be run on the 'active' replication group
 </pre>
 </td></tr>
 <tr><th>Explanation</th>
