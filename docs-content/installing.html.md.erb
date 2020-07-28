@@ -200,7 +200,7 @@ Solace PubSub+ for VMware Tanzu requires the following:
   * Internal deployment as part of the Solace PubSub+ for VMware Tanzu on a management VM
      * [Internal MySQL](#required_mysql_internal)
      * [Internal MySQL (Highly Available)](#required_mysql_internal_ha)
-  * As service from a deployment of [MySQL for VMware Tanzu](http://docs.pivotal.io/p-mysql/index.html). Please ensure to configure for a High Availability setup and with service plans offering a minimum of 100&nbsp;MB. See [MySQL for VMware Tanzu](#required_mysql_for_pcf).
+  * As service from a deployment of [VMware Tanzu SQL [MySQL]](http://docs.pivotal.io/p-mysql/index.html). Please ensure to configure for a High Availability setup and with service plans offering a minimum of 100&nbsp;MB. See [VMware Tanzu SQL [MySQL]](#required_mysql_for_pcf).
   * External when MySQL is already deployed outside VMware Tanzu, it may be offered as a user provided service instance to Solace PubSub+ for VMware Tanzu, see [External MySQL](#required_mysql_external).
 * If using TCP Routes: [TCP Routes Requirements](#tcp_routes_requirements)
 
@@ -300,7 +300,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
     <%= image_tag('form_mysql_internal_ha_new3.png') %>
     <p></p>
     <a id='required_mysql_for_pcf'></a>
-    **MySQL for VMware Tanzu**: When MySQL for VMware Tanzu tile is available, select a highly available service plan with a minimum of 100&nbsp;MB database size.
+    **VMware Tanzu SQL [MySQL]**: When VMware Tanzu SQL [MySQL] tile is available, select a highly available service plan with a minimum of 100&nbsp;MB database size.
     <%= image_tag('form_mysql_for_pcf_new2.png') %>
     <p></p>
     <a id='required_mysql_external'></a>
@@ -475,7 +475,7 @@ users can control when their services are upgraded.
     <li>TCP Routes configuration.</li>
     </ul>
 
-    <p class="note"><strong>Note:</strong> 
+    <p class="note"><strong>Note:</strong>
     For Shared service plans, every service on a broker must be marked for upgrade before the upgrade can happen.
     This prevents one tenant from upgrading a router before the other tenants are ready. The operator can
     mark the services for upgrade on behalf of the tenants.</p>
@@ -485,7 +485,7 @@ users can control when their services are upgraded.
 
     <%= image_tag('form_general_settings_inflight.png') %>
 
-    These fields control how many on-demand services can be updated at once. 
+    These fields control how many on-demand services can be updated at once.
     <br></br>
 
     The Maximum On-Demand Update Canaries field specifies how many services will initially be updated.
@@ -502,7 +502,7 @@ users can control when their services are upgraded.
 
     <p class="note"><strong>Note:</strong> The number of upgrades that can run at once is also constrained by
     the number of Director Workers configured in the Bosh Director tile on the Director Config page.
-    Bosh reserves one worker for status related tasks, and so no more than that number of workers minus one, 
+    Bosh reserves one worker for status related tasks, and so no more than that number of workers minus one,
     will be available to perform upgrades simultaneously. For example, if there are 3 Director Workers,
     no more than 2 upgrades will be performed at once regardless of what you enter in the
     Maximum On-Demand fields in the Solace tile.
@@ -617,10 +617,10 @@ users can control when their services are upgraded.
   + Upon enabling this feature with option 2 or option 3 described above, old bindings containing IPs will remain valid but won't be automatically updated to include the new address type. New bindings will have the new address type.
   + Before reconfiguring the tile with a new option, note that:
     - Moving from option 1 to another option is OK. Bindings created with option 1 will remain valid.
-    - Moving from option 2 to another option is OK. Bindings created with option 2 will remain valid. 
-    - Moving from option 3 to another option is possible but breaks existing bindings. Bindings created with option 3 will stop working. 
+    - Moving from option 2 to another option is OK. Bindings created with option 2 will remain valid.
+    - Moving from option 3 to another option is possible but breaks existing bindings. Bindings created with option 3 will stop working.
 
-    The solace-bosh-dns-aliases addon needs to be applied using a runtime-configuration. 
+    The solace-bosh-dns-aliases addon needs to be applied using a runtime-configuration.
     The operator can control to which deployment the runtime-configuration will be applied,
     including the selection of instance groups within the deployment.
 
@@ -633,7 +633,7 @@ users can control when their services are upgraded.
 
 
 
-    
+
 
 
 
@@ -693,8 +693,8 @@ They are required if you choose to use LDAP with TLS or if you want to use
     <%= image_tag('form_tls_config_enable_client_certificate_auth.png') %>
 
 1. Set the **Default REST SSL Server Certificate Max Chain Depth** for newly created service instances.
-Set to 3 by default and can be any number between 0 and 8. The 
-[REST SSL Server Certificate Max Chain Depth](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Service.htm#Set-Max-Chain) 
+Set to 3 by default and can be any number between 0 and 8. The
+[REST SSL Server Certificate Max Chain Depth](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Service.htm#Set-Max-Chain)
 can be changed by the service owner through the Solace PubSub+ Manager or CLI. Changes to this property do not impact existing service instances.
 
     <%= image_tag('form_tls_config_rest_server_cert_max_chain_depth.png') %>
@@ -865,12 +865,12 @@ for management and user credentials.**
     <%= image_tag('form_oauth_1.png') %>
     <%= image_tag('form_oauth_2.png') %>
 
-    Please refer to the [Client Authentication Overview](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm) 
+    Please refer to the [Client Authentication Overview](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm)
     page for field documentation.
     <br></br>
-    Changing the above configuration does not update pre-existing message VPNs. The default OAuth provider is only created on new message VPNs. 
+    Changing the above configuration does not update pre-existing message VPNs. The default OAuth provider is only created on new message VPNs.
     <br></br>
-    A user is free to modify any OAuth configuration manually by logging into the PubSub+ broker and using the command line interface. User customizations won't be lost. 
+    A user is free to modify any OAuth configuration manually by logging into the PubSub+ broker and using the command line interface. User customizations won't be lost.
     <br></br>
     <p class="note"><strong>Note:</strong> OAuth Authentication is disabled on message VPNs by default and can be enabled on the Application Access page.
 
@@ -907,8 +907,8 @@ for management and user credentials.**
 
     <%= image_tag('form_system_logging_selection.png') %>
 
-1. Set custom rules to control log forwarding per job. 
-    
+1. Set custom rules to control log forwarding per job.
+
     <%= image_tag('form_system_logging_rules.png') %>
 
     <p>When no rules are provided, all jobs forward their logs.</p>
@@ -916,7 +916,7 @@ for management and user credentials.**
     <code>if ($app-name != "solace-broker-logs") then stop <br>
     if ($app-name == "broker_agent") then stop</code>
     <p>Note that if your custom rule is invalid, it will be ignored and won't fail the deployment.</p>
- 
+
 1. Set TLS encryption.
 
     <%= image_tag('form_system_logging_tls.png') %>
@@ -1018,7 +1018,7 @@ If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not 
 
 <p class="note"><strong>Note:</strong> If some PubSub+ message brokers have been upgraded and others have not,
 it is not possible to create new bindings or service keys with the non-upgraded services.
-This is because features such as authentication schemes might have changed with the upgrade, and 
+This is because features such as authentication schemes might have changed with the upgrade, and
 would not be compatible with the services created before the upgrade.
 </p>
 
@@ -1227,11 +1227,11 @@ Here is a table showing the ports that are required for internal communication b
 
 ## <a id='ip_assignment'></a> IP Address Assignment
 
-For operator allocated instances, IP addresses are assigned to VMs during deployment and remain 
+For operator allocated instances, IP addresses are assigned to VMs during deployment and remain
 static throughout the life of the deployment. <strong>Note:</strong> you can specify the range of IPs for operated plans, see
  [Static IPs](#optional_static_ips)
 
-For on-demand services, IP addresses are dynamically allocated from the network during the on-demand deployment creation, but once allocated 
+For on-demand services, IP addresses are dynamically allocated from the network during the on-demand deployment creation, but once allocated
 they remain static throughout the life of the on-demand deployment.
 
 ## <a id='tcp_routes_requirements'></a> TCP Routes Requirements
@@ -1297,4 +1297,3 @@ they remain static throughout the life of the on-demand deployment.
 
 
 </table>
-
