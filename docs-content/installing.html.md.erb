@@ -568,6 +568,16 @@ users can control when their services are upgraded.
     The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans with **High Availability** enabled.
     A Monitor node requires 1 CPU and 1 GB of RAM.
 
+1.  <a id='rest_routes'></a> Enable REST Messaging through HTTP Routes
+
+    <%= image_tag('external_rest_routes.png') %>
+
+    Check the *Enable REST Messaging HTTP Routes* box to enable HTTP routes registered under the
+    Tanzu Application Service (TAS) system domain for all services for REST messaging capabilities and accessible with the externalRestUris and externalRestTlsUris
+    VCAP entry. This route maps the ports from restUris to externally accessible HTTP/HTTPS ports on a route registered under the TAS system domain.
+    When using HTTPS, the server certificate used will be that of the TAS tile's configuration and not that of the Solace PubSub TLS
+    configuration. See [Solace PubSub+ Credentials](credentials.html#vcap-example) for more information.
+
 1. Click **Save**.
 
 #### <a id='optional_bosh_dns_aliases'></a> (Optional) Bosh DNS Aliases
