@@ -200,7 +200,8 @@ cf create-service solace-pubsub enterprise-large
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service broker error: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: No matching Solace Message VPNs available.
+Server error, status code: 502, error code: 10001, message: Service broker error: 
+com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: No matching Solace Message VPNs available.
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>The service broker does not find any Solace Message VPNs in its inventory for the requested service plan.</td></tr>
@@ -236,7 +237,8 @@ cf update-service my-large-instance -c '{ "mqtt_tcp_route_enabled" : "false" }'
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service broker error: The parameter mqtt_tcp_route_enabled is invalid given the current configuration. It requires [ TCP Routes Enabled ]
+Server error, status code: 502, error code: 10001, message: Service broker error: The parameter 
+mqtt_tcp_route_enabled is invalid given the current configuration. It requires [ TCP Routes Enabled ]
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>As indicated in the error, the given parameter is only valid when TCP Routes is enabled.</td></tr>
@@ -254,7 +256,8 @@ cf update-service my-large-instance -c '{ "ldapGroupAdminReadOnly" : "cn=usernam
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service broker error: The parameter ldapGroupAdminReadOnly is invalid given the current configuration. It requires [ LDAP Enabled, Management Access set to LDAP ]
+Server error, status code: 502, error code: 10001, message: Service broker error: The parameter ldapGroupAdminReadOnly 
+is invalid given the current configuration. It requires [ LDAP Enabled, Management Access set to LDAP ]
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>As indicated in the error, the given parameter is only valid when LDAP is enabled and Management Access is set to LDAP.</td></tr>
@@ -281,11 +284,13 @@ Tags:
 Plan: enterprise-large
 Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
 Documentation url: http://docs.solace.com
-Dashboard: https://enterprise-large-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
+Dashboard: https://enterprise-large-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=
+YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
 
 Last Operation
 Status: delete failed
-Message: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: Unable to delete Service, the associated Message VPN v001 on 10.244.0.3 is not currently available
+Message: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: 
+Unable to delete Service, the associated Message VPN v001 on 10.244.0.3 is not currently available
 Started: 2020-01-00T00:00:00Z
 Updated: 2020-01-00T00:00:00Z
 </pre>
@@ -323,7 +328,8 @@ cf unbind-service my-app my-service-instance
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service instance test-shared: Service broker error: Operation canceled. Orphaned Endpoints Policy was violated.
+Server error, status code: 502, error code: 10001, message: Service instance test-shared: Service broker error: 
+Operation canceled. Orphaned Endpoints Policy was violated.
 Endpoints owned by v002.cu000001 must first be deleted:
         Queues: [ someQ ]
         Topics Endpoints: [ someTPE ]
@@ -333,13 +339,40 @@ Endpoints owned by v002.cu000001 must first be deleted:
 <tr><th>Possible Action(s)</th><td>Delete the Endpoints before unbinding. Alternatively you can adjust the <a href='service-instances.html#service_orphaned_resource_policy'>Service Orphaned Resource Policy</a>.</td></tr>
 </table>
 
+<br>
+
+<table border="1" class="nice">
+<tr><th colspan=2><a id='abort_replication_standby_error'></a>Standby Replication VPN Mode</th></th>
+<tr><th>Operation</th><td>
+<pre class="terminal">
+cf update-service my-app -c '{"vpnOptions:"{...}}'
+cf bind-service my-app my-service-instance # if LDAP is not the authentication scheme
+cf unbind-service my-app my-service-instance # if LDAP is not the authentication scheme
+</pre>
+Client Profile management in the Solace Service Dashboard
+</td></tr>
+<tr><th>Error</th><td>
+<pre class="terminal">
+The operation [...] is not supported on message-vpn v001 with its current configuration: replication admin-state [enabled] 
+and config-state [standby]. Management operations may only be run on the 'active' replication group
+</pre>
+</td></tr>
+<tr><th>Explanation</th>
+<td>If a service's message VPN has been configured to be part of a replication group and its configuration state is set to 'standby', all unsupported configuration operations are rejected. This
+includes creating or deleting client usernames, updating VPN options through cf update-service, or configuring client profiles through the service dashboard.</td>
+</tr>
+<tr><th>Possible Action(s)</th><td>Configuration is still allowed on the 'active' member of the replication group and will be config sync'd between the two. Managing
+bindings when replication configuration is set to standby and when using internal message broker authentication is not supported.</td></tr>
+</table>
+
+
   <br>
 
 
 ## <a id='dashboard'></a> Dashboard Troubleshooting
 
 <table border="1" class="nice">
-<tr><th colspan=2><a id='dashboard_permission_error'></a>Dashboard 403 Error using VMWare Tanzu SSO</th></th>
+<tr><th colspan=2><a id='dashboard_permission_error'></a>Dashboard 403 Error using VMware Tanzu SSO</th></th>
 <tr><th>Operation</th><td>
 Accessing the service dashboard with Single Sign On
 </td></tr>
@@ -349,8 +382,12 @@ On the dashboard's webpage, <pre class="terminal">403: Forbidden</pre> is shown.
 <tr><th>Explanation</th><td>The user's permissions are determined through a call to the CF API controller with the given service and user's access token. CF then
 tells the dashboard whether the user has <a href='https://docs.cloudfoundry.org/concepts/roles.html#permissions'>read and manage permissions</a>.</td></tr>
 <tr><th>Possible Action(s)</th><td>Verify that the account used to access the dashboard has permission to read/manage the service instance by verifying their 
-organization and space roles in CloudFoundry. If Single Sign
-On access for Solace PubSub+ was revoked through the Third Party Access pane on the VMWare Tanzu User Management page,
+organization and space roles in CloudFoundry.
+<p class="note"><strong>Note:</strong> 
+Users with 'admin' privileges still require an appropriate assigned role in the org and space to view and service instances
+and specifically require the SpaceDeveloper permission to manage the service instances. This is a limitation of VMware Tanzu/cloudfoundry UAA used in Single Sign On.</p>
+If Single Sign
+On access for Solace PubSub+ was revoked through the Third Party Access pane on the VMware Tanzu User Management page,
 logout of the dashboard by clicking the user icon in the top right corner and clicking logout and retry accessing the dashboard through the dashboard url.</td></tr>
 </table>
 
