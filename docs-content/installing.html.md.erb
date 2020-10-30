@@ -578,11 +578,14 @@ users can control when their services are upgraded.
     When using HTTPS, the server certificate used will be that of the TAS tile's configuration and not that of the Solace PubSub TLS
     configuration. See [Solace PubSub+ Credentials](credentials.html#vcap-example) for more information.
 
-1. <a id='log_retention'></a> Under **Log File Retention Policy**, configure the broker to retain logs based on the size of the log files themselves or for a specified number of days. 
+1. <a id='log_retention'></a> Under **Broker Log File Retention Policy**, configure the broker to retain logs based on the size of the log files themselves or for a specified number of days. 
 
 	<%= image_tag('log_file_retention_policy.png') %>
 
 	When you change the retention policy to day based, logged messages that may be older than what the new retention policy specifies are not automatically deleted. If this is a requirement, you must manually delete the older log files.
+	<br></br>
+        
+	This setting only affects broker logs and not other Bosh VM logs.  
 
 1. Click **Save**.
 
@@ -1003,8 +1006,6 @@ This errand deletes all on-demand service instances. If on-demand service instan
 
 **Unregisters the Solace PubSub+ Broker**:
 This errand deletes the Solace service broker and unregisters it from Cloud Foundry. This errand should always be ran when the tile is deleted, otherwise, manual cleanup is required. 
-
-Note: Errands should always by ran as part of deployments. Errands should not be ran from the Bosh CLI as this can lead to service affecting errors. 
 
 ### <a id='apply_changes'></a> Apply Changes
 

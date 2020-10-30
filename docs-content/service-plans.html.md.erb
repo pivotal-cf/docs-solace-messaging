@@ -134,7 +134,7 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>Maximum Queue Messages</th>
-  <td>Sets the maximum number of messages that can be queued for delivery to consumers. Sufficient system resources need to be available on the VM; consider this setting while selecting a VM Type for your deployment.   
+  <td>Sets the maximum number of messages that can be queued for delivery to consumers. Sufficient system resources need to be available on the VM; see <a href='https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/System-Scaling-Parameters.htm'> Solace documentation for specific requirements</a>. Consider this setting while selecting a VM Type for your deployment.   
   <ul>
   <li>This setting is only applied to new deployments. Existing deployments won't be updated.</li>
   <ul>
@@ -142,8 +142,8 @@ Service Plans can be customized by the operator allowing to adjust the plans for
   <td>&#10004;</td>
   <td>&#10004;</td>
   </tr>
-  <tr>
 
+  <tr>
   <th>VM Type</th>
   <td>The VM Type on which a service is created. Please see <a href='#service_plan_sizing'>Service Plan Sizing</a> to guide in this selection.
   <strong>The operator is cautioned not to adjust the VM Type without considering the effects on existing on-demand service instances.</strong>
@@ -201,10 +201,15 @@ The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans 
 
 A deployment of Solace PubSub+ Message Broker will attempt to maximize the use of the underlying resources on any given **VM Type**.
 
-The deployment will auto select a [Scaling Tier](https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/Scaling-Tier-Resources.htm) based on detected number of CPUs and RAM.
+The deployment will auto select the [maximum client connection scaling parameter](https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/System-Scaling-Parameters.htm) based on the following: 
+
+* number of detected CPUs,
+* amount of detected RAM,
+* and resource required by the configured maximum queue messages 
+
 This configuration is done at service creation time.
 
-All other plan limits will be auto calculated based on the scaling tier and the Solace PubSub+ message broker type.
+All other plan limits will be auto calculated based on scaling parameters and the Solace PubSub+ message broker type.
 
 ## <a id='unconfigured_service_plans'></a> Additional Configurable Service Plans
 
