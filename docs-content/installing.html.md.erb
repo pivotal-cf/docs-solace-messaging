@@ -568,7 +568,7 @@ users can control when their services are upgraded.
     The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans with **High Availability** enabled.
     A Monitor node requires 1 CPU and 1 GB of RAM.
 
-1.  <a id='rest_routes'></a> Enable REST Messaging through HTTP Routes
+1. <a id='rest_routes'></a> Enable REST Messaging through HTTP Routes
 
     <%= image_tag('external_rest_routes.png') %>
 
@@ -577,6 +577,15 @@ users can control when their services are upgraded.
     VCAP entry. This route maps the ports from restUris to externally accessible HTTP/HTTPS ports on a route registered under the TAS system domain.
     When using HTTPS, the server certificate used will be that of the TAS tile's configuration and not that of the Solace PubSub TLS
     configuration. See [Solace PubSub+ Credentials](credentials.html#vcap-example) for more information.
+
+1. <a id='log_retention'></a> Under **Broker Log File Retention Policy**, configure the broker to retain logs based on the size of the log files themselves or for a specified number of days. 
+
+	<%= image_tag('log_file_retention_policy.png') %>
+
+	When you change the retention policy to day based, logged messages that may be older than what the new retention policy specifies are not automatically deleted. If this is a requirement, you must manually delete the older log files.
+	<br></br>
+        
+	This setting only affects broker logs and not other Bosh VM logs.  
 
 1. Click **Save**.
 
@@ -982,6 +991,21 @@ Errands are scripts that are run when a tile is installed, updated or removed. T
 Unless otherwise stated in this documentation you should not modify these settings, otherwise the tile may not get installed properly. The only time you would change them would be if you were trying to remove a tile and one of the errands was preventing you to do this because the errand itself was failing.
 
 <%= image_tag('form_errands.png') %>
+
+**Registers and Updates the Solace Service Broker**:
+This errand ensures that the Solace service broker is installed/updated and configured according to the tile configuration. This errand also registers the Solace service broker on Cloud Foundry. This errand is mandatory and needs to run on every deploy.
+
+**Upgrades all on-demand service instances**:
+This errand upgrades all on-demand service instances. You may want to disable this errand when "User Controlled Upgrades for On Demand Instances" is enabled.
+
+**Validates the deployment**:
+This errand validates that brokers were successfully deployed and configured. This errand should be ran on every deploy to ensure the system is ready and running as expected by the end of the deployment.
+
+**Deletes all on-demand service instances**:
+This errand deletes all on-demand service instances. If on-demand service instances exist at the time the tile is deleted, this errand frees resources by automatically deleting associated bosh deployments. 
+
+**Unregisters the Solace PubSub+ Broker**:
+This errand deletes the Solace service broker and unregisters it from Cloud Foundry. This errand should always be ran when the tile is deleted, otherwise, manual cleanup is required. 
 
 ### <a id='apply_changes'></a> Apply Changes
 
