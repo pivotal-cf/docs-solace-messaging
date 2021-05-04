@@ -8,13 +8,13 @@ This topic describes how developers can manage instances of Solace PubSub+ servi
 
 ## <a id='about_solace_service_instance'></a> About the Solace Service Instance
 
-A Solace Service Instance represents a Message VPN on a Solace PubSub+ message broker. A Message VPN allows for many separate apps to share a single message broker while still remaining independent and separated. For more information about Message VPNs, see [Core Concepts](https://docs.solace.com/Features/Core-Concepts.htm).
+A Solace Service Instance represents a Message VPN on a Solace PubSub+ Event Broker. A Message VPN allows for many separate apps to share a single Event Broker while still remaining independent and separated. For more information about Message VPNs, see [Core Concepts](https://docs.solace.com/Features/Core-Concepts.htm).
 
 After deploying the Solace PubSub+ for VMware Tanzu tile, the Solace PubSub+ service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service which they can make available to apps that need to exchange messages.
 
 By [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance, developers give the app permission to access this Message VPN through a client username or LDAP. For more information about how developers can use the credentials provided by the binding or service keys, see [Understanding Solace PubSub+ Credentials](credentials.html).
 
-Creating a service instance also gives the developer permissions to manage the Message VPN through a Web UI on the Solace PubSub+ message broker or the SolAdmin administration tool. For more information, see [Managing the Message VPN](managing.html).
+Creating a service instance also gives the developer permissions to manage the Message VPN through a Web UI on the Solace PubSub+ Event Broker or the SolAdmin administration tool. For more information, see [Managing the Message VPN](managing.html).
 
 Service instances may be shared across Cloud Foundry orgs and spaces if you enable that feature when installing the tile. See the [installation page](installing.html#general_settings) to see how to enable it. For more information see [Enabling Service Instance Sharing](https://docs.cloudfoundry.org/services/enable-sharing.html).
 
@@ -135,7 +135,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI, do the foll
   OK
 
   service          plans                                                                                            description
-  solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ message broker for real-time, multi-protocol data distribution
+  solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
   </pre>
 1. Create an instance of the Solace PubSub+ service. Select the appropriate service plan for your app.
    For how the service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
@@ -178,7 +178,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
   OK
 
   service          plans                                                                                            description
-  solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ message broker for real-time, multi-protocol data distribution
+  solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
   </pre>
 
 1. Create an instance of the Solace PubSub+ service and select the appropriate service plan for your app. For how the service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
@@ -199,7 +199,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI with service
   Bound apps:
   Tags:
   Plan: enterprise-shared
-  Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
+  Description: Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
   Documentation url: http://docs.solace.com
   Dashboard: https<span>:</span>//solace-service-dashboard.YOUR-SYSTEM-DOMAIN/service-dashboard/f5d6bf5b-e84f-416b-8c08-4a0e782a51d2/
   Last Operation

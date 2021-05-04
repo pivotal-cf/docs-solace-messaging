@@ -5,9 +5,9 @@ owner: Partners
 
 This topic describes how operators and developers can troubleshoot instances of Solace PubSub+ services.
 
-A [Solace PubSub+ Service Instance](service-instances.html) is backed by a Message VPN on one or many Solace PubSub+ Software Message Broker, depending on the chosen plan.
+A [Solace PubSub+ Service Instance](service-instances.html) is backed by a Message VPN on one or many Solace PubSub+ Software Event Broker, depending on the chosen plan.
 
-You can discover the Solace PubSub+ Software Message Broker backing a service instance from the [Solace PubSub+ Credentials](credentials.html) which become available by [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance.
+You can discover the Solace PubSub+ Software Event Broker backing a service instance from the [Solace PubSub+ Credentials](credentials.html) which become available by [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance.
 
 
 ## <a id='operator'></a> Operator Troubleshooting
@@ -16,7 +16,7 @@ The operator will have access to the logs of all the components of Solace PubSub
 
 * Service Broker Logs
 * Service Broker Agent Logs
-* Solace PubSub+ message broker Logs
+* Solace PubSub+ Event Broker Logs
 
 An installation of Solace PubSub+ for VMware Tanzu may be configured to use [System Logging](installing.html#optional_system_logging) as a means of gathering all logs.
 
@@ -26,7 +26,7 @@ The following locations in Solace PubSub+ BOSH VMs will hold logs of interest th
 
 * All VM job logs
  * /var/vcap/sys/log
-* All Solace PubSub+ message broker Logs
+* All Solace PubSub+ Event Broker Logs
  * /var/vcap/store/containers/pubsub/volumes/jail/logs
 
 The service broker logs are collected in the management VM under /var/vcap/sys/log/broker-logs.
@@ -86,11 +86,11 @@ You can also watch service broker logs as follows:
 
 ### <a id='operator_diag'></a> Additional Diagnostics
 
-In addition to regular logging, Solace PubSub+ message brokers tools can help gather diagnostics logs on demand.
+In addition to regular logging, Solace PubSub+ Event Brokers tools can help gather diagnostics logs on demand.
 
-For example, having identified a problem with a given Solace service instance, the operator can access the backing Solace PubSub+ message brokers to examine logs and gather diagnostics.
+For example, having identified a problem with a given Solace service instance, the operator can access the backing Solace PubSub+ Event Brokers to examine logs and gather diagnostics.
 
-The backing Solace PubSub+ message brokers for a given service instance can be identified from the IPs used in the bindings or service keys, or mentioned in the service broker logs or message when an exception occurs.
+The backing Solace PubSub+ Event Brokers for a given service instance can be identified from the IPs used in the bindings or service keys, or mentioned in the service broker logs or message when an exception occurs.
 
 The operator should look for the VM in the Solace PubSub+ bosh deployment with the matching IP.
 
@@ -173,7 +173,7 @@ Process 'mariadb_ctrl' Execution failed
  can happen. This prevents one tenant from upgrading a router before the other tenants are ready.
 </p>
 
-<p class="note"><strong>Note:</strong> If some PubSub+ message brokers have been upgraded and others have not,
+<p class="note"><strong>Note:</strong> If some Solace PubSub+ Event Brokers have been upgraded and others have not,
 it is not possible to create new bindings or service keys with the non-upgraded services.
 This is because features such as authentication schemes might have changed with the upgrade, and 
 would not be compatible with the services created before the upgrade.
@@ -205,7 +205,7 @@ com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: No match
 </pre>
 </td></tr>
   <tr><th>Explanation</th><td>The service broker does not find any Solace Message VPNs in its inventory for the requested service plan.</td></tr>
-  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated Solace PubSub+ message brokers that support the given plan, in this case a enterprise-large.</td></tr>
+  <tr><th>Possible Action(s)</th><td>The operator needs to increase the number of allocated Solace PubSub+ Event Brokers that support the given plan, in this case a enterprise-large.</td></tr>
 </table>
 
   <br>
@@ -267,7 +267,7 @@ is invalid given the current configuration. It requires [ LDAP Enabled, Manageme
   <br>
 
 <table border="1" class="nice">
-<tr><th colspan=2>Communication failure: The Solace PubSub+ message brokers is not reachable.</th></th>
+<tr><th colspan=2>Communication failure: The Solace PubSub+ Event Brokers is not reachable.</th></th>
 <tr><th>Operation</th><td>
 <pre class="terminal">
 cf delete-service -f my-large-instance
@@ -282,7 +282,7 @@ Service: solace-pubsub
 Bound apps:
 Tags:
 Plan: enterprise-large
-Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
+Description: Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
 Documentation url: http://docs.solace.com
 Dashboard: https://enterprise-large-0.YOUR-SYSTEM.DOMAIN/#/msg-vpns/djAwNQ==?token=
 YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGYwMDcifQ%3D%3D.eHl6
@@ -295,7 +295,7 @@ Started: 2020-01-00T00:00:00Z
 Updated: 2020-01-00T00:00:00Z
 </pre>
 </td></tr>
-<tr><th>Explanation</th><td>The service broker cannot delete this instance because the Message VPN is flagged as unavailable. This happens when the backing Solace PubSub+ message broker is not reachable.</td></tr>
+<tr><th>Explanation</th><td>The service broker cannot delete this instance because the Message VPN is flagged as unavailable. This happens when the backing Solace PubSub+ Event Broker is not reachable.</td></tr>
 <tr><th>Possible Action(s)</th><td>The operator should examine the solace deployment and see why VM 10.244.0.3 is not available.<p>The service delete operation can be reattempted once the VM health is restored.</td></tr>
 </table>
 
@@ -362,7 +362,7 @@ and config-state [standby]. Management operations may only be run on the 'active
 includes creating or deleting client usernames, updating VPN options through cf update-service, or configuring client profiles through the service dashboard.</td>
 </tr>
 <tr><th>Possible Action(s)</th><td>Configuration is still allowed on the 'active' member of the replication group and will be config sync'd between the two. Managing
-bindings when replication configuration is set to standby and when using internal message broker authentication is not supported.</td></tr>
+bindings when replication configuration is set to standby and when using internal authentication is not supported.</td></tr>
 </table>
 
 
