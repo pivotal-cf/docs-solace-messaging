@@ -3,7 +3,7 @@ title: Managing the Message VPN
 owner: Partners
 ---
 
-Developers can manage the Message VPN associated with a service instance by using the Dashboard URL of the service and by connecting to the Solace PubSub+ message broker via the PubSub+ Manager web browser based interface.
+Developers can manage the Message VPN associated with a service instance by using the Dashboard URL of the service and by connecting to the Solace PubSub+ Event Broker via the PubSub+ Manager web browser based interface.
 
 
 ## <a id='solace_pubsub_service_dashboard'></a> Solace PubSub+ Service Dashboard
@@ -27,7 +27,7 @@ The Solace PubSub+ Service Dashboard offers the following functionality:
 	Bound apps:
 	Tags:
 	Plan: enterprise-shared
-	Description: Solace PubSub+ message broker for real-time, multi-protocol data distribution
+	Description: Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
 	Documentation url: http<span>:</span>//docs.solace.com
   Dashboard: https<span>:</span>//solace-service-dashboard.YOUR-SYSTEM-DOMAIN/service-dashboard/f5d6bf5b-e84f-416b-8c08-4a0e782a51d2/
   
@@ -68,7 +68,7 @@ At this point it is not intended to do a full backup and restore on the same ser
 
 ## <a id='solace_pubsub_manager'></a> Solace PubSub+ Manager
 
-The Solace PubSub+ message broker includes a browser based management interface for the Solace PubSub+ services.
+The Solace PubSub+ Event Broker includes a browser based management interface for the Solace PubSub+ services.
 The Solace PubSub+ Manager is accessible when a service is created from a link in the [Solace PubSub+ Service Dashboard](#solace_pubsub_service_dashboard).
 
 ### <a id='sample_pubsub_manager'></a> Sample PubSub+ Manager
@@ -89,11 +89,11 @@ client usernames should be created by binding services through VMware Tanzu.
 
 ## <a id='manage_with_semp'></a> Managing with SolAdmin
 
-This section describes how to connect to the Solace PubSub+ message broker with the SolAdmin legacy administration tool to manage the Message VPN associated with a service instance.
+This section describes how to connect to the Solace PubSub+ Event Broker with the SolAdmin legacy administration tool to manage the Message VPN associated with a service instance.
 
 ### <a id='retrieve_bound_app'></a> Retrieve Information From a Bound App
 
-To retrieve the information required to connect to the Solace PubSub+ message broker from a bound app, do the following:
+To retrieve the information required to connect to the Solace PubSub+ Event Broker from a bound app, do the following:
 
 1. Log in to your deployment and choose the org and space where your Solace PubSub+ service instance and bound app exists.
   <pre class="terminal">
@@ -110,7 +110,7 @@ To retrieve the information required to connect to the Solace PubSub+ message br
 
 ### <a id='retrieve_service_key'></a> Retrieve Information from a Service Key
 
-To retrieve the information required to connect to the Solace PubSub+ message broker from a service key, do the following:
+To retrieve the information required to connect to the Solace PubSub+ Event Broker from a service key, do the following:
 
 1. Log in to your deployment and choose the org and space where your Solace PubSub+ service instance and service key exists.
   <pre class="terminal">
@@ -128,7 +128,7 @@ To retrieve the information required to connect to the Solace PubSub+ message br
 ### <a id='locate_credentials'></a> Locate the Management Host and Credentials
 
 1. Both the `VCAP_SERVICES` and service key contain the same information, look for and record the following fields:
-  * `managementHostnames`: The Solace PubSub+ message broker's management hostnames. There will be multiple entries for Services on HA Plans.
+  * `managementHostnames`: The Solace PubSub+ Event Broker's management hostnames. There will be multiple entries for Services on HA Plans.
   * `activeManagementHostname`: A single entry that is dynamically routed to the active node for an HA service. Will always be the same as `managementHostnames` for non-HA plans.
   * When Management Access is set to `Message Broker Internal`:
       * `managementUsername`: The service instance's management username
@@ -138,7 +138,7 @@ To retrieve the information required to connect to the Solace PubSub+ message br
   <br><br>
   For more information about the `VCAP_SERVICES` fields, see the [Understanding Credentials](credentials.html) topic.
 
-### <a id='connect'></a> Connect to the Solace PubSub+ Message Broker
+### <a id='connect'></a> Connect to the Solace PubSub+ Event Broker
 
 The `managementHostnames` and `activeManagementHostname` are externally accessible FQDNs and can be used directly from within SolAdmin using standard ports for HTTP (`80`) and HTTPS (`443`). The procedure is as follows:
 
@@ -150,12 +150,12 @@ The `managementHostnames` and `activeManagementHostname` are externally accessib
 
     <%= image_tag('soladmin_manage.png') %>
 
-1. Under **Management Host**, enter the active management hostname of the Solace PubSub+ message broker recorded above.
+1. Under **Management Host**, enter the active management hostname of the Solace PubSub+ Event Broker recorded above.
 
 1. Under **User Name** and **Password**, enter the management username and password recorded above.
 
 1. Click **Ok**.
-   The Solace PubSub+ message broker should now appear in the **Managed Appliances** list.
+   The Solace PubSub+ Event Broker should now appear in the **Managed Appliances** list.
 
     <%= image_tag('soladmin_router_list.png') %>
 

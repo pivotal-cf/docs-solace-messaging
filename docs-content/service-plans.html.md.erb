@@ -3,7 +3,7 @@ title: Solace PubSub+ Service Plans
 owner: Partners
 ---
 
-Solace PubSub+ for VMware Tanzu offers multiple operator configurable service plans to support a variety of use cases.  Each service plan configures the Solace PubSub+ message broker for a given scaling capacity.
+Solace PubSub+ for VMware Tanzu offers multiple operator configurable service plans to support a variety of use cases.  Each service plan configures the Solace PubSub+ Event Broker for a given scaling capacity.
 
 As of release 2.2.0 the [Preconfigured Service Plans](#preconfigured_service_plans) are now editable by the operator.  There are also [additional Configurable Service Plans](#unconfigured_service_plans) that can also be customized by the operator.
 
@@ -16,10 +16,10 @@ The combination of the <strong>operator allocated</strong> instances in [Resourc
 
 ## <a id='service_plan_configuration'></a> Service Plan Configuration
 
-Service Plans can be customized by the operator allowing to adjust the plans for both types of Solace PubSub+ message brokers:
+Service Plans can be customized by the operator allowing to adjust the plans for both types of Solace PubSub+ Event Brokers:
 
-* Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker
-* Solace PubSub+ Standard message broker
+* Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Broker
+* Solace PubSub+ Standard Event Broker
 
 <table border="1" class="nice">
 
@@ -101,20 +101,20 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>High Availability</th>
-  <td>If checked, deployment of Message Brokers on this plan will be done in triplets across all availability zones providing a High Availability deployment. The sizing of the Message Brokers will be based on the selected <strong>VM Type</strong> and <strong>Disk Type</strong> in this plan. The Sizing of the Monitor node which requires smaller <strong>VM Type</strong> and <strong>Disk Type</strong> is based on the <a href='installing.html#general_settings'>General Settings</a></td>
+  <td>If checked, deployment of Event Brokers on this plan will be done in triplets across all availability zones providing a High Availability deployment. The sizing of the Event Brokers will be based on the selected <strong>VM Type</strong> and <strong>Disk Type</strong> in this plan. The Sizing of the Monitor node which requires smaller <strong>VM Type</strong> and <strong>Disk Type</strong> is based on the <a href='installing.html#general_settings'>General Settings</a></td>
   <td>&#10004;</td>
   <td>&#10004;</td>
   </tr>
 
   <tr>
   <th>Service instances</th>
-  <td>A <a href='service-instances.html#about_solace_service_instance'>Solace PubSub+ Service Instance</a> represents a Message VPN on a Solace PubSub+ message broker. The ability to host multiple service instances on a single Solace PubSub+ message broker for sharing the underlying resources is applicable on Enterprise and Enterprise Evaluation edition message brokers and is limited to a maximum of <strong>five</strong> service instances. 
+  <td>A <a href='service-instances.html#about_solace_service_instance'>Solace PubSub+ Service Instance</a> represents a Message VPN on a Solace PubSub+ Event Broker. The ability to host multiple service instances on a single Solace PubSub+ Event Broker for sharing the underlying resources is applicable on Enterprise and Enterprise Evaluation edition Event Brokers and is limited to a maximum of <strong>five</strong> service instances. 
   
   <br></br>
   You will be able to configure an Enterprise edition broker with up to twenty-five service instances
   if you provide a 25 Message VPN Product Key.
   <br></br>
-  As for the Standard message broker, it can only host <strong>one</strong> service instance.
+  As for the Standard Event Broker, it can only host <strong>one</strong> service instance.
   </td>
   <td>&#10004;</td>
   <td>&#10004;</td>
@@ -122,7 +122,7 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>Quota</th>
-  <td>Sets the limit on the maximum number of Solace PubSub+ Message Broker deployments that may be created for this service plan across all orgs and spaces. Keeping in mind that this deployment is used to host one or more service instances as defined in the plan by <strong>Service instances</strong>.
+  <td>Sets the limit on the maximum number of Solace PubSub+ Event Broker deployments that may be created for this service plan across all orgs and spaces. Keeping in mind that this deployment is used to host one or more service instances as defined in the plan by <strong>Service instances</strong>.
   <ul>
   <li>This quota is only consulted at the time a service creation request is done.</li>
   <li>Decreasing the quota will not have an effect on existing service instances if the quota was already exceeded.</li>
@@ -158,7 +158,7 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>Disk Type</th>
-  <td>The persistent disk size used by the Message Broker. The size of the persistent disk can be changed both before and after deployment. Increasing the size of the persistent disks will impact the service of already bound apps. However, messages will not be lost. Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable Solace PubSub+ message broker, and/or undefined behaviors. </td>
+  <td>The persistent disk size used by the Event Broker. The size of the persistent disk can be changed both before and after deployment. Increasing the size of the persistent disks will impact the service of already bound apps. However, messages will not be lost. Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable Solace PubSub+ Event Broker, and/or undefined behaviors. </td>
   <td>&#10004;</td>
   <td> <a href="#tableNote1"><sup>1</sup></a> </td>
   </tr>
@@ -199,7 +199,7 @@ The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans 
 
 ## <a id='service_plan_sizing'></a> Service Plan Sizing
 
-A deployment of Solace PubSub+ Message Broker will attempt to maximize the use of the underlying resources on any given **VM Type**.
+A deployment of Solace PubSub+ Event Broker will attempt to maximize the use of the underlying resources on any given **VM Type**.
 
 The deployment will auto select the [maximum client connection scaling parameter](https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/System-Scaling-Parameters.htm) based on the following: 
 
@@ -209,17 +209,17 @@ The deployment will auto select the [maximum client connection scaling parameter
 
 This configuration is done at service creation time.
 
-All other plan limits will be auto calculated based on scaling parameters and the Solace PubSub+ message broker type.
+All other plan limits will be auto calculated based on scaling parameters and the Solace PubSub+ Event Broker type.
 
 ## <a id='unconfigured_service_plans'></a> Additional Configurable Service Plans
 
-The Solace PubSub+ for VMware Tanzu tile contains two additional unconfigured plans for both types of Solace PubSub+ message brokers:
+The Solace PubSub+ for VMware Tanzu tile contains two additional unconfigured plans for both types of Solace PubSub+ Event Brokers:
 
-* Solace PubSub+ Standard message broker
+* Solace PubSub+ Standard Event Broker
  * <a id='plan_standard_3'></a> Standard Plan 3
  * <a id='plan_standard_4'></a> Standard Plan 4
 
-* Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker
+* Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Broker
  * <a id='plan_enterprise_5'></a> Enterprise Plan 5
  * <a id='plan_enterprise_6'></a> Enterprise Plan 6
 
@@ -242,7 +242,7 @@ If there are existing service instances on these plans, the operator should use 
   </tr>
 
   <tr>
-  <td colspan=3>A single message VPN on a dedicated Solace PubSub+ Standard message broker with associated properties set to moderate values.</td>
+  <td colspan=3>A single message VPN on a dedicated Solace PubSub+ Standard Event Broker with associated properties set to moderate values.</td>
   </tr>
 
   <tr>
@@ -308,7 +308,7 @@ If there are existing service instances on these plans, the operator should use 
   </tr>
 
   <tr>
-  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Standard message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
+  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Standard Event Brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
   </tr>
 
   <tr>
@@ -375,7 +375,7 @@ If there are existing service instances on these plans, the operator should use 
   </tr>
 
   <tr>
-  <td colspan=3>A single Message VPN in a shared Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker. Useful for light traffic and development.</td>
+  <td colspan=3>A single Message VPN in a shared Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Broker. Useful for light traffic and development.</td>
   </tr>
 
   <tr>
@@ -441,7 +441,7 @@ If there are existing service instances on these plans, the operator should use 
   </tr>
 
   <tr>
-  <td colspan=3>A single message VPN on a dedicated Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker with associated properties set to high values.</td>
+  <td colspan=3>A single message VPN on a dedicated Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Broker with associated properties set to high values.</td>
   </tr>
 
   <tr>
@@ -507,7 +507,7 @@ If there are existing service instances on these plans, the operator should use 
   </tr>
 
   <tr>
-  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
+  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
   </tr>
 
   <tr>
@@ -573,7 +573,7 @@ If there are existing service instances on these plans, the operator should use 
   </tr>
 
   <tr>
-  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to high values.</td>
+  <td colspan=3>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Brokers in a high availability (HA) configuration with associated properties set to high values.</td>
   </tr>
 
   <tr>

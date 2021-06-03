@@ -11,9 +11,9 @@ Solace PubSub+ was designed to be deployed across all your IT environments inclu
 
 Solace PubSub+ supports all kinds of messaging APIs, QoS, and data streaming as part of one platform across all clouds in a high-performance, WAN-optimized, easy-to-manage solution. It is easily deployed in your public and private cloud environments and forms the perfect backbone for single or multi-cloud messaging support of your cloud-native microservices, IoT, big data capture, and next-generation digital apps.
 
-Solace PubSub+ for VMware Tanzu provides plans for both shared message broker instances for cost-effective development as well as a variety of plans for dedicated message brokers of varying performance, scale, and high-availability. Together, they meet the requirements for a range of robust test and production deployments.
+Solace PubSub+ for VMware Tanzu provides plans for both shared event broker instances for cost-effective development as well as a variety of plans for dedicated event brokers of varying performance, scale, and high-availability. Together, they meet the requirements for a range of robust test and production deployments.
 
-One of the key strengths of Solace PubSub+ is its [support for many different open transports and protocols](http://dev.solace.com/tech/#multi-service), making Solace PubSub+ message brokers ideal data distribution platforms to connect to any app.
+One of the key strengths of Solace PubSub+ is its [support for many different open transports and protocols](http://dev.solace.com/tech/#multi-service), making Solace PubSub+ Event Brokers ideal data distribution platforms to connect to any app.
 
 <%= image_tag('new_solace-overview_new.png') %>
 
@@ -48,9 +48,9 @@ There is also simple sample code which shows you how to easily connect to a Sola
 
 Solace offers two PubSub+ for VMware Tanzu tiles: the Enterprise Evaluation tile and the Enterprise tile.
 
-The Enterprise Evaluation tile is comprised of two message brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise Evaluation Edition. PubSub+ Standard is a forever free enterprise-grade message broker that supports publish/subscribe, queueing, request/reply, and streaming, along with integrated high availability (HA) and disaster recovery (DR). The PubSub+ Enterprise Evaluation Edition is a free 90-day evaluation version of the PubSub+ Enterprise edition, which supports all the features of PubSub+ Standard, but with increased performance and scaling. You can download an Enterprise Evaluation tile [here](https://products.solace.com/download/PUBSUB_VMware Tanzu_STAND). Also, if you are interested in a support plan for Solace PubSub+ for VMware Tanzu, contact [Solace Support](https://solace.com/support) or your local [Solace sales representative](mailto:info@solace.com?Subject=Enterprise version of Solace PubSub+ For VMware Tanzu).
+The Enterprise Evaluation tile is comprised of two Event Brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise Evaluation Edition. PubSub+ Standard is a forever free enterprise-grade event broker that supports publish/subscribe, queueing, request/reply, and streaming, along with integrated high availability (HA) and disaster recovery (DR). The PubSub+ Enterprise Evaluation Edition is a free 90-day evaluation version of the PubSub+ Enterprise edition, which supports all the features of PubSub+ Standard, but with increased performance and scaling. You can download an Enterprise Evaluation tile [here](https://products.solace.com/download/PUBSUB_VMware Tanzu_STAND). Also, if you are interested in a support plan for Solace PubSub+ for VMware Tanzu, contact [Solace Support](https://solace.com/support) or your local [Solace sales representative](mailto:info@solace.com?Subject=Enterprise version of Solace PubSub+ For VMware Tanzu).
 
-The Enterprise tile is also comprised of two message brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise. Contact [Solace Support](https://solace.com/support) for information on how to obtain this tile and associated support plans.
+The Enterprise tile is also comprised of two Event Brokers: Solace PubSub+ Standard, and Solace PubSub+ Enterprise. Contact [Solace Support](https://solace.com/support) for information on how to obtain this tile and associated support plans.
 
 
 ## <a id='marketplace-plans'></a> VMware Tanzu Marketplace Plans
@@ -66,44 +66,44 @@ These are the plans for both the Enterprise Evaluation and Enterprise tiles:
 	</tr>
   <tr>
     <td><a href='service-plans.html#plan_standard_medium'>Standard Medium</a></td>
-    <td>A single message VPN on a dedicated Solace PubSub+ Standard message broker with associated properties set to moderate values.</td>
+    <td>A single message VPN on a dedicated Solace PubSub+ Standard Event Broker with associated properties set to moderate values.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_standard_medium_ha'>Standard Medium-HA</a></td>
-    <td>A single message VPN spanning 3 Solace PubSub+ Standard message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
+    <td>A single message VPN spanning 3 Solace PubSub+ Standard Event Brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_standard_3'>Standard Plan 3</a></td>
-    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Standard message broker.</td>
+    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Standard Event Broker.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_standard_4'>Standard Plan 4</a></td>
-    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Standard message broker.</td>
+    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Standard Event Broker.</td>
   </tr>
 
   <tr>
     <td><a href='service-plans.html#plan_enterprise_shared'>Enterprise Shared</a></td>
-    <td>A single message VPN in a shared Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker. Useful for light traffic and development.</td>
+    <td>A single message VPN in a shared Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Broker. Useful for light traffic and development.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_large'>Enterprise Large</a></td>
-    <td>A single message VPN on a dedicated Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker with associated properties set to high values.</td>
+    <td>A single message VPN on a dedicated Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Broker with associated properties set to high values.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_medium_ha'>Enterprise Medium-HA</a></td>
-    <td>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
+    <td>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Brokers in a high availability (HA) configuration with associated properties set to moderate values.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_large_ha'>Enterprise Large-HA</a></td>
-    <td>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition message brokers in a high availability (HA) configuration with associated properties set to high values.</td>
+    <td>A single message VPN spanning 3 Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Brokers in a high availability (HA) configuration with associated properties set to high values.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_5'>Enterprise Plan 5</a></td>
-    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker.</td>
+    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Broker.</td>
   </tr>
   <tr>
     <td><a href='service-plans.html#plan_enterprise_6'>Enterprise Plan 6</a></td>
-    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Enterprise or Enterprise Evaluation Edition message broker.</td>
+    <td>A unconfigured service plan for the operator to <a href='service-plans.html#service_plan_configuration'>customize</a>. This plan can deploy a Solace PubSub+ Enterprise or Enterprise Evaluation Edition Event Broker.</td>
   </tr>
 </table>
 
@@ -120,7 +120,7 @@ TCP routes allow access to Solace messaging services hosted inside your VMware T
 
 Having TCP routes enables many use cases:
 
- * **Hybrid cloud:** Other Solace PubSub+ message brokers deployed outside VMware Tanzu can establish [Bridge](https://docs.solace.com/Features/Working-With-Message-VPN-Bridges.htm) connections to Solace PubSub+ services inside your VMware Tanzu cloud.
+ * **Hybrid cloud:** Other Solace PubSub+ Event Brokers deployed outside VMware Tanzu can establish [Bridge](https://docs.solace.com/Features/Working-With-Message-VPN-Bridges.htm) connections to Solace PubSub+ services inside your VMware Tanzu cloud.
  * **External client app:** Apps deployed outside VMware Tanzu can communicate via messaging with apps deployed inside VMware Tanzu by connecting to a Solace PubSub+ service deployed in VMware Tanzu.
  * **IoT:** Devices using MQTT or REST can connect to Solace PubSub+ services from outside VMware Tanzu to communicate with your apps deployed inside VMware Tanzu, look for the *TCP Routes for IoT---MQTT Java Application Tutorial* [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java/tcp-routes-mqtt/).
  * **Mobile apps:** Mobile and web apps can use [web messaging](https://docs.solace.com/Features/Web-Messaging-Concepts/Web-Messaging-Concepts.htm) to connect to Solace PubSub+ services from outside VMware Tanzu to communicate with your apps deployed inside VMware Tanzu.
@@ -133,7 +133,7 @@ System logging allows you to redirect the logs from the Solace PubSub+ VMware Ta
 
 ### <a id='pcf-solace-messaging-intergration-ldap'></a> LDAP
 
-You can enable the use of an LDAP server for the Solace PubSub+ message broker's authentication and authorization needs. This configuration allows you to grant an LDAP server control over Management access and Application access. To use LDAP, you must [enable and configure LDAP at installation time](installing.html#optional_ldap_settings) and make a choice about [Management Access](installing.html#optional_management_access) and [Application Access](installing.html#optional_application_access).
+You can enable the use of an LDAP server for the Solace PubSub+ Event Broker's authentication and authorization needs. This configuration allows you to grant an LDAP server control over Management access and Application access. To use LDAP, you must [enable and configure LDAP at installation time](installing.html#optional_ldap_settings) and make a choice about [Management Access](installing.html#optional_management_access) and [Application Access](installing.html#optional_application_access).
 
 
 ## <a id='solace-messaging-features'></a> Solace PubSub+ Features
@@ -144,11 +144,11 @@ In addition to easy and natural APIs for your apps, Solace PubSub+ supports the 
 * [Comprehensive authentication, authorization, and encryption](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm) features to ensure that your infrastructure and information are protected at all times.
 * High-performance messaging middleware which can cost-effectively meet the needs of any app.
 * [Simplified operations](https://docs.solace.com/Management-Tools.htm) with multiple management administration interfaces.
-* [Virtualize application groups on a single Solace message broker](https://docs.solace.com/Configuring-and-Managing/Managing-Message-VPNs.htm) with complete message isolation through Solace Message VPNs.
+* [Virtualize application groups on a single Solace Event Broker](https://docs.solace.com/Configuring-and-Managing/Managing-Message-VPNs.htm) with complete message isolation through Solace Message VPNs.
 
 ## <a id='architecture'></a> Architecture
 
-Solace PubSub+ is a managed service. The tile deploys the PubSub+ message brokers onto VMware Tanzu's IaaS. The Solace PubSub+ tile registers a service broker with VMware Tanzu and exposes its service plans in the VMware Tanzu Marketplace. The diagram below provides an overview of the product architecture of Solace PubSub+ for VMware Tanzu.
+Solace PubSub+ is a managed service. The tile deploys the PubSub+ Event Brokers onto VMware Tanzu's IaaS. The Solace PubSub+ tile registers a service broker with VMware Tanzu and exposes its service plans in the VMware Tanzu Marketplace. The diagram below provides an overview of the product architecture of Solace PubSub+ for VMware Tanzu.
 
 <%= image_tag('Deployment-overview_newbranding.png') %>
 
@@ -165,7 +165,7 @@ The following table provides version and version-support information about Solac
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>v2.11.0</td>
+        <td>v2.12.0</td>
     </tr>
     <tr>
         <td>Editions</td>
@@ -173,11 +173,11 @@ The following table provides version and version-support information about Solac
     </tr>
     <tr>
         <td>Release date</td>
-        <td>April 5th, 2020</td>
+        <td>June 2nd, 2021</td>
     </tr>
     <tr>
-        <td>Solace PubSub+ message broker version</td>
-        <td>9.8.0.12</td>
+        <td>Solace PubSub+ Event Broker version</td>
+        <td>9.9.0.28</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>

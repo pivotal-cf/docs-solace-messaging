@@ -5,10 +5,15 @@ owner: Partners
 
 Release Notes for Solace PubSub+ for VMware Tanzu.
 
+### v2.12.0
+**Release Date: June 2nd, 2021**
+
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.9.0.28.
+
 ### v2.11.0
 **Release Date: April 5th, 2021**
 
-This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ message broker v9.8.0.12 and the following new features and fixes:
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.8.0.12 and the following new features and fixes:
 
 * Adds support for VMware Tanzu v2.11.x
 
@@ -19,7 +24,7 @@ In addition to the above features, this resolves the following issues:
 ### v2.10.0
 **Release Date: November 2nd, 2020**
 
-This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ message broker v9.7.0.29 and the following new features and fixes:
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.7.0.29 and the following new features and fixes:
 
 * Adds an option to configure maximum queue messages per service plan
 * Adds an option to configure broker log file retention policy
@@ -34,7 +39,7 @@ In addition to the above features, this resolves the following issues:
 ### v2.9.0
 **Release Date: July 28th, 2020**
 
-This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ message broker v9.6.0.27 and the following new features and fixes:
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.6.0.27 and the following new features and fixes:
 
 * Adds support for HTTP(s) REST messaging routes registered under the Tanzu Application Service system domain
 * Adds support for passing VM extensions to on demand service instances
@@ -49,7 +54,7 @@ In addition to the above features, this resolves the following issues:
 ### v2.8.0
 **Release Date: May 19th, 2020**
 
-This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ message broker v9.5.0.25 and the following new features and fixes:
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.5.0.25 and the following new features and fixes:
 
 * Adds Single Sign On for the Solace Service Dashboard allowing users to authenticate with their VMware Tanzu credentials
 * Adds request parameter schema for service create and update as well as binding create allowing for Apps Manager integration
@@ -66,13 +71,13 @@ In addition to the above features, this release resolves the following issues:
 ### v2.7.0
 **Release Date: March 5, 2020**
 
-This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ message broker v9.4.0.78 and the following new features and fixes:
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.4.0.78 and the following new features and fixes:
 
 * The Service Instance Dashboard now provides management of client profiles.
 * Bosh VM logs can now be forwarded to a syslog server.
 * Specific TCP ports can now be requested when creating and updating a service when TCP routing is enabled.
 * The Service Instance Dashboard now provides an option to automatically opt-in to all future updates and upgrades when user-controlled upgrades are enabled.
-* Application Security Groups now include the message broker health check port.
+* Application Security Groups now include the Event Broker health check port.
 * HA group in-service upgrades are optimized so that a connected application has a single switchover.
 * Adds operator access to the MySQL Bootstrap errand through bosh.
 * TCP route request parameters are no longer reverted to default when they are not supplied. 
@@ -92,7 +97,7 @@ In addition to the above features, this release resolves the following issues:
 
 **Release Date: Nov 20, 2019**
 
-This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ message broker v9.3.1.5 and the following fixes: 
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.3.1.5 and the following fixes: 
 
 * Upgrades to ODB v0.34.1 to address security CVE(s).
 * Fixes a service instance dashboard issue that may prevent access (reference # SOL-27678)
@@ -101,7 +106,7 @@ This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ mes
 
 **Release Date: October 29, 2019**
 
-This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ message broker v9.3.0.22 and introduces the following new features and fixes:
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.3.0.22 and introduces the following new features and fixes:
 
 * Operators can now allocate ranges of IP addresses to pre-provisioned plans
 * The TCP Routes domain is now configurable
@@ -129,7 +134,7 @@ it is not permitted to create new bindings or service keys on the instances that
 
 **Release Date: August 16, 2019**
 
-This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ message broker v9.2.0.14 and introduces the following new features:
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.2.0.14 and introduces the following new features:
 
 * Authentication using OAuth is now provided
 * The number of on-demand service instances that can be upgraded at once is now configurable. This allows several services to be upgraded in parallel
@@ -161,7 +166,7 @@ In addition to the above features, this release resolves the following issues:
 
 **Release Date: July 23, 2019**
 
-This maintenance release contains Solace PubSub+ message broker v9.0.1.7 and the following fixes:
+This maintenance release contains Solace PubSub+ Event Broker v9.0.1.7 and the following fixes:
 
 * Updated the cf cli to version 6.45.0 to fix a CVE.
 
@@ -169,7 +174,7 @@ This maintenance release contains Solace PubSub+ message broker v9.0.1.7 and the
 
 **Release Date: March 15, 2019**
 
-This maintenance release contains Solace PubSub+ message broker v9.0.1.7 and the following fixes:
+This maintenance release contains Solace PubSub+ Event Broker v9.0.1.7 and the following fixes:
 
 * Customizable service name can now accept white spaces. [SOL-16355]
 * Improved scaling tier determination. In previous releases a failure to determine supported scaling tiers may block upgrades. [SOL-15795]
@@ -180,11 +185,11 @@ This maintenance release contains Solace PubSub+ message broker v9.0.1.7 and the
 
 **Release Date: February 8, 2019**
 
-This minor release contains Solace PubSub+ message broker v9.0.1.7 and has the
+This minor release contains Solace PubSub+ Event Broker v9.0.1.7 and has the
 following new features:
 
 * User controlled upgrades.
-* Support for the message broker's 100 connection scaling tier.
+* Support for the Event Broker's 100 connection scaling tier.
 * The credentials stored in the MySQL database can be encrypted and support key rotation.
 * The name of the service that appears in the marketplace can be configured.
 * Adds support for VMware Tanzu v2.4.
@@ -193,13 +198,13 @@ following new features:
 management nodes to support required communications with the VMware Tanzu Application Service for VMs (TAS for VMs)
 on its public domain. The tile does not communicate with anything on the internet.
 * Using TCP Routes on VMware Tanzu v2.3 and VMware Tanzu v2.4 also requires the enabled internet
-connection on operator allocated message brokers.
+connection on operator allocated Event Brokers.
 
 ### v2.2.1
 
 **Release Date: January 24, 2019**
 
-This minor release contains Solace PubSub+ message broker v8.13.1.30 and the following fixes:
+This minor release contains Solace PubSub+ Event Broker v8.13.1.30 and the following fixes:
 
 * Handling of empty LDAP Management Groups. [SOL-14589]
 * Use https for management of an internal messaging service. [SOL-14597]
@@ -208,9 +213,9 @@ This minor release contains Solace PubSub+ message broker v8.13.1.30 and the fol
 
 **Release Date: December 21, 2018**
 
-This minor release contains an upgrade to Solace PubSub+ message broker v8.13.1.30 and the following additional features:
+This minor release contains an upgrade to Solace PubSub+ Event Broker v8.13.1.30 and the following additional features:
 
-* On-Demand Solace PubSub+ message broker deployment capabilities.
+* On-Demand Solace PubSub+ Event Broker deployment capabilities.
 * Configurable Service Plans.
 * Automation of Application Security Groups (ASGs) management for service instances at binding and unbinding time.
 * A Beta Backup and Restore feature for service configuration settings.
@@ -231,15 +236,15 @@ This maintenance release contains the following fixes:
 * If the admin password contains special characters (such as  : # ? / \ %), it may be exposed in the test-errand logs. [SOL-10907]
 * Recover access to management route of existing HA Service if not present. [SOL-11411]
 * Avoid 'out-of-sync' HA Service during stemcell upgrades if VM network interface is changed.
-* Detection of upgrade in progress when there is no change in Message Broker version between Solace PubSub+ for VMware Tanzu enterprise evaluation tile upgrade to the enterprise tile.
+* Detection of upgrade in progress when there is no change in Event Broker version between Solace PubSub+ for VMware Tanzu enterprise evaluation tile upgrade to the enterprise tile.
 
 ### v2.1.0
 
 **Release Date: September 14, 2018**
 
-This minor release contains an upgrade to Solace PubSub+ message broker v8.12.0.1007 and the following:
+This minor release contains an upgrade to Solace PubSub+ Event Broker v8.12.0.1007 and the following:
 
-* Adds free Solace PubSub+ Standard edition message broker with new plans.
+* Adds free Solace PubSub+ Standard edition Event Broker with new plans.
 * Adds CredHub support which is available from VMware Tanzu v2.x.x.
 * Adds a new orphaned resource policy.
 * Supports optional username parameter at bind time.
@@ -253,19 +258,19 @@ This minor release contains an upgrade to Solace PubSub+ message broker v8.12.0.
 **Release Date: August 3, 2018**
 
 The releases addresses an authentication configuration defect which can expose internal admin credentials. Additional security checks are added to the errand.
-The bundled Solace PubSub+ message broker is v8.11.0.1033.
+The bundled Solace PubSub+ Event Broker is v8.11.0.1033.
 
 ### v2.0.1
 
 **Release Date: July 27, 2018**
 
-This minor release contains an upgrade to Solace PubSub+ message broker v8.11.0.1033.
+This minor release contains an upgrade to Solace PubSub+ Event Broker v8.11.0.1033.
 
 ### v2.0.0
 
 **Release Date: July 11, 2018**
 
-This major release contains Solace PubSub+ message broker v8.11.0.1029 and the following:
+This major release contains Solace PubSub+ Event Broker v8.11.0.1029 and the following:
 
 * As a major and renamed release, upgrades from older named product solace-messaging to solace-pubsub are not possible. It will be possible to upgrade from Solace PubSub+ for VMware Tanzu v2.0.0 to subsequent releases.
 * Product rebranding from solace-messaging to solace-pubsub+ along with renamed plans.
