@@ -58,6 +58,7 @@ The parameters applied can be viewed in the service instance dashboard.
  * `rest_tls_tcp_route_enabled`
  * `amqp_tcp_route_enabled`
  * `amqp_tls_tcp_route_enabled`
+ * `health_check_tls_tcp_route_enabled`
 
 1. The following parameters can be used to request a specific port for TCP routes on any of the
    above protocols if and only if they are enabled. These can subsequently be provided in an update-service request. 
@@ -78,6 +79,7 @@ The parameters applied can be viewed in the service instance dashboard.
  * `rest_tls_tcp_route_primary_port`, `rest_tls_tcp_route_backup_port`
  * `amqp_tcp_route_primary_port`, `amqp_tcp_route_backup_port`
  * `amqp_tls_tcp_route_primary_port`, `amqp_tls_tcp_route_backup_port`
+ * `health_check_tcp_route_primary_port`, `health_check_tcp_route_backup_port`
 
 1. <a id='vpn_options'></a> The top level configuration option `vpnOptions` can be provided to configure various properties on the VPN.
   1. [Service REST Mode](https://docs.solace.com/Open-APIs-Protocols/REST-get-start.htm#When) can be set
