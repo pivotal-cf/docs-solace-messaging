@@ -587,6 +587,13 @@ users can control when their services are upgraded.
         
 	This setting only affects broker logs and not other Bosh VM logs.  
 
+1. <a id='revert_primary'></a> Restore Primary Node as Active On Upgrade
+   <%= image_tag('restore_primary_node.png') %>
+
+    Check the *Restore Primary Node as Active On Upgrade* box to restore the Primary node as active
+    after upgrading High Availability On Demand instances. Operator Allocated instance ordering will not be affected by this property.
+    When not enabled, the upgrade will minimize application reconnections.
+
 1. Click **Save**.
 
 #### <a id='optional_bosh_dns_aliases'></a> (Optional) Bosh DNS Aliases
