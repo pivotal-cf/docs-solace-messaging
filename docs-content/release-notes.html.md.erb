@@ -5,6 +5,21 @@ owner: Partners
 
 Release Notes for Solace PubSub+ for VMware Tanzu.
 
+### v2.16.0
+**Release Date: April 22nd, 2022**
+
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.13.1.38 and the following new features and fixes:
+
+* Adds ability to purge services and event brokers from management via the advanced section of the administrator service dashboard
+* Adds support for VMware Tanzu v2.13.x
+* Removes support for VMware Tanzu v2.8.x and v2.9.x
+
+In addition to the above features, this resolves the following issues:
+
+* Fixed an issue where services were not available for user controlled upgrades after a stemcell upgrade (reference # SOL-64343)
+* Fixed an issue where services were not available for user controlled upgrades after VM recreations (reference # SOL-63414)
+* Fixed an issue where event brokers would no longer be managed after the number of VPNs was changed on the associated plan (reference # SOL-65125)
+
 ### v2.15.1
 **Release Date: January 10th, 2022**
 
