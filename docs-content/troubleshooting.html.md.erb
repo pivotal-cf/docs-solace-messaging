@@ -405,3 +405,50 @@ The page never loads and the URL contains the port 943.
 
 
   <br>
+
+## <a id='advanced'></a> Advanced Asset Management
+
+In cases where a service or event broker can no longer be managed by regular managenent operations, the instance in question can be purged.
+This is done by accessing the Service Dashboard as an administrator at the solace-pubsub-broker-2.x.x app's registered route. When a service is purged,
+its associated Cloud Foundry service and bindings are not deleted, and the underlying resources may or may not be freed. When an
+event broker is purged, the underlying deployment (either on demand or operator allocated) may not be deleted resulting in orphaned VMs
+requiring additional cleanup operations. <b>Services or event brokers should only be purged as a last resort.</b>
+
+
+<table border="1" class="nice">
+<tr><th colspan=2><a id='upgrade_from_2_15'></a>Service no longer exists in Cloud Foundry but still appears in administrator Service Dashboard</th></th>
+<tr><th>Operation</th><td>
+Viewing the list of services in the Solace PubSub+ Service Dashboard.
+</td></tr>
+<tr><th>Error</th><td>
+A service is listed without a corresponding name from Cloud Foundry, and no such service is expected.
+</td></tr>
+<tr><th>Explanation</th><td>If a service is removed from Cloud Foundry without Cloud Foundry notifying the  Solace Service Broker, such is the case with `cf purge-service-instance`,
+the service may be orphaned. This orphaned service will continue to consume Event Broker resources such as VPNs.</td></tr>
+<tr><th>Possible Action(s)</th><td>
+The service instance in question can be purged from Advanced > Purge Service on the home page of the Solace PubSub+ Service Dashboard when accessed by an administrator.
+<p class="note"><strong>Note:</strong> Purging service instances is a nonrecoverable operation. Only proceed if the service is confirmed missing in Cloud Foundry.
+</p>
+</td></tr>
+</table>
+
+<table border="1" class="nice">
+<tr><th colspan=2><a id='upgrade_from_2_15'></a>Cannot manage enterprise evaluation services after upgrade to 2.16.0+ when using Solace PubSub+ for VMware Tanzu Enterprise Evaluation Edition</th></th>
+<tr><th>Operation</th><td>
+Managing an enterprise evaluation service, eg. creating bindings.
+</td></tr>
+<tr><th>Error</th><td>
+All operations are rejected indicating that the underlying broker is not as expected with an error similar to
+<pre class="terminal">
+Service broker error: Will not bind service instance because the VMR is not expected: VMR 10.0.4.11 
+Expected Edition:'Solace PubSub+ Enterprise Evaluation Edition' Actual:'Solace PubSub+ Standard'
+</pre>
+</td></tr>
+<tr><th>Explanation</th><td>Starting with 2.16.0, upgrades from Enterprise Evaluation Edition brokers are no longer supported. Prior to an upgrade to 2.16, all Enterprise Evaluation Edition service instances and configured event broker resources should be removed.</td></tr>
+<tr><th>Possible Action(s)</th><td>If Enterprise Evaluation Edition brokers and services remain after an upgrade, they can be removed through the Advanced > Purge Broker section on the
+home page of the Solace PubSub+ Service Dashboard when accessed by an administrator.
+The underlying deployments should be manually deleted by setting the number of instances in the Resource Config section to 0 and by deleting any relevant On Demand instances.
+<p class="note"><strong>Note:</strong> Only Solace PubSub+ Enterprise Evaluation Edition users are affected. Solace PubSub+ Enterprise Edition upgrades are still supported.
+</p>
+</td></tr>
+</table>
