@@ -130,7 +130,7 @@ To retrieve the information required to connect to the Solace PubSub+ Event Brok
 1. Both the `VCAP_SERVICES` and service key contain the same information, look for and record the following fields:
   * `managementHostnames`: The Solace PubSub+ Event Broker's management hostnames. There will be multiple entries for Services on HA Plans.
   * `activeManagementHostname`: A single entry that is dynamically routed to the active node for an HA service. Will always be the same as `managementHostnames` for non-HA plans.
-  * When Management Access is set to `Message Broker Internal`:
+  * When Management Access is set to `Event Broker Internal`:
       * `managementUsername`: The service instance's management username
       * `managementPassword`: The service instance's management password
   * When Management Access is set to `LDAP Server`:
