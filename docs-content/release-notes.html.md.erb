@@ -19,10 +19,9 @@ In addition to the above features, this resolves the following issues:
 * Fixed an issue where services were not available for user controlled upgrades after a stemcell upgrade (reference # SOL-64343)
 * Fixed an issue where services were not available for user controlled upgrades after VM recreations (reference # SOL-63414)
 
-**Warning for users of the Enterprise Evaluation tile:** if your deployment has enterprise service instances, they will become unmanagable after upgrading to 2.16.0+.
-Prior to upgrading to v2.16.0, all enterprise evaluation services and event brokers should be deleted as they will not be managed after the upgrade.
-Enterprise evaluation instances expire after 90 days, and upgrades are no longer supported.
-If an enteprise evaluation service instance was not deleted prior to the upgrade, it can be cleaned up with the newly added administrator purge operations.
+**Warning for users of the Enterprise Evaluation tile:** if your deployment has enterprise evaluation service instances, they will become unmanageable after upgrading to 2.16.0+.
+Prior to upgrading to v2.16.0, all enterprise evaluation services and event brokers should be deleted.
+If an enterprise evaluation service instance was not deleted prior to the upgrade, it can be cleaned up with the newly added administrator purge operations.
 See [Troubleshooting](troubleshooting.html#advanced) for more information.
 
 ### v2.15.1
