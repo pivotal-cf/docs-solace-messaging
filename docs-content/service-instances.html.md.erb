@@ -31,81 +31,68 @@ The following procedures show you:
 While the provided procedures are relevant to Solace PubSub+, they do not provide a complete set of examples of how to manage service instances in VMware Tanzu. For more information, see [Managing Service Instances with the cf CLI](http://docs.pivotal.io/pivotalcf/1-12/devguide/services/managing-services.html).
 
 
-
 ## <a id='service-specific-configuration'></a> Service Specific Parameters
 
 A service instance can be customized at creation time and updated as well using parameters when certain features are enabled.
-The parameters applied can be viewed in the service instance dashboard. 
+The parameters applied can be viewed in the service instance dashboard.
 
 1. When LDAP is enabled, these parameters can be used to control management access to a service instance.
- * ldapGroupAdminReadOnly: Admin ReadOnly permissions are granted to the provided value for that parameter.
- * ldapGroupAdminReadWrite: Admin ReadWrite permissions are granted to the provided value for that parameter.
+    * ldapGroupAdminReadOnly: Admin ReadOnly permissions are granted to the provided value for that parameter.
+    * ldapGroupAdminReadWrite: Admin ReadWrite permissions are granted to the provided value for that parameter.
 
-1. If TCP routes are enabled and the configuration per protocol is either "Enabled by default" or "Disabled by default", then
+2. If TCP routes are enabled and the configuration per protocol is either "Enabled by default" or "Disabled by default", then
    you can use these parameters with valid values: `true`, `false` to control
    TCP Routes per service instance. Only specified routes will be updated.
- * `tcp_route_enabled`
- * `smf_tcp_route_enabled`
- * `smf_tls_tcp_route_enabled`
- * `smf_zip_tcp_route_enabled`
- * `web_messaging_tcp_route_enabled`
- * `web_messaging_tls_tcp_route_enabled`
- * `mqtt_tcp_route_enabled`
- * `mqtt_tls_tcp_route_enabled`
- * `mqtt_ws_tcp_route_enabled`
- * `mqtt_wss_tcp_route_enabled`
- * `rest_tcp_route_enabled`
- * `rest_tls_tcp_route_enabled`
- * `amqp_tcp_route_enabled`
- * `amqp_tls_tcp_route_enabled`
- * `health_check_tls_tcp_route_enabled`
+    * `tcp_route_enabled`
+    * `smf_tcp_route_enabled`
+    * `smf_tls_tcp_route_enabled`
+    * `smf_zip_tcp_route_enabled`
+    * `web_messaging_tcp_route_enabled`
+    * `web_messaging_tls_tcp_route_enabled`
+    * `mqtt_tcp_route_enabled`
+    * `mqtt_tls_tcp_route_enabled`
+    * `mqtt_ws_tcp_route_enabled`
+    * `mqtt_wss_tcp_route_enabled`
+    * `rest_tcp_route_enabled`
+    * `rest_tls_tcp_route_enabled`
+    * `amqp_tcp_route_enabled`
+    * `amqp_tls_tcp_route_enabled`
+    * `health_check_tls_tcp_route_enabled`
 
-1. The following parameters can be used to request a specific port for TCP routes on any of the
-   above protocols if and only if they are enabled. These can subsequently be provided in an update-service request. 
+3. The following parameters can be used to request a specific port for TCP routes on any of the above protocols if and only if they are enabled. These can subsequently be provided in an update-service request.
    If provided on an update service request, the original route will be deleted, and the new route will be bound to the
    requested port. This port should not be in use and should be within the range configured on the TCP router.
    When using a standalone plan, the primary variant of the request parameter should be used
    If the service is provisioned under a high availability plan, the backup variant can be used as well.
- * `smf_tcp_route_primary_port`, `smf_tcp_route_backup_port`
- * `smf_tls_tcp_route_primary_port`, `smf_tls_tcp_route_backup_port`
- * `smf_zip_tcp_route_primary_port`, `smf_zip_tcp_route_backup_port`
- * `web_messaging_tcp_route_primary_port`, `web_messaging_tcp_route_backup_port`
- * `web_messaging_tls_tcp_route_primary_port`, `web_messaging_tls_tcp_route_backup_port`
- * `mqtt_tcp_route_primary_port`, `mqtt_tcp_route_backup_port`
- * `mqtt_tls_tcp_route_primary_port`, `mqtt_tls_tcp_route_backup_port`
- * `mqtt_ws_tcp_route_primary_port`, `mqtt_ws_tcp_route_backup_port`
- * `mqtt_wss_tcp_route_primary_port`, `mqtt_wss_tcp_route_backup_port`
- * `rest_tcp_route_primary_port`, `rest_tcp_route_backup_port`
- * `rest_tls_tcp_route_primary_port`, `rest_tls_tcp_route_backup_port`
- * `amqp_tcp_route_primary_port`, `amqp_tcp_route_backup_port`
- * `amqp_tls_tcp_route_primary_port`, `amqp_tls_tcp_route_backup_port`
- * `health_check_tcp_route_primary_port`, `health_check_tcp_route_backup_port`
+    * `smf_tcp_route_primary_port`, `smf_tcp_route_backup_port`
+    * `smf_tls_tcp_route_primary_port`, `smf_tls_tcp_route_backup_port`
+    * `smf_zip_tcp_route_primary_port`, `smf_zip_tcp_route_backup_port`
+    * `web_messaging_tcp_route_primary_port`, `web_messaging_tcp_route_backup_port`
+    * `web_messaging_tls_tcp_route_primary_port`, `web_messaging_tls_tcp_route_backup_port`
+    * `mqtt_tcp_route_primary_port`, `mqtt_tcp_route_backup_port`
+    * `mqtt_tls_tcp_route_primary_port`, `mqtt_tls_tcp_route_backup_port`
+    * `mqtt_ws_tcp_route_primary_port`, `mqtt_ws_tcp_route_backup_port`
+    * `mqtt_wss_tcp_route_primary_port`, `mqtt_wss_tcp_route_backup_port`
+    * `rest_tcp_route_primary_port`, `rest_tcp_route_backup_port`
+    * `rest_tls_tcp_route_primary_port`, `rest_tls_tcp_route_backup_port`
+    * `amqp_tcp_route_primary_port`, `amqp_tcp_route_backup_port`
+    * `amqp_tls_tcp_route_primary_port`, `amqp_tls_tcp_route_backup_port`
+    * `health_check_tcp_route_primary_port`, `health_check_tcp_route_backup_port`
 
-1. <a id='vpn_options'></a> The top level configuration option `vpnOptions` can be provided to configure various properties on the VPN.
+4. <a id='vpn_options'></a> The top level configuration option `vpnOptions` can be provided to configure various properties on the VPN.
   1. [Service REST Mode](https://docs.solace.com/Open-APIs-Protocols/REST-get-start.htm#When) can be set
-to either messaging or gateway. The mode can be set with the `vpnOptions.serviceRestMode` json property with valid values `gateway` or `messaging`. 
+to either messaging or gateway. The mode can be set with the `vpnOptions.serviceRestMode` json property with valid values `gateway` or `messaging`.
 This property defaults to messaging.
 
-1. <a id='service_orphaned_resource_policy'></a> A service orphaned resource
-policy can be set at service creation or update time. This service policy
-takes precedence over the operator set
+1. <a id='service_orphaned_resource_policy'></a> A service orphaned resource policy can be set at service creation or update time. This service policy takes precedence over the operator set
 [Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy).
-The orphaned resource policy is applied during
-[unbind operations](bindings.html#unbind-cf-cli) to ensure orphaned resources
-such as `Queues` and `Topic Endpoints` are handled according to this policy.
+The orphaned resource policy is applied during [unbind operations](bindings.html#unbind-cf-cli) to ensure orphaned resources such as `Queues` and `Topic Endpoints` are handled according to this policy.
 The policy can be set using parameter key `orphanedResourcePolicy` with one of these values:
-   * `Abort`: The unbind operation is aborted with an
-      [error](troubleshooting.html#abort_orphaned_resource_policy_error)
-      if there are any resources owned by the binding linked credentials
-      that would be orphaned once the credentials are removed.
-   * `Delete`: Any orphaned resources owned by the current binding linked credentials are deleted
-   from the service instance. All data held in the orphaned resources is lost.
-   * `MakeServiceOwned`: The ownership of orphaned resource is set to be service-level.
-   This resource can be accessed by any current and future client credentials sharing
-   the service instance.
+   * `Abort`: The unbind operation is aborted with an [error](troubleshooting.html#abort_orphaned_resource_policy_error) if there are any resources owned by the binding linked credentials that would be orphaned once the credentials are removed.
+   * `Delete`: Any orphaned resources owned by the current binding linked credentials are deleted from the service instance. All data held in the orphaned resources is lost.
+   * `MakeServiceOwned`: The ownership of orphaned resource is set to be service-level. This resource can be accessed by any current and future client credentials sharing the service instance.
 
-Service specific configuration parameters are a JSON object that is provided
-either in-line or in a file. For more information,
+Service specific configuration parameters are a JSON object that is provided either in-line or in a file. For more information,
 see [Arbitrary Parameters](https://docs.pivotal.io/pivotalcf/1-12/devguide/services/managing-services.html#arbitrary-params-create).
 
 
@@ -114,6 +101,7 @@ see [Arbitrary Parameters](https://docs.pivotal.io/pivotalcf/1-12/devguide/servi
 To create an instance of the Solace PubSub+ service with the cf CLI, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
+
   <pre class="terminal">
   $ cf api api.YOUR-SYSTEM-DOMAIN
   Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
@@ -123,6 +111,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI, do the foll
   </pre>
 
 1. Log in to your deployment and select an org and a space.
+
   <pre class="terminal">
   $ cf login
   API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
@@ -131,6 +120,7 @@ To create an instance of the Solace PubSub+ service with the cf CLI, do the foll
   </pre>
 
 1. List the Marketplace services and locate the Solace PubSub+ service and its associated service plans.
+
   <pre class="terminal">
   $ cf marketplace
   Getting services from marketplace in org example / space development as user<span>@</span>example.com...
@@ -139,9 +129,11 @@ To create an instance of the Solace PubSub+ service with the cf CLI, do the foll
   service          plans                                                                                            description
   solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
   </pre>
+
 1. Create an instance of the Solace PubSub+ service. Select the appropriate service plan for your app.
    For how the service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
    The following example uses the `enterprise-large-ha` service plan and no service-specific parameters.
+
   <pre class="terminal">
   $ cf create-service solace-pubsub enterprise-large-ha solace-pubsub-instance
   Creating service instance solace-pubsub-instance in org example / space development as user@example.com...
@@ -249,14 +241,16 @@ To update an instance of the Solace PubSub+ service with the cf CLI, do the foll
 	</pre>
 
 1. Update the service instance of the Solace PubSub+ service assuming both LDAP and TCP routes are enabled. This disables external access to the MQTT Plain Text messaging protocol, grants Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups, and sets the Orphaned Resource Policy to Delete.
+
 	<pre class="terminal">
-        $ cf update-service solace-pubsub-instance -c '{ "orphanedResourcePolicy": "Delete", "mqtt\_tcp\_route\_enabled" : "false", "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com", "ldapGroupAdminReadWrite" : "cn=username2,ou=groups,dc=solace,dc=com" }'
-	Updating service instance solace-pubsub-instance user...
-	OK
+   $ cf update-service solace-pubsub-instance -c '{ "orphanedResourcePolicy": "Delete", "mqtt\_tcp\_route\_enabled" : "false", "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com", "ldapGroupAdminReadWrite" : "cn=username2,ou=groups,dc=solace,dc=com" }'
+   Updating service instance solace-pubsub-instance user...
+   OK
 	</pre>
+
     <p class="note"><strong>Note:</strong> Updating a Service Instance that has existing application bindings or service keys can be a service affecting operation. An existing app using bindings may need to unbind and rebind to obtain its updated Solace PubSub+ Credentials, while an existing app using service keys will need a new service key.</p>
 
-1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
+2. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
 
 
 ## <a id='cf-cli-update-sp'></a>Update a Service Instance to a new Service Plan
@@ -266,7 +260,7 @@ An on-demand service instance may be upgraded to a different service plan.
 Assuming you have a service named 'solace-pubsub-instance' as in the previous section, you can update it to a new service plan by running
 
   <pre class="terminal">
-  $cf update-service solace-pubsub-instance -p &lt;new-service-plan&gt; 
+  $cf update-service solace-pubsub-instance -p &lt;new-service-plan&gt;
   </pre>
 
 Several restrictions apply:
@@ -289,6 +283,7 @@ A service instance may be deleted once it has no bindings and no service keys.
 To delete an instance of the Solace PubSub+ service with the cf CLI, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
+
   <pre class="terminal">
   $ cf api api.YOUR-SYSTEM-DOMAIN
   Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
@@ -298,6 +293,7 @@ To delete an instance of the Solace PubSub+ service with the cf CLI, do the foll
   </pre>
 
 1. Log in to your deployment and select an org and a space.
+
   <pre class="terminal">
   $ cf login
   API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
@@ -306,43 +302,48 @@ To delete an instance of the Solace PubSub+ service with the cf CLI, do the foll
   </pre>
 
 1. Locate the previously created service.
-	<pre class="terminal">
-	$ cf services
-	Getting services in org example / space dev as user<span>@</span>example.com...
-	OK
 
-	name                            service            plan                bound apps   last operation
-	solace-pubsub-instance-IoT      solace-pubsub      enterprise-shared                create succeeded
-	</pre>
+  <pre class="terminal">
+  $ cf services
+  Getting services in org example / space dev as user<span>@</span>example.com...
+  OK
+
+  name                            service            plan                bound apps   last operation
+  solace-pubsub-instance-IoT      solace-pubsub      enterprise-shared                create succeeded
+  </pre>
 
 1. Delete the service instance `solace-pubsub-instance-IoT` of the Solace PubSub+ service.
-	<pre class="terminal">
-	$ cf delete-service solace-pubsub-instance-IoT
 
-	Really delete the service solace-pubsub-instance-IoT?> yes
-	Deleting service solace-pubsub-instance-IoT in org example / space dev as user<span>@</span>example.com...
-	OK
+  <pre class="terminal">
+  $ cf delete-service solace-pubsub-instance-IoT
 
-	Delete in progress. Use 'cf services' or 'cf service solace-pubsub-instance-IoT' to check operation status.
-	</pre>
+  Really delete the service solace-pubsub-instance-IoT?>
+  Deleting service solace-pubsub-instance-IoT in org example / space dev as user<span>@</span>example.com...
+  OK
 
-1. You can monitor the progress of the delete operation.
-	<pre class="terminal">
-	$ cf services
-	Getting services in org example / space dev as user<span>@</span>example.com...
-	OK
+  Delete in progress. Use 'cf services' or 'cf service solace-pubsub-instance-IoT' to check operation status.
+  </pre>
 
-	name                            service            plan                bound apps   last operation
-	solace-pubsub-instance-IoT      solace-pubsub      enterprise-shared                delete in progress
-	</pre>
-	Notice the `delete in progress`; this service is removed after the deletion is completed.
-	<pre class="terminal">
-	$ cf services
-	Getting services in org example / space dev as user<span>@</span>example.com...
-	OK
+2. You can monitor the progress of the delete operation.
 
-	No services found
-	</pre>
+  <pre class="terminal">
+  $ cf services
+  Getting services in org example / space dev as user<span>@</span>example.com...
+  OK
+
+  name                            service            plan                bound apps   last operation
+  solace-pubsub-instance-IoT      solace-pubsub      enterprise-shared                delete in progress
+  </pre>
+
+  Notice the `delete in progress`; this service is removed after the deletion is completed.
+
+  <pre class="terminal">
+  $ cf services
+  Getting services in org example / space dev as user<span>@</span>example.com...
+  OK
+
+  No services found
+  </pre>
 
 
 ## <a id='apps-man-create'></a> Create a Service Instance in Apps Manager
@@ -360,9 +361,11 @@ To create an instance of the Solace PubSub+ service in Apps Manager, do the foll
 1. Click **Solace PubSub+**.
 
 1. Select the appropriate service plan for your app. For information on how service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
-  <%= image_tag('appsmanager_select_solace_pubsub_plan_short_form.png') %>
+
+  ![alt-text=""](./images/appsmanager_select_solace_pubsub_plan_short_form.png)
 
 1. Enter an **Instance Name**, select a space under **Add to Space** and configure any optional parameters if desired. Then click **Add**.
-  <%= image_tag('appsmanager_solace_messaging_create_service_do_not_bind_short_form_new.png') %>
+
+  ![alt-text=""](./images/appsmanager_solace_messaging_create_service_do_not_bind_short_form_new.png)
 
 1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).

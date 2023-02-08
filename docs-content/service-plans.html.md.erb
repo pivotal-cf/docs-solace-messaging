@@ -108,8 +108,8 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>Service instances</th>
-  <td>A <a href='service-instances.html#about_solace_service_instance'>Solace PubSub+ Service Instance</a> represents a Message VPN on a Solace PubSub+ Event Broker. The ability to host multiple service instances on a single Solace PubSub+ Event Broker for sharing the underlying resources is applicable on Enterprise and Enterprise Evaluation edition Event Brokers and is limited to a maximum of <strong>five</strong> service instances. 
-  
+  <td>A <a href='service-instances.html#about_solace_service_instance'>Solace PubSub+ Service Instance</a> represents a Message VPN on a Solace PubSub+ Event Broker. The ability to host multiple service instances on a single Solace PubSub+ Event Broker for sharing the underlying resources is applicable on Enterprise and Enterprise Evaluation edition Event Brokers and is limited to a maximum of <strong>five</strong> service instances.
+
   <br></br>
   You will be able to configure an Enterprise edition broker with up to twenty-five service instances
   if you provide a 25 Message VPN Product Key.
@@ -134,7 +134,7 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>Maximum Queue Messages</th>
-  <td>Sets the maximum number of messages that can be queued for delivery to consumers. Sufficient system resources need to be available on the VM; see <a href='https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/System-Scaling-Parameters.htm'> Solace documentation for specific requirements</a>. Consider this setting while selecting a VM Type for your deployment.   
+  <td>Sets the maximum number of messages that can be queued for delivery to consumers. Sufficient system resources need to be available on the VM; see <a href='https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/System-Scaling-Parameters.htm'> Solace documentation for specific requirements</a>. Consider this setting while selecting a VM Type for your deployment.
   <ul>
   <li>This setting is only applied to new deployments. Existing deployments won't be updated.</li>
   <ul>
@@ -179,7 +179,7 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>Product Key</th>
-  <td>Users of Enterprise editions can configure instances to host up to 25 VPNs if they provide a product key in this field. 
+  <td>Users of Enterprise editions can configure instances to host up to 25 VPNs if they provide a product key in this field.
   <a href="#tableNote4"><sup>4</sup></a> </td>
   <td>&#10004;</td>
   <td>&#10004;</td>
@@ -201,11 +201,11 @@ The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans 
 
 A deployment of Solace PubSub+ Event Broker will attempt to maximize the use of the underlying resources on any given **VM Type**.
 
-The deployment will auto select the [maximum client connection scaling parameter](https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/System-Scaling-Parameters.htm) based on the following: 
+The deployment will auto select the [maximum client connection scaling parameter](https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/System-Scaling-Parameters.htm) based on the following:
 
 * number of detected CPUs,
 * amount of detected RAM,
-* and resource required by the configured maximum queue messages 
+* and resource required by the configured maximum queue messages
 
 This configuration is done at service creation time.
 
@@ -631,11 +631,10 @@ If there are existing service instances on these plans, the operator should use 
 </table>
 
 
-
 ## <a id='sample_standard_plan_configuration'></a> Sample Standard Plan Configuration
 
-<%= image_tag('sample_on_demand_standard.png') %>
+![alt-text=""](./images/sample_on_demand_standard.png)
 
 ## <a id='sample_enterprise_plan_configuration'></a> Sample Enterprise Plan Configuration
 
-<%= image_tag('sample_on_demand_enterprise.png') %>
+![alt-text=""](./images/sample_on_demand_enterprise.png)

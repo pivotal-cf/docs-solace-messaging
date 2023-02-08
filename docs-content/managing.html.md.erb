@@ -13,7 +13,7 @@ The Solace PubSub+ Service Dashboard offers the following functionality:
 * A link to the [Solace PubSub+ Manager](#solace_pubsub_manager).
 * Manage Client Profiles and their configuration.
 * Capture a backup of basic service configuration and subsequently restore it.
-* Elect to receive an upgrade when an upgrade is available if [user controlled upgrades are enabled](installing.html#user-controlled-upgrades). 
+* Elect to receive an upgrade when an upgrade is available if [user controlled upgrades are enabled](installing.html#user-controlled-upgrades).
   This includes the option to opt-in to automatically receive upgrades when they become availabe.
 
 ### <a id='retrieve_dashboard'></a> Retrieve Dashboard Information
@@ -30,7 +30,7 @@ The Solace PubSub+ Service Dashboard offers the following functionality:
 	Description: Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
 	Documentation url: http<span>:</span>//docs.solace.com
   Dashboard: https<span>:</span>//solace-service-dashboard.YOUR-SYSTEM-DOMAIN/service-dashboard/f5d6bf5b-e84f-416b-8c08-4a0e782a51d2/
-  
+
 	Last Operation
 	Status: create succeeded
 	Message:
@@ -38,13 +38,10 @@ The Solace PubSub+ Service Dashboard offers the following functionality:
 	Started: 2020-01-01T00:00:00Z
 	</pre>
 
-1. Use the provided URL in a browser. As of Solace PubSub+ version 2.8.0, the dashboard support Single Sign On using VMware Tanzu accounts. When navigating
-to the URL provided, users will be asked to authorize Solace PubSub+ to read basic information about their VMware Tanzu account.
-Users with manage access will be able to utilize the features of the service
-dashboard such as Client Profile management, Backup and Restore, Service Management, and Upgrade Management. Users with only read access will see basic information such as
-the vpn name and broker version. 
+1. Use the provided URL in a browser. As of Solace PubSub+ version 2.8.0, the dashboard support Single Sign On using VMware Tanzu accounts. When navigating to the URL provided, users will be asked to authorize Solace PubSub+ to read basic information about their VMware Tanzu account.
+Users with manage access will be able to utilize the features of the service dashboard such as Client Profile management, Backup and Restore, Service Management, and Upgrade Management. Users with only read access will see basic information such as the vpn name and broker version.
 
-    <%= image_tag('sample_service_dashboard.png') %>
+    ![alt-text=""](./images/sample_service_dashboard.png)
 
 ### <a id='client_profile_management'></a> Client Profile Management
 
@@ -52,11 +49,11 @@ Client profiles are assigned to client usernames so that a common configuration 
 
 The Client Profile Management section displays existing client profiles and offers the ability to create, update, and delete client profiles on the message VPN. While creating and updating client profiles, select the client profile capabilities to turn ON/OFF. For more information about client profiles, please consult Solace's documentation: [Client Profile](https://docs.solace.com/PubSub-Basics/Core-Concepts-Solace-Event-Broker-Concepts.htm#client-profile) and [Client Profile Configuration](https://docs.solace.com/Configuring-and-Managing/Configuring-Client-Profiles.htm)
 
-The client profile highlighted in light green is the selected default client profile. New client usernames created through Cloud Foundry are automatically assigned this client profile. To select a different default client profile, use the dropdown menu that can be found at the bottom of the client profile table. Changing the default client profile does not modify existing client usernames, the change only applies to new client usernames.  
+The client profile highlighted in light green is the selected default client profile. New client usernames created through Cloud Foundry are automatically assigned this client profile. To select a different default client profile, use the dropdown menu that can be found at the bottom of the client profile table. Changing the default client profile does not modify existing client usernames, the change only applies to new client usernames.
 
 Note that updating a client profile affects all clients using the client profile.
 
-Also note that the client profile named 'default' as well as the selected default client profile (the highlighted client profile) can't be deleted. 
+Also note that the client profile named 'default' as well as the selected default client profile (the highlighted client profile) can't be deleted.
 
 ### <a id='solace_pubsub_configuration_backup_and_restore'></a> Solace PubSub+ Configuration Backup and Restore
 
@@ -73,7 +70,7 @@ The Solace PubSub+ Manager is accessible when a service is created from a link i
 
 ### <a id='sample_pubsub_manager'></a> Sample PubSub+ Manager
 
-  <%= image_tag('sample_pubsub_manager_new.png') %>
+  ![alt-text=""](./images/sample_pubsub_manager_new.png)
 
 ### Restrictions on the Use of the PubSub+ Manager
 
@@ -148,15 +145,15 @@ The `managementHostnames` and `activeManagementHostname` are externally accessib
 
 1. Click **Manage** to open the **Manage Appliance** window.
 
-    <%= image_tag('soladmin_manage.png') %>
+    ![alt-text=""](./images/soladmin_manage.png)
 
-1. Under **Management Host**, enter the active management hostname of the Solace PubSub+ Event Broker recorded above.
+2. Under **Management Host**, enter the active management hostname of the Solace PubSub+ Event Broker recorded above.
 
-1. Under **User Name** and **Password**, enter the management username and password recorded above.
+3. Under **User Name** and **Password**, enter the management username and password recorded above.
 
-1. Click **Ok**.
+4. Click **Ok**.
    The Solace PubSub+ Event Broker should now appear in the **Managed Appliances** list.
 
-    <%= image_tag('soladmin_router_list.png') %>
+    ![alt-text=""](./images/soladmin_router_list.png)
 
-1. To learn how to use SolAdmin to manage your Message VPN, see the included context specific tool help within the SolAdmin tool itself.
+5. To learn how to use SolAdmin to manage your Message VPN, see the included context specific tool help within the SolAdmin tool itself.

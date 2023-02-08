@@ -209,7 +209,7 @@ Solace PubSub+ for VMware Tanzu requires the following:
 
 To install Solace PubSub+ for VMware Tanzu, do the following:
 
-1. Download the product file from the [Solace Downloads page](https://products.solace.com/download/PUBSUB_VMware Tanzu_STAND)
+1. Download the product file from the [Solace Downloads page](https://products.solace.com/download/PUBSUB_VMware%20Tanzu_STAND)
 
 1. Upload the product file on the Ops Manager **Installation Dashboard**.
 
@@ -225,7 +225,8 @@ To install Solace PubSub+ for VMware Tanzu, do the following:
 To configure Solace PubSub+ for VMware Tanzu, do the following:
 
 From the **Settings** tab of the Solace PubSub+ tile:
-  <%= image_tag('select_tile_settings_new.png') %>
+
+  ![alt-text=""](./images/select_tile_settings_new.png)
 
 1. Configure the [**Required Settings**](#configure_required):
    * [**Assign AZs and Networks**](#required_azs_and_network)
@@ -237,7 +238,7 @@ From the **Settings** tab of the Solace PubSub+ tile:
    * [**Stemcell**](#required_stemcell)
    * [**Resource Config**](#required_resource_config)
 
-1. Configure the [**Optional Settings**](#configure_optional):
+2. Configure the [**Optional Settings**](#configure_optional):
    * [**Event Broker Config**](#general_settings)
    * [**TLS Config**](#optional_tls_config)
    * [**Management Access (LDAP)**](#optional_management_access)
@@ -250,87 +251,88 @@ From the **Settings** tab of the Solace PubSub+ tile:
    * [**Static IPs**](#optional_static_ips)
    * [**Errands**](#optional_errands)
 
-1. [Apply Changes](#apply_changes).
+3. [Apply Changes](#apply_changes).
 
 ### <a id='configure_required'></a> Required Settings
 
 #### <a id='required_azs_and_network'></a> Assign AZs and Networks
 
 1. From the **Settings** tab of the Solace PubSub+ tile, click **Assign AZs and Networks**.
-    <%= image_tag('select_1_assign_azs_and_networks.png') %>
 
-1. Under **AZ and Network Assignments**, choose the availability zones and network where the Solace PubSub+ deployment should run. This will include all **Operator Allocated** Event Brokers. If you are deploying Solace PubSub+ with high availability plans, consider using multiple availability zones for maximum fault tolerance. Also choose the Service Network, this is where **On Demand** Allocated Event Brokers will be deployed, the Availability Zones for On Demand Allocated Event Brokers are controlled in each plan.
-    <%= image_tag('form_assign_azs_and_networks_new2.png') %>
+    ![alt-text=""](./images/select_1_assign_azs_and_networks.png)
 
-1. Click **Save**.
+2. Under **AZ and Network Assignments**, choose the availability zones and network where the Solace PubSub+ deployment should run. This will include all **Operator Allocated** Event Brokers. If you are deploying Solace PubSub+ with high availability plans, consider using multiple availability zones for maximum fault tolerance. Also choose the Service Network, this is where **On Demand** Allocated Event Brokers will be deployed, the Availability Zones for On Demand Allocated Event Brokers are controlled in each plan.
+
+    ![alt-text=""](./images/form_assign_azs_and_networks_new2.png)
+
+3. Click **Save**.
 
 #### <a id='required_mysql_configuration'></a> MySQL Configuration
 
-
 1. Click **MySQL Database**.
 
-    <%= image_tag('select_1_mysql.png') %>
+    ![alt-text=""](./images/select_1_mysql.png)
 
-1. (Optional) Database columns holding credentials can be encrypted by
+2. (Optional) Database columns holding credentials can be encrypted by
 		entering an encryption key in **DB Encryption Key**.
 		There are no restrictions on the length of the characters for the key.
-    <%= image_tag('form_mysql_encryption_keys.png') %>
-    <p></p>
-		<p class="note warning"><strong>Warning:</strong> You cannot recover a loss
-			encryption key. You must safeguard against the loss of encryption keys.</p>
+
+    ![alt-text=""](./images/form_mysql_encryption_keys.png)
+
+	<p class="note warning"><strong>Warning:</strong> You cannot recover a lost encryption key. You must safeguard against the loss of encryption keys.</p><br>
 
 	Depending on your use case, do one of the following:
-	+ If you redeploy and do not want to change the encryption, leave the
-	**DB Encryption Key** with its current value.
-	+ If you want to change the encryption key, enter the new key in **DB
-	Encryption Key** and enter the old key in **Previous DB Encryption Key**.
-	The previously encrypted data is decrypted using the old key and re-encrypted using the new key.
-	+ If you want to decrypt the database, enter the last used key in **Previous
-	DB Encryption Key** and clear **DB Encryption Key**.
 
+	+ If you redeploy and do not want to change the encryption, leave the **DB Encryption Key** with its current value.
+	+ If you want to change the encryption key, enter the new key in **DB Encryption Key** and enter the old key in **Previous DB Encryption Key**. The previously encrypted data is decrypted using the old key and re-encrypted using the new key.
+	+ If you want to decrypt the database, enter the last used key in **Previous DB Encryption Key** and clear **DB Encryption Key**.
 
-1. Select one of the supported MySQL configuration for the service broker's database.
-    <p></p>
+3. Select one of the supported MySQL configuration for the service broker's database.
+
     <a id='required_mysql_internal'></a>
     **Internal MySQL**: The default option is for an 'Internal MySQL' deployed to a single management VM. For a production setup please make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. Without a load balancer, the service broker relies on MySQL driver for failover functions using up to two management VMs when available.
-    <%= image_tag('form_mysql_default_new2.png') %>
-    <p></p>
+
+    ![alt-text=""](./images/form_mysql_default_new2.png)
+
     <a id='required_mysql_internal_ha'></a>
+
     **Internal MySQL (Highly Available)**: Make sure to allocate two management VMs and one arbitrator VM. The arbitrator VM should be located in a different availability zone than the management VMs. When using a load balancer setup, ensure to point to the two management VMs with health check port `1936`. The load balancer setup must be sticky. For more information, see [CF MySQL Release - Proxy: Configuring Load Balancer](https://github.com/cloudfoundry/cf-mysql-release/blob/develop/docs/proxy.md#configuring-load-balancer). Without a load balancer, the service broker relies on MySQL driver for failover functions using up to two management VMs when available.
-    <%= image_tag('form_mysql_internal_ha_new3.png') %>
-    <p></p>
+
+    ![alt-text=""](./images/form_mysql_internal_ha_new3.png)
+
     <a id='required_mysql_for_pcf'></a>
+
     **VMware Tanzu SQL [MySQL]**: When VMware Tanzu SQL [MySQL] tile is available, select a highly available service plan with a minimum of 100&nbsp;MB database size.
-    <%= image_tag('form_mysql_for_pcf_new2.png') %>
-    <p></p>
+
+    ![alt-text=""](./images/form_mysql_for_pcf_new2.png)
+
     <a id='required_mysql_external'></a>
     **External MySQL**: When MySQL is available as an external service, it may be provided as a user-provided-service to Solace PubSub+ for VMware Tanzu. Ensure you have a highly available deployment with a minimum of 100&nbsp;MB database size.
-    <%= image_tag('form_mysql_external_new2.png') %>
-    <p></p>
+
+    ![alt-text=""](./images/form_mysql_external_new2.png)
+
     <p class="note"><strong>Note:</strong> Except for the encryption keys, you cannot modify your MySQL configurations after the deployment has completed. Be sure to select the most appropriate option for your deployment.</p>
 
-1. Click **Save**.
+4. Click **Save**.
 
 #### <a id='required_management_access'></a> Management Access
 
 1. Click **Management Access**.
 
-    <%= image_tag('select_1_management_access.png') %>
+    ![alt-text=""](./images/select_1_management_access.png)
 
-1. Under **Admin user password**, pick a password for the Event Broker's `admin` user.
+2. Under **Admin user password**, pick a password for the Event Broker's `admin` user.
 
-    <%= image_tag('form_management_access_admin_user_password_new.png') %>
+    ![alt-text=""](./images/form_management_access_admin_user_password_new.png)
 
 <p class="note"><strong>Note:</strong> The password can only contain alphanumeric characters and any of  .!@#$%^-_+={}[]/?
-<br/>
 <br/>
 It cannot contain any of the characters ():";'<>,`\*&|
 </p>
 
-
 1. [(Optional) if you want to use LDAP](#optional_management_access).
 
-1. Click **Save**.
+2. Click **Save**.
 
 #### <a id='required_tcp_routes'></a> TCP Routes (Save Required)
 
@@ -338,13 +340,13 @@ Open this pane and click **Save** even if using the default setting. If you want
 
 1. Click **TCP Routes**.
 
-    <%= image_tag('select_1_tcp_routes.png') %>
+    ![alt-text=""](./images/select_1_tcp_routes.png)
 
-1. Default: **TCP Routes Disabled**.
+2. Default: **TCP Routes Disabled**.
 
-     <%= image_tag('form_tcp_routes_new.png') %>
+     ![alt-text=""](./images/form_tcp_routes_new.png)
 
-1. Click **Save**.
+3. Click **Save**.
 
 <p class="note"><strong>Note:</strong> Failing to click <strong>Save</strong> might result in an <code>unknown property "solace_router"</code> exception when you attempt to Apply Changes.</p>
 
@@ -354,9 +356,9 @@ Open this pane even if using the default setting. You need to select all the Ava
 
 1. Click **Standard Plans**.
 
-     <%= image_tag('select_1_standard_plans.png') %>
+     ![alt-text=""](./images/select_1_standard_plans.png)
 
-1. Click **Save**.
+2. Click **Save**.
 
 #### <a id='required_enterprise_plans'></a> Enterprise Plans (Save Required)
 
@@ -364,9 +366,9 @@ Open this pane even if using the default setting. You need to select all the Ava
 
 1. Click **Enterprise Plans**.
 
-    <%= image_tag('select_1_enterprise_plans.png') %>
+    ![alt-text=""](./images/select_1_enterprise_plans.png)
 
-1. Click **Save**.
+2. Click **Save**.
 
 #### <a id='required_stemcell'></a> Stemcell
 
@@ -374,24 +376,26 @@ You might need to import a stemcell import if the minimum stemcell required for 
 
 1. Click **Stemcell**.
 
-     <%= image_tag('select_1_stemcell.png') %>
+     ![alt-text=""](./images/select_1_stemcell.png)
 
-1. Click **Import Stemcell** to import the required stemcell for your installation of VMware Tanzu.
-  * [Download Stemcells for VMware Tanzu](https://network.tanzu.vmware.com/products/stemcells-ubuntu-xenial/)
+2. Click **Import Stemcell** to import the required stemcell for your installation of VMware Tanzu.
+
+     * [Download Stemcells for VMware Tanzu](https://network.tanzu.vmware.com/products/stemcells-ubuntu-xenial/)
 
 #### <a id='required_resource_config'></a> Resource Config
 
 1. Click **Resource Config**.
 
-    <%= image_tag('select_1_resource_config.png') %>
+    ![alt-text=""](./images/select_1_resource_config.png)
 
-1. Use the drop-down menus to configure the number of Solace PubSub+ Event Broker job instances that are available in each of the service plans mentioned above. These job instances are statically created when the tile is deployed. Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances.<br/><br/>
-Five Enterprise Shared service instances can be hosted on a single Enterprise Shared job instance. As such, the maximum number of Enterprise Shared service instances that can concurrently exist for the `Enterprise Shared` service plan is equal to five times the number of `Enterprise Shared` job instances. Conversely, three HA Solace PubSub+ Event Broker job instances are required for a single HA Solace PubSub+ Event Broker service instance. As such, the maximum number of HA Solace PubSub+ Event Broker service instances that can concurrently exist for the `Enterprise Large-HA` and `Enterprise Medium-HA` service plans is equal to one-third the number of their corresponding job instances. In order for `Enterprise Large-HA` and `Enterprise Medium-HA` service plans to provide high availability fault tolerance, make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more. If you have only one availability zone, the deployment is not fault tolerant and Solace does not recommend using high availability service plans under this scenario.
+2. Use the drop-down menus to configure the number of Solace PubSub+ Event Broker job instances that are available in each of the service plans mentioned above. These job instances are statically created when the tile is deployed. Service instances are then dynamically allocated at service instance creation time, post-deployment, using these job instances.<br/>
+Five Enterprise Shared service instances can be hosted on a single Enterprise Shared job instance. As such, the maximum number of Enterprise Shared service instances that can concurrently exist for the `Enterprise Shared` service plan is equal to five times the number of `Enterprise Shared` job instances. Conversely, three HA Solace PubSub+ Event Broker job instances are required for a single HA Solace PubSub+ Event Broker service instance. As such, the maximum number of HA Solace PubSub+ Event Broker service instances that can concurrently exist for the `Enterprise Large-HA` and `Enterprise Medium-HA` service plans is equal to one-third the number of their corresponding job instances. In order for `Enterprise Large-HA` and `Enterprise Medium-HA` service plans to provide high availability fault tolerance, make use of multiple availability zones for your deployment, with a minimum of 2 and an ideal of 3 or more. If you have only one availability zone, the deployment is not fault tolerant and Solace does not recommend using high availability service plans under this scenario. <br>
     <p class="note"><strong>Note:</strong> The <strong>Automatic</strong> number of job instances is kept to the same values found in previous tile releases. This is just to ensure no instances are lost during upgrades.</p>
     <p class="note"><strong>Note:</strong> The number of job instances can be increased after the tile is deployed without impacting already bound apps. However, reducing the number of instances can result in app failure and message loss.</p>
     <p class="note"><strong>Note:</strong> The size of the persistent disk can be changed both before and after deployment. Increasing the size of the persistent disks will impact the service of already bound apps. However, messages will not be lost. Reducing the size of the persistent disk post-deployment is not recommended and can result in message loss, inoperable Solace PubSub+ Event Broker, and/or undefined behaviors.</p>
     <p class="note"><strong>Note:</strong> Unless there are no existing service instances or you are configuring a new plan, Solace recommends keeping the default values for <strong>VM Type</strong> and ensuring it matches the configurable service plan. A reduction of the RAM or CPU capacity may lead to a deployment failure or service degradation.</p>
-    <%= image_tag('form_resource_config.png') %>
+
+    ![alt-text=""](./images/form_resource_config.png)
 
 1. Click **Save**.
 
@@ -401,97 +405,92 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
 1. Click **General Settings**.
 
-     <%= image_tag('select_1_general_settings.png') %>
+     ![alt-text=""](./images/select_1_general_settings.png)
 
-1. In **Service Name**, enter the name you want as the service name in the Marketplace.
+2. In **Service Name**, enter the name you want as the service name in the Marketplace.
 
-    <%= image_tag('form_general_settings_service_name.png') %>
+    ![alt-text=""](./images/form_general_settings_service_name.png)
 
-    <p class="note"><strong>Note:</strong> If you change the name to something
-			other than <code>solace-pubsub</code>, any apps that use the
-			<a href="https://github.com/SolaceProducts/sl-spring-cloud-connectors">Solace PubSub+ Spring Cloud Connectors</a>
-			have to be changed. Clone the project and change any instances of the string
-			<code>solace-pubsub</code> to the service name you selected.</p>
+    <p class="note"><strong>Note:</strong> If you change the name to something other than <code>solace-pubsub</code>, any apps that use the
+			<a href="https://github.com/SolaceProducts/sl-spring-cloud-connectors">Solace PubSub+ Spring Cloud Connectors</a> have to be changed. Clone the project and change any instances of the string <code>solace-pubsub</code> to the service name you selected.</p>
 
-1. Check the **Enable Service Instance Sharing** checkbox to allow service instances to be shared across different Cloud Foundry orgs and spaces.
+3. Check the **Enable Service Instance Sharing** checkbox to allow service instances to be shared across different Cloud Foundry orgs and spaces.
 
-    <%= image_tag('form_general_settings_service_sharing.png') %>
+    ![alt-text=""](./images/form_general_settings_service_sharing.png)
 
     For more information about this feature see [Enabling Service Instance Sharing](https://docs.cloudfoundry.org/services/enable-sharing.html).
 
-1. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ Event Brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example).
+4. Under **Starting Port**, enter a port where the messaging services on the Solace PubSub+ Event Brokers (e.g. MQTT, REST, or SMF) will start listening from, for example, `7000`. The exact port numbers chosen for each service will be based on this starting port and specified in the `VCAP_SERVICES` environment variable passed to apps. For an example, see [Example Environment Variable](credentials.html#example). <br>
     <p class="note"><strong>Note:</strong> The Starting Port may only be set at tile installation time. Its value may not be changed later.</p>
-    <%= image_tag('form_general_settings_starting_port.png') %>
 
-1. <a id='default_orphaned_resource_policy'></a> Under **Default Orphaned Resource Policy**, choose a default policy for your deployment. This default policy is used when a service does not have its own policy. See [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy) for more details about the options.
+    ![alt-text=""](./images/form_general_settings_starting_port.png)
 
-    <%= image_tag('form_general_settings_default_orphaned_resource_policy.png') %>
+5. <a id='default_orphaned_resource_policy'></a> Under **Default Orphaned Resource Policy**, choose a default policy for your deployment. This default policy is used when a service does not have its own policy. See [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy) for more details about the options.
 
-1. <a id='user-controlled-upgrades'></a>Under **User Controlled Upgrades for On Demand Instances**, configure whether or not
-users can control when their services are upgraded.
+    ![alt-text=""](./images/form_general_settings_default_orphaned_resource_policy.png)
 
-    <%= image_tag('form_general_settings_upgrade_1.png') %>
+6. <a id='user-controlled-upgrades'></a>Under **User Controlled Upgrades for On Demand Instances**, configure whether or not users can control when their services are upgraded.
+
+    ![alt-text=""](./images/form_general_settings_upgrade_1.png)
 
     To enable user-controlled upgrades, select **true** from the dropdown.
-    <br></br>
+    <br>
 
     When eligible, on-demand services users can indicate through their service dashboard if they want to upgrade. A task runs periodically to check for pending upgrade requests and perform them as required.
-    <br></br>
+    <br>
 
     In addition, the default value for 'opt-in to automatic upgrades' with newly created services can be changed. When a service opts-in to automatic upgrades,
-    the service will be automatically enrolled into upgrades when they become available instead of awaiting an indication from the user to enroll. The service owner
-    can opt-in or opt-out on the [Service Dashboard](managing.html#solace_pubsub_service_dashboard).
+    the service will be automatically enrolled into upgrades when they become available instead of awaiting an indication from the user to enroll. The service owner can opt-in or opt-out on the [Service Dashboard](managing.html#solace_pubsub_service_dashboard).
+    <br>
     <p class="note">
     <strong>Note:</strong> When upgrading to 2.7.0 from a previous version, existing services will be migrated with a value of false for the automatic opt-in to
     upgrades option, ignoring the default value specified in the tile's form.
-    </p>
+    </p><br>
 
     To set how often the upgrade task runs, do one of the following:
+
 	  + Select a preconfigured interval in **On Demand Upgrade Task Timer**.
 	  + Select **Custom Time** and enter an interval in Cron format.
 
-    <%= image_tag('form_general_settings_upgrade_2.png') %>
+    ![alt-text=""](./images/form_general_settings_upgrade_2.png)
 
     When an update is available, the service dashboard looks like this:
 
-    <%= image_tag('service_dashboard_with_update.png') %>
+    ![alt-text=""](./images/service_dashboard_with_update.png)
 
     If the user clicks **Mark for Update**, then the service is updated at the next scheduled time. Alternatively, the **automatically opt-in to updates** option
     can be toggled at any point. When on, the user does not need to click **Mark for Update** when an update is available as it will automatically opt in.
 
-    The Mark for Update button will appear if the service broker detects that there has been a change in configuration, including
-    <br></br>
+    The Mark for Update button will appear if the service broker detects that there has been a change in configuration, including:
 
-    <ul>
-    <li>PubSub+ for VMware Tanzu Version</li>
-    <li>A change to the the disk size or availability zone attributes of the Service Plan associated with the service instance</li>
-    <li>Application access authentication scheme</li>
-    <li>Management access authentication scheme</li>
-    <li>PubSub+ Admin password</li>
-    <li>Starting port</li>
-    <li>TLS configuration</li>
-    <li>LDAP configuration</li>
-    <li>Syslog configuration</li>
-    <li>TCP Routes configuration.</li>
-    </ul>
-
+    * PubSub+ for VMware Tanzu Version
+    * A change to the the disk size or availability zone attributes of the Service Plan associated with the service instance
+    * Application access authentication scheme
+    * Management access authentication scheme
+    * PubSub+ Admin password
+    * Starting port
+    * TLS configuration
+    * LDAP configuration
+    * Syslog configuration
+    * TCP Routes configuration
+<br>
     <p class="note"><strong>Note:</strong>
     For Shared service plans, every service on a broker must be marked for upgrade before the upgrade can happen.
     This prevents one tenant from upgrading a router before the other tenants are ready. The operator can
     mark the services for upgrade on behalf of the tenants.</p>
 
 
-1. <a id='inflight'></a> Maximum In-Flight Canaries and Updates
+6. <a id='inflight'></a> Maximum In-Flight Canaries and Updates
 
-    <%= image_tag('form_general_settings_inflight.png') %>
+    ![alt-text=""](./images/form_general_settings_inflight.png)
 
     These fields control how many on-demand services can be updated at once.
-    <br></br>
+    <br>
 
     The Maximum On-Demand Update Canaries field specifies how many services will initially be updated.
     If those updates are successful, then the rest of the services will be updated.
     It is recommended to leave that setting with the value 1.
-    <br></br>
+    <br>
 
     The Maximum On-Demand In-Flight Upgrades field specifies how many services can be updated
     in parallel after the canaries have been updated.
@@ -509,19 +508,19 @@ users can control when their services are upgraded.
 
     See [Configuring Bosh Director](https://docs.pivotal.io/pivotalcf/2-6/om/gcp/config-manual.html) for details on how to set the number of Director Workers.
 
+<a id='webhook'></a>
+1. Under **Web Hook**, you can choose to Enable or Disable.
 
-
-1. <a id='webhook'></a> Under **Web Hook**, you can choose to Enable or Disable.
-
-    <%= image_tag('form_general_settings_webhook.png') %>
+    ![alt-text=""](./images/form_general_settings_webhook.png)
 
     Web Hook enables an endpoint to receive POST requests for service create,
 		delete, and update events.
-    <br></br>
+    <br>
 
     The `operation` field describes the service event. The possible values are `create`,`update`, or `delete`.
 	  The message has service identifying information with network information for all
-	  messaging services. <br><br>
+	  messaging services.
+    <br>
 		The following sample message is for a service create event.
 		Many lines in the services section of this sample have been
 	  removed for brevity:
@@ -545,71 +544,65 @@ users can control when their services are upgraded.
 	  "serviceId" : "1fcdef72-58a4-4e48-a8fc-29a290c0fde9"
 	}
 	```
-    The REST endpoint must return the HTTP status code 200 otherwise the message
-    will remain on a queue and delivery will be reattempted repeatedly. Please see
-    [REST Consumers](https://docs.solace.com/Features/REST-Messaging-Concepts/REST-Consumers.htm) and
-    [Solace REST Status Codes](https://docs.solace.com/RESTMessagingPrtl/Solace-REST-Status-Codes.htm)
-    for requirements regarding the REST endpoint.
-    <br></br>
+
+The REST endpoint must return the HTTP status code 200 otherwise the message will remain on a queue and delivery will be reattempted repeatedly. Please see [REST Consumers](https://docs.solace.com/Features/REST-Messaging-Concepts/REST-Consumers.htm) and [Solace REST Status Codes](https://docs.solace.com/RESTMessagingPrtl/Solace-REST-Status-Codes.htm) for requirements regarding the REST endpoint.
+<br>
 
     Also see [Managing REST Messaging](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Messaging.htm) for
     more information about Solace REST Delivery Points.
 
-1. <a id='sb_settings'></a> Adjust service broker related settings.
+2.  <a id='sb_settings'></a> Adjust service broker related settings.
 
-    <%= image_tag('form_general_settings_sb.png') %>
+    ![alt-text=""](./images/form_general_settings_sb.png)
 
     An operator has a chance to confirm the buildpack and the amount of memory used for the Service Broker installation in CF.
 
-1. <a id='monitor_settings'></a> Adjust Monitor VM Type and Disk Type
+3.  <a id='monitor_settings'></a> Adjust Monitor VM Type and Disk Type.
 
-    <%= image_tag('form_general_monitor.png') %>
+    ![alt-text=""](./images/form_general_monitor.png)
 
     The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans with **High Availability** enabled.
     A Monitor node requires 1 CPU and 1 GB of RAM.
 
-1. <a id='rest_routes'></a> Enable REST Messaging through HTTP Routes
+4.  <a id='rest_routes'></a> Enable REST Messaging through HTTP Routes.
 
-    <%= image_tag('external_rest_routes.png') %>
+    ![alt-text=""](./images/external_rest_routes.png)
 
-    Check the *Enable REST Messaging HTTP Routes* box to enable HTTP routes registered under the
-    Tanzu Application Service (TAS) system domain for all services for REST messaging capabilities and accessible with the externalRestUris and externalRestTlsUris
-    VCAP entry. This route maps the ports from restUris to externally accessible HTTP/HTTPS ports on a route registered under the TAS system domain.
-    When using HTTPS, the server certificate used will be that of the TAS tile's configuration and not that of the Solace PubSub TLS
-    configuration. See [Solace PubSub+ Credentials](credentials.html#vcap-example) for more information.
+    Check the *Enable REST Messaging HTTP Routes* box to enable HTTP routes registered under the Tanzu Application Service (TAS) system domain for all services for REST messaging capabilities and accessible with the externalRestUris and externalRestTlsUris VCAP entry. This route maps the ports from restUris to externally accessible HTTP/HTTPS ports on a route registered under the TAS system domain.
+    When using HTTPS, the server certificate used will be that of the TAS tile's configuration and not that of the Solace PubSub TLS configuration. See [Solace PubSub+ Credentials](credentials.html#vcap-example) for more information.
 
-1. <a id='log_retention'></a> Under **Broker Log File Retention Policy**, configure the broker to retain logs based on the size of the log files themselves or for a specified number of days. 
+<a id='log_retention'></a>
 
-	<%= image_tag('log_file_retention_policy.png') %>
+5.  Under **Broker Log File Retention Policy**, configure the broker to retain logs based on the size of the log files themselves or for a specified number of days.
 
-	When you change the retention policy to day based, logged messages that may be older than what the new retention policy specifies are not automatically deleted. If this is a requirement, you must manually delete the older log files.
-	<br></br>
-        
-	This setting only affects broker logs and not other Bosh VM logs.  
+  ![alt-text=""](./images/log_file_retention_policy.png)
 
-1. <a id='revert_primary'></a> Restore Primary Node as Active On Upgrade
-   <%= image_tag('restore_primary_node.png') %>
+When you change the retention policy to day based, logged messages that may be older than what the new retention policy specifies are not automatically deleted. If this is a requirement, you must manually delete the older log files.
+<br>
 
-    Check the *Restore Primary Node as Active On Upgrade* box to restore the Primary node as active
-    after upgrading High Availability On Demand instances. Operator Allocated instance ordering will not be affected by this property.
-    When not enabled, the upgrade will minimize application reconnections.
+This setting only affects broker logs and not other Bosh VM logs.
 
-1. Click **Save**.
+1.  <a id='revert_primary'></a> Restore Primary Node as Active On Upgrade.
+
+   ![alt-text=""](./images/restore_primary_node.png)
+
+Check the *Restore Primary Node as Active On Upgrade* box to restore the Primary node as active after upgrading High Availability On Demand instances. Operator Allocated instance ordering will not be affected by this property.
+When not enabled, the upgrade will minimize application reconnections.
+
+2.  Click **Save**.
 
 #### <a id='optional_bosh_dns_aliases'></a> (Optional) Bosh DNS Aliases
 
 1. Click **Bosh DNS Aliases**
 
-    <%= image_tag('select_bosh_dns.png') %>
+    ![alt-text=""](./images/select_bosh_dns.png)
 
-
-    <%= image_tag('form_bosh_dns.png') %>
+    ![alt-text=""](./images/form_bosh_dns.png)
 
     This feature allows you to configure the tile so that DNS addresses are included in binding credentials rather than IP addresses.
     This allows client applications to perform certificate hostname validation.
 
     You have three options in terms of address types to include in binding credentials. This is configurable from the General Settings tab in Ops Manager.
-
 
     **Option 1: Include IP Addresses**
 
@@ -647,247 +640,207 @@ users can control when their services are upgraded.
     By entering a deployment name that does not exist,
     you can prevent Bosh from DNS-resolving your custom domain name.
 
-
-
-
-
-
-
 #### <a id='optional_tls_config'></a> (Optional) TLS Config
 
 1. Click **TLS Config**.
 
-    <%= image_tag('select_1_tls_config.png') %>
+    ![alt-text=""](./images/select_1_tls_config.png)
 
     TLS is disabled by default.
 
-    <%= image_tag('form_tls_config_new.png') %>
+    ![alt-text=""](./images/form_tls_config_new.png)
 
-1. Click **TLS Enabled**.
+2. Click **TLS Enabled**.
 
-    <%= image_tag('form_tls_config_enabled_new.png') %>
+    ![alt-text=""](./images/form_tls_config_enabled_new.png)
 
     By enabling and configuring TLS, you allow messaging between apps and the Solace PubSub+ Event Broker to be encrypted. Apps requiring encryption would then need to use the TLS-specific URLs passed in the `VCAP_SERVICES` environment variable. For more information about the `VCAP_SERVICES` environment variable, see [Example Environment Variable](credentials.html#example). If TLS is not configured, the TLS specific URLs continue to be passed in the `VCAP_SERVICES` environment variable but fail to connect to a PubSub+ Event Broker if used.
 
-1. Configure **Event Broker's RSA certificate (Server Certificate)** either
+3. Configure **Event Broker's RSA certificate (Server Certificate)** either
 by pasting in a certificate and private key in PEM format or clicking **Generate RSA Certificate**.
 Generated certificates are equivalent to self-signed certificates.
 
+    ![alt-text=""](./images/form_tls_config_server_certificate_new.png)
 
-    <%= image_tag('form_tls_config_server_certificate_new.png') %>
+    <p class="note"><strong>Note:</strong> The server certificate configured is used by all Solace PubSub+ Event Brokers deployed. As such, all Solace PubSub+ Event Brokers deployed in a VMware Tanzu instances have the same identification.</p>
 
-    <p class="note"><strong>Note:</strong> The server certificate configured
-		is used by all Solace PubSub+ Event Brokers deployed.
-			As such, all Solace PubSub+ Event Brokers deployed in a VMware Tanzu instances
-			 have the same identification.</p>
+    ![alt-text=""](./images/form_tls_config_disable_sb_cert_validation.png)
 
-    <%= image_tag('form_tls_config_disable_sb_cert_validation.png') %>
+    <p class="note"><strong>Note:</strong> Communication between the Solace PubSub+ Service Broker and Solace PubSub+ Event Broker is also encrypted if a TLS certificate is configured. The Service Broker uses the Container Certificate Trust Store Framework to validate the server certificate returned by Solace PubSub+ Event Brokers. If the framework is not operational when the tile is deployed, the Service Broker is unable to validate server certificates sent by the Solace PubSub+ Event Brokers and the tile fails to deploy. In development environments, it may be acceptable to not require server certificate validation, in which case the <strong>Disable RSA Server Certificate validation on the Service Broker (For development only)</strong> check box can be selected. This check box should never be selected in production deployments. Instead, the framework should be made operational.</p>
 
-    <p class="note"><strong>Note:</strong> Communication between the Solace PubSub+
-			Service Broker and Solace PubSub+ Event Broker is also encrypted if a
-			TLS certificate is configured. The Service Broker uses the Container
-			Certificate Trust Store Framework to validate the server certificate returned
-			by Solace PubSub+ Event Brokers. If the framework is not operational
-		when the tile is deployed, the Service Broker is unable to validate
-			server certificates sent by the Solace PubSub+ Event Brokers and the tile
-			fails to deploy. In development environments, it may be acceptable to not
-			require server certificate validation, in which case the
-			<strong>Disable RSA Server Certificate validation on the Service Broker
-				(For development only)</strong> checkbox can be selected.
-				This checkbox should never be selected in production deployments.
-				Instead, the framework should be made operational.</p>
-
-1. (Optional) Configure **Event Broker's Trusted Root Certificates**.
+1. (Optional) Configure **Event Broker Trusted Root Certificates**.
 These certificates are stored in the trust store on the Solace PubSub+ Event Brokers.
-They are required if you choose to use LDAP with TLS or if you want to use
-[Client Certificate Authentication](https://docs.solace.com/Features/Client-Authentication.htm#Client-Certificate).
+They are required if you choose to use LDAP with TLS or if you want to use [Client Certificate Authentication](https://docs.solace.com/Features/Client-Authentication.htm#Client-Certificate).
 
-    <%= image_tag('form_tls_config_trusted_root_certificates_new.png') %>
+    ![alt-text=""](./images/form_tls_config_trusted_root_certificates_new.png)
 
 1. Enable **Client Certificate Authentication**. Enabled by default, this will configure the router to enable client authentication by certificate.
 
-    <%= image_tag('form_tls_config_enable_client_certificate_auth.png') %>
+    ![alt-text=""](./images/form_tls_config_enable_client_certificate_auth.png)
 
-1. Set the **Default REST SSL Server Certificate Max Chain Depth** for newly created service instances.
+2. Set the **Default REST SSL Server Certificate Max Chain Depth** for newly created service instances.
 Set to 3 by default and can be any number between 0 and 8. The
-[REST SSL Server Certificate Max Chain Depth](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Service.htm#Set-Max-Chain)
-can be changed by the service owner through the Solace PubSub+ Manager or CLI. Changes to this property do not impact existing service instances.
+[REST SSL Server Certificate Max Chain Depth](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Service.htm#Set-Max-Chain) can be changed by the service owner through the Solace PubSub+ Manager or CLI. Changes to this property do not impact existing service instances.
 
-    <%= image_tag('form_tls_config_rest_server_cert_max_chain_depth.png') %>
+    ![alt-text=""](./images/form_tls_config_rest_server_cert_max_chain_depth.png)
 
 1. Click **Save**.
-
 
 #### <a id='optional_service_access'></a>(Optional) Service Access
 
 1. Click **Service Access**.
 
-    <%= image_tag('select_1_service_access.png') %>
+    ![alt-text=""](./images/select_1_service_access.png)
 
-1. Check the **Enable global access to plans of service solace_pubsub** option.
+2. Check the **Enable global access to plans of service solace_pubsub** option.
 
-    <%= image_tag('form_service_access_new.png') %>
+    ![alt-text=""](./images/form_service_access_new.png)
 
     <p class="note"><strong>Note:</strong> To control access to Solace PubSub+ service plans on a case-by-case basis, do not enable this option. Once this is enabled, it cannot be disabled from this form. It must be revoked by the operator manually.</p>
 
-1. Click **Save**.
+3. Click **Save**.
 
 #### <a id='optional_credhub'></a>(Optional) Security
 
 1. Click **Security**.
 
-    <%= image_tag('select_1_security.png') %>
+    ![alt-text=""](./images/select_1_security.png)
 
-1. Check the **Secure service instance credentials** option.
+2. Check the **Secure service instance credentials** option.
 
-    <%= image_tag('form_secure_service_instance_credentials.png') %>
+    ![alt-text=""](./images/form_secure_service_instance_credentials.png)
 
     <p class="note"><strong>Note:</strong> This enables credentials storage on CredHub capable deployments.</p>
 
-1. Check the **Automatic application security group management** option.
+3. Check the **Automatic application security group management** option.
 
-    <%= image_tag('form_security_asg.png') %>
+    ![alt-text=""](./images/form_security_asg.png)
 
-    <p class="note"><strong>Note:</strong> This allows for application security
-			groups to be created for each service binding and deleted on unbind.
-			The created application security groups grants an app's space
-			access to the Solace PubSub+ Service Instance IP and service ports only.</p>
+    <p class="note"><strong>Note:</strong> This allows for application security groups to be created for each service binding and deleted on unbind. The created application security groups grants an app's space access to the Solace PubSub+ Service Instance IP and service ports only.</p>
 
-1. Click **Save**.
+4. Click **Save**.
 
 #### <a id='optional_management_access'></a> (Optional) Management Access
 
 1. Click **Management Access**.
 
-    <%= image_tag('select_1_management_access.png') %>
+    ![alt-text=""](./images/select_1_management_access.png)
 
-1. If you configured [LDAP](#optional_ldap_settings), you may choose to have the LDAP Server provide the authentication and authorization for the management roles on a Solace service instance.
+2. If you configured [LDAP](#optional_ldap_settings), you may choose to have the LDAP Server provide the authentication and authorization for the management roles on a Solace service instance.
 
-    <%= image_tag('form_management_access_ldap_new.png') %>
+    ![alt-text=""](./images/form_management_access_ldap_new.png)
 
-1. (Optional) Configure Groups with Solace PubSub+ Event Brokers administration read-only privilege.
+3. (Optional) Configure Groups with Solace PubSub+ Event Brokers administration read-only privilege.
 
-    <%= image_tag('form_management_access_ldap_readonly_new.png') %>
+    ![alt-text=""](./images/form_management_access_ldap_readonly_new.png)
 
-1. (Optional) Configure Groups with Solace PubSub+ Event Brokers administration read-write privileges.
+4. (Optional) Configure Groups with Solace PubSub+ Event Brokers administration read-write privileges.
 
-    <%= image_tag('form_management_access_ldap_readwrite_new.png') %>
+    ![alt-text=""](./images/form_management_access_ldap_readwrite_new.png)
 
-1. (Optional) Configure Groups with Solace PubSub+ Event Brokers administration administrator privileges.
+5. (Optional) Configure Groups with Solace PubSub+ Event Brokers administration administrator privileges.
 
-    <%= image_tag('form_management_access_ldap_admin_new.png') %>
+    ![alt-text=""](./images/form_management_access_ldap_admin_new.png)
 
-    <p class="note"><strong>Note:</strong> Cloud Operators need to have global
-			access to the Solace PubSub+ Event Brokers deployed by the tile.
-			This allows them to administer the Solace PubSub+ Event Brokers with
-			 SolAdmin, CLI, or SEMP-based tools. Cloud operators might have different
-			 roles. Each role requires one of the three types of access-level:
+    <p class="note"><strong>Note:</strong> Cloud Operators need to have global access to the Solace PubSub+ Event Brokers deployed by the tile. This allows them to administer the Solace PubSub+ Event Brokers with SolAdmin, CLI, or SEMP-based tools. Cloud operators might have different roles. Each role requires one of the three types of access-level:
 			 administrator, read-write, and read-only. When using "Event Broker Internal",
 			 the cloud operators access to a single administrator level role using the admin
 			 password. With "LDAP Server", users can be assigned to groups in LDAP mapping to
 			 their respective roles.</p>
 
-1. (Optional) Configure a Monitor User.
+6. (Optional) Configure a Monitor User.
 
-    <%= image_tag('form_management_access_monitor_user.png') %>
+    ![alt-text=""](./images/form_management_access_monitor_user.png)
 
     You can create a management interface user with read-only access both to the global configuration and the VPN-level configuration. Please see [CLI User Access Levels](https://docs.solace.com/Configuring-and-Managing/CLI-User-Access-Levels.htm) for details about the access levels.
 
-
-1. Click **Save**.
+7. Click **Save**.
 
 #### <a id='optional_application_access'></a> (Optional) Application Access
 
 1. Click **Application Access**.
 
-    <%= image_tag('select_1_application_access.png') %>
+    ![alt-text=""](./images/select_1_application_access.png)
 
-1. Using the defaults, the Solace PubSub+ Event Broker
-uses its internal database for user credentials per service instance.
-If you configured LDAP, you may request the Solace PubSub+ Event Broker to
-use the LDAP Server for authentication and authorization of when a client attempts
-to access a Solace PubSub+ service instance.
+2. Using the defaults, the Solace PubSub+ Event Broker
+uses its internal database for user credentials per service instance. If you configured LDAP, you may request the Solace PubSub+ Event Broker to use the LDAP Server for authentication and authorization of when a client attempts to access a Solace PubSub+ service instance.
 
-    <%= image_tag('form_application_access.png') %>
-
+    ![alt-text=""](./images/form_application_access.png)
 
 1. You can also enable OAuth Authentication for new service instances. Changing this setting does not update pre-existing service instances.  If you select to generate client usernames, our service broker will create a client username at bind time and return it in VCAP services. Client applications can optionally use the client username in OAuth tokens.  Please see the section on OAuth Configuration below to see how to configure a default OAuth provider.
 
-1. Click **Save**.
+2. Click **Save**.
 
 #### <a id='optional_ldap_settings'> </a>(Optional) LDAP Settings
 
 1. Click **LDAP Settings**.
 
-    <%= image_tag('select_1_ldap_settings.png') %>
+    ![alt-text=""](./images/select_1_ldap_settings.png)
 
     LDAP is disabled by default.
 
-    <%= image_tag('form_ldap_settings_new.png') %>
+    ![alt-text=""](./images/form_ldap_settings_new.png)
 
     <p class="note"><strong>Note:</strong> Using the default
-			<strong>LDAP Disabled</strong>, the Solace PubSub+ Event Broker uses its
-			internal database for management and user credentials per service instance.
-			To use an LDAP store, you must select <strong>LDAP Enabled</strong> and provide all the
-			required settings for your LDAP server.</p>
+			<strong>LDAP Disabled</strong>, the Solace PubSub+ Event Broker uses its internal database for management and user credentials per service instance. To use an LDAP store, you must select <strong>LDAP Enabled</strong> and provide all the required settings for your LDAP server.</p>
 
-1. Click **LDAP Enabled**.
+2. Click **LDAP Enabled**.
 
-    <%= image_tag('form_ldap_settings_enabled_new.png') %>
+    ![alt-text=""](./images/form_ldap_settings_enabled_new.png)
 
-1. Set LDAP Server URL.
+3. Set LDAP Server URL.
 
-    <%= image_tag('form_ldap_settings_server_url.png') %>
+    ![alt-text=""](./images/form_ldap_settings_server_url.png)
 
     <p class="note"><strong>Note:</strong> Consider the network accessibility of the provided LDAP server. You may need to check the <strong>Internet Connected</strong> option in <a href="#required_resource_config">Resource Config</a>.</p>
 
-1. Set LDAP TLS Preference.
+4. Set LDAP TLS Preference.
 
-    <%= image_tag('form_ldap_settings_starttls_new.png') %>
+    ![alt-text=""](./images/form_ldap_settings_starttls_new.png)
 
-1. Set LDAP Credentials to use with the LDAP Server.
+5. Set LDAP Credentials to use with the LDAP Server.
 
-    <%= image_tag('form_ldap_settings_credentials.png') %>
+    ![alt-text=""](./images/form_ldap_settings_credentials.png)
 
-1. Set User Search Base.
+6. Set User Search Base.
 
-    <%= image_tag('form_ldap_settings_user_search_base.png') %>
+    ![alt-text=""](./images/form_ldap_settings_user_search_base.png)
 
-1. Set User Search Filter.
+7. Set User Search Filter.
 
-    <%= image_tag('form_ldap_settings_user_search_filter.png') %>
+    ![alt-text=""](./images/form_ldap_settings_user_search_filter.png)
 
-1. Set User Group Membership Attribute Name.
+8. Set User Group Membership Attribute Name.
 
-    <%= image_tag('form_ldap_settings_user_group_membership_attribute_name.png') %>
+    ![alt-text=""](./images/form_ldap_settings_user_group_membership_attribute_name.png)
 
-1. Click **Save**.
+9. Click **Save**.
 
 In order to have an effective LDAP configuration, configure LDAP for [Management Access](#optional_management_access)
 and [Application Access](#optional_application_access).
-**If neither [Management Access](#optional_management_access) nor
-[Application Access](#optional_application_access) are configured for LDAP,
-the Solace PubSub+ Event Broker continues to use its internal database
-for management and user credentials.**
+
+**If neither [Management Access](#optional_management_access) nor [Application Access](#optional_application_access) are configured for LDAP,
+the Solace PubSub+ Event Broker continues to use its internal database for management and user credentials.**
 
 #### <a id='optional_oauth_settings'> </a>(Optional) OAuth Provider Settings
 
 1. Click **OAuth Provider Settings**.
 
-    <%= image_tag('select_1_oauth.png') %>
+    ![alt-text=""](./images/select_1_oauth.png)
 
     This page allows you to configure a default OAuth Provider that is configured on new message VPNs.
 
-    <%= image_tag('form_oauth_1.png') %>
-    <%= image_tag('form_oauth_2.png') %>
+    ![alt-text=""](./images/form_oauth_1.png)
+
+    ![alt-text=""](./images/form_oauth_2.png)
 
     Please refer to the [Client Authentication Overview](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm)
     page for field documentation.
-    <br></br>
+    <br>
     Changing the above configuration does not update pre-existing message VPNs. The default OAuth provider is only created on new message VPNs.
-    <br></br>
+    <br>
     A user is free to modify any OAuth configuration manually by logging into the PubSub+ broker and using the command line interface. User customizations won't be lost.
-    <br></br>
+    <br>
     <p class="note"><strong>Note:</strong> OAuth Authentication is disabled on message VPNs by default and can be enabled on the Application Access page.
 
 
@@ -895,37 +848,37 @@ for management and user credentials.**
 
 1. Click **System Logging**.
 
-    <%= image_tag('select_1_system_logging.png') %>
+    ![alt-text=""](../images/select_1_system_logging.png)
 
     System logging is disabled by default.
 
-    <%= image_tag('form_system_logging.png') %>
+    ![alt-text=""](./images/form_system_logging.png)
 
-1. Click **System Logging Enabled**.
+2. Click **System Logging Enabled**.
 
-    <%= image_tag('form_system_logging_enabled_new.png') %>
+    ![alt-text=""](./images/form_system_logging_enabled_new.png)
 
-1. Set the external syslog hostname.
+3. Set the external syslog hostname.
 
-    <%= image_tag('form_system_logging_server.png') %>
+    ![alt-text=""](./images/form_system_logging_server.png)
 
     <p class="note"><strong>Note:</strong> Consider the network accessibility of the provided syslog server. You may need to check the <strong>Internet Connected</strong> option in [Resource Config](#required_resource_config).</p>
 
-1. Set the external syslog port.
+4. Set the external syslog port.
 
-    <%= image_tag('form_system_logging_port.png') %>
+    ![alt-text=""](./images/form_system_logging_port.png)
 
-1. Set the external syslog network protocol.
+5. Set the external syslog network protocol.
 
-    <%= image_tag('form_system_logging_protocol.png') %>
+    ![alt-text=""](./images/form_system_logging_protocol.png)
 
-1. Select what logs to send to the external syslog server.
+6. Select what logs to send to the external syslog server.
 
-    <%= image_tag('form_system_logging_selection.png') %>
+    ![alt-text=""](./images/form_system_logging_selection.png)
 
-1. Set custom rules to control log forwarding per job.
+7. Set custom rules to control log forwarding per job.
 
-    <%= image_tag('form_system_logging_rules.png') %>
+    ![alt-text=""](./images/form_system_logging_rules.png)
 
     <p>When no rules are provided, all jobs forward their logs.</p>
     <p>Some rule examples:</p>
@@ -933,44 +886,36 @@ for management and user credentials.**
     if ($app-name == "broker_agent") then stop</code>
     <p>Note that if your custom rule is invalid, it will be ignored and won't fail the deployment.</p>
 
-1. Set TLS encryption.
+8. Set TLS encryption.
 
-    <%= image_tag('form_system_logging_tls.png') %>
+    ![alt-text=""](./images/form_system_logging_tls.png)
 
-1. Click **Save**.
+9. Click **Save**.
 
 #### <a id='optional_tcp_routes'></a> (Optional) Enable TCP Routes
 
 1. Click **TCP Routes**.
 
-    <%= image_tag('select_1_tcp_routes.png') %>
+    ![alt-text=""](./images/select_1_tcp_routes.png)
 
     TCP routes are disabled by default.
 
-    <%= image_tag('form_tcp_routes_new.png') %>
+    ![alt-text=""](./images/form_tcp_routes_new.png)
 
-1. Click **TCP Routes Enabled**.
+2. Click **TCP Routes Enabled**.
 
-    <%= image_tag('form_tcp_routes_enabled_1_new.png') %>
+    ![alt-text=""](/./images/form_tcp_routes_enabled_1_new.png)
 
-    <%= image_tag('form_tcp_routes_enabled_2_new.png') %>
+    ![alt-text=""](./images/form_tcp_routes_enabled_2_new.png)
 
-1. (Optional) Enter a domain into the Custom TCP Domain Name field. If a domain is entered here,
+3. (Optional) Enter a domain into the Custom TCP Domain Name field. If a domain is entered here,
 it will be the domain used for TCP routes, otherwise the first discovered TCP domain will be used.
 
 1. Select which protocols will have TCP routes.
 
-    <p class="note"><strong>Note:</strong> Fine-grained control is available by protocol.
-			If you choose <strong>Not Allowed</strong>, a TCP route is never created for this protocol,
-			even if requested at service creation time.
-			If you choose <strong>Disabled by default</strong>, at service creation time,
-			a TCP route is not created for this protocol unless a user-provided parameter overrides it
-			with a <code>true</code> setting.
-			If you choose <strong>Enabled by default</strong>,
-			a TCP route is created for this protocol at service creation time,
-			unless a user-provided parameter overrides it with <code>false</code> setting.</p>
+    <p class="note"><strong>Note:</strong> Fine-grained control is available by protocol. If you choose <strong>Not Allowed</strong>, a TCP route is never created for this protocol, even if requested at service creation time. If you choose <strong>Disabled by default</strong>, at service creation time, a TCP route is not created for this protocol unless a user-provided parameter overrides it with a <code>true</code> setting. If you choose <strong>Enabled by default</strong>, a TCP route is created for this protocol at service creation time, unless a user-provided parameter overrides it with <code>false</code> setting.</p>
 
-1. Check the [TCP Routes Requirements](#tcp_routes_requirements) and Click **Save**.
+2. Check the [TCP Routes Requirements](#tcp_routes_requirements) and Click **Save**.
 
 #### <a id='optional_static_ips'></a> (Optional) Configure Static IPs
 
@@ -983,13 +928,13 @@ The IPs must belong to the network assigned to your deployment and must not be i
 
 1. Click **Static IPs**.
 
-    <%= image_tag('select_1_static_ips.png') %>
+    ![alt-text=""](./images/select_1_static_ips.png)
 
-1. Enter the range, or comma-separated ranges, or IP addresses, for any plans for which you want to specify IP ranges:
+2. Enter the range, or comma-separated ranges, or IP addresses, for any plans for which you want to specify IP ranges:
 
-    <%= image_tag('static_ips_form.png') %>
+    ![alt-text=""](./images/static_ips_form.png)
 
-1. Click **Save**.
+3. Click **Save**.
 
 #### <a id='optional_errands'></a> (Optional) Configure Errands
 
@@ -997,7 +942,7 @@ Errands are scripts that are run when a tile is installed, updated or removed. T
 
 Unless otherwise stated in this documentation you should not modify these settings, otherwise the tile may not get installed properly. The only time you would change them would be if you were trying to remove a tile and one of the errands was preventing you to do this because the errand itself was failing.
 
-<%= image_tag('form_errands.png') %>
+![alt-text=""](./images/form_errands.png)
 
 **Registers and Updates the Solace Service Broker**:
 This errand ensures that the Solace service broker is installed/updated and configured according to the tile configuration. This errand also registers the Solace service broker on Cloud Foundry. This errand is mandatory and needs to run on every deploy.
@@ -1009,26 +954,26 @@ This errand upgrades all on-demand service instances. You may want to disable th
 This errand validates that brokers were successfully deployed and configured. This errand should be ran on every deploy to ensure the system is ready and running as expected by the end of the deployment.
 
 **Deletes all on-demand service instances**:
-This errand deletes all on-demand service instances. If on-demand service instances exist at the time the tile is deleted, this errand frees resources by automatically deleting associated bosh deployments. 
+This errand deletes all on-demand service instances. If on-demand service instances exist at the time the tile is deleted, this errand frees resources by automatically deleting associated bosh deployments.
 
 **Unregisters the Solace PubSub+ Broker**:
-This errand deletes the Solace service broker and unregisters it from Cloud Foundry. This errand should always be ran when the tile is deleted, otherwise, manual cleanup is required. 
+This errand deletes the Solace service broker and unregisters it from Cloud Foundry. This errand should always be ran when the tile is deleted, otherwise, manual cleanup is required.
 
 ### <a id='apply_changes'></a> Apply Changes
 
 In order to apply changes, all the settings for the Solace tile must be marked with green checkmarks.
 
-<%= image_tag('select_all_done.png') %>
+![alt-text=""](./images/select_all_done.png)
 
 1. Click **Installation Dashboard** at the top left corner of the screen to leave the tile configuration and go back to dashboard.
 
-    <%= image_tag('link_installation_dashboard_new.png') %>
+    ![alt-text=""](./images/link_installation_dashboard_new.png)
 
-1. Click **Apply Changes** to deploy the tile.
+2. Click **Apply Changes** to deploy the tile.
 
-    <%= image_tag('apply_changes_new.png') %>
+    ![alt-text=""](./images/apply_changes_new.png)
 
-1. After the tile has deployed, see [Creating and Binding Solace PubSub+ Service Instances](service-instances.html) for information about creating instances of the Solace PubSub+ service and binding them to apps.
+3. After the tile has deployed, see [Creating and Binding Solace PubSub+ Service Instances](service-instances.html) for information about creating instances of the Solace PubSub+ service and binding them to apps.
 
 
 ## <a id='upgrades'></a> Upgrades
@@ -1037,7 +982,7 @@ Solace PubSub+ for VMware Tanzu supports upgrades starting with VMware Tanzu v2.
 
 If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not supported. The v1.x.x tile should be uninstalled before a v2.0.0 tile is installed.
 
-<p class="note warning"><strong>Warning:</strong> If you removed an Evaluation version and intend to install an Enterprise version with the same version number, then you must remove the bosh releases for that version first. Log into bosh and execute
+<p class="note warning"><strong>Warning:</strong> If you removed an Evaluation version and intend to install an Enterprise version with the same version number, then you must remove the bosh releases for that version first. Log into bosh and execute:
 
 <pre class="terminal">
   $ bosh delete-release solace-pubsub/&lt;version&gt;

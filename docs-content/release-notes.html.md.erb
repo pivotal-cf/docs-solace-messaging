@@ -11,7 +11,7 @@ Release Notes for Solace PubSub+ for VMware Tanzu.
 This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v10.0.1.41.
 
 ### v2.16.0
-**Release Date: April 20nd, 2022**
+**Release Date: April 20th, 2022**
 
 This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.13.1.38 and the following new features and fixes:
 
@@ -86,7 +86,7 @@ This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Eve
 * Adds an option to configure maximum queue messages per service plan
 * Adds an option to configure broker log file retention policy
 * Adds support for VMware Tanzu v2.10.x
-* Removes support for VMware Tanzu v2.6.x 
+* Removes support for VMware Tanzu v2.6.x
 
 In addition to the above features, this resolves the following issues:
 
@@ -137,7 +137,7 @@ This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Eve
 * Application Security Groups now include the Event Broker health check port.
 * HA group in-service upgrades are optimized so that a connected application has a single switchover.
 * Adds operator access to the MySQL Bootstrap errand through bosh.
-* TCP route request parameters are no longer reverted to default when they are not supplied. 
+* TCP route request parameters are no longer reverted to default when they are not supplied.
 * Adds support for VMware Tanzu v2.8.x.
 * Removes support for VMware Tanzu v2.4.x.
 
@@ -146,7 +146,7 @@ In addition to the above features, this release resolves the following issues:
 * Interrupted or failed upgrades on HA groups can now be recovered with a subsequent upgrade (reference # SOL-28539)
 * Fixed an issue where TCP routes cannot be enabled on a service that initially had all routes disabled (reference # SOL-28209)
 * A constraint on the monitor VM type field was added so that incompatible VM types are not selectable (reference # SOL-29008)
-* Fixed an issue where CF clients used in internal components would sometime fail to connect to CF (reference # SOL-28328) 
+* Fixed an issue where CF clients used in internal components would sometime fail to connect to CF (reference # SOL-28328)
 * Service broker and broker-agent logs no longer contain line breaks (reference # SOL-2367)
 * Fixed an issue causing TCP routes to become orphaned (reference # SOL-28116)
 
@@ -154,7 +154,7 @@ In addition to the above features, this release resolves the following issues:
 
 **Release Date: Nov 20, 2019**
 
-This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.3.1.5 and the following fixes: 
+This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Event Broker v9.3.1.5 and the following fixes:
 
 * Upgrades to ODB v0.34.1 to address security CVE(s).
 * Fixes a service instance dashboard issue that may prevent access (reference # SOL-27678)
@@ -182,7 +182,7 @@ In addition to the above features, this release resolves the following issues:
 The following changes have been made to this documentation:
 
 * Installation and Troubleshooting pages: All services in a Shared broker must be marked for upgrade before the upgrade can happen
-* Installation and Troubleshooting pages: When some on-demand service instances have been upgraded, 
+* Installation and Troubleshooting pages: When some on-demand service instances have been upgraded,
 it is not permitted to create new bindings or service keys on the instances that have not yet been upgraded
 * Installation page: The relation between on-demand parallel upgrades and the maximum number of tasks configured in the Bosh director
 * Installation page: Ports required for configuration synchronization are now listed in the Networking section
