@@ -44,7 +44,7 @@ This release of Solace PubSub+ for VMware Tanzu tile contains Solace PubSub+ Eve
 * Adds support for VMware Tanzu v2.12.x
 * Adds the ability to restore the primary node as active after an upgrade.
 
-In addition to the above features, this resolves the following issues:
+In addition to the above features, this release resolves the following issues:
 
 * Updates Apache Log4j2 to version 2.16.0 resolving CVE-2021-44228, CVE-2021-45046
 
@@ -182,8 +182,7 @@ In addition to the above features, this release resolves the following issues:
 The following changes have been made to this documentation:
 
 * Installation and Troubleshooting pages: All services in a Shared broker must be marked for upgrade before the upgrade can happen
-* Installation and Troubleshooting pages: When some on-demand service instances have been upgraded,
-it is not permitted to create new bindings or service keys on the instances that have not yet been upgraded
+* Installation and Troubleshooting pages: When some on-demand service instances have been upgraded, it is not permitted to create new bindings or service keys on the instances that have not yet been upgraded
 * Installation page: The relation between on-demand parallel upgrades and the maximum number of tasks configured in the Bosh director
 * Installation page: Ports required for configuration synchronization are now listed in the Networking section
 
@@ -394,7 +393,7 @@ Features included in the release:
 
 * AMQP v1.0 support: With release v8.6.0 of the VMR, the tile now provides direct access to AMQP/AMQPS and via public TCP Routes ports if configured. Solace's implementation of Advanced Message Queuing Protocol (AMQP) v1.0 support is compatible with a variety of open source AMQP APIs.
 * Web UI: Provides access to the Alpha version of WebUI for management of a solace-messaging service instance.
-* Enterprise Edition of the Tile is available from Solace. Please contact [Solace Support](https://solace.com/support) or your local [Solace sales representative](mailto:info@solace.com?Subject=Enterprise Edition of Solace Messaging For VMware Tanzu).
+* Enterprise Edition of the Tile is available from Solace. Please contact [Solace Support](https://solace.com/support) or your local [Solace sales representative](mailto:info@solace.com) with the Subject: Enterprise Edition of Solace Messaging For VMware Tanzu.
 * Contains VMR release v8.6.0.x.
 
 ### v1.1.0
@@ -468,7 +467,7 @@ Features included in this release:
 * Uses customer-provided Virtual Message Routers (VMRs).
 * Ability to configures multiple VMRs.
 * Provides these two service plans:
-  1. Shared VMR: Provides a service instance on a VMR shared with other service instances.
-  1. Dedicated VMR: Provides a service instance on a dedicated VMR.
+  * Shared VMR: Provides a service instance on a VMR shared with other service instances.
+  * Dedicated VMR: Provides a service instance on a dedicated VMR.
 * Tile is upgradeable within Ops Manager — All service plan configuration and messages are lost during upgrades.
 * Service Broker uses external MySQL service.

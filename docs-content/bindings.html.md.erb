@@ -23,7 +23,7 @@ The procedures show you how to bind this service instance to the app named `web-
 
 A binding may be customized at creation time with service-specific parameters.
 
-1. `username`: When this key is provided, the binding will its value as the client-username in the Message VPN backing the service instance. This will allow a new application to bind to an existing service and access the resources that are already owned by the given `username` in the service instance.
+`username`: When this key is provided, the binding will its value as the client-username in the Message VPN backing the service instance. This will allow a new application to bind to an existing service and access the resources that are already owned by the given `username` in the service instance.
 
 
 ## <a id='bind-cf-cli'></a> Bind a Service Instance with the cf CLI
@@ -31,44 +31,46 @@ A binding may be customized at creation time with service-specific parameters.
 To bind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
-  <pre class="terminal">
-  $ cf api api.YOUR-SYSTEM-DOMAIN
-  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
-  OK
-  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
-  Not logged in. Use 'cf login' to log in.
-  </pre>
 
-1. Log in to your deployment and select an org and a space.
-  <pre class="terminal">
-  $ cf login
-  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-  Email> user<span>@</span>example.com
-  Password>
-  </pre>
+    ```
+    $ cf api api.YOUR-SYSTEM-DOMAIN
+    Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...OK
+    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+    Not logged in. Use 'cf login' to log in.
+    ```
+
+2. Log in to your deployment and select an org and a space.
+
+    ```
+    $ cf login
+    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+    Email> user<span>@</span>example.com
+    Password>
+    ```
 
 1. Locate the previously created service.
-	<pre class="terminal">
-	$ cf services
-	Getting services in org example / space dev as user<span>@</span>example.com...
-	OK
 
-	name                        service            plan                 bound apps   last operation
-	solace-pubsub-instance      solace-pubsub      enterprise-large-ha               create succeeded
-	</pre>
+    ```
+    $ cf services
+    Getting services in org example / space dev as user<span>@</span>example.com...OK
 
-1. Bind the instance to an app called `web-backend`.
-  <pre class="terminal">
-  $ cf bind-service web-backend solace-pubsub-instance
-  Binding service solace-pubsub-instance to app web-backend in org example / space development as user<span>@</span>example.com...
-  OK
-  TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
-  </pre>
+    name                        service            plan                 bound apps   last operation
+    solace-pubsub-instance      solace-pubsub      enterprise-large-ha               create succeeded
+    ```
+
+2. Bind the instance to an app called `web-backend`.
+
+    ```
+    $ cf bind-service web-backend solace-pubsub-instance
+    Binding service solace-pubsub-instance to app web-backend in org example / space development as user<span>@</span>example.com...OK
+    TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
+    ```
 
 1. Restage the app for the binding to take effect.
-  <pre class="terminal">
-  $ cf restage web-backend
-  </pre>
+
+    ```
+    $ cf restage web-backend
+    ```
 
 
 ## <a id='bind-cf-cli-specific-params'></a> Bind a Service Instance with the cf CLI with Service-Specific Parameters
@@ -76,44 +78,46 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
 To bind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool with an added service-specific parameter to choose a `username`, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
-  <pre class="terminal">
-  $ cf api api.YOUR-SYSTEM-DOMAIN
-  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
-  OK
-  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
-  Not logged in. Use 'cf login' to log in.
-  </pre>
+
+    ```
+    $ cf api api.YOUR-SYSTEM-DOMAIN
+    Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...OK
+    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+    Not logged in. Use 'cf login' to log in.
+    ```
 
 1. Log in to your deployment and select an org and a space.
-  <pre class="terminal">
-  $ cf login
-  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-  Email> user<span>@</span>example.com
-  Password>
-  </pre>
 
-1. Locate the previously created service.
-	<pre class="terminal">
-	$ cf services
-	Getting services in org example / space dev as user<span>@</span>example.com...
-	OK
+    ```
+    $ cf login
+    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+    Email> user<span>@</span>example.com
+    Password>
+    ```
 
-	name                        service            plan                 bound apps   last operation
-	solace-pubsub-instance      solace-pubsub      enterprise-large-ha               create succeeded
-	</pre>
+2. Locate the previously created service.
 
-1. Bind the instance to an app called `web-backend` with a service-specific parameter `username` parameter.
-  <pre class="terminal">
-  $ cf bind-service web-backend solace-pubsub-instance -c '{ "username" : "customName" }'
-  Binding service solace-pubsub-instance to app web-backend in org example / space development as user<span>@</span>example.com...
-  OK
-  TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
-  </pre>
+    ```
+    $ cf services
+    Getting services in org example / space dev as user<span>@</span>example.com...OK
 
-1. Restage the app for the binding to take effect.
-  <pre class="terminal">
-  $ cf restage web-backend
-  </pre>
+    name                        service            plan                 bound apps   last operation
+    solace-pubsub-instance      solace-pubsub      enterprise-large-ha               create succeeded
+    ```
+
+3. Bind the instance to an app called `web-backend` with a service-specific parameter `username` parameter.
+
+    ```
+    $ cf bind-service web-backend solace-pubsub-instance -c '{ "username" : "customName" }'
+    Binding service solace-pubsub-instance to app web-backend in org example / space development as user<span>@</span>example.com...OK
+    TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
+    ```
+
+4. Restage the app for the binding to take effect.
+
+    ```
+    $ cf restage web-backend
+    ```
 
 
 ## <a id='apps-man'></a> Bind a Service Instance in Apps Manager
@@ -126,66 +130,63 @@ To bind an instance of the Solace PubSub+ service in Apps Manager, do the follow
 
 1. Click **Apps**, click the app name **web-backend**, click **Services**, then click **Bind a Service**.
 
-  ![alt-text=""](./images/appsmanager_solace_messaging_service_list_empty_new.png)
+    ![alt-text=""](./images/appsmanager_solace_messaging_service_list_empty_new.png)
 
 1. Select a service instance to bind to the app and click **Bind**.
 
-  ![alt-text=""](./images/appsmanager_solace_messaging_bind_service_selected_new.png)
+    ![alt-text=""](./images/appsmanager_solace_messaging_bind_service_selected_new.png)
 
 1. After the service is bound, you can find it listed under **Services**.
 
-  ![alt-text=""](./images/appsmanager_solace_messaging_service_list_has_service_new.png)
+    ![alt-text=""](./images/appsmanager_solace_messaging_service_list_has_service_new.png)
 
 
 ## <a id='unbind-cf-cli'></a> Unbind a Service Instance with the cf CLI
 
 Unbinding an app from a service instance revokes previously allocated credentials.
 Then the app no longer has access to this service.
-When the binding-linked credentials are being removed, an orphaned resource policy
-is checked and applied. For more information about orphaned resource policies, see
-[Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy)
-  and
-[Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy).
+When the binding-linked credentials are being removed, an orphaned resource policy is checked and applied. For more information about orphaned resource policies, see [Default Orphaned Resource Policy](installing.html#default_orphaned_resource_policy) and [Service Orphaned Resource Policy](service-instances.html#service_orphaned_resource_policy).
 
-To unbind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool,
-do the following:
+To unbind an instance of the Solace PubSub+ service with the cf Command Line Interface (CLI) tool,do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
-  <pre class="terminal">
-  $ cf api api.YOUR-SYSTEM-DOMAIN
-  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
-  OK
-  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
-  Not logged in. Use 'cf login' to log in.
-  </pre>
+
+    ```
+    $ cf api api.YOUR-SYSTEM-DOMAIN
+    Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...OK
+    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+    Not logged in. Use 'cf login' to log in.
+    ```
 
 1. Log in to your deployment and select an org and a space.
-  <pre class="terminal">
-  $ cf login
-  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-  Email> user<span>@</span>example.com
-  Password>
-  </pre>
 
-1. Locate the previously created service.
-	<pre class="terminal">
-	$ cf services
-	Getting services in org example / space dev as user<span>@</span>example.com...
-	OK
+    ```
+    $ cf login
+    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+    Email> user<span>@</span>example.com
+    Password>
+    ```
 
-	name                        service            plan                 bound apps   last operation
-	solace-pubsub-instance      solace-pubsub      enterprise-large-ha  web-backend  create succeeded
-	</pre>
+2. Locate the previously created service.
 
-1. Unbind the instance from the app called `web-backend`.
-  <pre class="terminal">
-  $ cf unbind-service web-backend solace-pubsub-instance
-  Unbinding service solace-pubsub-instance from app web-backend in org example / space development as user<span>@</span>example.com...
-  OK
-  TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
-  </pre>
+    ```
+    $ cf services
+    Getting services in org example / space dev as user<span>@</span>example.com...OK
 
-1. Restage the app for the binding to take effect.
-  <pre class="terminal">
-  $ cf restage web-backend
-  </pre>
+    name                        service            plan                 bound apps   last operation
+    solace-pubsub-instance      solace-pubsub      enterprise-large-ha  web-backend  create succeeded
+    ```
+
+3. Unbind the instance from the app called `web-backend`.
+
+    ```
+    $ cf unbind-service web-backend solace-pubsub-instance
+    Unbinding service solace-pubsub-instance from app web-backend in org example / space development as user<span>@</span>example.com...OK
+    TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
+    ```
+
+4. Restage the app for the binding to take effect.
+
+    ```
+    $ cf restage web-backend
+    ```

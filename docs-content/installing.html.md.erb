@@ -283,9 +283,9 @@ From the **Settings** tab of the Solace PubSub+ tile:
 
 	Depending on your use case, do one of the following:
 
-	+ If you redeploy and do not want to change the encryption, leave the **DB Encryption Key** with its current value.
+	* If you redeploy and do not want to change the encryption, *eave the **DB Encryption Key** with its current value.
 	+ If you want to change the encryption key, enter the new key in **DB Encryption Key** and enter the old key in **Previous DB Encryption Key**. The previously encrypted data is decrypted using the old key and re-encrypted using the new key.
-	+ If you want to decrypt the database, enter the last used key in **Previous DB Encryption Key** and clear **DB Encryption Key**.
+	* If you want to decrypt the database, enter the last used key in **Previous DB Encryption Key** and clear **DB Encryption Key**.
 
 3. Select one of the supported MySQL configuration for the service broker's database.
 
@@ -325,12 +325,10 @@ From the **Settings** tab of the Solace PubSub+ tile:
 
     ![alt-text=""](./images/form_management_access_admin_user_password_new.png)
 
-<p class="note"><strong>Note:</strong> The password can only contain alphanumeric characters and any of  .!@#$%^-_+={}[]/?
-<br/>
-It cannot contain any of the characters ():";'<>,`\*&|
-</p>
+    <p class="note"><strong>Note:</strong> The password can only contain alphanumeric characters and any of <strong>.!@#$%^-_+={}[]/?</strong> It cannot contain any of the characters <strong>():";'<>,`\*&|</strong> </p>
+    <br>
 
-1. [(Optional) if you want to use LDAP](#optional_management_access).
+1. (Optional) Follow this procedure if you want to use [LDAP](#optional_management_access).
 
 2. Click **Save**.
 
@@ -380,7 +378,7 @@ You might need to import a stemcell import if the minimum stemcell required for 
 
 2. Click **Import Stemcell** to import the required stemcell for your installation of VMware Tanzu.
 
-     * [Download Stemcells for VMware Tanzu](https://network.tanzu.vmware.com/products/stemcells-ubuntu-xenial/)
+   * [Download Stemcells for VMware Tanzu](https://network.tanzu.vmware.com/products/stemcells-ubuntu-xenial/)
 
 #### <a id='required_resource_config'></a> Resource Config
 
@@ -478,9 +476,9 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
     For Shared service plans, every service on a broker must be marked for upgrade before the upgrade can happen.
     This prevents one tenant from upgrading a router before the other tenants are ready. The operator can
     mark the services for upgrade on behalf of the tenants.</p>
+    <br>
 
-
-6. <a id='inflight'></a> Maximum In-Flight Canaries and Updates
+    <a id='inflight'></a> Maximum In-Flight Canaries and Updates
 
     ![alt-text=""](./images/form_general_settings_inflight.png)
 
@@ -494,10 +492,10 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
     The Maximum On-Demand In-Flight Upgrades field specifies how many services can be updated
     in parallel after the canaries have been updated.
-    <br></br>
+    <br>
 
     <p class="note"><strong>Note:</strong> within each HA service, each node will still be updated one at a time to avoid service disruption.</p>
-    <br></br>
+    <br>
 
     <p class="note"><strong>Note:</strong> The number of upgrades that can run at once is also constrained by
     the number of Director Workers configured in the Bosh Director tile on the Director Config page.
@@ -508,8 +506,7 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
     See [Configuring Bosh Director](https://docs.pivotal.io/pivotalcf/2-6/om/gcp/config-manual.html) for details on how to set the number of Director Workers.
 
-<a id='webhook'></a>
-1. Under **Web Hook**, you can choose to Enable or Disable.
+1. <a id='webhook'></a>Under **Web Hook**, you can choose to Enable or Disable.
 
     ![alt-text=""](./images/form_general_settings_webhook.png)
 
@@ -518,38 +515,34 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
     <br>
 
     The `operation` field describes the service event. The possible values are `create`,`update`, or `delete`.
-	  The message has service identifying information with network information for all
-	  messaging services.
+	  The message has service identifying information with network information for all messaging services.
     <br>
-		The following sample message is for a service create event.
-		Many lines in the services section of this sample have been
-	  removed for brevity:
+		The following sample message is for a service create event. Many lines in the services section of this sample have been removed for brevity:
 
-	```json
-	{
-	  "timestamp" : "2019-01-29T14:39Z",
-	  "nodes" : [ {
-	    "role" : "primary",
-	    "ip" : "192.168.16.19"
-	  } ],
-	  "operation" : "create",
-	  "planId" : "68bc18fa-3b06-41a1-bd66-bc6ff2281b75",
-	  "planName" : "enterprise_shared",
-	  "services" : {
-	  "webMessagingUris" : [ "http://192.168.16.19:7005" ],
-	  "publicWebMessagingUris" : [ "http://tcp.YOUR-DOMAIN:49551" ],
-	  "managementHostnames" : [ "enterprise-shared-0.sys.YOUR-DOMAIN" ],
-	  "smfHosts" : [ "tcp://192.168.16.19:7001" ]
-	  },
-	  "serviceId" : "1fcdef72-58a4-4e48-a8fc-29a290c0fde9"
-	}
-	```
+    ```json
+    {
+      "timestamp" : "2019-01-29T14:39Z",
+      "nodes" : [ {
+        "role" : "primary",
+        "ip" : "192.168.16.19"
+      } ],
+      "operation" : "create",
+      "planId" : "68bc18fa-3b06-41a1-bd66-bc6ff2281b75",
+      "planName" : "enterprise_shared",
+      "services" : {
+      "webMessagingUris" : [ "http://192.168.16.19:7005" ]
+      "publicWebMessagingUris" : [ "http://tcp.YOUR-DOMAIN:49551" ],
+      "managementHostnames" : [ "enterprise-shared-0.sys.YOUR-DOMAIN" ],
+      "smfHosts" : [ "tcp://192.168.16.19:7001" ]
+       },
+      "serviceId" : "1fcdef72-58a4-4e48-a8fc-29a290c0fde9"
+    }
+    ```
 
-The REST endpoint must return the HTTP status code 200 otherwise the message will remain on a queue and delivery will be reattempted repeatedly. Please see [REST Consumers](https://docs.solace.com/Features/REST-Messaging-Concepts/REST-Consumers.htm) and [Solace REST Status Codes](https://docs.solace.com/RESTMessagingPrtl/Solace-REST-Status-Codes.htm) for requirements regarding the REST endpoint.
-<br>
+    The REST endpoint must return the HTTP status code 200. Otherwise the message will remain on a queue and delivery will be reattempted repeatedly. Please see [REST Consumers](https://docs.solace.com/Features/REST-Messaging-Concepts/REST-Consumers.htm) and [Solace REST Status Codes](https://docs.solace.com/RESTMessagingPrtl/Solace-REST-Status-Codes.htm) for requirements regarding the REST endpoint.
+    <br>
 
-    Also see [Managing REST Messaging](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Messaging.htm) for
-    more information about Solace REST Delivery Points.
+    Also see [Managing REST Messaging](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Messaging.htm) for more information about Solace REST Delivery Points.
 
 2.  <a id='sb_settings'></a> Adjust service broker related settings.
 
@@ -571,23 +564,19 @@ The REST endpoint must return the HTTP status code 200 otherwise the message wil
     Check the *Enable REST Messaging HTTP Routes* box to enable HTTP routes registered under the Tanzu Application Service (TAS) system domain for all services for REST messaging capabilities and accessible with the externalRestUris and externalRestTlsUris VCAP entry. This route maps the ports from restUris to externally accessible HTTP/HTTPS ports on a route registered under the TAS system domain.
     When using HTTPS, the server certificate used will be that of the TAS tile's configuration and not that of the Solace PubSub TLS configuration. See [Solace PubSub+ Credentials](credentials.html#vcap-example) for more information.
 
-<a id='log_retention'></a>
+5. <a id='log_retention'></a>Under **Broker Log File Retention Policy**, configure the broker to retain logs based on the size of the log files themselves or for a specified number of days.
 
-5.  Under **Broker Log File Retention Policy**, configure the broker to retain logs based on the size of the log files themselves or for a specified number of days.
+    ![alt-text=""](./images/log_file_retention_policy.png)
 
-  ![alt-text=""](./images/log_file_retention_policy.png)
-
-When you change the retention policy to day based, logged messages that may be older than what the new retention policy specifies are not automatically deleted. If this is a requirement, you must manually delete the older log files.
-<br>
-
-This setting only affects broker logs and not other Bosh VM logs.
+    When you change the retention policy to day based, logged messages that may be older than what the new retention policy specifies are not automatically deleted. If this is a requirement, you must manually delete the older log files.
+    This setting only affects broker logs and not other Bosh VM logs.
 
 1.  <a id='revert_primary'></a> Restore Primary Node as Active On Upgrade.
 
-   ![alt-text=""](./images/restore_primary_node.png)
+    ![alt-text=""](./images/restore_primary_node.png)
 
-Check the *Restore Primary Node as Active On Upgrade* box to restore the Primary node as active after upgrading High Availability On Demand instances. Operator Allocated instance ordering will not be affected by this property.
-When not enabled, the upgrade will minimize application reconnections.
+    Check the *Restore Primary Node as Active On Upgrade* box to restore the Primary node as active after upgrading High Availability On Demand instances. Operator Allocated instance ordering will not be affected by this property.
+    When not enabled, the upgrade will minimize application reconnections.
 
 2.  Click **Save**.
 
@@ -816,11 +805,9 @@ uses its internal database for user credentials per service instance. If you con
 
 9. Click **Save**.
 
-In order to have an effective LDAP configuration, configure LDAP for [Management Access](#optional_management_access)
-and [Application Access](#optional_application_access).
+In order to have an effective LDAP configuration, configure LDAP for [Management Access](#optional_management_access) and [Application Access](#optional_application_access).
 
-**If neither [Management Access](#optional_management_access) nor [Application Access](#optional_application_access) are configured for LDAP,
-the Solace PubSub+ Event Broker continues to use its internal database for management and user credentials.**
+**If neither [Management Access](#optional_management_access) nor [Application Access](#optional_application_access) are configured for LDAP, the Solace PubSub+ Event Broker continues to use its internal database for management and user credentials.**
 
 #### <a id='optional_oauth_settings'> </a>(Optional) OAuth Provider Settings
 
@@ -834,13 +821,12 @@ the Solace PubSub+ Event Broker continues to use its internal database for manag
 
     ![alt-text=""](./images/form_oauth_2.png)
 
-    Please refer to the [Client Authentication Overview](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm)
-    page for field documentation.
-    <br>
+    Please refer to the [Client Authentication Overview](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm) page for field documentation.
+
     Changing the above configuration does not update pre-existing message VPNs. The default OAuth provider is only created on new message VPNs.
-    <br>
+
     A user is free to modify any OAuth configuration manually by logging into the PubSub+ broker and using the command line interface. User customizations won't be lost.
-    <br>
+
     <p class="note"><strong>Note:</strong> OAuth Authentication is disabled on message VPNs by default and can be enabled on the Application Access page.
 
 
@@ -848,7 +834,7 @@ the Solace PubSub+ Event Broker continues to use its internal database for manag
 
 1. Click **System Logging**.
 
-    ![alt-text=""](../images/select_1_system_logging.png)
+    ![alt-text=""](./images/select_1_system_logging.png)
 
     System logging is disabled by default.
 
@@ -904,7 +890,7 @@ the Solace PubSub+ Event Broker continues to use its internal database for manag
 
 2. Click **TCP Routes Enabled**.
 
-    ![alt-text=""](/./images/form_tcp_routes_enabled_1_new.png)
+    ![alt-text=""](./images/form_tcp_routes_enabled_1_new.png)
 
     ![alt-text=""](./images/form_tcp_routes_enabled_2_new.png)
 
@@ -944,20 +930,16 @@ Unless otherwise stated in this documentation you should not modify these settin
 
 ![alt-text=""](./images/form_errands.png)
 
-**Registers and Updates the Solace Service Broker**:
-This errand ensures that the Solace service broker is installed/updated and configured according to the tile configuration. This errand also registers the Solace service broker on Cloud Foundry. This errand is mandatory and needs to run on every deploy.
-
-**Upgrades all on-demand service instances**:
-This errand upgrades all on-demand service instances. You may want to disable this errand when "User Controlled Upgrades for On Demand Instances" is enabled.
-
-**Validates the deployment**:
-This errand validates that brokers were successfully deployed and configured. This errand should be ran on every deploy to ensure the system is ready and running as expected by the end of the deployment.
-
-**Deletes all on-demand service instances**:
-This errand deletes all on-demand service instances. If on-demand service instances exist at the time the tile is deleted, this errand frees resources by automatically deleting associated bosh deployments.
-
-**Unregisters the Solace PubSub+ Broker**:
-This errand deletes the Solace service broker and unregisters it from Cloud Foundry. This errand should always be ran when the tile is deleted, otherwise, manual cleanup is required.
+  * **Registers and Updates the Solace Service Broker**:
+  This errand ensures that the Solace service broker is installed/updated and configured according to the tile configuration. This errand also registers the Solace service broker on Cloud Foundry. This errand is mandatory and needs to run on every deploy.
+  * **Upgrades all on-demand service instances**:
+  This errand upgrades all on-demand service instances. You may want to disable this errand when "User Controlled Upgrades for On Demand Instances" is enabled.
+  * **Validates the deployment**:
+  This errand validates that brokers were successfully deployed and configured. This errand should be ran on every deploy to ensure the system is ready and running as expected by the end of the deployment.
+  * **Deletes all on-demand service instances**:
+  This errand deletes all on-demand service instances. If on-demand service instances exist at the time the tile is deleted, this errand frees resources by automatically deleting associated bosh deployments.
+  * **Unregisters the Solace PubSub+ Broker**:
+  This errand deletes the Solace service broker and unregisters it from Cloud Foundry. This errand should always be ran when the tile is deleted, otherwise, manual cleanup is required.
 
 ### <a id='apply_changes'></a> Apply Changes
 
@@ -991,13 +973,10 @@ If a v1.x.x tile is currently installed, a direct upgrade path to v2.0.0 is not 
 </pre>
 </p>
 
-
 <p class="note"><strong>Note:</strong> If some PubSub+ Event Brokers have been upgraded and others have not,
 it is not possible to create new bindings or service keys with the non-upgraded services.
-This is because features such as authentication schemes might have changed with the upgrade, and
-would not be compatible with the services created before the upgrade.
+This is because features such as authentication schemes might have changed with the upgrade, and would not be compatible with the services created before the upgrade.
 </p>
-
 
 ### <a id='upgrades_non_ha'></a> Non-High Availability Upgrades
 

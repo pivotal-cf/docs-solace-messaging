@@ -18,25 +18,15 @@ The Solace PubSub+ Service Dashboard offers the following functionality:
 
 ### <a id='retrieve_dashboard'></a> Retrieve Dashboard Information
 
-1. Look for the 'Dashboard' by getting details about the created service.
-	<pre class="terminal">
-	$ cf service solace-pubsub-instance-IoT
+1. Look for the Dashboard by getting details about the created service.
 
-	Service instance: solace-pubsub-instance-IoT
-	Service: solace-pubsub
-	Bound apps:
-	Tags:
-	Plan: enterprise-shared
-	Description: Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
-	Documentation url: http<span>:</span>//docs.solace.com
-  Dashboard: https<span>:</span>//solace-service-dashboard.YOUR-SYSTEM-DOMAIN/service-dashboard/f5d6bf5b-e84f-416b-8c08-4a0e782a51d2/
+    ```
+    $ cf service solace-pubsub-instance-IoT
 
-	Last Operation
-	Status: create succeeded
-	Message:
-	Started: 2020-01-01T00:00:00Z
-	Started: 2020-01-01T00:00:00Z
-	</pre>
+    Service instance: solace-pubsub-instance-IoT Service: solace-pubsub Bound apps: Tags: Plan: enterprise-shared Description: Solace PubSub+ Event Broker for real-time, multi-protocol data distribution Documentation url: http<span>:</span>//docs.solace.com Dashboard: https<span>:</span>//solace-service-dashboard.YOUR-SYSTEM-DOMAIN/service-dashboard/f5d6bf5b-e84f-416b-8c08-4a0e782a51d2/
+
+    Last Operation Status: create succeeded Message: Started: 2020-01-01T00:00:00Z Started: 2020-01-01T00:00:00Z
+    ```
 
 1. Use the provided URL in a browser. As of Solace PubSub+ version 2.8.0, the dashboard support Single Sign On using VMware Tanzu accounts. When navigating to the URL provided, users will be asked to authorize Solace PubSub+ to read basic information about their VMware Tanzu account.
 Users with manage access will be able to utilize the features of the service dashboard such as Client Profile management, Backup and Restore, Service Management, and Upgrade Management. Users with only read access will see basic information such as the vpn name and broker version.
@@ -93,46 +83,51 @@ This section describes how to connect to the Solace PubSub+ Event Broker with th
 To retrieve the information required to connect to the Solace PubSub+ Event Broker from a bound app, do the following:
 
 1. Log in to your deployment and choose the org and space where your Solace PubSub+ service instance and bound app exists.
-  <pre class="terminal">
-  $ cf login
-  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-  Email> user<span>@</span>example.com
-  Password>
-  </pre>
+
+    ```
+    $ cf login
+    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+    Email> user<span>@</span>example.com
+    Password>
+    ```
 
 1. View the `VCAP_SERVICES` environment variable by retrieving the environment variables associated with your bound app:
-  <pre class="terminal">
-  $ cf env YOUR-APP
-  </pre>
+
+    ```
+    $ cf env YOUR-APP
+    ```
 
 ### <a id='retrieve_service_key'></a> Retrieve Information from a Service Key
 
 To retrieve the information required to connect to the Solace PubSub+ Event Broker from a service key, do the following:
 
 1. Log in to your deployment and choose the org and space where your Solace PubSub+ service instance and service key exists.
-  <pre class="terminal">
-  $ cf login
-  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-  Email> user<span>@</span>example.com
-  Password>
-  </pre>
+
+    ```
+    $ cf login
+    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+    Email> user<span>@</span>example.com
+    Password>
+    ```
 
 1. View the service key:
-  <pre class="terminal">
-  $ cf service-key solace-pubsub-instance my-service-key
-  </pre>
+
+    ```
+    $ cf service-key solace-pubsub-instance my-service-key
+    ```
+
 
 ### <a id='locate_credentials'></a> Locate the Management Host and Credentials
 
 1. Both the `VCAP_SERVICES` and service key contain the same information, look for and record the following fields:
-  * `managementHostnames`: The Solace PubSub+ Event Broker's management hostnames. There will be multiple entries for Services on HA Plans.
-  * `activeManagementHostname`: A single entry that is dynamically routed to the active node for an HA service. Will always be the same as `managementHostnames` for non-HA plans.
-  * When Management Access is set to `Event Broker Internal`:
-      * `managementUsername`: The service instance's management username
-      * `managementPassword`: The service instance's management password
-  * When Management Access is set to `LDAP Server`:
-      * The management username and password are to be provided by the LDAP Administrator.
-  <br><br>
+     * `managementHostnames`: The Solace PubSub+ Event Broker's management hostnames. There will be multiple entries for Services on HA Plans.
+     * `activeManagementHostname`: A single entry that is dynamically routed to the active node for an HA service. Will always be the same as `managementHostnames` for non-HA plans.
+     * When Management Access is set to `Event Broker Internal`:
+        * `managementUsername`: The service instance's management username
+        * `managementPassword`: The service instance's management password
+     * When Management Access is set to `LDAP Server`:
+        * The management username and password are to be provided by the LDAP Administrator.
+  <br>
   For more information about the `VCAP_SERVICES` fields, see the [Understanding Credentials](credentials.html) topic.
 
 ### <a id='connect'></a> Connect to the Solace PubSub+ Event Broker

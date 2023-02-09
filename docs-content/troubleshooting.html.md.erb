@@ -1,5 +1,5 @@
 ---
-title: Solace PubSub+ Troubleshooting 
+title: Solace PubSub+ Troubleshooting
 owner: Partners
 ---
 
@@ -20,14 +20,14 @@ The operator will have access to the logs of all the components of Solace PubSub
 
 An installation of Solace PubSub+ for VMware Tanzu may be configured to use [System Logging](installing.html#optional_system_logging) as a means of gathering all logs.
 
-### <a id='operator_logs'></a> Accessing Logs 
+### <a id='operator_logs'></a> Accessing Logs
 
 The following locations in Solace PubSub+ BOSH VMs will hold logs of interest that can help in troubleshooting issues:
 
 * All VM job logs
- * /var/vcap/sys/log
+  * /var/vcap/sys/log
 * All Solace PubSub+ Event Broker Logs
- * /var/vcap/store/containers/pubsub/volumes/jail/logs
+  * /var/vcap/store/containers/pubsub/volumes/jail/logs
 
 The service broker logs are collected in the management VM under /var/vcap/sys/log/broker-logs.
 
@@ -38,51 +38,57 @@ This means that you can use the **bosh logs** command to download the service br
 You can also watch service broker logs as follows:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
-  <pre class="terminal">
-  $ cf api api.YOUR-SYSTEM-DOMAIN
-  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
-  OK
-  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.82.0)
-  Not logged in. Use 'cf login' to log in.
-  </pre>
+
+    ```
+    $ cf api api.YOUR-SYSTEM-DOMAIN
+    Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
+    OK
+    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.82.0)
+    Not logged in. Use 'cf login' to log in.
+    ```
 
 1. Log in to your deployment and select an org and a space.
-  <pre class="terminal">
-  $ cf login
-  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-  Email> user<span>@</span>example.com
-  Password>
-  </pre>
+
+   ```
+    $ cf login
+    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+    Email> user<span>@</span>example.com
+    Password>
+    ```
 
 1. Target the `solace` org and `solace-broker` space.
-	<pre class="terminal">
-	$ cf target -o solace -s solace-broker
-	api endpoint:   https://api.YOUR-SYSTEM-DOMAIN
-	api version:    2.82.0
-	user:           admin
-	org:            solace
-	space:          solace-broker
-	</pre>
+
+    ```
+    $ cf target -o solace -s solace-broker
+    api endpoint:   https://api.YOUR-SYSTEM-DOMAIN
+    api version:    2.82.0
+    user:           admin
+    org:            solace
+    space:          solace-broker
+    ```
 
 1. Discover the Solace PubSub+ Service Broker App name.
-	<pre class="terminal">
-	$ cf apps
-	Getting apps in org solace /space solace-broker as user@example.com...
-	OK
 
-	name                              requested state   instances   memory   disk   urls
-	solace-broker-1.2.0            started           1/1         1G       512M   solace-broker.YOUR-SYSTEM-DOMAIN
+    ```
+    $ cf apps
+    Getting apps in org solace /space solace-broker as user@example.com...
+    OK
 
-	OK
-	</pre>
+    name                              requested state   instances   memory   disk   urls
+    solace-broker-1.2.0            started           1/1         1G       512M   solace-broker.YOUR-SYSTEM-DOMAIN
+
+    OK
+    ```
+
 	<p class="note"><strong>Note:</strong> Take note of the application name. In this case 'solace-broker-1.2.0'</p>
 
-1. To watch the logs of Solace PubSub+ Service Broker
-	<pre class="terminal">
-	$ cf logs solace-broker-1.2.0 | tee saved_solace-broker-1.2.0.txt
-	Retrieving logs for app solace-broker-1.2.0 in org solace /space solace-broker as user@example.com...
-	....
-	</pre>
+3. To watch the logs of Solace PubSub+ Service Broker:
+
+    ```
+    $ cf logs solace-broker-1.2.0 | tee saved_solace-broker-1.2.0.txt
+    Retrieving logs for app solace-broker-1.2.0 in org solace /space solace-broker as user@example.com...
+    ....
+    ```
 
 ### <a id='operator_diag'></a> Additional Diagnostics
 
@@ -95,30 +101,32 @@ The backing Solace PubSub+ Event Brokers for a given service instance can be ide
 The operator should look for the VM in the Solace PubSub+ bosh deployment with the matching IP.
 
 Get additional diagnostics from "EnterpriseLarge/0" VM.
-  <pre class="terminal">
+
+```
   $ bosh ssh EnterpriseLarge/0
   # sudo -i
   # /var/vcap/jobs/broker\_agent/bin/gather\_diagnostics.sh
-  </pre>
+  ```
+
   Then you can look at the gathered logs under `/var/vcap/store/diag`.
 
-In the event that a process fails and creates a core dump, the core file can be found under /var/vcap/store/cores. Core files are compressed using gzip.
+In the event that a process fails and creates a core dump, the core file can be found under `/var/vcap/store/cores`. Core files are compressed using gzip.
 
 ### <a id='install_errors'></a> Installation Issues
 
-If you get the error
+If you get the error:
 
-<pre class="terminal">
-Colocated job 'solace-bosh-dns-aliases' is already added to the instance group 'compute'
-</pre>
+  ```
+  Colocated job 'solace-bosh-dns-aliases' is already added to the instance group 'compute'
+  ```
 
-then do the following:
+Then do the following:
 
-- Log into your bosh environment
-- Execute the command 'bosh configs'
-- Look for runtime-configs with 'solace' in their name
-- Delete the solace runtime-configs using the bosh 'delete-config' command
-- Redeploy
+* Log into your bosh environment
+* Execute the command `bosh configs`
+* Look for runtime-configs with 'solace' in their name
+* Delete the solace runtime-configs using the bosh `delete-config` command
+* Redeploy
 
 
 ### <a id='upgrade_errors'></a> Upgrade Issues
@@ -175,7 +183,7 @@ Process 'mariadb_ctrl' Execution failed
 
 <p class="note"><strong>Note:</strong> If some Solace PubSub+ Event Brokers have been upgraded and others have not,
 it is not possible to create new bindings or service keys with the non-upgraded services.
-This is because features such as authentication schemes might have changed with the upgrade, and 
+This is because features such as authentication schemes might have changed with the upgrade, and
 would not be compatible with the services created before the upgrade.
 </p>
 
@@ -200,7 +208,7 @@ cf create-service solace-pubsub enterprise-large
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service broker error: 
+Server error, status code: 502, error code: 10001, message: Service broker error:
 com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: No matching Solace Message VPNs available.
 </pre>
 </td></tr>
@@ -237,7 +245,7 @@ cf update-service my-large-instance -c '{ "mqtt_tcp_route_enabled" : "false" }'
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service broker error: The parameter 
+Server error, status code: 502, error code: 10001, message: Service broker error: The parameter
 mqtt_tcp_route_enabled is invalid given the current configuration. It requires [ TCP Routes Enabled ]
 </pre>
 </td></tr>
@@ -256,7 +264,7 @@ cf update-service my-large-instance -c '{ "ldapGroupAdminReadOnly" : "cn=usernam
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service broker error: The parameter ldapGroupAdminReadOnly 
+Server error, status code: 502, error code: 10001, message: Service broker error: The parameter ldapGroupAdminReadOnly
 is invalid given the current configuration. It requires [ LDAP Enabled, Management Access set to LDAP ]
 </pre>
 </td></tr>
@@ -289,7 +297,7 @@ YWJj.eyJhY2Nlc3NfdG9rZW4iOiJ2MDA1LWlaksjdlasdjas09dasdlkansdlakslZmRmOWFlNjM3ZGY
 
 Last Operation
 Status: delete failed
-Message: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException: 
+Message: com.solace.cloudfoundry.servicebroker.exception.SolaceServiceException:
 Unable to delete Service, the associated Message VPN v001 on 10.244.0.3 is not currently available
 Started: 2020-01-00T00:00:00Z
 Updated: 2020-01-00T00:00:00Z
@@ -328,7 +336,7 @@ cf unbind-service my-app my-service-instance
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-Server error, status code: 502, error code: 10001, message: Service instance test-shared: Service broker error: 
+Server error, status code: 502, error code: 10001, message: Service instance test-shared: Service broker error:
 Operation canceled. Orphaned Endpoints Policy was violated.
 Endpoints owned by v002.cu000001 must first be deleted:
         Queues: [ someQ ]
@@ -338,7 +346,6 @@ Endpoints owned by v002.cu000001 must first be deleted:
 <tr><th>Explanation</th><td>The service broker will reject unbinding when the client-username that was used by the application owns <a href='https://docs.solace.com/Features/Endpoints.htm'>Endpoints</a> such as Queues and Topic Endpoints while the current Orphaned Resource Policy is to <b>Abort</b></td></tr>
 <tr><th>Possible Action(s)</th><td>Delete the Endpoints before unbinding. Alternatively you can adjust the <a href='service-instances.html#service_orphaned_resource_policy'>Service Orphaned Resource Policy</a>.</td></tr>
 </table>
-
 <br>
 
 <table border="1" class="nice">
@@ -353,7 +360,7 @@ Client Profile management in the Solace Service Dashboard
 </td></tr>
 <tr><th>Error</th><td>
 <pre class="terminal">
-The operation [...] is not supported on message-vpn v001 with its current configuration: replication admin-state [enabled] 
+The operation [...] is not supported on message-vpn v001 with its current configuration: replication admin-state [enabled]
 and config-state [standby]. Management operations may only be run on the 'active' replication group
 </pre>
 </td></tr>
@@ -364,8 +371,6 @@ includes creating or deleting client usernames, updating VPN options through cf 
 <tr><th>Possible Action(s)</th><td>Configuration is still allowed on the 'active' member of the replication group and will be config sync'd between the two. Managing
 bindings when replication configuration is set to standby and when using internal authentication is not supported.</td></tr>
 </table>
-
-
   <br>
 
 
@@ -381,9 +386,9 @@ On the dashboard's webpage, <pre class="terminal">403: Forbidden</pre> is shown.
 </td></tr>
 <tr><th>Explanation</th><td>The user's permissions are determined through a call to the CF API controller with the given service and user's access token. CF then
 tells the dashboard whether the user has <a href='https://docs.cloudfoundry.org/concepts/roles.html#permissions'>read and manage permissions</a>.</td></tr>
-<tr><th>Possible Action(s)</th><td>Verify that the account used to access the dashboard has permission to read/manage the service instance by verifying their 
+<tr><th>Possible Action(s)</th><td>Verify that the account used to access the dashboard has permission to read/manage the service instance by verifying their
 organization and space roles in CloudFoundry.
-<p class="note"><strong>Note:</strong> 
+<p class="note"><strong>Note:</strong>
 Users with 'admin' privileges still require an appropriate assigned role in the org and space to view and service instances
 and specifically require the SpaceDeveloper permission to manage the service instances. This is a limitation of VMware Tanzu/cloudfoundry UAA used in Single Sign On.</p>
 If Single Sign
@@ -403,16 +408,11 @@ The page never loads and the URL contains the port 943.
 <tr><th>Possible Action(s)</th><td>Wait for the upgrade to complete. Empty the browser's cache and try again, the webpage should no longer be improperly redirected.</td></tr>
 </table>
 
-
-  <br>
-
 ## <a id='advanced'></a> Advanced Asset Management
 
 In cases where a service or event broker can no longer be managed by regular managenent operations, the instance in question can be purged.
 This is done by accessing the Service Dashboard as an administrator at the solace-pubsub-broker-2.x.x app's registered route. When a service is purged,
-its associated Cloud Foundry service and bindings are not deleted, and the underlying resources may or may not be freed. When an
-event broker is purged, the underlying deployment (either on demand or operator allocated) may not be deleted resulting in orphaned VMs
-requiring additional cleanup operations. <b>Services or event brokers should only be purged as a last resort.</b>
+its associated Cloud Foundry service and bindings are not deleted, and the underlying resources may or may not be freed. When an event broker is purged, the underlying deployment (either on demand or operator allocated) may not be deleted resulting in orphaned VMs requiring additional cleanup operations. **Services or event brokers should only be purged as a last resort.**
 
 
 <table border="1" class="nice">
@@ -440,7 +440,7 @@ Managing an enterprise evaluation service, eg. creating bindings.
 <tr><th>Error</th><td>
 All operations are rejected indicating that the underlying broker is not as expected with an error similar to
 <pre class="terminal">
-Service broker error: Will not bind service instance because the VMR is not expected: VMR 10.0.4.11 
+Service broker error: Will not bind service instance because the VMR is not expected: VMR 10.0.4.11
 Expected Edition:'Solace PubSub+ Enterprise Evaluation Edition' Actual:'Solace PubSub+ Standard'
 </pre>
 </td></tr>

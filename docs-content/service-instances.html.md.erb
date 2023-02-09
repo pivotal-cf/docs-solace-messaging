@@ -102,44 +102,42 @@ To create an instance of the Solace PubSub+ service with the cf CLI, do the foll
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
 
-  <pre class="terminal">
-  $ cf api api.YOUR-SYSTEM-DOMAIN
-  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
-  OK
-  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
-  Not logged in. Use 'cf login' to log in.
-  </pre>
+    ```
+    $ cf api api.YOUR-SYSTEM-DOMAIN
+    Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...OK
+    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+    Not logged in. Use 'cf login' to log in.
+    ```
 
-1. Log in to your deployment and select an org and a space.
+2. Log in to your deployment and select an org and a space.
 
-  <pre class="terminal">
-  $ cf login
-  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-  Email> user<span>@</span>example.com
-  Password>
-  </pre>
+    ```
+    $ cf login
+    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+    Email> user<span>@</span>example.com
+    Password>
+    ```
 
 1. List the Marketplace services and locate the Solace PubSub+ service and its associated service plans.
 
-  <pre class="terminal">
-  $ cf marketplace
-  Getting services from marketplace in org example / space development as user<span>@</span>example.com...
-  OK
+    ```
+    $ cf marketplace
+    Getting services from marketplace in org example / space development as user<span>@</span>example.com...OK
 
-  service          plans                                                                                            description
-  solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
-  </pre>
+    service          plans                                                                               description
+    solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha      Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
+    ```
 
 1. Create an instance of the Solace PubSub+ service. Select the appropriate service plan for your app.
    For how the service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
    The following example uses the `enterprise-large-ha` service plan and no service-specific parameters.
 
-  <pre class="terminal">
-  $ cf create-service solace-pubsub enterprise-large-ha solace-pubsub-instance
-  Creating service instance solace-pubsub-instance in org example / space development as user@example.com...
-  OK
-  </pre>
-  <p class="note"><strong>Note:</strong> Any parameter dependent features will use their defaults. For example, if you have TCP Routes enabled or LDAP enabled, all the selections made at tile installation time are applicable to the created service as per tile configuration.</p>
+    ```
+    $ cf create-service solace-pubsub enterprise-large-ha solace-pubsub-instance
+    Creating service instance solace-pubsub-instance in org example / space development as user@example.com...OK
+    ```
+
+    <p class="note"><strong>Note:</strong> Any parameter dependent features will use their defaults. For example, if you have TCP Routes enabled or LDAP enabled, all the selections made at tile installation time are applicable to the created service as per tile configuration.</p>
 
 1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
 
@@ -149,60 +147,59 @@ To create an instance of the Solace PubSub+ service with the cf CLI, do the foll
 To create an instance of the Solace PubSub+ service with the cf CLI with service-specific parameters, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
-  <pre class="terminal">
-  $ cf api api.YOUR-SYSTEM-DOMAIN
-  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
-  OK
-  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
-  Not logged in. Use 'cf login' to log in.
-  </pre>
+
+    ```
+    $ cf api api.YOUR-SYSTEM-DOMAIN
+    Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...OK
+    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+    Not logged in. Use 'cf login' to log in.
+    ```
 
 1. Log in to your deployment and select an org and a space.
-  <pre class="terminal">
-  $ cf login
-  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-  Email> user<span>@</span>example.com
-  Password>
-  </pre>
+
+    ```
+    $ cf login
+    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+    Email> user<span>@</span>example.com
+    Password>
+    ```
 
 1. List the Marketplace services and locate the Solace PubSub+ service and its associated service plans.
-  <pre class="terminal">
-  $ cf marketplace
-  Getting services from marketplace in org example / space development as user<span>@</span>example.com...
-  OK
 
-  service          plans                                                                                            description
-  solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha                   Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
-  </pre>
+    ```
+    $ cf marketplace
+    Getting services from marketplace in org example / space development as user<span>@</span>example.com...OK
+
+    service          plans                                                                             description
+    solace-pubsub    enterprise-shared, enterprise-large, enterprise-medium-ha, enterprise-large-ha      Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
+    ```
 
 1. Create an instance of the Solace PubSub+ service and select the appropriate service plan for your app. For how the service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
 
-1. Add applicable service-specific parameters. The following example uses the `enterprise-shared` service plan with service-specific parameters for TCP routes that enable opening an MQTT TLS port to support IoT devices, setting the Orphaned Resource Policy to make any orphaned resources service instance owned
-  and setting the VPN's REST mode to gateway.
-  <pre class="terminal">
-  $ cf create-service solace-pubsub enterprise-shared solace-pubsub-instance-IoT -c '{ "mqtt\_tls\_tcp\_route\_enabled" : "true" , "mqtt\_tls\_tcp\_route\_primary\_port": 1024 , "orphanedResourcePolicy": "MakeServiceOwned", "vpnOptions":{"serviceRestMode":"gateway"} }'
-  Creating service instance solace-pubsub-instance-IoT in org example / space development as user@example.com...
-  OK
-  </pre>
+2. Add applicable service-specific parameters. The following example uses the `enterprise-shared` service plan with service-specific parameters for TCP routes that enable opening an MQTT TLS port to support IoT devices, setting the Orphaned Resource Policy to make any orphaned resources service instance owned and setting the VPN's REST mode to gateway.
 
-1. Getting details about the created service.
-  <pre class="terminal">
-  $ cf service solace-pubsub-instance-IoT<br>
-  Service instance: solace-pubsub-instance-IoT
-  Service: solace-pubsub
-  Bound apps:
-  Tags:
-  Plan: enterprise-shared
-  Description: Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
-  Documentation url: http://docs.solace.com
-  Dashboard: https<span>:</span>//solace-service-dashboard.YOUR-SYSTEM-DOMAIN/service-dashboard/f5d6bf5b-e84f-416b-8c08-4a0e782a51d2/
-  Last Operation
-  Status: create succeeded
-  Message:
-  Started: 2020-01-01T00:00:00Z
-  Started: 2020-01-01T00:00:00Z
-  </pre>
-  <p class="note"><strong>Note:</strong> The Dashboard URL provides a Web UI to manage the service instance.</p>
+    ```
+    $ cf create-service solace-pubsub enterprise-shared solace-pubsub-instance-IoT -c '{ "mqtt\_tls\_tcp\_route\_enabled" : "true" , "mqtt\_tls\_tcp\_route\_primary\_port": 1024 , "orphanedResourcePolicy": "MakeServiceOwned", "vpnOptions":{"serviceRestMode":"gateway"} }'
+    Creating service instance solace-pubsub-instance-IoT in org example / space development as user@example.com...OK
+    ```
+
+3. Getting details about the created service.
+
+    ```
+    $ cf service solace-pubsub-instance-IoT<br>
+    Service instance: solace-pubsub-instance-IoT
+    Service: solace-pubsub
+    Bound apps:
+    Tags:
+    Plan: enterprise-shared
+    Description: Solace PubSub+ Event Broker for real-time, multi-protocol data distribution
+    Documentation url: http://docs.solace.com
+    Dashboard: https<span>:</span>//solace-service-dashboard YOUR-SYSTEM-DOMAIN/service-dashboard/f5d6bf5b-e84f-416b-8c08-4a0e782a51d2/
+    Last Operation Status: create succeeded
+    Message: Started: 2020-01-01T00:00:00Z Started: 2020-01-01T00:00:00Z
+    ```
+
+    <p class="note"><strong>Note:</strong> The Dashboard URL provides a Web UI to manage the service instance.</p>
 
 1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
 
@@ -214,64 +211,61 @@ Sometimes, you may want to update an existing service instance to enable or disa
 To update an instance of the Solace PubSub+ service with the cf CLI, do the following:
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
-  <pre class="terminal">
-  $ cf api api.YOUR-SYSTEM-DOMAIN
-  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
-  OK
-  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
-  Not logged in. Use 'cf login' to log in.
-  </pre>
+
+    ```
+    $ cf api api.YOUR-SYSTEM-DOMAIN
+    Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...OK
+    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+    Not logged in. Use 'cf login' to log in.
+    ```
 
 1. Log in to your deployment and select an org and a space.
-  <pre class="terminal">
-  $ cf login
-  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-  Email> user<span>@</span>example.com
-  Password>
-  </pre>
+
+    ```
+    $ cf login
+    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAINEmail> user<span>@</span>example.com
+    Password>
+    ```
 
 1. Locate the previously created service.
-	<pre class="terminal">
-	$ cf services
-	Getting services in org example / space dev as user<span>@</span>example.com...
-	OK
 
-	name                        service            plan                bound apps   last operation
-	solace-pubsub-instance      solace-pubsub      enterprise-large-ha              create succeeded
-	</pre>
+    ```
+    $ cf services
+    Getting services in org example / space dev as user<span>@</span>example.com...OK
 
-1. Update the service instance of the Solace PubSub+ service assuming both LDAP and TCP routes are enabled. This disables external access to the MQTT Plain Text messaging protocol, grants Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups, and sets the Orphaned Resource Policy to Delete.
+    name                        service            plan                bound apps   last operation
+    solace-pubsub-instance      solace-pubsub      enterprise-large-ha              create succeeded
+    ```
 
-	<pre class="terminal">
-   $ cf update-service solace-pubsub-instance -c '{ "orphanedResourcePolicy": "Delete", "mqtt\_tcp\_route\_enabled" : "false", "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com", "ldapGroupAdminReadWrite" : "cn=username2,ou=groups,dc=solace,dc=com" }'
-   Updating service instance solace-pubsub-instance user...
-   OK
-	</pre>
+2. Update the service instance of the Solace PubSub+ service assuming both LDAP and TCP routes are enabled. This disables external access to the MQTT Plain Text messaging protocol, grants Admin ReadOnly and Admin ReadWrite to the Message VPN for this service instance to the provided LDAP groups, and sets the Orphaned Resource Policy to Delete.
+
+    ```
+    $ cf update-service solace-pubsub-instance -c '{ "orphanedResourcePolicy": "Delete", "mqtt\_tcp\_route\_enabled" : "false", "ldapGroupAdminReadOnly" : "cn=username1,ou=groups,dc=solace,dc=com", "ldapGroupAdminReadWrite" : "cn=username2,ou=groups,dc=solace,dc=com" }'
+    Updating service instance solace-pubsub-instance user...OK
+    ```
 
     <p class="note"><strong>Note:</strong> Updating a Service Instance that has existing application bindings or service keys can be a service affecting operation. An existing app using bindings may need to unbind and rebind to obtain its updated Solace PubSub+ Credentials, while an existing app using service keys will need a new service key.</p>
 
-2. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
+1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
 
 
 ## <a id='cf-cli-update-sp'></a>Update a Service Instance to a new Service Plan
 
 An on-demand service instance may be upgraded to a different service plan.
 
-Assuming you have a service named 'solace-pubsub-instance' as in the previous section, you can update it to a new service plan by running
+Assuming you have a service named 'solace-pubsub-instance' as in the previous section, you can update it to a new service plan by running:
 
-  <pre class="terminal">
-  $cf update-service solace-pubsub-instance -p &lt;new-service-plan&gt;
-  </pre>
+    $cf update-service solace-pubsub-instance -p <new-service-plan>
 
 Several restrictions apply:
 
 1. The service instance must be an on-demand service
-1. The upgrade must be from standalone to HA
-1. The current and new service plans must have a maximum of one message VPN
-1. The current service plan must have AZs as a subset of the AZs of the new service plan
-1. The new service plan must have sufficient available quota
-1. The new service plan must have the same VM type
-1. Ugrading from standard to enterprise is not supported
+2. The upgrade must be from standalone to HA
+3. The current and new service plans must have a maximum of one message VPN
+4. The current service plan must have AZs as a subset of the AZs of the new service plan
+5. The new service plan must have sufficient available quota
+6. The new service plan must have the same VM type
+7. Ugrading from standard to enterprise is not supported
 
 
 ## <a id='cf-cli-delete'></a> Deleting a Service Instance with the cf CLI
@@ -284,66 +278,60 @@ To delete an instance of the Solace PubSub+ service with the cf CLI, do the foll
 
 1. Set your API endpoint to the Cloud Controller of your deployment.
 
-  <pre class="terminal">
-  $ cf api api.YOUR-SYSTEM-DOMAIN
-  Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...
-  OK
-  API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
-  Not logged in. Use 'cf login' to log in.
-  </pre>
+    ```
+    $ cf api api.YOUR-SYSTEM-DOMAIN
+    Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...OK
+    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+    Not logged in. Use 'cf login' to log in.
+    ```
 
 1. Log in to your deployment and select an org and a space.
 
-  <pre class="terminal">
-  $ cf login
-  API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-  Email> user<span>@</span>example.com
-  Password>
-  </pre>
+    ```
+    $ cf login
+    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
+    Email> user<span>@</span>example.com
+    Password>
+    ```
 
 1. Locate the previously created service.
 
-  <pre class="terminal">
-  $ cf services
-  Getting services in org example / space dev as user<span>@</span>example.com...
-  OK
+    ```
+    $ cf services
+    Getting services in org example / space dev as user<span>@</span>example.com...OK
 
-  name                            service            plan                bound apps   last operation
-  solace-pubsub-instance-IoT      solace-pubsub      enterprise-shared                create succeeded
-  </pre>
+    name                            service            plan                bound apps   last operation
+    solace-pubsub-instance-IoT      solace-pubsub      enterprise-shared                create succeeded
+    ```
 
 1. Delete the service instance `solace-pubsub-instance-IoT` of the Solace PubSub+ service.
 
-  <pre class="terminal">
-  $ cf delete-service solace-pubsub-instance-IoT
+    ```
+    $ cf delete-service solace-pubsub-instance-IoT
 
-  Really delete the service solace-pubsub-instance-IoT?>
-  Deleting service solace-pubsub-instance-IoT in org example / space dev as user<span>@</span>example.com...
-  OK
+    Really delete the service solace-pubsub-instance-IoT?Deleting service solace-pubsub-instance-IoT in org example / space dev as user<span>@</span>example.com...OK
 
-  Delete in progress. Use 'cf services' or 'cf service solace-pubsub-instance-IoT' to check operation status.
-  </pre>
+    Delete in progress. Use 'cf services' or 'cf service solace-pubsub-instance-IoT' to check operation status.
+    ```
 
-2. You can monitor the progress of the delete operation.
+1. You can monitor the progress of the delete operation.
 
-  <pre class="terminal">
-  $ cf services
-  Getting services in org example / space dev as user<span>@</span>example.com...
-  OK
+    ```
+    $ cf services
+    Getting services in org example / space dev as user<span>@</span>example.com...OK
 
-  name                            service            plan                bound apps   last operation
-  solace-pubsub-instance-IoT      solace-pubsub      enterprise-shared                delete in progress
-  </pre>
+    name                            service            plan                bound apps   last operation
+    solace-pubsub-instance-IoT      solace-pubsub      enterprise-shared                delete in progress
+    ```
 
-  Notice the `delete in progress`; this service is removed after the deletion is completed.
+    Notice the `delete in progress`; this service is removed after the deletion is completed.
 
-  <pre class="terminal">
-  $ cf services
-  Getting services in org example / space dev as user<span>@</span>example.com...
-  OK
+    ```
+    $ cf services
+    Getting services in org example / space dev as user<span>@</span>example.com...OK
 
-  No services found
-  </pre>
+    No services found
+    ```
 
 
 ## <a id='apps-man-create'></a> Create a Service Instance in Apps Manager
@@ -362,10 +350,10 @@ To create an instance of the Solace PubSub+ service in Apps Manager, do the foll
 
 1. Select the appropriate service plan for your app. For information on how service plans differ, see [VMware Tanzu Marketplace Plans](index.html#marketplace-plans).
 
-  ![alt-text=""](./images/appsmanager_select_solace_pubsub_plan_short_form.png)
+    ![alt-text=""](./images/appsmanager_select_solace_pubsub_plan_short_form.png)
 
 1. Enter an **Instance Name**, select a space under **Add to Space** and configure any optional parameters if desired. Then click **Add**.
 
-  ![alt-text=""](./images/appsmanager_solace_messaging_create_service_do_not_bind_short_form_new.png)
+    ![alt-text=""](./images/appsmanager_solace_messaging_create_service_do_not_bind_short_form_new.png)
 
 1. Make this new service instance accessible to an app by [binding](bindings.html) or [creating a service key](service-keys.html).
