@@ -35,7 +35,7 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
     ```
     $ cf api api.YOUR-SYSTEM-DOMAIN
     Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...OK
-    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+    API endpoint:  https://api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
     Not logged in. Use 'cf login' to log in.
     ```
 
@@ -43,8 +43,8 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
 
     ```
     $ cf login
-    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-    Email> user<span>@</span>example.com
+    API endpoint: https://api.YOUR-SYSTEM-DOMAIN
+    Email> user@example.com
     Password>
     ```
 
@@ -52,7 +52,7 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
 
     ```
     $ cf services
-    Getting services in org example / space dev as user<span>@</span>example.com...OK
+    Getting services in org example / space dev as user@example.com...OK
 
     name                        service            plan                 bound apps   last operation
     solace-pubsub-instance      solace-pubsub      enterprise-large-ha               create succeeded
@@ -62,7 +62,7 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
 
     ```
     $ cf bind-service web-backend solace-pubsub-instance
-    Binding service solace-pubsub-instance to app web-backend in org example / space development as user<span>@</span>example.com...OK
+    Binding service solace-pubsub-instance to app web-backend in org example / space development as user@example.com...OK
     TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
     ```
 
@@ -82,7 +82,7 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
     ```
     $ cf api api.YOUR-SYSTEM-DOMAIN
     Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...OK
-    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+    API endpoint:  https://api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
     Not logged in. Use 'cf login' to log in.
     ```
 
@@ -90,8 +90,8 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
 
     ```
     $ cf login
-    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-    Email> user<span>@</span>example.com
+    API endpoint: https://api.YOUR-SYSTEM-DOMAIN
+    Email> user@example.com
     Password>
     ```
 
@@ -99,7 +99,7 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
 
     ```
     $ cf services
-    Getting services in org example / space dev as user<span>@</span>example.com...OK
+    Getting services in org example / space dev as user@example.com...OK
 
     name                        service            plan                 bound apps   last operation
     solace-pubsub-instance      solace-pubsub      enterprise-large-ha               create succeeded
@@ -109,7 +109,7 @@ To bind an instance of the Solace PubSub+ service with the cf Command Line Inter
 
     ```
     $ cf bind-service web-backend solace-pubsub-instance -c '{ "username" : "customName" }'
-    Binding service solace-pubsub-instance to app web-backend in org example / space development as user<span>@</span>example.com...OK
+    Binding service solace-pubsub-instance to app web-backend in org example / space development as user@example.com...OK
     TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
     ```
 
@@ -154,7 +154,7 @@ To unbind an instance of the Solace PubSub+ service with the cf Command Line Int
     ```
     $ cf api api.YOUR-SYSTEM-DOMAIN
     Setting api endpoint to api.YOUR-SYSTEM-DOMAIN...OK
-    API endpoint:  <span>https:</span>//api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
+    API endpoint:  https://api.YOUR-SYSTEM-DOMAIN (API version: 2.59.0)
     Not logged in. Use 'cf login' to log in.
     ```
 
@@ -162,8 +162,8 @@ To unbind an instance of the Solace PubSub+ service with the cf Command Line Int
 
     ```
     $ cf login
-    API endpoint: <span>https:</span>//api.YOUR-SYSTEM-DOMAIN
-    Email> user<span>@</span>example.com
+    API endpoint: https://api.YOUR-SYSTEM-DOMAIN
+    Email> user@example.com
     Password>
     ```
 
@@ -171,7 +171,7 @@ To unbind an instance of the Solace PubSub+ service with the cf Command Line Int
 
     ```
     $ cf services
-    Getting services in org example / space dev as user<span>@</span>example.com...OK
+    Getting services in org example / space dev as user@example.com...OK
 
     name                        service            plan                 bound apps   last operation
     solace-pubsub-instance      solace-pubsub      enterprise-large-ha  web-backend  create succeeded
@@ -181,7 +181,7 @@ To unbind an instance of the Solace PubSub+ service with the cf Command Line Int
 
     ```
     $ cf unbind-service web-backend solace-pubsub-instance
-    Unbinding service solace-pubsub-instance from app web-backend in org example / space development as user<span>@</span>example.com...OK
+    Unbinding service solace-pubsub-instance from app web-backend in org example / space development as user@example.com...OK
     TIP: Use 'cf restage web-backend to ensure your env variable changes take effect
     ```
 
