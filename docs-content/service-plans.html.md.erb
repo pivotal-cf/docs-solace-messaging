@@ -134,7 +134,7 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 
   <tr>
   <th>Maximum Queue Messages</th>
-  <td>Sets the maximum number of messages that can be queued for delivery to consumers. Sufficient system resources need to be available on the VM; see <a href='https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/System-Scaling-Parameters.htm'> Solace documentation for specific requirements</a>. Consider this setting while selecting a VM Type for your deployment.
+  <td>Sets the maximum number of messages that can be queued for delivery to consumers. Sufficient system resources need to be available on the VM; see <a href='https://docs.solace.com/Software-Broker/SW-Broker-Configuration-Defaults.htm'> Solace documentation for specific requirements</a>. Consider this setting while selecting a VM Type for your deployment.
   <ul>
   <li>This setting is only applied to new deployments. Existing deployments won't be updated.</li>
   <ul>
@@ -191,7 +191,7 @@ Service Plans can be customized by the operator allowing to adjust the plans for
 <p id='tableNote1' class="note"><strong><sup>1</sup> Note</strong>: Please set the same matching <strong>VM Type</strong> and <strong>Disk Type</strong> if you have <strong>Operator Allocated</strong> instances in <a href='installing.html#required_resource_config'>Resource Config</a>.</p>
 <p id='tableNote2' class="note"><strong><sup>2</sup> Note</strong>: Please consider if using the same Network and AZs used in <a href='installing.html#required_azs_and_network'>Assign AZs and Networks</a> for Operator Allocated instances.</p>
 <p id='tableNote3' class="note"><strong><sup>3</sup> Note</strong>: To configure VM extensions on tile created instance groups, see <a href='https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html'>Managing Custom VM Extensions</a></p>
-<p id='tableNote4' class="note"><strong><sup>4</sup> Note</strong>: See <a href="https://docs.solace.com/Configuring-and-Managing/Product-Key.htm">Product Keys</a></p>
+<p id='tableNote4' class="note"><strong><sup>4</sup> Note</strong>: See <a href="https://docs.solace.com/Admin/Product-Key.htm">Product Keys</a></p>
 
 ## <a id='general_plan_settings'></a> General Settings
 
@@ -201,7 +201,7 @@ The Monitor **VM Type** and **Disk Type** settings apply to all on-demand plans 
 
 A deployment of Solace PubSub+ Event Broker will attempt to maximize the use of the underlying resources on any given **VM Type**.
 
-The deployment will auto select the [maximum client connection scaling parameter](https://docs.solace.com/Configuring-and-Managing/SW-Broker-Specific-Config/System-Scaling-Parameters.htm) based on the following:
+The deployment will auto select the [maximum client connection scaling parameter](https://docs.solace.com/Software-Broker/System-Scaling-Parameters.htm) based on the following:
 
 * number of detected CPUs,
 * amount of detected RAM,

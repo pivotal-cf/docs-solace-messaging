@@ -8,7 +8,7 @@ This topic describes how developers can manage instances of Solace PubSub+ servi
 
 ## <a id='about_solace_service_instance'></a> About the Solace Service Instance
 
-A Solace Service Instance represents a Message VPN on a Solace PubSub+ Event Broker. A Message VPN allows for many separate apps to share a single Event Broker while still remaining independent and separated. For more information about Message VPNs, see [Core Concepts](https://docs.solace.com/Features/Core-Concepts.htm).
+A Solace Service Instance represents a Message VPN on a Solace PubSub+ Event Broker. A Message VPN allows for many separate apps to share a single Event Broker while still remaining independent and separated. For more information, see [Message VPNs](https://docs.solace.com/Features/VPN/Managing-Message-VPNs.htm).
 
 After deploying the Solace PubSub+ for VMware Tanzu tile, the Solace PubSub+ service appears in the Marketplace. Developers can use either the Cloud Foundry Command Line Interface (cf CLI) or Apps Manager to create an instance of the service which they can make available to apps that need to exchange messages.
 
@@ -80,7 +80,7 @@ The parameters applied can be viewed in the service instance dashboard.
     * `health_check_tcp_route_primary_port`, `health_check_tcp_route_backup_port`
 
 4. <a id='vpn_options'></a> The top level configuration option `vpnOptions` can be provided to configure various properties on the VPN.
-  1. [Service REST Mode](https://docs.solace.com/Open-APIs-Protocols/REST-get-start.htm#When) can be set
+  1. [Service REST Mode](https://docs.solace.com/API/REST/REST-get-start.htm#When) can be set
 to either messaging or gateway. The mode can be set with the `vpnOptions.serviceRestMode` json property with valid values `gateway` or `messaging`.
 This property defaults to messaging.
 

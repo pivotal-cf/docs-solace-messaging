@@ -5,7 +5,7 @@ owner: Partners
 
 This topic describes how operators and developers can troubleshoot instances of Solace PubSub+ services.
 
-A [Solace PubSub+ Service Instance](service-instances.html) is backed by a Message VPN on one or many Solace PubSub+ Software Event Broker, depending on the chosen plan.
+A [Solace PubSub+ Service Instance](service-instances.html) is backed by a Message VPN on one or more PubSub+ Software Event Brokers, depending on the plan you've chosen.
 
 You can discover the Solace PubSub+ Software Event Broker backing a service instance from the [Solace PubSub+ Credentials](credentials.html) which become available by [binding](bindings.html) an app to the instance or [creating a service key](service-keys.html) for the instance.
 
@@ -343,7 +343,7 @@ Endpoints owned by v002.cu000001 must first be deleted:
         Topics Endpoints: [ someTPE ]
 </pre>
 </td></tr>
-<tr><th>Explanation</th><td>The service broker will reject unbinding when the client-username that was used by the application owns <a href='https://docs.solace.com/Features/Endpoints.htm'>Endpoints</a> such as Queues and Topic Endpoints while the current Orphaned Resource Policy is to <b>Abort</b></td></tr>
+<tr><th>Explanation</th><td>The service broker will reject unbinding when the client-username that was used by the application owns <a href='https://docs.solace.com/Messaging/Guaranteed-Msg/Endpoints.htm'>Endpoints</a> such as Queues and Topic Endpoints while the current Orphaned Resource Policy is to <b>Abort</b></td></tr>
 <tr><th>Possible Action(s)</th><td>Delete the Endpoints before unbinding. Alternatively you can adjust the <a href='service-instances.html#service_orphaned_resource_policy'>Service Orphaned Resource Policy</a>.</td></tr>
 </table>
 <br>
@@ -397,14 +397,14 @@ logout of the dashboard by clicking the user icon in the top right corner and cl
 </table>
 
 <table border="1" class="nice">
-<tr><th colspan=2><a id='dashboard_permission_error'></a>Solace PubSub+ Manager Redirected to Port 943</th></th>
+<tr><th colspan=2><a id='dashboard_permission_error'></a>Solace PubSub+ Broker Manager Redirected to Port 943</th></th>
 <tr><th>Operation</th><td>
-Accessing Solace PubSub+ Manager
+Accessing PubSub+ Broker Manager
 </td></tr>
 <tr><th>Error</th><td>
 The page never loads and the URL contains the port 943.
 </td></tr>
-<tr><th>Explanation</th><td>If the Solace PubSub+ Manager was accessed during an upgrade to v2.15.0, it is possible that the browser got redirected to port 943.</td></tr>
+<tr><th>Explanation</th><td>If the PubSub+ Broker Manager was accessed during an upgrade to v2.15.0, it is possible that the browser got redirected to port 943.</td></tr>
 <tr><th>Possible Action(s)</th><td>Wait for the upgrade to complete. Empty the browser's cache and try again, the webpage should no longer be improperly redirected.</td></tr>
 </table>
 

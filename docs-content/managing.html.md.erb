@@ -3,14 +3,14 @@ title: Managing the Message VPN
 owner: Partners
 ---
 
-Developers can manage the Message VPN associated with a service instance by using the Dashboard URL of the service and by connecting to the Solace PubSub+ Event Broker via the PubSub+ Manager web browser based interface.
+Developers can manage the Message VPN associated with a service instance by using the Dashboard URL of the service and by connecting to the Solace PubSub+ Event Broker via the PubSub+ Broker Manager web browser based interface.
 
 
 ## <a id='solace_pubsub_service_dashboard'></a> Solace PubSub+ Service Dashboard
 
 The Solace PubSub+ Service Dashboard offers the following functionality:
 
-* A link to the [Solace PubSub+ Manager](#solace_pubsub_manager).
+* A link to the [Solace PubSub+ Borker Manager](#solace_pubsub_manager).
 * Manage Client Profiles and their configuration.
 * Capture a backup of basic service configuration and subsequently restore it.
 * Elect to receive an upgrade when an upgrade is available if [user controlled upgrades are enabled](installing.html#user-controlled-upgrades).
@@ -37,7 +37,7 @@ Users with manage access will be able to utilize the features of the service das
 
 Client profiles are assigned to client usernames so that a common configuration can be applied to groups of clients.
 
-The Client Profile Management section displays existing client profiles and offers the ability to create, update, and delete client profiles on the message VPN. While creating and updating client profiles, select the client profile capabilities to turn ON/OFF. For more information about client profiles, please consult Solace's documentation: [Client Profile](https://docs.solace.com/PubSub-Basics/Core-Concepts-Solace-Event-Broker-Concepts.htm#client-profile) and [Client Profile Configuration](https://docs.solace.com/Configuring-and-Managing/Configuring-Client-Profiles.htm)
+The Client Profile Management section displays existing client profiles and offers the ability to create, update, and delete client profiles on the message VPN. While creating and updating client profiles, select the client profile capabilities to turn ON/OFF. For more information about client profiles, see [Clients Profiles](https://docs.solace.com/Security/Client-Authorization-Overview.htm) and [Configuring Clients with Client Profiles](https://docs.solace.com/Security/Assigning-Client-Profiles.htm)
 
 The client profile highlighted in light green is the selected default client profile. New client usernames created through Cloud Foundry are automatically assigned this client profile. To select a different default client profile, use the dropdown menu that can be found at the bottom of the client profile table. Changing the default client profile does not modify existing client usernames, the change only applies to new client usernames.
 
@@ -53,18 +53,18 @@ At this point it is not intended to do a full backup and restore on the same ser
 
 **Note that performing a restore will delete all persisted messages and will leave the VPN with only the objects that existed when the backup was performed.**
 
-## <a id='solace_pubsub_manager'></a> Solace PubSub+ Manager
+## <a id='solace_pubsub_manager'></a> Solace PubSub+ Broker Manager
 
-The Solace PubSub+ Event Broker includes a browser based management interface for the Solace PubSub+ services.
-The Solace PubSub+ Manager is accessible when a service is created from a link in the [Solace PubSub+ Service Dashboard](#solace_pubsub_service_dashboard).
+The PubSub+ Event Broker includes a browser based management interface for the Solace PubSub+ services.
+The PubSub+ Broker Manager is accessible when a service is created from a link in the [Solace PubSub+ Service Dashboard](#solace_pubsub_service_dashboard).
 
-### <a id='sample_pubsub_manager'></a> Sample PubSub+ Manager
+### <a id='sample_pubsub_manager'></a> Sample PubSub+ Broker Manager
 
   ![alt-text=""](./images/sample_pubsub_manager_new.png)
 
-### Restrictions on the Use of the PubSub+ Manager
+### Restrictions on the Use of the PubSub+ Broker Manager
 
-There are some actions that you must not perform in the PubSub+ Manager:
+There are some actions that you must not perform in the PubSub+ Broker Manager:
 
 1. Do not change anything on the **Message VPN/Services** page. Settings such as
 TLS configuration must be managed through the tile.
@@ -134,7 +134,7 @@ To retrieve the information required to connect to the Solace PubSub+ Event Brok
 
 The `managementHostnames` and `activeManagementHostname` are externally accessible FQDNs and can be used directly from within SolAdmin using standard ports for HTTP (`80`) and HTTPS (`443`). The procedure is as follows:
 
-1. Download and install the SolAdmin administration tool from the [Solace Developers Portal Download Page](http://dev.solace.com/downloads/).
+1. Download and install the SolAdmin administration tool from the [Solace Downloads page](https://solace.com/downloads/).
 
 1. Start SolAdmin.
 

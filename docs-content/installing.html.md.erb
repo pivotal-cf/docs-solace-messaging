@@ -447,8 +447,8 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
 
     To set how often the upgrade task runs, do one of the following:
 
-	  + Select a preconfigured interval in **On Demand Upgrade Task Timer**.
-	  + Select **Custom Time** and enter an interval in Cron format.
+	 - Select a preconfigured interval in **On Demand Upgrade Task Timer**.
+	 - Select **Custom Time** and enter an interval in Cron format.
 
     ![alt-text=""](./images/form_general_settings_upgrade_2.png)
 
@@ -504,7 +504,7 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
     no more than 2 upgrades will be performed at once regardless of what you enter in the
     Maximum On-Demand fields in the Solace tile.
 
-    See [Configuring Bosh Director](https://docs.pivotal.io/pivotalcf/2-6/om/gcp/config-manual.html) for details on how to set the number of Director Workers.
+    See [Configuring Bosh Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/index.html) for details on how to set the number of Director Workers.
 
 1. <a id='webhook'></a>Under **Web Hook**, you can choose to Enable or Disable.
 
@@ -539,10 +539,10 @@ Five Enterprise Shared service instances can be hosted on a single Enterprise Sh
     }
     ```
 
-    The REST endpoint must return the HTTP status code 200. Otherwise the message will remain on a queue and delivery will be reattempted repeatedly. Please see [REST Consumers](https://docs.solace.com/Features/REST-Messaging-Concepts/REST-Consumers.htm) and [Solace REST Status Codes](https://docs.solace.com/RESTMessagingPrtl/Solace-REST-Status-Codes.htm) for requirements regarding the REST endpoint.
+    The REST endpoint must return the HTTP status code 200. Otherwise the message will remain on a queue and delivery will be reattempted repeatedly. Please see [REST Consumers](https://docs.solace.com/API/REST/REST-Msging-Concepts.htm) and [Solace REST Status Codes](https://docs.solace.com/API/RESTMessagingPrtl/Solace-REST-Status-Codes.htm) for requirements regarding the REST endpoint.
     <br>
 
-    Also see [Managing REST Messaging](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Messaging.htm) for more information about Solace REST Delivery Points.
+    Also see [Managing REST Messaging](https://docs.solace.com/Services/Managing-REST-Messaging.htm) for more information about Solace REST Delivery Points.
 
 2.  <a id='sb_settings'></a> Adjust service broker related settings.
 
@@ -659,7 +659,7 @@ Generated certificates are equivalent to self-signed certificates.
 
 1. (Optional) Configure **Event Broker Trusted Root Certificates**.
 These certificates are stored in the trust store on the Solace PubSub+ Event Brokers.
-They are required if you choose to use LDAP with TLS or if you want to use [Client Certificate Authentication](https://docs.solace.com/Features/Client-Authentication.htm#Client-Certificate).
+They are required if you choose to use LDAP with TLS or if you want to use [Client Certificate Authentication](https://docs.solace.com/Security/Client-Authentication-Overview.htm).
 
     ![alt-text=""](./images/form_tls_config_trusted_root_certificates_new.png)
 
@@ -669,7 +669,7 @@ They are required if you choose to use LDAP with TLS or if you want to use [Clie
 
 2. Set the **Default REST SSL Server Certificate Max Chain Depth** for newly created service instances.
 Set to 3 by default and can be any number between 0 and 8. The
-[REST SSL Server Certificate Max Chain Depth](https://docs.solace.com/Configuring-and-Managing/Managing-REST-Service.htm#Set-Max-Chain) can be changed by the service owner through the Solace PubSub+ Manager or CLI. Changes to this property do not impact existing service instances.
+[REST SSL Server Certificate Max Chain Depth](https://docs.solace.com/Services/Managing-REST-Service.htm#Set-Max-Chain) can be changed by the service owner through the Solace PubSub+ Broker Manager or CLI. Changes to this property do not impact existing service instances.
 
     ![alt-text=""](./images/form_tls_config_rest_server_cert_max_chain_depth.png)
 
@@ -741,7 +741,7 @@ Set to 3 by default and can be any number between 0 and 8. The
 
     ![alt-text=""](./images/form_management_access_monitor_user.png)
 
-    You can create a management interface user with read-only access both to the global configuration and the VPN-level configuration. Please see [CLI User Access Levels](https://docs.solace.com/Configuring-and-Managing/CLI-User-Access-Levels.htm) for details about the access levels.
+    You can create a management interface user with read-only access both to the global configuration and the VPN-level configuration. Please see [CLI User Access Levels](https://docs.solace.com/Admin/CLI-User-Access-Levels.htm) for details about the access levels.
 
 7. Click **Save**.
 
@@ -821,7 +821,7 @@ In order to have an effective LDAP configuration, configure LDAP for [Management
 
     ![alt-text=""](./images/form_oauth_2.png)
 
-    Please refer to the [Client Authentication Overview](https://docs.solace.com/Overviews/Client-Authentication-Overview.htm) page for field documentation.
+    Please refer to the [Client Authentication Overview](https://docs.solace.com/Security/Client-Authentication-Overview.htm) page for field documentation.
 
     Changing the above configuration does not update pre-existing message VPNs. The default OAuth provider is only created on new message VPNs.
 
@@ -991,7 +991,7 @@ Upgrades are non-service-affecting for high-availability plans `Enterprise Large
 
 An application using an HA service experiences at least one switch-over during an upgrade, and at most two switch-overs.
 
-See our [Getting Started Samples](http://dev.solace.com/get-started/pcf-tutorials/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java) for some examples of how HA connections are used, as well as [Configuring-Client-Connections](https://docs.solace.com/Solace-Messaging-APIs/Developer-Guide/Configuring-Connection-T.htm) for additional information on client connection setup to allow for switch-overs during upgrades.
+See our [Getting Started Samples](https://tutorials.solace.dev/tanzu/) with full source code available in [GitHub](https://github.com/SolaceSamples/solace-samples-cloudfoundry-java) for some examples of how HA connections are used, as well as [Configuring-Client-Connections](https://docs.solace.com/API/API-Developer-Guide/Configuring-Connection-T.htm) for additional information on client connection setup to allow for switch-overs during upgrades.
 
 The upgrade process is designed to keep services available.
 
